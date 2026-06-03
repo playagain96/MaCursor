@@ -1,0 +1,998 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E577F3EF2B16EC461B07391F /* SwiftUI/Services/HelperToolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB43430C8E46157D3E2AB0EB /* SwiftUI/Services/HelperToolManager.swift */; };
+		2AAC23FCF4BE5C6918C44D64 /* SwiftUI/AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822AA46EAA8E188937F8C791 /* SwiftUI/AppDelegate.swift */; };
+		95162B85DA31CD92A2229088 /* SwiftUI/Services/CursorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4020F786A4F370638B4A68F /* SwiftUI/Services/CursorService.swift */; };
+		A99A5D94EB4DC3DEDB4F3076 /* CursorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3F9AF6BB008150E7278111 /* CursorLibrary.swift */; };
+		88F66F5C0E48CE0DB4D7445B /* MACConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456CE28DACB8867A7DDBA89 /* MACConstants.swift */; };
+		F2AF4A4FAD5E676EB79E5C98 /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD8C57FC7AAC15C0A4FFF14 /* LibraryController.swift */; };
+		714A8A422166D41979210DAD /* SwiftUI/Models/CursorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897480CACDA0C15040C7EE47 /* SwiftUI/Models/CursorModel.swift */; };
+		AE38744ECCC1CCC49CA866BB /* SwiftUI/Views/CursorThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD767DFBA548141D844E0FC /* SwiftUI/Views/CursorThemeEditorView.swift */; };
+		AC23139532D64D0B57120751 /* SwiftUI/Views/CursorThemeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D17A87D79E15CC7DF24DCF8 /* SwiftUI/Views/CursorThemeDetailView.swift */; };
+		CEE19135B48E8D0E92B7D484 /* SwiftUI/Views/HelperToolStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B39A20A0BDB42CB178B2F9 /* SwiftUI/Views/HelperToolStatusView.swift */; };
+		4863FC43749EB5290692E89F /* SwiftUI/MaCursorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5596005C577340FA0593E1 /* SwiftUI/MaCursorApp.swift */; };
+		A22DC4B5A19B682577DCA91F /* SwiftUI/Views/CursorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632FC338D84FE2E2A5BE854 /* SwiftUI/Views/CursorPreviewView.swift */; };
+		A18EB2759EDCD5CFD28ACBF6 /* MACCursorSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72606524D0D8D0C086C00580 /* MACCursorSwift.swift */; };
+		1175491A9678EDD562DA7214 /* MACCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C27736576C36C2373197271 /* MACCursor.m */; };
+		C7D34A3585984CE3D3BEF4EE /* SwiftUI/ViewModels/LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD64CEAC408967BEF748EE /* SwiftUI/ViewModels/LibraryViewModel.swift */; };
+		FBE6219110EC183B1AA821F3 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8DA561E196CEECE976572 /* FileManagerExtensions.swift */; };
+		AA77001100110022 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77001100110011 /* hotkeys.m */; };
+		AA77002200220022 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77001100110011 /* hotkeys.m */; };
+		AA77003300330022 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77001100110011 /* hotkeys.m */; };
+		AA88001100110022 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA88001100110011 /* Carbon.framework */; };
+		AA88002200220022 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA88001100110011 /* Carbon.framework */; };
+		AA88003300330022 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA88001100110011 /* Carbon.framework */; };
+		AABB001100110022 /* SwiftUI/Views/GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100110011 /* SwiftUI/Views/GeneralSettingsView.swift */; };
+		AACC007700770022 /* SwiftUI/Views/CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACC007700770011 /* SwiftUI/Views/CheckForUpdatesView.swift */; };
+		AABB002200220022 /* SwiftUI/Views/ShortcutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB002200220011 /* SwiftUI/Views/ShortcutSettingsView.swift */; };
+		AABB003300330022 /* SwiftUI/Views/AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB003300330011 /* SwiftUI/Views/AboutSettingsView.swift */; };
+		AABB004400440022 /* SwiftUI/Views/AboutWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB004400440011 /* SwiftUI/Views/AboutWindowView.swift */; };
+		AABB005500550022 /* SwiftUI/Models/AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB005500550011 /* SwiftUI/Models/AppearanceManager.swift */; };
+		DD11001100110022 /* SwiftUI/Models/LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11001100110011 /* SwiftUI/Models/LanguageManager.swift */; };
+		AABB006600660022 /* SwiftUI/Services/ModalWindowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB006600660011 /* SwiftUI/Services/ModalWindowCoordinator.swift */; };
+		8D210CBF55A23BC538EAA598 /* SwiftUI/Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C110A9CF5B77C5D6A2949F2 /* SwiftUI/Views/SettingsView.swift */; };
+		2F6964BFCA8BA5118217ECDC /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 0C4AD5A867375C3B578C81DC /* Sparkle */; };
+		EE11001100110022 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE11001100110011 /* Localizable.strings */; };
+		A34D7E0847E76C3CD195A1D4 /* SwiftUI/ViewModels/CursorThemeEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAEE24CC0A9B423A545248B /* SwiftUI/ViewModels/CursorThemeEditorViewModel.swift */; };
+		765104148188FD326062F020 /* SwiftUI/Views/LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BC7317A0F551818E2801AE /* SwiftUI/Views/LibraryView.swift */; };
+		9038B917D178B7F74D49983F /* NSBitmapImageRepExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C5E984EA999E13247D860 /* NSBitmapImageRepExtensions.swift */; };
+		1679C299F4819C0679762450 /* SwiftUI/Views/CursorEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD8C78EE55CB7E5513A31B /* SwiftUI/Views/CursorEditorView.swift */; };
+		CC11001100110022 /* SwiftUI/Services/WindowsCursorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC11001100110011 /* SwiftUI/Services/WindowsCursorParser.swift */; };
+		CC22002200220022 /* SwiftUI/Services/WindowsCursorImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22002200220011 /* SwiftUI/Services/WindowsCursorImporter.swift */; };
+		CC33003300330022 /* SwiftUI/Utils/WindowsCursorUTTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC33003300330011 /* SwiftUI/Utils/WindowsCursorUTTypes.swift */; };
+		F63777A83372210D1FF4914E /* SwiftUI/Views/CursorThemeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347615832DAB2A0976453371 /* SwiftUI/Views/CursorThemeRowView.swift */; };
+		895B5136D150C1B9465AEA4F /* SwiftUI/Models/CursorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578387732EEC904403B4CCA9 /* SwiftUI/Models/CursorThemeModel.swift */; };
+		3804B72F80269FD7DC394C1F /* SwiftUI/Models/CursorIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F1C67CA1B3541A668CE97 /* SwiftUI/Models/CursorIdentifier.swift */; };
+		2B1B1C5484CCA6B9DF7219AD /* MACPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C80E913C3F3C419701EF5E8 /* MACPreferences.swift */; };
+		C5475B4F2BA5AC865C4D8531 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */; };
+		120B8369D2508391432FA975 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D60249E6F374B02871AB67 /* ApplicationServices.framework */; };
+
+		23EDBD1BA5C2E2C697C49929 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20E996ED042D7B7C3E0BBC3 /* Security.framework */; };
+		13D664923ACB96A3584B1C2B /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9A6FADCC03B87EB3BB62BF /* ServiceManagement.framework */; };
+
+		6C595BDC02703B2C5DDE4ADE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */; };
+		406D49426BAD30193E2382B7 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A253C7C28F873B6822EED /* ApplicationServices.framework */; };
+
+		9B14F74D538D67E0A24164E2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */; };
+		F2901D0B04355C207AE1B308 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */; };
+		A04556B70615A052BAEF57C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */; };
+		CAB5B3CA3AB8BCCE0FD42EBA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B36FDC21A51D11AA8B8598 /* Cocoa.framework */; };
+		3D925D9ED4B83520AD7AD9BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */; };
+		421D78DEB5F216548CD0A23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B36FDC21A51D11AA8B8598 /* Cocoa.framework */; };
+
+		C11F9AF8600979EC9727613C /* com.writronic.macursorhelper.app in Copy Helper */ = {isa = PBXBuildFile; fileRef = B11C4EE7A55FDC4E3A771DC1 /* com.writronic.macursorhelper.app */; };
+		CE10000100000001 /* MACCursorDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000100000002 /* MACCursorDefs.m */; };
+		CE10000200000001 /* MACCursorActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000200000002 /* MACCursorActions.m */; };
+		CE20000100000001 /* MACCursorDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000100000002 /* MACCursorDefs.m */; };
+		CE20000200000001 /* MACCursorActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000200000002 /* MACCursorActions.m */; };
+		CE20000300000001 /* MACCursorDaemon.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000300000002 /* MACCursorDaemon.m */; };
+		CE30000100000001 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000500000001 /* main.m */; };
+/* End PBXBuildFile section */
+
+
+
+/* Begin PBXCopyFilesBuildPhase section */
+
+		FE60BD3E8C11BFCFFB6A3097 /* Copy Helper */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				C11F9AF8600979EC9727613C /* com.writronic.macursorhelper.app in Copy Helper */,
+			);
+			name = "Copy Helper";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		ECCD8C78EE55CB7E5513A31B /* SwiftUI/Views/CursorEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CursorEditorView.swift; sourceTree = "<group>"; };
+		DD3F9AF6BB008150E7278111 /* CursorLibrary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CursorLibrary.swift; path = SwiftUI/Models/CursorLibrary.swift; sourceTree = "<group>"; };
+		7D17A87D79E15CC7DF24DCF8 /* SwiftUI/Views/CursorThemeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CursorThemeDetailView.swift; sourceTree = "<group>"; };
+		347615832DAB2A0976453371 /* SwiftUI/Views/CursorThemeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CursorThemeRowView.swift; sourceTree = "<group>"; };
+		578387732EEC904403B4CCA9 /* SwiftUI/Models/CursorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/CursorThemeModel.swift; sourceTree = "<group>"; };
+		5C110A9CF5B77C5D6A2949F2 /* SwiftUI/Views/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/SettingsView.swift; sourceTree = "<group>"; };
+		FCAEE24CC0A9B423A545248B /* SwiftUI/ViewModels/CursorThemeEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/ViewModels/CursorThemeEditorViewModel.swift; sourceTree = "<group>"; };
+		822AA46EAA8E188937F8C791 /* SwiftUI/AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/AppDelegate.swift; sourceTree = "<group>"; };
+		BB43430C8E46157D3E2AB0EB /* SwiftUI/Services/HelperToolManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Services/HelperToolManager.swift; sourceTree = "<group>"; };
+		270C5E984EA999E13247D860 /* NSBitmapImageRepExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSBitmapImageRepExtensions.swift; path = SwiftUI/Utils/NSBitmapImageRepExtensions.swift; sourceTree = "<group>"; };
+		E7C8DA561E196CEECE976572 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileManagerExtensions.swift; path = SwiftUI/Utils/FileManagerExtensions.swift; sourceTree = "<group>"; };
+		E4020F786A4F370638B4A68F /* SwiftUI/Services/CursorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Services/CursorService.swift; sourceTree = "<group>"; };
+		3ECD64CEAC408967BEF748EE /* SwiftUI/ViewModels/LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/ViewModels/LibraryViewModel.swift; sourceTree = "<group>"; };
+		2C5596005C577340FA0593E1 /* SwiftUI/MaCursorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/MaCursorApp.swift; sourceTree = "<group>"; };
+		72606524D0D8D0C086C00580 /* MACCursorSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MACCursorSwift.swift; path = SwiftUI/Models/MACCursorSwift.swift; sourceTree = "<group>"; };
+		CAD767DFBA548141D844E0FC /* SwiftUI/Views/CursorThemeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CursorThemeEditorView.swift; sourceTree = "<group>"; };
+		AA77001100110011 /* hotkeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotkeys.m; sourceTree = "<group>"; };
+		AA77001100110044 /* hotkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hotkeys.h; sourceTree = "<group>"; };
+		AA88001100110011 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		32B39A20A0BDB42CB178B2F9 /* SwiftUI/Views/HelperToolStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/HelperToolStatusView.swift; sourceTree = "<group>"; };
+		AABB001100110011 /* SwiftUI/Views/GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/GeneralSettingsView.swift; sourceTree = "<group>"; };
+		AACC007700770011 /* SwiftUI/Views/CheckForUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CheckForUpdatesView.swift; sourceTree = "<group>"; };
+		AABB002200220011 /* SwiftUI/Views/ShortcutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/ShortcutSettingsView.swift; sourceTree = "<group>"; };
+		AABB003300330011 /* SwiftUI/Views/AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/AboutSettingsView.swift; sourceTree = "<group>"; };
+		AABB004400440011 /* SwiftUI/Views/AboutWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/AboutWindowView.swift; sourceTree = "<group>"; };
+		AABB005500550011 /* SwiftUI/Models/AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/AppearanceManager.swift; sourceTree = "<group>"; };
+		DD11001100110011 /* SwiftUI/Models/LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/LanguageManager.swift; sourceTree = "<group>"; };
+		AABB006600660011 /* SwiftUI/Services/ModalWindowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Services/ModalWindowCoordinator.swift; sourceTree = "<group>"; };
+		8632FC338D84FE2E2A5BE854 /* SwiftUI/Views/CursorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CursorPreviewView.swift; sourceTree = "<group>"; };
+		0C80E913C3F3C419701EF5E8 /* MACPreferences.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MACPreferences.swift; path = SwiftUI/Models/MACPreferences.swift; sourceTree = "<group>"; };
+		EE11002200110011 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resources/l10n/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE11003300110011 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Resources/l10n/nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE11004400110011 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resources/l10n/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EE11005500110011 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/l10n/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE11006600110011 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Resources/l10n/de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE11007700110011 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Resources/l10n/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE11008800110011 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Resources/l10n/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE11009900110011 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Resources/l10n/tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE1100AA00110011 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Resources/l10n/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE1100BB00110011 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = Resources/l10n/ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		77BC7317A0F551818E2801AE /* SwiftUI/Views/LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/LibraryView.swift; sourceTree = "<group>"; };
+		CC11001100110011 /* SwiftUI/Services/WindowsCursorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Services/WindowsCursorParser.swift; sourceTree = "<group>"; };
+		CC22002200220011 /* SwiftUI/Services/WindowsCursorImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Services/WindowsCursorImporter.swift; sourceTree = "<group>"; };
+		CC33003300330011 /* SwiftUI/Utils/WindowsCursorUTTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Utils/WindowsCursorUTTypes.swift; sourceTree = "<group>"; };
+
+		C456CE28DACB8867A7DDBA89 /* MACConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MACConstants.swift; path = SwiftUI/Models/MACConstants.swift; sourceTree = "<group>"; };
+		897480CACDA0C15040C7EE47 /* SwiftUI/Models/CursorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/CursorModel.swift; sourceTree = "<group>"; };
+		2FD8C57FC7AAC15C0A4FFF14 /* LibraryController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LibraryController.swift; path = SwiftUI/Services/LibraryController.swift; sourceTree = "<group>"; };
+		789F1C67CA1B3541A668CE97 /* SwiftUI/Models/CursorIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/CursorIdentifier.swift; sourceTree = "<group>"; };
+		0EEBAF91AF8402F49A80EC0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C4D60249E6F374B02871AB67 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D20E996ED042D7B7C3E0BBC3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FF9A6FADCC03B87EB3BB62BF /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		949BBEC71127967367FD74F9 /* MaCursor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MaCursor.entitlements; sourceTree = "<group>"; };
+		7F778D392ABC460D8A6CBF35 /* MaCursor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaCursor-Bridging-Header.h"; sourceTree = "<group>"; };
+		D16A253C7C28F873B6822EED /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = ../../../../../../../../../System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<group>"; };
+		A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B1BDFEED205B0D8A7B5E5EE6 /* MaCursor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaCursor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44B36FDC21A51D11AA8B8598 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		0093F39CDFA8B9CBCA2F23F4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		C4AA203AB31933561FD59703 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		61B1C20A60501C3FE6B7405F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		41A4C26D18636B4380C8058A /* MaCursor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MaCursor-Info.plist"; sourceTree = "<group>"; };
+		4B35E1828BA082BA61A49C5B /* MaCursor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaCursor-Prefix.pch"; sourceTree = "<group>"; };
+		DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C8131B95BCE2C686CE2130EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2F24430B7D565F07B5DD8277 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+
+
+		BEE90051E8E0556B6119A86A /* CGSPrivateAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivateAccessibility.h; sourceTree = "<group>"; };
+		68A4018E5EF8099A327B6CCF /* CGSPrivateConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivateConnection.h; sourceTree = "<group>"; };
+		737F4FBA16098E416EFC7004 /* CGSPrivateCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivateCursor.h; sourceTree = "<group>"; };
+
+		831B510FB228DE9195D6BE9A /* MaCursor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaCursor-Prefix.pch"; sourceTree = "<group>"; };
+		B11C4EE7A55FDC4E3A771DC1 /* com.writronic.macursorhelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.writronic.macursorhelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8F1A88D3292D8786A97BF92 /* NSFileManager+DirectoryLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+DirectoryLocations.h"; sourceTree = "<group>"; };
+		59DD46ADE91D4F29C27966F6 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
+		FC33E49EA05A54B089D57DE4 /* MACLibraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACLibraryController.h; sourceTree = "<group>"; };
+		B25CBA8302ADEA1257E63735 /* MACLibraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACLibraryController.m; sourceTree = "<group>"; };
+		30E81350274037A365DAB7BD /* MACCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACCursor.h; sourceTree = "<group>"; };
+		7C27736576C36C2373197271 /* MACCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACCursor.m; sourceTree = "<group>"; };
+		74C371427AF2B74A8E5A9EE6 /* MACCursorLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACCursorLibrary.h; sourceTree = "<group>"; };
+		D55A53022D60E40C210B890F /* MACCursorLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACCursorLibrary.m; sourceTree = "<group>"; };
+		CE00000100000001 /* MACCursorDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MACCursorDefs.h; sourceTree = "<group>"; };
+		CE00000100000002 /* MACCursorDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACCursorDefs.m; sourceTree = "<group>"; };
+		CE00000200000001 /* MACCursorActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MACCursorActions.h; sourceTree = "<group>"; };
+		CE00000200000002 /* MACCursorActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACCursorActions.m; sourceTree = "<group>"; };
+		CE00000300000001 /* MACCursorDaemon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MACCursorDaemon.h; sourceTree = "<group>"; };
+		CE00000300000002 /* MACCursorDaemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACCursorDaemon.m; sourceTree = "<group>"; };
+		CE00000400000001 /* CursorEngineHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CursorEngineHelper.entitlements; sourceTree = "<group>"; };
+		CE00000500000001 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE00000600000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		086D7FA9D63F99220E13BB7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F6964BFCA8BA5118217ECDC /* Sparkle in Frameworks */,
+				A04556B70615A052BAEF57C6 /* QuartzCore.framework in Frameworks */,
+				9B14F74D538D67E0A24164E2 /* UniformTypeIdentifiers.framework in Frameworks */,
+				13D664923ACB96A3584B1C2B /* ServiceManagement.framework in Frameworks */,
+				23EDBD1BA5C2E2C697C49929 /* Security.framework in Frameworks */,
+				CAB5B3CA3AB8BCCE0FD42EBA /* Cocoa.framework in Frameworks */,
+				AA88003300330022 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+		DDE0FF0CB9E36BB3025EFD37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120B8369D2508391432FA975 /* ApplicationServices.framework in Frameworks */,
+				C5475B4F2BA5AC865C4D8531 /* SystemConfiguration.framework in Frameworks */,
+				AA88001100110022 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		222A7666134B4F109A7EB7C5 /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MASPreferences;
+			sourceTree = "<group>";
+		};
+		0A858C1C8FFE9F396969E9FB /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		B58F021FBF5AE9C810C3457F /* Rebel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Rebel;
+			sourceTree = "<group>";
+		};
+		B7E6EA1B58B2B5B60EE6303C /* external */ = {
+			isa = PBXGroup;
+			children = (
+				B58F021FBF5AE9C810C3457F /* Rebel */,
+				155EB58660ABDBE6D22AC2BF /* DTScrollView */,
+				222A7666134B4F109A7EB7C5 /* MASPreferences */,
+				36F64DA5C27B7BF081FA9F2F /* BTRKit */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+		36F64DA5C27B7BF081FA9F2F /* BTRKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BTRKit;
+			sourceTree = "<group>";
+		};
+		1212E12479199A20CEF0D892 = {
+			isa = PBXGroup;
+			children = (
+				9A92BFF79FC93FD7F3646E06 /* MaCursor */,
+				51A877596DB22EDF207098EF /* CursorEngine */,
+				11D7BFA65826C4CF1928187B /* CursorEngineHelper */,
+				22F9E82E530772BC541F91B5 /* Frameworks */,
+				B6E939283071E97E80D0F6E6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B6E939283071E97E80D0F6E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B1BDFEED205B0D8A7B5E5EE6 /* MaCursor.app */,
+				B11C4EE7A55FDC4E3A771DC1 /* com.writronic.macursorhelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22F9E82E530772BC541F91B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0EEBAF91AF8402F49A80EC0D /* CoreGraphics.framework */,
+				AA88001100110011 /* Carbon.framework */,
+				D16A253C7C28F873B6822EED /* ApplicationServices.framework */,
+				8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */,
+				A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */,
+				FF9A6FADCC03B87EB3BB62BF /* ServiceManagement.framework */,
+				D20E996ED042D7B7C3E0BBC3 /* Security.framework */,
+				2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */,
+				C4D60249E6F374B02871AB67 /* ApplicationServices.framework */,
+				44B36FDC21A51D11AA8B8598 /* Cocoa.framework */,
+				C8131B95BCE2C686CE2130EF /* XCTest.framework */,
+				2F24430B7D565F07B5DD8277 /* Foundation.framework */,
+				751CD4BCBE18650A0A95B274 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		751CD4BCBE18650A0A95B274 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0093F39CDFA8B9CBCA2F23F4 /* AppKit.framework */,
+				C4AA203AB31933561FD59703 /* CoreData.framework */,
+				61B1C20A60501C3FE6B7405F /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9A92BFF79FC93FD7F3646E06 /* MaCursor */ = {
+			isa = PBXGroup;
+			children = (
+				949BBEC71127967367FD74F9 /* MaCursor.entitlements */,
+				7F778D392ABC460D8A6CBF35 /* MaCursor-Bridging-Header.h */,
+				2C5596005C577340FA0593E1 /* SwiftUI/MaCursorApp.swift */,
+				822AA46EAA8E188937F8C791 /* SwiftUI/AppDelegate.swift */,
+				578387732EEC904403B4CCA9 /* SwiftUI/Models/CursorThemeModel.swift */,
+				897480CACDA0C15040C7EE47 /* SwiftUI/Models/CursorModel.swift */,
+				789F1C67CA1B3541A668CE97 /* SwiftUI/Models/CursorIdentifier.swift */,
+				3ECD64CEAC408967BEF748EE /* SwiftUI/ViewModels/LibraryViewModel.swift */,
+				FCAEE24CC0A9B423A545248B /* SwiftUI/ViewModels/CursorThemeEditorViewModel.swift */,
+				77BC7317A0F551818E2801AE /* SwiftUI/Views/LibraryView.swift */,
+				347615832DAB2A0976453371 /* SwiftUI/Views/CursorThemeRowView.swift */,
+				7D17A87D79E15CC7DF24DCF8 /* SwiftUI/Views/CursorThemeDetailView.swift */,
+				CAD767DFBA548141D844E0FC /* SwiftUI/Views/CursorThemeEditorView.swift */,
+				ECCD8C78EE55CB7E5513A31B /* SwiftUI/Views/CursorEditorView.swift */,
+				8632FC338D84FE2E2A5BE854 /* SwiftUI/Views/CursorPreviewView.swift */,
+				5C110A9CF5B77C5D6A2949F2 /* SwiftUI/Views/SettingsView.swift */,
+				AABB003300330011 /* SwiftUI/Views/AboutSettingsView.swift */,
+				AABB004400440011 /* SwiftUI/Views/AboutWindowView.swift */,
+				AABB002200220011 /* SwiftUI/Views/ShortcutSettingsView.swift */,
+				AABB001100110011 /* SwiftUI/Views/GeneralSettingsView.swift */,
+				32B39A20A0BDB42CB178B2F9 /* SwiftUI/Views/HelperToolStatusView.swift */,
+				AACC007700770011 /* SwiftUI/Views/CheckForUpdatesView.swift */,
+				E4020F786A4F370638B4A68F /* SwiftUI/Services/CursorService.swift */,
+				BB43430C8E46157D3E2AB0EB /* SwiftUI/Services/HelperToolManager.swift */,
+				AABB006600660011 /* SwiftUI/Services/ModalWindowCoordinator.swift */,
+				B5796B49B23BC7898CD686E9 /* categories */,
+				B6047DDA5A0E65DC5A309500 /* controllers */,
+				B7403A8F616E4ED6B405D6F0 /* models */,
+				2F2688020C95796EE3419326 /* subclasses */,
+				97A3BEE8EDAC84402FC4505D /* views */,
+				B7E6EA1B58B2B5B60EE6303C /* external */,
+				831B510FB228DE9195D6BE9A /* MaCursor-Prefix.pch */,
+				DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */,
+				644D7B5EC8829BB984ED40A6 /* Supporting Files */,
+				E7C8DA561E196CEECE976572 /* FileManagerExtensions.swift */,
+				270C5E984EA999E13247D860 /* NSBitmapImageRepExtensions.swift */,
+				0C80E913C3F3C419701EF5E8 /* MACPreferences.swift */,
+				AABB005500550011 /* SwiftUI/Models/AppearanceManager.swift */,
+				DD11001100110011 /* SwiftUI/Models/LanguageManager.swift */,
+				C456CE28DACB8867A7DDBA89 /* MACConstants.swift */,
+				72606524D0D8D0C086C00580 /* MACCursorSwift.swift */,
+				DD3F9AF6BB008150E7278111 /* CursorLibrary.swift */,
+				2FD8C57FC7AAC15C0A4FFF14 /* LibraryController.swift */,
+				CC11001100110011 /* SwiftUI/Services/WindowsCursorParser.swift */,
+				CC22002200220011 /* SwiftUI/Services/WindowsCursorImporter.swift */,
+				CC33003300330011 /* SwiftUI/Utils/WindowsCursorUTTypes.swift */,
+				EE11001100110011 /* Localizable.strings */,
+			);
+			path = MaCursor;
+			sourceTree = "<group>";
+		};
+		644D7B5EC8829BB984ED40A6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				41A4C26D18636B4380C8058A /* MaCursor-Info.plist */,
+				4B35E1828BA082BA61A49C5B /* MaCursor-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		51A877596DB22EDF207098EF /* CursorEngine */ = {
+			isa = PBXGroup;
+			children = (
+				64CC80CBD5FF1CF8AB407507 /* CGSPrivateAPI */,
+				CE00000100000001 /* MACCursorDefs.h */,
+				CE00000100000002 /* MACCursorDefs.m */,
+				CE00000200000001 /* MACCursorActions.h */,
+				CE00000200000002 /* MACCursorActions.m */,
+				CE00000300000001 /* MACCursorDaemon.h */,
+				CE00000300000002 /* MACCursorDaemon.m */,
+			);
+			path = CursorEngine;
+			sourceTree = "<group>";
+		};
+		64CC80CBD5FF1CF8AB407507 /* CGSPrivateAPI */ = {
+			isa = PBXGroup;
+			children = (
+				BEE90051E8E0556B6119A86A /* CGSPrivateAccessibility.h */,
+				68A4018E5EF8099A327B6CCF /* CGSPrivateConnection.h */,
+				737F4FBA16098E416EFC7004 /* CGSPrivateCursor.h */,
+			);
+			path = CGSPrivateAPI;
+			sourceTree = "<group>";
+		};
+
+		155EB58660ABDBE6D22AC2BF /* DTScrollView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTScrollView;
+			sourceTree = "<group>";
+		};
+		11D7BFA65826C4CF1928187B /* CursorEngineHelper */ = {
+			isa = PBXGroup;
+			children = (
+				CE00000400000001 /* CursorEngineHelper.entitlements */,
+				CE00000600000001 /* Info.plist */,
+				CE00000500000001 /* main.m */,
+			);
+			path = CursorEngineHelper;
+			sourceTree = "<group>";
+		};
+
+		B5796B49B23BC7898CD686E9 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				F8F1A88D3292D8786A97BF92 /* NSFileManager+DirectoryLocations.h */,
+				59DD46ADE91D4F29C27966F6 /* NSFileManager+DirectoryLocations.m */,
+			);
+			name = categories;
+			path = LegacyEngine/categories;
+			sourceTree = "<group>";
+		};
+		B6047DDA5A0E65DC5A309500 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC33E49EA05A54B089D57DE4 /* MACLibraryController.h */,
+				B25CBA8302ADEA1257E63735 /* MACLibraryController.m */,
+				0A858C1C8FFE9F396969E9FB /* Preferences */,
+			);
+			name = controllers;
+			path = LegacyEngine/controllers;
+			sourceTree = "<group>";
+		};
+		B7403A8F616E4ED6B405D6F0 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				30E81350274037A365DAB7BD /* MACCursor.h */,
+				7C27736576C36C2373197271 /* MACCursor.m */,
+				74C371427AF2B74A8E5A9EE6 /* MACCursorLibrary.h */,
+				D55A53022D60E40C210B890F /* MACCursorLibrary.m */,
+			);
+			name = models;
+			path = LegacyEngine/models;
+			sourceTree = "<group>";
+		};
+		2F2688020C95796EE3419326 /* subclasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = subclasses;
+			path = LegacyEngine/subclasses;
+			sourceTree = "<group>";
+		};
+		97A3BEE8EDAC84402FC4505D /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = views;
+			path = LegacyEngine/views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B88593A5B831E8E3E210077D /* MaCursor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCEC884F5D51E2FD0494B7B0 /* Build configuration list for PBXNativeTarget "MaCursor" */;
+			buildPhases = (
+				991547DA531E3639CC409EC1 /* Sources */,
+				9B6CCD6347D04B1070331F83 /* Resources */,
+				086D7FA9D63F99220E13BB7F /* Frameworks */,
+				767AC31FA4C5A5C65E033D3B /* Build Number */,
+				FE60BD3E8C11BFCFFB6A3097 /* Copy Helper */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MaCursor;
+			packageProductDependencies = (
+				0C4AD5A867375C3B578C81DC /* Sparkle */,
+			);
+			productName = MaCursor;
+			productReference = B1BDFEED205B0D8A7B5E5EE6 /* MaCursor.app */;
+			productType = "com.apple.product-type.application";
+		};
+
+		F6D73D54A20D1D399F4B59DA /* com.writronic.macursorhelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F34E0EA57659AF9F83EC6AB /* Build configuration list for PBXNativeTarget "com.writronic.macursorhelper" */;
+			buildPhases = (
+				75AD4E82995E6758C2F86B9E /* Sources */,
+				DDE0FF0CB9E36BB3025EFD37 /* Frameworks */,
+				CDD2876659C16C266518E6B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = com.writronic.macursorhelper;
+			productName = com.writronic.macursorhelper;
+			productReference = B11C4EE7A55FDC4E3A771DC1 /* com.writronic.macursorhelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		904BBD1AD4BFB4742F0527EE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				CLASSPREFIX = MAC;
+				LastUpgradeCheck = 1500;
+				ORGANIZATIONNAME = Writronic;
+				TargetAttributes = {
+					B88593A5B831E8E3E210077D = {
+						DevelopmentTeam = SP495GG2KZ;
+						ProvisioningStyle = Automatic;
+					};
+					F6D73D54A20D1D399F4B59DA = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = SP495GG2KZ;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 76B1F4BE951909A219D886C9 /* Build configuration list for PBXProject "MaCursor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				nl,
+				"zh-Hans",
+				fr,
+				de,
+				ru,
+				es,
+				tr,
+				ja,
+				ar,
+			);
+			mainGroup = 1212E12479199A20CEF0D892;
+			packageReferences = (
+				26D8BD7F8A3A4CCEB28AC77D /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			productRefGroup = B6E939283071E97E80D0F6E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B88593A5B831E8E3E210077D /* MaCursor */,
+				F6D73D54A20D1D399F4B59DA /* com.writronic.macursorhelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9B6CCD6347D04B1070331F83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D925D9ED4B83520AD7AD9BF /* Images.xcassets in Resources */,
+				EE11001100110022 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD2876659C16C266518E6B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		767AC31FA4C5A5C65E033D3B /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\nbuildPlist=${INFOPLIST_FILE}\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $buildPlist)\nBuildNumberINCR=$((CFBundleVersion + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BuildNumberINCR\" $buildPlist\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		991547DA531E3639CC409EC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4863FC43749EB5290692E89F /* SwiftUI/MaCursorApp.swift in Sources */,
+				2AAC23FCF4BE5C6918C44D64 /* SwiftUI/AppDelegate.swift in Sources */,
+				895B5136D150C1B9465AEA4F /* SwiftUI/Models/CursorThemeModel.swift in Sources */,
+				714A8A422166D41979210DAD /* SwiftUI/Models/CursorModel.swift in Sources */,
+				3804B72F80269FD7DC394C1F /* SwiftUI/Models/CursorIdentifier.swift in Sources */,
+				C7D34A3585984CE3D3BEF4EE /* SwiftUI/ViewModels/LibraryViewModel.swift in Sources */,
+				A34D7E0847E76C3CD195A1D4 /* SwiftUI/ViewModels/CursorThemeEditorViewModel.swift in Sources */,
+				765104148188FD326062F020 /* SwiftUI/Views/LibraryView.swift in Sources */,
+				F63777A83372210D1FF4914E /* SwiftUI/Views/CursorThemeRowView.swift in Sources */,
+				AC23139532D64D0B57120751 /* SwiftUI/Views/CursorThemeDetailView.swift in Sources */,
+				AE38744ECCC1CCC49CA866BB /* SwiftUI/Views/CursorThemeEditorView.swift in Sources */,
+				1679C299F4819C0679762450 /* SwiftUI/Views/CursorEditorView.swift in Sources */,
+				A22DC4B5A19B682577DCA91F /* SwiftUI/Views/CursorPreviewView.swift in Sources */,
+				8D210CBF55A23BC538EAA598 /* SwiftUI/Views/SettingsView.swift in Sources */,
+				AABB003300330022 /* SwiftUI/Views/AboutSettingsView.swift in Sources */,
+				AABB004400440022 /* SwiftUI/Views/AboutWindowView.swift in Sources */,
+				AABB002200220022 /* SwiftUI/Views/ShortcutSettingsView.swift in Sources */,
+				AABB001100110022 /* SwiftUI/Views/GeneralSettingsView.swift in Sources */,
+				AABB005500550022 /* SwiftUI/Models/AppearanceManager.swift in Sources */,
+				DD11001100110022 /* SwiftUI/Models/LanguageManager.swift in Sources */,
+				CEE19135B48E8D0E92B7D484 /* SwiftUI/Views/HelperToolStatusView.swift in Sources */,
+				AACC007700770022 /* SwiftUI/Views/CheckForUpdatesView.swift in Sources */,
+				95162B85DA31CD92A2229088 /* SwiftUI/Services/CursorService.swift in Sources */,
+				E577F3EF2B16EC461B07391F /* SwiftUI/Services/HelperToolManager.swift in Sources */,
+				AABB006600660022 /* SwiftUI/Services/ModalWindowCoordinator.swift in Sources */,
+				FBE6219110EC183B1AA821F3 /* FileManagerExtensions.swift in Sources */,
+				9038B917D178B7F74D49983F /* NSBitmapImageRepExtensions.swift in Sources */,
+				2B1B1C5484CCA6B9DF7219AD /* MACPreferences.swift in Sources */,
+				88F66F5C0E48CE0DB4D7445B /* MACConstants.swift in Sources */,
+				A18EB2759EDCD5CFD28ACBF6 /* MACCursorSwift.swift in Sources */,
+				A99A5D94EB4DC3DEDB4F3076 /* CursorLibrary.swift in Sources */,
+				F2AF4A4FAD5E676EB79E5C98 /* LibraryController.swift in Sources */,
+				1175491A9678EDD562DA7214 /* MACCursor.m in Sources */,
+				CC11001100110022 /* SwiftUI/Services/WindowsCursorParser.swift in Sources */,
+				CC22002200220022 /* SwiftUI/Services/WindowsCursorImporter.swift in Sources */,
+				CC33003300330022 /* SwiftUI/Utils/WindowsCursorUTTypes.swift in Sources */,
+				CE10000100000001 /* MACCursorDefs.m in Sources */,
+				CE10000200000001 /* MACCursorActions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+		75AD4E82995E6758C2F86B9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE20000100000001 /* MACCursorDefs.m in Sources */,
+				CE20000200000001 /* MACCursorActions.m in Sources */,
+				CE20000300000001 /* MACCursorDaemon.m in Sources */,
+				CE30000100000001 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+
+
+/* Begin XCBuildConfiguration section */
+		551D228339C894DBF526D20A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"PROJECT_DIR=\\\"\"$(PROJECT_DIR)\"\\\"",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		E74702D380A76ACDEA0D2990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "PROJECT_DIR=\\\"\"$(PROJECT_DIR)\"\\\"";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		2B683268D17894AA634737F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MaCursor/MaCursor.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SP495GG2KZ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MaCursor/MaCursor-Prefix.pch";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MaCursor/MaCursor-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MaCursor/MaCursor-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
+				USER_HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/CursorEngine",
+					"$(PROJECT_DIR)/CursorEngine/CGSPrivateAPI",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		439955DEAE9E2B8796294631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MaCursor/MaCursor.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SP495GG2KZ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MaCursor/MaCursor-Prefix.pch";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MaCursor/MaCursor-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MaCursor/MaCursor-Bridging-Header.h";
+				SWIFT_VERSION = 6.0;
+				USER_HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/CursorEngine",
+					"$(PROJECT_DIR)/CursorEngine/CGSPrivateAPI",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+
+		48E59F9FBF117B290D25F2AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = CursorEngineHelper/CursorEngineHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = SP495GG2KZ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/CursorEngine",
+					"$(PROJECT_DIR)/CursorEngine/CGSPrivateAPI",
+				);
+				INFOPLIST_FILE = CursorEngineHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursorhelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1A443D7A999A6563C5621BAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = CursorEngineHelper/CursorEngineHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = SP495GG2KZ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/CursorEngine",
+					"$(PROJECT_DIR)/CursorEngine/CGSPrivateAPI",
+				);
+				INFOPLIST_FILE = CursorEngineHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursorhelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76B1F4BE951909A219D886C9 /* Build configuration list for PBXProject "MaCursor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				551D228339C894DBF526D20A /* Debug */,
+				E74702D380A76ACDEA0D2990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCEC884F5D51E2FD0494B7B0 /* Build configuration list for PBXNativeTarget "MaCursor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B683268D17894AA634737F0 /* Debug */,
+				439955DEAE9E2B8796294631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+
+		7F34E0EA57659AF9F83EC6AB /* Build configuration list for PBXNativeTarget "com.writronic.macursorhelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48E59F9FBF117B290D25F2AD /* Debug */,
+				1A443D7A999A6563C5621BAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		26D8BD7F8A3A4CCEB28AC77D /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0C4AD5A867375C3B578C81DC /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26D8BD7F8A3A4CCEB28AC77D /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin PBXVariantGroup section */
+		EE11001100110011 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE11002200110011 /* en */,
+				EE11003300110011 /* nl */,
+				EE11004400110011 /* zh-Hans */,
+				EE11005500110011 /* fr */,
+				EE11006600110011 /* de */,
+				EE11007700110011 /* ru */,
+				EE11008800110011 /* es */,
+				EE11009900110011 /* tr */,
+				EE1100AA00110011 /* ja */,
+				EE1100BB00110011 /* ar */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+	};
+	rootObject = 904BBD1AD4BFB4742F0527EE /* Project object */;
+}
