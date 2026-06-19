@@ -4,7 +4,7 @@ struct HelperToolStatusView: View {
     @State private var helperManager = HelperToolManager.shared
     @State private var errorMessage: String?
     @State private var isProcessing: Bool = false
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -12,20 +12,20 @@ struct HelperToolStatusView: View {
                     Circle()
                         .fill(helperManager.isInstalled ? .green : .secondary)
                         .frame(width: 8, height: 8)
-                    
+
                     Text(helperManager.statusDescription)
                         .font(.callout)
                 }
-                
+
                 if let errorMessage {
                     Text(errorMessage)
                         .font(.caption)
                         .foregroundStyle(.red)
                 }
             }
-            
+
             Spacer()
-            
+
             Button(helperManager.isInstalled ? "Uninstall" : "Install") {
                 Task {
                     isProcessing = true

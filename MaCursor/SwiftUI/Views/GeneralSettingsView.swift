@@ -3,25 +3,25 @@ import Sparkle
 
 struct GeneralSettingsView: View {
     var updater: SPUUpdater?
-    
+
     @Environment(AppearanceManager.self) private var appearanceManager
     @Environment(LanguageManager.self) private var languageManager
     @Environment(LibraryViewModel.self) private var library
-    
+
     @State private var cursorScaleValue: Double = {
         (MACPreferences.value(forKey: MACPreferences.cursorScaleKey) as? NSNumber)?.doubleValue ?? 1.0
     }()
-    
-    
+
+
     @State private var hideTahoeCursors: Bool = MACPreferences.hideTahoeCursors
     @State private var isLeftHanded: Bool = MACPreferences.isLeftHanded
     @State private var showResetConfirmation = false
     @State private var showRestartAlert = false
-    
+
     var body: some View {
         @Bindable var manager = appearanceManager
         @Bindable var langManager = languageManager
-        
+
         Form {
             Section("Theme") {
                 Picker("Appearance", selection: $manager.currentMode) {
@@ -32,7 +32,7 @@ struct GeneralSettingsView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            
+
             Section("Language") {
                 Picker("Language", selection: $langManager.currentLanguage) {
                     ForEach(AppLanguage.allCases) { language in
@@ -41,7 +41,7 @@ struct GeneralSettingsView: View {
                     }
                 }
             }
-            
+
             Section("Cursor") {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
@@ -51,24 +51,24 @@ struct GeneralSettingsView: View {
                             .monospacedDigit()
                             .foregroundStyle(.secondary)
                     }
-                    
+
                     Slider(value: $cursorScaleValue, in: 1.0...4.0, step: 0.25)
                         .onChange(of: cursorScaleValue) { _, newValue in
                             MACPreferences.set(NSNumber(value: newValue), forKey: MACPreferences.cursorScaleKey)
                             CursorService.setScale(Float(newValue))
                         }
                 }
-                
+
                 Toggle("Hide Tahoe cursors", isOn: $hideTahoeCursors)
                     .onChange(of: hideTahoeCursors) { _, newValue in
                         MACPreferences.setFlag(newValue, forKey: MACPreferences.hideTahoeCursorsKey)
                         NotificationCenter.default.post(name: .hideTahoeCursorsChanged, object: nil)
                     }
-                
+
                 Text("When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart.")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
-                
+
                 Picker("Mouse Hand", selection: $isLeftHanded) {
                     Text("Left Hand").tag(true)
                     Text("Right Hand").tag(false)
@@ -79,12 +79,12 @@ struct GeneralSettingsView: View {
                     reapplyActiveThemeIfNeeded()
                 }
             }
-            
+
 
             Section("Helper Tool") {
                 HelperToolStatusView()
             }
-            
+
             if let updater = updater {
                 Section("Software Updates") {
                     Toggle("Automatically check for updates", isOn: Binding(
@@ -93,15 +93,15 @@ struct GeneralSettingsView: View {
                     ))
                 }
             }
-            
+
             Section("Reset Settings") {
                 HStack {
                     Text("Reset all settings to default values (cannot be undone)")
                         .font(.callout)
                         .foregroundStyle(.secondary)
-                    
+
                     Spacer()
-                    
+
                     Button {
                         showResetConfirmation = true
                     } label: {
@@ -140,13 +140,13 @@ struct GeneralSettingsView: View {
             }
         }
     }
-    
-    
+
+
     private func performFullReset() {
         library.removeAllThemes()
-        
+
         CursorService.setScale(CursorService.defaultScale())
-        
+
         let allKeys: [String] = [
             MACPreferences.appliedCursorKey,
             MACPreferences.clickActionKey,
@@ -163,20 +163,20 @@ struct GeneralSettingsView: View {
         for key in allKeys {
             MACPreferences.set(nil, forKey: key)
         }
-        
+
         appearanceManager.currentMode = .system
         languageManager.currentLanguage = .system
         UserDefaults.standard.removeObject(forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
-        
+
         UserDefaults.standard.removeObject(forKey: "SUEnableAutomaticChecks")
-        
+
         cursorScaleValue = 1.0
         hideTahoeCursors = true
         isLeftHanded = false
-        
+
         reapplyActiveThemeIfNeeded()
-        
+
         let helperManager = HelperToolManager.shared
         if helperManager.isInstalled {
             Task {
@@ -184,7 +184,7 @@ struct GeneralSettingsView: View {
             }
         }
     }
-    
+
     private func reapplyActiveThemeIfNeeded() {
         if let appliedTheme = library.cursorThemes.first(where: { $0.isApplied }) {
             library.apply(appliedTheme)

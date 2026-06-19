@@ -5,9 +5,9 @@ enum AppearanceMode: Int, CaseIterable, Identifiable {
     case system = 0
     case light  = 1
     case dark   = 2
-    
+
     var id: Int { rawValue }
-    
+
     var label: String {
         switch self {
         case .system: return String(localized: "System")
@@ -15,7 +15,7 @@ enum AppearanceMode: Int, CaseIterable, Identifiable {
         case .dark:   return String(localized: "Dark")
         }
     }
-    
+
     var icon: String {
         switch self {
         case .system: return "circle.lefthalf.filled"
@@ -31,15 +31,15 @@ final class AppearanceManager {
     var currentMode: AppearanceMode {
         didSet { applyAndPersist() }
     }
-    
+
     init() {
         let raw = (MACPreferences.value(forKey: MACPreferences.appearanceModeKey) as? NSNumber)?.intValue ?? 0
         self.currentMode = AppearanceMode(rawValue: raw) ?? .system
     }
-    
+
     func applyAndPersist() {
         MACPreferences.set(NSNumber(value: currentMode.rawValue), forKey: MACPreferences.appearanceModeKey)
-        
+
         switch currentMode {
         case .system:
             NSApp.appearance = nil
@@ -49,7 +49,7 @@ final class AppearanceManager {
             NSApp.appearance = NSAppearance(named: .darkAqua)
         }
     }
-    
+
     func applyOnLaunch() {
         applyAndPersist()
     }

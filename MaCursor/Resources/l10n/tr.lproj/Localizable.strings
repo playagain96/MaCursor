@@ -13,145 +13,145 @@
 "%lld × %lld" = "%1$lld × %2$lld";
 
 /* Format: cursor count in theme */
-"%lld cursors" = "%lld cursors";
+"%lld cursors" = "%lld imleç";
 
 /* Format: additional cursor count overflow */
 "+%lld" = "+%lld";
 
 /* Settings tab title */
-"About" = "About";
+"About" = "Hakkında";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "MaCursor Hakkında";
 
 /* Undo: add cursor */
-"Add Cursor" = "Add Cursor";
+"Add Cursor" = "İmleç Ekle";
 
 /* Button: add shortcut slot */
-"Add shortcut slot" = "Add shortcut slot";
+"Add shortcut slot" = "Kısayol yuvası ekle";
 
 /* Button: add new theme */
-"Add Theme" = "Add Theme";
+"Add Theme" = "Tema Ekle";
 
 /* Section: animation settings */
-"Animation" = "Animation";
+"Animation" = "Animasyon";
 
 /* Label: appearance picker */
-"Appearance" = "Appearance";
+"Appearance" = "Görünüm";
 
 /* Badge: theme is applied */
-"Applied" = "Applied";
+"Applied" = "Uygulandı";
 
 /* Context menu: apply theme */
-"Apply" = "Apply";
+"Apply" = "Uygula";
 
 
 /* Label: theme creator */
-"Creator" = "Creator";
+"Creator" = "Oluşturan";
 
 /* Label: theme creator (with colon) */
-"Creator:" = "Creator:";
+"Creator:" = "Oluşturan:";
 
 
 /* Format: theme subtitle (creator and version) */
-"by %@ • v%.1f" = "by %1$@ • v%2$.1f";
+"by %@ • v%.1f" = "%1$@ tarafından • v%2$.1f";
 
 /* Button: cancel action */
-"Cancel" = "Cancel";
+"Cancel" = "İptal";
 
 /* Undo: change theme creator */
-"Change Creator" = "Change Creator";
+"Change Creator" = "Oluşturanı Değiştir";
 
 /* Undo: change theme HiDPI */
-"Change HiDPI" = "Change HiDPI";
+"Change HiDPI" = "HiDPI’yi Değiştir";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Change Identifier";
+"Change Identifier" = "Tanımlayıcıyı Değiştir";
 
 /* Undo: change theme name */
-"Change Name" = "Change Name";
+"Change Name" = "Adı Değiştir";
 
 /* Undo: change theme version */
-"Change Version" = "Change Version";
+"Change Version" = "Sürümü Değiştir";
 
 /* Placeholder: no cursor selected */
-"Choose a cursor from the list to edit its properties." = "Choose a cursor from the list to edit its properties.";
+"Choose a cursor from the list to edit its properties." = "Özelliklerini düzenlemek için listeden bir imleç seçin.";
 
 /* Placeholder: no theme selected */
-"Choose a cursor theme from the sidebar to view its cursors." = "Choose a cursor theme from the sidebar to view its cursors.";
+"Choose a cursor theme from the sidebar to view its cursors." = "İmleçlerini görüntülemek için kenar çubuğundan bir imleç teması seçin.";
 
 /* Import panel description */
-"Choose cursor theme files to import (.cursor)" = "Choose cursor theme files to import (.cursor)";
+"Choose cursor theme files to import (.cursor)" = "İçe aktarılacak imleç teması dosyalarını seçin (.cursor)";
 
 /* Button: close window */
-"Close" = "Close";
+"Close" = "Kapat";
 
 /* About: copyright notice */
-"Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
+"Copyright © %@ Writronic. All rights reserved." = "Telif hakkı © %@ Writronic. Tüm hakları saklıdır.";
 
 /* Section: cursor settings */
-"Cursor" = "Cursor";
+"Cursor" = "İmleç";
 
 /* Label: cursor scale slider */
-"Cursor Scale" = "Cursor Scale";
+"Cursor Scale" = "İmleç Ölçeği";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Cursor Theme";
+"Cursor Theme" = "İmleç Teması";
 
 /* Undo suffix: cursor type */
-"cursor type" = "cursor type";
+"cursor type" = "imleç türü";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Cursor Type:";
+"Cursor Type:" = "İmleç Türü:";
 
 /* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
+"Custom cursor themes for macOS" = "macOS için özel imleç temaları";
 
 /* Appearance mode: dark */
-"Dark" = "Dark";
+"Dark" = "Koyu";
 
 /* Button: delete cursor */
-"Delete" = "Delete";
+"Delete" = "Sil";
 
 /* Undo suffix: dimensions */
-"dimensions" = "dimensions";
+"dimensions" = "boyutlar";
 
 /* Button: discard changes */
-"Discard" = "Discard";
+"Discard" = "Vazgeç";
 
 
 /* Label: drop zone */
-"Drop" = "Drop";
+"Drop" = "Bırak";
 
 /* Button: duplicate cursor */
-"Duplicate" = "Duplicate";
+"Duplicate" = "Çoğalt";
 
 /* Button: edit theme */
-"Edit" = "Edit";
+"Edit" = "Düzenle";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edit Theme";
+"Edit Theme" = "Temayı Düzenle";
 
 /* Error: write failure */
-"Error writing cursor theme to disk." = "Error writing cursor theme to disk.";
+"Error writing cursor theme to disk." = "İmleç teması diske yazılırken hata oluştu.";
 
 /* Error: theme file creation failure */
-"Failed to create cursor theme file" = "Failed to create cursor theme file";
+"Failed to create cursor theme file" = "İmleç teması dosyası oluşturulamadı";
 
 /* Undo suffix: frame count */
-"frame count" = "frame count";
+"frame count" = "kare sayısı";
 
 /* Label: frame count */
-"Frame Count:" = "Frame Count:";
+"Frame Count:" = "Kare Sayısı:";
 
 /* Undo suffix: frame duration */
-"frame duration" = "frame duration";
+"frame duration" = "kare süresi";
 
 /* Label: frame duration */
-"Frame Duration:" = "Frame Duration:";
+"Frame Duration:" = "Kare Süresi:";
 
 /* Settings tab: general */
-"General" = "General";
+"General" = "Genel";
 
 /* About: license */
 "GPL-3.0" = "GPL-3.0";
@@ -160,211 +160,211 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Helper Not Found";
+"Helper Not Found" = "Yardımcı Araç Bulunamadı";
 
 /* Section: helper tool */
-"Helper Tool" = "Helper Tool";
+"Helper Tool" = "Yardımcı Araç";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Hot Spot";
+"Hot Spot" = "Etkin Nokta";
 
 /* Undo suffix: hotspot */
-"hotspot" = "hotspot";
+"hotspot" = "etkin nokta";
 
 /* Button: import */
-"Import" = "Import";
+"Import" = "İçe Aktar";
 
 /* Menu: import theme */
-"Import Theme..." = "Import Theme...";
+"Import Theme..." = "Temayı İçe Aktar...";
 
 /* Button: install helper */
-"Install" = "Install";
+"Install" = "Yükle";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Installed & Active";
+"Installed & Active" = "Yüklü ve Etkin";
 
 /* Section/Picker: language setting */
-"Language" = "Language";
+"Language" = "Dil";
 
 /* Button: dismiss restart prompt */
-"Later" = "Later";
+"Later" = "Daha Sonra";
 
 /* Appearance mode: light */
-"Light" = "Light";
+"Light" = "Açık";
 
 /* App name */
 "MaCursor" = "MaCursor";
 
 /* Default cursor dump file name */
-"MaCursor Dump" = "MaCursor Dump";
+"MaCursor Dump" = "MaCursor Dökümü";
 
 /* About: tagline */
-"Made with ❤️" = "Made with ❤️";
+"Made with ❤️" = "❤️ ile yapıldı";
 
 /* Error: duplicate cursor names */
-"Multiple cursors with the name(s): %@ exist." = "Multiple cursors with the name(s): %@ exist.";
+"Multiple cursors with the name(s): %@ exist." = "%@ adında birden fazla imleç var.";
 
 /* Label: theme name */
-"Name:" = "Name:";
+"Name:" = "Adı:";
 
 /* Button: new theme */
-"New Theme" = "New Theme";
+"New Theme" = "Yeni Tema";
 
 /* Error: no file URL */
-"No file URL set." = "No file URL set.";
+"No file URL set." = "Dosya URL’si belirlenmemiş.";
 
 /* Error: directory not found */
-"No path found for directory in domain." = "No path found for directory in domain.";
+"No path found for directory in domain." = "Etki alanındaki dizin için yol bulunamadı.";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "No Shortcuts";
+"No Shortcuts" = "Kısayol Yok";
 
 /* Placeholder: no theme selected */
-"None" = "None";
+"None" = "Yok";
 
 /* Helper status: not installed */
-"Not Installed" = "Not Installed";
+"Not Installed" = "Yüklü Değil";
 
 /* Placeholder: shortcut instructions */
-"Press + to add a favorite cursor shortcut." = "Press + to add a favorite cursor shortcut.";
+"Press + to add a favorite cursor shortcut." = "Favori imleç kısayolu eklemek için + tuşuna basın.";
 
 /* Button: recording shortcut */
-"Press shortcut…" = "Press shortcut…";
+"Press shortcut…" = "Kısayola basın…";
 
 /* Section: cursor preview */
-"Preview" = "Preview";
+"Preview" = "Önizleme";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Record Shortcut";
+"Record Shortcut" = "Kısayolu Kaydet";
 
 /* Tooltip: remove representation */
-"Remove %@ representation" = "Remove %@ representation";
+"Remove %@ representation" = "%@ temsilini kaldır";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Remove Cursor";
+"Remove Cursor" = "İmleci Kaldır";
 
 /* Button: remove shortcut slot */
-"Remove selected slot" = "Remove selected slot";
+"Remove selected slot" = "Seçili yuvayı kaldır";
 
 /* Section: cursor representations */
-"Representations" = "Representations";
+"Representations" = "Temsiller";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Requires Approval in System Settings";
+"Requires Approval in System Settings" = "Sistem Ayarları’nda Onay Gerekiyor";
 
 /* Button: reset settings */
-"Reset" = "Reset";
+"Reset" = "Sıfırla";
 
 /* Description: reset button */
-"Reset all settings to default values (cannot be undone)" = "Reset all settings to default values (cannot be undone)";
+"Reset all settings to default values (cannot be undone)" = "Tüm ayarları varsayılan değerlere sıfırla (geri alınamaz)";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Reset All Settings?";
+"Reset All Settings?" = "Tüm Ayarlar Sıfırlansın mı?";
 
 /* Section: reset settings */
-"Reset Settings" = "Reset Settings";
+"Reset Settings" = "Ayarları Sıfırla";
 
 /* Button: restart app */
-"Restart Now" = "Restart Now";
+"Restart Now" = "Şimdi Yeniden Başlat";
 
 /* Alert title: restart required */
-"Restart Required" = "Restart Required";
+"Restart Required" = "Yeniden Başlatma Gerekiyor";
 
 /* Button: restore cursors */
-"Restore" = "Restore";
+"Restore" = "Geri Yükle";
 
 /* Button: restore system cursors */
-"Restore system cursors" = "Restore system cursors";
+"Restore system cursors" = "Sistem imleçlerini geri yükle";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Restore System Cursors";
+"Restore System Cursors" = "Sistem İmleçlerini Geri Yükle";
 
 /* Button: save theme */
-"Save" = "Save";
+"Save" = "Kaydet";
 
 /* Alert title: save failure */
-"Save failed" = "Save failed";
+"Save failed" = "Kaydetme başarısız oldu";
 
 /* Unit: seconds */
-"sec" = "sec";
+"sec" = "sn";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Select a Cursor";
+"Select a Cursor" = "Bir İmleç Seçin";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Select a Cursor Theme";
+"Select a Cursor Theme" = "Bir İmleç Teması Seçin";
 
 /* Window title: settings */
-"Settings" = "Settings";
+"Settings" = "Ayarlar";
 
 /* Menu: open settings */
-"Settings..." = "Settings...";
+"Settings..." = "Ayarlar...";
 
 /* Settings tab: shortcut */
-"Shortcut" = "Shortcut";
+"Shortcut" = "Kısayol";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Kısayolların çalışması için Yardımcı Araç’ın yüklü olması gerekir. Yardımcı Araç’ı Genel → Yardımcı Araç’tan yükleyebilirsiniz.";
 
 /* Context menu: show in Finder */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Finder’da Göster";
 
 /* Label: cursor size */
-"Size:" = "Size:";
+"Size:" = "Boyut:";
 
 /* Appearance mode: system */
-"System" = "System";
+"System" = "Sistem";
 
 /* Language picker: system default */
-"System Default" = "System Default";
+"System Default" = "Sistem Varsayılanı";
 
 /* Alert message: cursor theme load failure */
-"The cursor theme could not be loaded." = "The cursor theme could not be loaded.";
+"The cursor theme could not be loaded." = "İmleç teması yüklenemedi.";
 
 /* Error: destination not writable */
-"The destination, %@, is not writable." = "The destination, %@, is not writable.";
+"The destination, %@, is not writable." = "%@ hedefi yazılabilir değil.";
 
 /* Alert message: language restart */
-"The language change will take effect after restarting MaCursor." = "The language change will take effect after restarting MaCursor.";
+"The language change will take effect after restarting MaCursor." = "Dil değişikliği, MaCursor yeniden başlatıldıktan sonra geçerli olacak.";
 
 /* Section: theme settings */
-"Theme" = "Theme";
+"Theme" = "Tema";
 
 /* Label: theme name */
-"Theme Name" = "Theme Name";
+"Theme Name" = "Tema Adı";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Theme Not Found";
+"Theme Not Found" = "Tema Bulunamadı";
 
 /* Alert message: reset confirmation */
-"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone.";
+"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "Bu işlem tüm imleç temalarını kaldırır, sistem imleçlerini geri yükler ve tüm tercihleri varsayılan değerlerine sıfırlar. Bu işlem geri alınamaz.";
 
 /* Error: invalid directory */
-"Unable to create a cursor theme from the directory specified." = "Unable to create a cursor theme from the directory specified.";
+"Unable to create a cursor theme from the directory specified." = "Belirtilen dizinden bir imleç teması oluşturulamadı.";
 
 /* Button: uninstall helper */
-"Uninstall" = "Uninstall";
+"Uninstall" = "Kaldır";
 
 /* Default creator */
-"Unknown" = "Unknown";
+"Unknown" = "Bilinmiyor";
 
 /* Default new theme name */
-"Unnamed" = "Unnamed";
+"Unnamed" = "İsimsiz";
 
 /* Alert title: unsaved changes */
-"Unsaved Changes" = "Unsaved Changes";
+"Unsaved Changes" = "Kaydedilmemiş Değişiklikler";
 
 /* About: version label */
-"Version %@" = "Version %@";
+"Version %@" = "Sürüm %@";
 
 /* Label: theme version */
-"Version:" = "Version:";
+"Version:" = "Sürüm:";
 
 /* Link: website */
-"Visit Website" = "Visit Website";
+"Visit Website" = "Web Sitesini Ziyaret Et";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -373,4 +373,28 @@
 "Y:" = "Y:";
 
 /* Alert message: unsaved changes */
-"Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+"Your changes will be discarded if you don't save them." = "Kaydetmezseniz değişiklikleriniz silinecek.";
+
+/* Toggle: hide Tahoe-specific cursor variants */
+"Hide Tahoe cursors" = "Tahoe imleçlerini gizle";
+
+/* Caption: Hide Tahoe cursors explanation */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "Etkinleştirildiğinde, Tahoe’ya özgü imleç çeşitleri (ArrowS, IBeamS) gizlenir. Bir imleci kaldırmak, onun Tahoe’daki karşılığını da kaldırır.";
+
+/* Picker: mouse handedness */
+"Mouse Hand" = "Fare Eli";
+
+/* Mouse Hand option: left-handed */
+"Left Hand" = "Sol El";
+
+/* Mouse Hand option: right-handed */
+"Right Hand" = "Sağ El";
+
+/* Section: software updates */
+"Software Updates" = "Yazılım Güncellemeleri";
+
+/* Toggle: automatically check for updates */
+"Automatically check for updates" = "Güncellemeleri otomatik olarak denetle";
+
+/* Menu: check for updates (Sparkle) */
+"Check for Updates…" = "Güncellemeleri Denetle…";

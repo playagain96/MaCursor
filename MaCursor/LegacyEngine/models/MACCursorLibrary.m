@@ -99,30 +99,30 @@ NSString *const MACLibraryDidSaveNotificationName = @"MACLibraryDidSave";
     if ((self = [self init])) {
         self.cursors = cursors.mutableCopy;
     }
-    
+
     return self;
 }
 
 - (instancetype)init {
     if ((self = [super init])) {
         self.undoManager = [[NSUndoManager alloc] init];
-        
+
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         __weak typeof(self) weakSelf = self;
         id ob1 = [center addObserverForName:NSUndoManagerDidCloseUndoGroupNotification object:self.undoManager queue:nil usingBlock:^(NSNotification *note) {
             [weakSelf updateChangeCount:NSChangeDone];
         }];
-        
+
         id ob2 = [center addObserverForName:NSUndoManagerDidUndoChangeNotification object:self.undoManager queue:nil usingBlock:^(NSNotification *note) {
             [weakSelf updateChangeCount:NSChangeUndone];
         }];
-        
+
         id ob3 = [center addObserverForName:NSUndoManagerDidRedoChangeNotification object:self.undoManager queue:nil usingBlock:^(NSNotification *note) {
             [weakSelf updateChangeCount:NSChangeRedone];
         }];
-        
+
         self.observers = @[ob1, ob2, ob3];
-        
+
         self.name           = NSLocalizedString(@"Unnamed", "Default New Cursor Theme Name");
         self.creator         = NSUserName();
         self.hiDPI          = NO;
@@ -134,13 +134,13 @@ NSString *const MACLibraryDidSaveNotificationName = @"MACLibraryDidSave";
         self.lastChangeCount = 0;
         [self startObservingProperties];
     }
-    
+
     return self;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     MACCursorLibrary *lib = [[MACCursorLibrary allocWithZone:zone] initWithCursors:self.cursors];
-    
+
     [lib.undoManager disableUndoRegistration];
     lib.name             = self.name;
     lib.creator           = self.creator;
@@ -149,7 +149,7 @@ NSString *const MACLibraryDidSaveNotificationName = @"MACLibraryDidSave";
     lib.identifier       = [MACCursorLibrary sanitizeName:self.name];
     lib.uuid             = [[NSUUID UUID] UUIDString];
     [lib.undoManager enableUndoRegistration];
-    
+
     return lib;
 }
 
@@ -169,10 +169,10 @@ NSString *const MACLibraryDidSaveNotificationName = @"MACLibraryDidSave";
     for (MACCursor *cursor in self.cursors) {
         [self stopObservingCursor:cursor];
     }
-    
+
     self.cursors = [NSMutableSet set];
     [self.undoManager disableUndoRegistration];
-    
+
     NSDictionary *cursorDicts = dictionary[MACCursorDictionaryCursorsKey];
     NSString *creator          = dictionary[MACCursorDictionaryCreatorKey];
     NSNumber *hiDPI           = dictionary[MACCursorDictionaryHiDPIKey];
@@ -180,30 +180,30 @@ NSString *const MACLibraryDidSaveNotificationName = @"MACLibraryDidSave";
     NSString *themeName        = dictionary[MACCursorDictionaryThemeNameKey];
     NSNumber *themeVersion     = dictionary[MACCursorDictionaryThemeVersionKey];
     NSString *uuidStr          = dictionary[MACCursorDictionaryUUIDKey];
-    
+
     self.name       = themeName;
     self.version    = themeVersion;
     self.creator     = creator;
     self.identifier = identifier;
     self.hiDPI      = hiDPI.boolValue;
-    
+
     if (!self.identifier) {
         [self.undoManager enableUndoRegistration];
         NSLog(@"cannot make library from dictionary with no identifier");
         return NO;
     }
-    
+
     if (!uuidStr.length) {
         [self.undoManager enableUndoRegistration];
         NSLog(@"cannot make library from dictionary with no UUID");
         return NO;
     }
-    
+
     self.uuid = uuidStr;
-    
+
     [self.cursors removeAllObjects];
     [self addCursorsFromDictionary:cursorDicts];
-    
+
     [self.undoManager enableUndoRegistration];
     return YES;
 }
@@ -213,7 +213,7 @@ NSString *const MACLibraryDidSaveNotificationName = @"MACLibraryDidSave";
     for (MACCursor *cursor in self.cursors) {
         [self stopObservingCursor:cursor];
     }
-    
+
     for (id observer in self.observers) {
         [NSNotificationCenter.defaultCenter removeObserver:observer];
     }
@@ -253,13 +253,13 @@ const char MACCursorPropertiesContext;
         } else {
             decamelized = [self.class cursorUndoProperties][keyPath];
         }
-        
+
         id oldValue = change[NSKeyValueChangeOldKey];
         if ([oldValue isKindOfClass:[NSNull class]])
             oldValue = nil;
-        
+
         [[self.undoManager prepareWithInvocationTarget: object] setValue:oldValue forKeyPath:keyPath];
-        
+
         if (!self.undoManager.isUndoing) {
             [self.undoManager setActionName:[[NSLocalizedString(@"Change ", "Undo Change Prefix") stringByAppendingString:decamelized] capitalizedString]];
         }
@@ -290,14 +290,14 @@ const char MACCursorPropertiesContext;
     if ([self.cursors containsObject:cursor]) {
         return;
     }
-    
+
     NSSet *change = [NSSet setWithObject:cursor];
-    
+
     [[self.undoManager prepareWithInvocationTarget:self] removeCursor:cursor];
     if (!self.undoManager.isUndoing) {
         [self.undoManager setActionName:NSLocalizedString(@"Add Cursor", "Add Cursor Undo Title")];
     }
-    
+
     [self willChangeValueForKey:@"cursors" withSetMutation:NSKeyValueUnionSetMutation usingObjects:change];
     [self.cursors addObject:cursor];
     [self startObservingCursor:cursor];
@@ -306,12 +306,12 @@ const char MACCursorPropertiesContext;
 
 - (void)removeCursor:(MACCursor *)cursor {
     NSSet *change = [NSSet setWithObject:cursor];
-    
+
     [[self.undoManager prepareWithInvocationTarget:self] addCursor:cursor];
     if (!self.undoManager.isUndoing) {
         [self.undoManager setActionName:NSLocalizedString(@"Remove Cursor", @"Remove Cursor Undo Title")];
     }
-    
+
     [self willChangeValueForKey:@"cursors" withSetMutation:NSKeyValueMinusSetMutation usingObjects:change];
     [self.cursors removeObject:cursor];
     [self stopObservingCursor:cursor];
@@ -325,21 +325,21 @@ const char MACCursorPropertiesContext;
 
 - (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *drep = [NSMutableDictionary dictionary];
-    
+
     drep[MACCursorDictionaryThemeNameKey]       = self.name;
     drep[MACCursorDictionaryThemeVersionKey]    = self.version;
     drep[MACCursorDictionaryCreatorKey]         = self.creator;
     drep[MACCursorDictionaryHiDPIKey]          = @(self.isHiDPI);
     drep[MACCursorDictionaryIdentifierKey]     = self.identifier;
     drep[MACCursorDictionaryUUIDKey]           = self.uuid;
-    
+
     NSMutableDictionary *cursors = [NSMutableDictionary dictionary];
     for (MACCursor *cursor in self.cursors) {
         cursors[cursor.identifier] = [cursor dictionaryRepresentation];
     }
-    
+
     drep[MACCursorDictionaryCursorsKey] = cursors;
-    
+
     return drep;
 }
 
@@ -350,16 +350,16 @@ const char MACCursorPropertiesContext;
 - (NSError *)save {
     NSCountedSet *count  = [[NSCountedSet alloc] initWithArray:[self.cursors.allObjects valueForKey:@"identifier"]];
     NSMutableSet *duplicates = [NSMutableSet set];
-    
+
     for (NSString *identifier in count) {
         if ([duplicates containsObject:identifier])
             continue;
-        
+
         NSUInteger amount = [count countForObject:identifier];
         if (amount > 1)
             [duplicates addObject:nameForCursorIdentifier(identifier)];
     }
-        
+
     if (duplicates.count > 0) {
         return [NSError errorWithDomain:MACErrorDomain code:MACErrorMultipleCursorIdentifiersCode userInfo:@{
                                                                                                            NSLocalizedDescriptionKey: NSLocalizedString(@"Save failed", @"New Cursor Theme Failure Title"),
@@ -393,7 +393,7 @@ const char MACCursorPropertiesContext;
     while (self.isDirty) {
         [self.undoManager undo];
     }
-    
+
     [self updateChangeCount:NSChangeCleared];
     [self.undoManager removeAllActions];
 }
@@ -406,7 +406,7 @@ const char MACCursorPropertiesContext;
     if (![object isKindOfClass:self.class]) {
         return NO;
     }
-    
+
     return ([object.name isEqualToString:self.name] &&
             [object.creator isEqualToString:self.creator] &&
             [object.identifier isEqualToString:self.identifier] &&

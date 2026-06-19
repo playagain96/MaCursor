@@ -3,7 +3,7 @@
 MACCursorScale cursorScaleForScale(CGFloat scale) {
     if (scale < 0.0)
         return MACCursorScaleNone;
-    
+
     return (MACCursorScale)((NSInteger)scale * 100);
 }
 
@@ -34,31 +34,31 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
 
 - (id)initWithCursorDictionary:(NSDictionary *)dict {
     if ((self = [self init])) {
-        
+
         if (![self _readFromDictionary:dict])
             return nil;
-        
+
     }
-    
+
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     MACCursor *cursor = [[MACCursor allocWithZone:zone] init];
-    
+
     cursor.frameCount      = self.frameCount;
     cursor.frameDuration   = self.frameDuration;
     cursor.size            = self.size;
     cursor.representations = self.representations.mutableCopy;
     cursor.hotSpot         = self.hotSpot;
     cursor.identifier      = self.identifier;
-    
+
     return cursor;
 }
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {    
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
     NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-    
+
     if ([key isEqualToString:@"imageWithAllReps"]) {
         keyPaths = [keyPaths setByAddingObjectsFromArray:@[ @"representations" ]];
     } else if ([key isEqualToString:@"name"]) {
@@ -66,14 +66,14 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
     } else if ([key hasPrefix:@"cursorImage"]) {
         keyPaths = [keyPaths setByAddingObjectsFromArray:@[ [key stringByReplacingCharactersInRange:NSMakeRange(6, 5) withString:@"Rep"] ]];
     }
-    
+
     return keyPaths;
 }
 
 - (BOOL)_readFromDictionary:(NSDictionary *)dictionary {
     if (!dictionary || !dictionary.count)
         return NO;
-    
+
     NSNumber *frameCount    = [dictionary objectForKey:MACCursorDictionaryFrameCountKey];
     NSNumber *frameDuration = [dictionary objectForKey:MACCursorDictionaryFrameDurationKey];
     NSNumber *hotSpotX      = [dictionary objectForKey:MACCursorDictionaryHotSpotXKey];
@@ -81,15 +81,15 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
     NSNumber *pointsWide    = [dictionary objectForKey:MACCursorDictionaryPointsWideKey];
     NSNumber *pointsHigh    = [dictionary objectForKey:MACCursorDictionaryPointsHighKey];
     NSArray *reps           = [dictionary objectForKey:MACCursorDictionaryRepresentationsKey];
-    
+
     if (frameCount && frameDuration && hotSpotX && hotSpotY && pointsWide && pointsHigh) {
-        
+
         self.frameCount    = frameCount.unsignedIntegerValue;
         self.frameDuration = frameDuration.doubleValue;
         self.hotSpot       = NSMakePoint(hotSpotX.doubleValue, hotSpotY.doubleValue);
-        
+
         self.size           = NSMakeSize(pointsWide.doubleValue, pointsHigh.doubleValue);
-        
+
         for (NSData *data in reps) {
             NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithData:data];
             rep.size = NSMakeSize(self.size.width, self.size.height * self.frameCount);
@@ -111,15 +111,15 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
     drep[MACCursorDictionaryHotSpotYKey]      = @(self.hotSpot.y);
     drep[MACCursorDictionaryPointsWideKey]    = @(self.size.width);
     drep[MACCursorDictionaryPointsHighKey]    = @(self.size.height);
-    
+
     NSMutableArray *pngs = [NSMutableArray array];
     for (NSString *key in self.representations) {
         NSBitmapImageRep *rep = self.representations[key];
         pngs[pngs.count] = [rep.ensuredSRGBSpace representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
     }
-    
+
     drep[MACCursorDictionaryRepresentationsKey] = pngs;
-    
+
     return drep;
 }
 
@@ -129,7 +129,7 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
 
         NSString *scaleString = [key substringFromIndex:prefix.length];
         CGFloat scale = [scaleString doubleValue] / 100;
-        
+
         if ([key hasPrefix:@"cursorRep"])
             return [self representationForScale:cursorScaleForScale(scale)];
         else {
@@ -142,7 +142,7 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
             return nil;
         }
     }
-    
+
     return [super valueForUndefinedKey:key];
 }
 
@@ -151,21 +151,21 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
         NSString *prefix = [key hasPrefix:@"cursorRep"] ? @"cursorRep" : @"cursorImage";
         NSString *scaleString = [key substringFromIndex:prefix.length];
         CGFloat scale = [scaleString doubleValue] / 100;
-        
+
         if ([key hasPrefix:@"cursorImage"]) {
             value = [(NSImage *)value representations][0];
         }
-        
+
         [self setRepresentation:value forScale:cursorScaleForScale(scale)];
         return;
     }
-    
+
     [super setValue:value forUndefinedKey:key];
 }
 
 - (void)setRepresentation:(NSBitmapImageRep *)imageRep forScale:(MACCursorScale)scale {
     [self willChangeValueForKey:@"representations"];
-    
+
     NSString *key = [@"cursorRep" stringByAppendingFormat:@"%lu", scale];
     [self willChangeValueForKey:key];
     if (imageRep)
@@ -268,14 +268,14 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
     if (![object isKindOfClass:self.class]) {
         return NO;
     }
-    
+
     BOOL props =  (object.frameCount == self.frameCount &&
                    object.frameDuration == self.frameDuration &&
                    NSEqualSizes(object.size, self.size) &&
                    NSEqualPoints(object.hotSpot, self.hotSpot) &&
                    [object.identifier isEqualToString:self.identifier]);
 
-    
+
     return props;
 }
 

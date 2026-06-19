@@ -13,9 +13,9 @@ enum AppLanguage: String, CaseIterable, Identifiable {
     case tr      = "tr"
     case ja      = "ja"
     case ar      = "ar"
-    
+
     var id: String { rawValue }
-    
+
     var displayName: String {
         switch self {
         case .system: return String(localized: "System Default")
@@ -31,7 +31,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case .ar:     return "العربية"
         }
     }
-    
+
     var languageCode: String? {
         switch self {
         case .system: return nil
@@ -46,31 +46,31 @@ final class LanguageManager {
     var currentLanguage: AppLanguage {
         didSet { applyAndPersist() }
     }
-    
+
     var needsRestart: Bool = false
-    
+
     private let launchLanguage: AppLanguage
-    
+
     init() {
         let saved = MACPreferences.value(forKey: MACPreferences.languageKey) as? String ?? "system"
         let resolved = AppLanguage(rawValue: saved) ?? .system
         self.currentLanguage = resolved
         self.launchLanguage = resolved
     }
-    
+
     func applyAndPersist() {
         MACPreferences.set(currentLanguage.rawValue as NSString, forKey: MACPreferences.languageKey)
-        
+
         if let code = currentLanguage.languageCode {
             UserDefaults.standard.set([code], forKey: "AppleLanguages")
         } else {
             UserDefaults.standard.removeObject(forKey: "AppleLanguages")
         }
         UserDefaults.standard.synchronize()
-        
+
         needsRestart = (currentLanguage != launchLanguage)
     }
-    
+
     func restartApp() {
         let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
         let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
@@ -78,7 +78,7 @@ final class LanguageManager {
         task.launchPath = "/usr/bin/open"
         task.arguments = ["-n", path]
         task.launch()
-        
+
         NSApp.terminate(nil)
     }
 }

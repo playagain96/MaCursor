@@ -5,13 +5,13 @@ struct CursorEditorView: View {
     @Bindable var cursor: CursorModel
     var usedIdentifiers: Set<String> = []
     var onDirty: (() -> Void)? = nil
-    
+
     private var availableIdentifiers: [(identifier: String, name: String)] {
         CursorIdentifier.allIdentifiers.filter {
             $0.identifier == cursor.identifier || !usedIdentifiers.contains($0.identifier)
         }
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -23,9 +23,9 @@ struct CursorEditorView: View {
                     }
                     .onChange(of: cursor.identifier) { _, _ in onDirty?() }
                 }
-                
+
                 Divider()
-                
+
                 Section("Animation") {
                     HStack(spacing: 16) {
                         LabeledContent("Frame Count:") {
@@ -34,7 +34,7 @@ struct CursorEditorView: View {
                                 .textFieldStyle(.roundedBorder)
                                 .onChange(of: cursor.frameCount) { _, _ in onDirty?() }
                         }
-                        
+
                         LabeledContent("Frame Duration:") {
                             TextField("", value: $cursor.frameDuration, format: .number.precision(.fractionLength(2)))
                                 .frame(width: 80)
@@ -45,9 +45,9 @@ struct CursorEditorView: View {
                         }
                     }
                 }
-                
+
                 Divider()
-                
+
                 Section("Hot Spot") {
                     HStack(spacing: 16) {
                         LabeledContent("X:") {
@@ -58,7 +58,7 @@ struct CursorEditorView: View {
                                 .frame(width: 60)
                                 .textFieldStyle(.roundedBorder)
                         }
-                        
+
                         LabeledContent("Y:") {
                             TextField("", value: Binding(
                                 get: { Double(cursor.hotSpot.y) },
@@ -67,16 +67,16 @@ struct CursorEditorView: View {
                                 .frame(width: 60)
                                 .textFieldStyle(.roundedBorder)
                         }
-                        
+
                         LabeledContent("Size:") {
                             Text("\(Int(cursor.size.width)) × \(Int(cursor.size.height))")
                                 .foregroundStyle(.secondary)
                         }
                     }
                 }
-                
+
                 Divider()
-                
+
                 Section("Representations") {
                     HStack(spacing: 16) {
                         RepresentationDropZone(cursor: cursor, scale: 100, label: "1×", onDirty: onDirty)
@@ -85,9 +85,9 @@ struct CursorEditorView: View {
                         RepresentationDropZone(cursor: cursor, scale: 1000, label: "10×", onDirty: onDirty)
                     }
                 }
-                
+
                 Divider()
-                
+
                 Section("Preview") {
                     CursorPreviewView(cursor: cursor)
                         .frame(width: 128, height: 128)
@@ -104,15 +104,15 @@ struct RepresentationDropZone: View {
     let scale: Int
     let label: String
     var onDirty: (() -> Void)? = nil
-    
+
     @State private var isTargeted = false
-    
+
     var body: some View {
         VStack(spacing: 4) {
             Text(label)
                 .font(.caption.bold())
                 .foregroundStyle(.secondary)
-            
+
             ZStack(alignment: .topTrailing) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
@@ -124,7 +124,7 @@ struct RepresentationDropZone: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(isTargeted ? Color.accentColor.opacity(0.1) : Color.clear)
                         )
-                    
+
                     if let image = cursor.image(forScale: scale) {
                         Image(nsImage: image)
                             .resizable()
@@ -142,7 +142,7 @@ struct RepresentationDropZone: View {
                         }
                     }
                 }
-                
+
                 if cursor.image(forScale: scale) != nil {
                     Button {
                         removeRepresentation()
@@ -163,12 +163,12 @@ struct RepresentationDropZone: View {
             }
         }
     }
-    
+
     private func removeRepresentation() {
         cursor.removeRepresentation(forScale: scale)
         onDirty?()
     }
-    
+
     private func handleDrop(_ providers: [NSItemProvider]) -> Bool {
         for provider in providers {
             if provider.canLoadObject(ofClass: NSImage.self) {
@@ -182,14 +182,14 @@ struct RepresentationDropZone: View {
                 }
                 return true
             }
-            
+
             if provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
                 provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) { item, _ in
                     guard let data = item as? Data,
                           let url = URL(dataRepresentation: data, relativeTo: nil) else { return }
-                    
+
                     let ext = url.pathExtension.lowercased()
-                    
+
                     if ext == "cur" || ext == "ani" {
                         do {
                             let result = try WindowsCursorImporter.parseForRepresentation(from: url)

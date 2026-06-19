@@ -13,145 +13,145 @@
 "%lld × %lld" = "%1$lld × %2$lld";
 
 /* Format: cursor count in theme */
-"%lld cursors" = "%lld cursors";
+"%lld cursors" = "%lld 个指针";
 
 /* Format: additional cursor count overflow */
 "+%lld" = "+%lld";
 
 /* Settings tab title */
-"About" = "About";
+"About" = "关于";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "关于 MaCursor";
 
 /* Undo: add cursor */
-"Add Cursor" = "Add Cursor";
+"Add Cursor" = "添加指针";
 
 /* Button: add shortcut slot */
-"Add shortcut slot" = "Add shortcut slot";
+"Add shortcut slot" = "添加快捷键槽";
 
 /* Button: add new theme */
-"Add Theme" = "Add Theme";
+"Add Theme" = "添加主题";
 
 /* Section: animation settings */
-"Animation" = "Animation";
+"Animation" = "动画";
 
 /* Label: appearance picker */
-"Appearance" = "Appearance";
+"Appearance" = "外观";
 
 /* Badge: theme is applied */
-"Applied" = "Applied";
+"Applied" = "已应用";
 
 /* Context menu: apply theme */
-"Apply" = "Apply";
+"Apply" = "应用";
 
 
 /* Label: theme creator */
-"Creator" = "Creator";
+"Creator" = "创作者";
 
 /* Label: theme creator (with colon) */
-"Creator:" = "Creator:";
+"Creator:" = "创作者：";
 
 
 /* Format: theme subtitle (creator and version) */
-"by %@ • v%.1f" = "by %1$@ • v%2$.1f";
+"by %@ • v%.1f" = "创作者 %1$@ • v%2$.1f";
 
 /* Button: cancel action */
-"Cancel" = "Cancel";
+"Cancel" = "取消";
 
 /* Undo: change theme creator */
-"Change Creator" = "Change Creator";
+"Change Creator" = "更改创作者";
 
 /* Undo: change theme HiDPI */
-"Change HiDPI" = "Change HiDPI";
+"Change HiDPI" = "更改 HiDPI";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Change Identifier";
+"Change Identifier" = "更改标识符";
 
 /* Undo: change theme name */
-"Change Name" = "Change Name";
+"Change Name" = "更改名称";
 
 /* Undo: change theme version */
-"Change Version" = "Change Version";
+"Change Version" = "更改版本";
 
 /* Placeholder: no cursor selected */
-"Choose a cursor from the list to edit its properties." = "Choose a cursor from the list to edit its properties.";
+"Choose a cursor from the list to edit its properties." = "从列表中选择一个指针以编辑其属性。";
 
 /* Placeholder: no theme selected */
-"Choose a cursor theme from the sidebar to view its cursors." = "Choose a cursor theme from the sidebar to view its cursors.";
+"Choose a cursor theme from the sidebar to view its cursors." = "从边栏中选择一个指针主题以查看其包含的指针。";
 
 /* Import panel description */
-"Choose cursor theme files to import (.cursor)" = "Choose cursor theme files to import (.cursor)";
+"Choose cursor theme files to import (.cursor)" = "选择要导入的指针主题文件（.cursor）";
 
 /* Button: close window */
-"Close" = "Close";
+"Close" = "关闭";
 
 /* About: copyright notice */
-"Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
+"Copyright © %@ Writronic. All rights reserved." = "版权所有 © %@ Writronic。保留所有权利。";
 
 /* Section: cursor settings */
-"Cursor" = "Cursor";
+"Cursor" = "指针";
 
 /* Label: cursor scale slider */
-"Cursor Scale" = "Cursor Scale";
+"Cursor Scale" = "指针缩放";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Cursor Theme";
+"Cursor Theme" = "指针主题";
 
 /* Undo suffix: cursor type */
-"cursor type" = "cursor type";
+"cursor type" = "指针类型";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Cursor Type:";
+"Cursor Type:" = "指针类型：";
 
 /* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
+"Custom cursor themes for macOS" = "适用于 macOS 的自定指针主题";
 
 /* Appearance mode: dark */
-"Dark" = "Dark";
+"Dark" = "深色";
 
 /* Button: delete cursor */
-"Delete" = "Delete";
+"Delete" = "删除";
 
 /* Undo suffix: dimensions */
-"dimensions" = "dimensions";
+"dimensions" = "尺寸";
 
 /* Button: discard changes */
-"Discard" = "Discard";
+"Discard" = "放弃";
 
 
 /* Label: drop zone */
-"Drop" = "Drop";
+"Drop" = "拖放";
 
 /* Button: duplicate cursor */
-"Duplicate" = "Duplicate";
+"Duplicate" = "复制";
 
 /* Button: edit theme */
-"Edit" = "Edit";
+"Edit" = "编辑";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edit Theme";
+"Edit Theme" = "编辑主题";
 
 /* Error: write failure */
-"Error writing cursor theme to disk." = "Error writing cursor theme to disk.";
+"Error writing cursor theme to disk." = "将指针主题写入磁盘时出错。";
 
 /* Error: theme file creation failure */
-"Failed to create cursor theme file" = "Failed to create cursor theme file";
+"Failed to create cursor theme file" = "无法创建指针主题文件";
 
 /* Undo suffix: frame count */
-"frame count" = "frame count";
+"frame count" = "帧数";
 
 /* Label: frame count */
-"Frame Count:" = "Frame Count:";
+"Frame Count:" = "帧数：";
 
 /* Undo suffix: frame duration */
-"frame duration" = "frame duration";
+"frame duration" = "帧持续时间";
 
 /* Label: frame duration */
-"Frame Duration:" = "Frame Duration:";
+"Frame Duration:" = "帧持续时间：";
 
 /* Settings tab: general */
-"General" = "General";
+"General" = "通用";
 
 /* About: license */
 "GPL-3.0" = "GPL-3.0";
@@ -160,211 +160,211 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Helper Not Found";
+"Helper Not Found" = "未找到辅助工具";
 
 /* Section: helper tool */
-"Helper Tool" = "Helper Tool";
+"Helper Tool" = "辅助工具";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Hot Spot";
+"Hot Spot" = "热点";
 
 /* Undo suffix: hotspot */
-"hotspot" = "hotspot";
+"hotspot" = "热点";
 
 /* Button: import */
-"Import" = "Import";
+"Import" = "导入";
 
 /* Menu: import theme */
-"Import Theme..." = "Import Theme...";
+"Import Theme..." = "导入主题…";
 
 /* Button: install helper */
-"Install" = "Install";
+"Install" = "安装";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Installed & Active";
+"Installed & Active" = "已安装并激活";
 
 /* Section/Picker: language setting */
-"Language" = "Language";
+"Language" = "语言";
 
 /* Button: dismiss restart prompt */
-"Later" = "Later";
+"Later" = "稍后";
 
 /* Appearance mode: light */
-"Light" = "Light";
+"Light" = "浅色";
 
 /* App name */
 "MaCursor" = "MaCursor";
 
 /* Default cursor dump file name */
-"MaCursor Dump" = "MaCursor Dump";
+"MaCursor Dump" = "MaCursor 转储";
 
 /* About: tagline */
-"Made with ❤️" = "Made with ❤️";
+"Made with ❤️" = "用心制作 ❤️";
 
 /* Error: duplicate cursor names */
-"Multiple cursors with the name(s): %@ exist." = "Multiple cursors with the name(s): %@ exist.";
+"Multiple cursors with the name(s): %@ exist." = "存在多个名称为 %@ 的指针。";
 
 /* Label: theme name */
-"Name:" = "Name:";
+"Name:" = "名称：";
 
 /* Button: new theme */
-"New Theme" = "New Theme";
+"New Theme" = "新建主题";
 
 /* Error: no file URL */
-"No file URL set." = "No file URL set.";
+"No file URL set." = "未设置文件 URL。";
 
 /* Error: directory not found */
-"No path found for directory in domain." = "No path found for directory in domain.";
+"No path found for directory in domain." = "在域中未找到该目录的路径。";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "No Shortcuts";
+"No Shortcuts" = "无快捷键";
 
 /* Placeholder: no theme selected */
-"None" = "None";
+"None" = "无";
 
 /* Helper status: not installed */
-"Not Installed" = "Not Installed";
+"Not Installed" = "未安装";
 
 /* Placeholder: shortcut instructions */
-"Press + to add a favorite cursor shortcut." = "Press + to add a favorite cursor shortcut.";
+"Press + to add a favorite cursor shortcut." = "按 + 键以添加一个收藏指针快捷键。";
 
 /* Button: recording shortcut */
-"Press shortcut…" = "Press shortcut…";
+"Press shortcut…" = "按快捷键…";
 
 /* Section: cursor preview */
-"Preview" = "Preview";
+"Preview" = "预览";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Record Shortcut";
+"Record Shortcut" = "录制快捷键";
 
 /* Tooltip: remove representation */
-"Remove %@ representation" = "Remove %@ representation";
+"Remove %@ representation" = "移除 %@ 表示形式";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Remove Cursor";
+"Remove Cursor" = "移除指针";
 
 /* Button: remove shortcut slot */
-"Remove selected slot" = "Remove selected slot";
+"Remove selected slot" = "移除所选槽";
 
 /* Section: cursor representations */
-"Representations" = "Representations";
+"Representations" = "表示形式";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Requires Approval in System Settings";
+"Requires Approval in System Settings" = "需要在“系统设置”中批准";
 
 /* Button: reset settings */
-"Reset" = "Reset";
+"Reset" = "重置";
 
 /* Description: reset button */
-"Reset all settings to default values (cannot be undone)" = "Reset all settings to default values (cannot be undone)";
+"Reset all settings to default values (cannot be undone)" = "将所有设置重置为默认值（无法撤销）";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Reset All Settings?";
+"Reset All Settings?" = "重置所有设置？";
 
 /* Section: reset settings */
-"Reset Settings" = "Reset Settings";
+"Reset Settings" = "重置设置";
 
 /* Button: restart app */
-"Restart Now" = "Restart Now";
+"Restart Now" = "立即重启";
 
 /* Alert title: restart required */
-"Restart Required" = "Restart Required";
+"Restart Required" = "需要重新启动";
 
 /* Button: restore cursors */
-"Restore" = "Restore";
+"Restore" = "恢复";
 
 /* Button: restore system cursors */
-"Restore system cursors" = "Restore system cursors";
+"Restore system cursors" = "恢复系统指针";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Restore System Cursors";
+"Restore System Cursors" = "恢复系统指针";
 
 /* Button: save theme */
-"Save" = "Save";
+"Save" = "存储";
 
 /* Alert title: save failure */
-"Save failed" = "Save failed";
+"Save failed" = "存储失败";
 
 /* Unit: seconds */
-"sec" = "sec";
+"sec" = "秒";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Select a Cursor";
+"Select a Cursor" = "选择一个指针";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Select a Cursor Theme";
+"Select a Cursor Theme" = "选择一个指针主题";
 
 /* Window title: settings */
-"Settings" = "Settings";
+"Settings" = "设置";
 
 /* Menu: open settings */
-"Settings..." = "Settings...";
+"Settings..." = "设置…";
 
 /* Settings tab: shortcut */
-"Shortcut" = "Shortcut";
+"Shortcut" = "快捷键";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "快捷键需要先安装辅助工具。你可以在“通用”→“辅助工具”中安装它。";
 
 /* Context menu: show in Finder */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "在 Finder 中显示";
 
 /* Label: cursor size */
-"Size:" = "Size:";
+"Size:" = "大小：";
 
 /* Appearance mode: system */
-"System" = "System";
+"System" = "系统";
 
 /* Language picker: system default */
-"System Default" = "System Default";
+"System Default" = "系统默认";
 
 /* Alert message: cursor theme load failure */
-"The cursor theme could not be loaded." = "The cursor theme could not be loaded.";
+"The cursor theme could not be loaded." = "无法加载该指针主题。";
 
 /* Error: destination not writable */
-"The destination, %@, is not writable." = "The destination, %@, is not writable.";
+"The destination, %@, is not writable." = "目标位置 %@ 不可写入。";
 
 /* Alert message: language restart */
-"The language change will take effect after restarting MaCursor." = "The language change will take effect after restarting MaCursor.";
+"The language change will take effect after restarting MaCursor." = "语言更改将在重新启动 MaCursor 后生效。";
 
 /* Section: theme settings */
-"Theme" = "Theme";
+"Theme" = "主题";
 
 /* Label: theme name */
-"Theme Name" = "Theme Name";
+"Theme Name" = "主题名称";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Theme Not Found";
+"Theme Not Found" = "未找到主题";
 
 /* Alert message: reset confirmation */
-"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone.";
+"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "此操作将移除所有指针主题、恢复系统指针，并将每项偏好设置重置为默认值。此操作无法撤销。";
 
 /* Error: invalid directory */
-"Unable to create a cursor theme from the directory specified." = "Unable to create a cursor theme from the directory specified.";
+"Unable to create a cursor theme from the directory specified." = "无法从指定的目录创建指针主题。";
 
 /* Button: uninstall helper */
-"Uninstall" = "Uninstall";
+"Uninstall" = "卸载";
 
 /* Default creator */
-"Unknown" = "Unknown";
+"Unknown" = "未知";
 
 /* Default new theme name */
-"Unnamed" = "Unnamed";
+"Unnamed" = "未命名";
 
 /* Alert title: unsaved changes */
-"Unsaved Changes" = "Unsaved Changes";
+"Unsaved Changes" = "未存储的更改";
 
 /* About: version label */
-"Version %@" = "Version %@";
+"Version %@" = "版本 %@";
 
 /* Label: theme version */
-"Version:" = "Version:";
+"Version:" = "版本：";
 
 /* Link: website */
-"Visit Website" = "Visit Website";
+"Visit Website" = "访问网站";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -373,4 +373,28 @@
 "Y:" = "Y:";
 
 /* Alert message: unsaved changes */
-"Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+"Your changes will be discarded if you don't save them." = "如果你不存储更改，这些更改将被放弃。";
+
+/* Toggle: hide Tahoe-specific cursor variants */
+"Hide Tahoe cursors" = "隐藏 Tahoe 指针";
+
+/* Caption: Hide Tahoe cursors explanation */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "启用后，Tahoe 专属的指针变体（ArrowS、IBeamS）将被隐藏。移除某个指针时，也会一并移除其对应的 Tahoe 项。";
+
+/* Picker: mouse handedness */
+"Mouse Hand" = "鼠标手";
+
+/* Mouse Hand option: left-handed */
+"Left Hand" = "左手";
+
+/* Mouse Hand option: right-handed */
+"Right Hand" = "右手";
+
+/* Section: software updates */
+"Software Updates" = "软件更新";
+
+/* Toggle: automatically check for updates */
+"Automatically check for updates" = "自动检查更新";
+
+/* Menu: check for updates (Sparkle) */
+"Check for Updates…" = "检查更新…";

@@ -5,21 +5,21 @@ struct CursorThemeEditorView: View {
     @State private var viewModel: CursorThemeEditorViewModel
     @State private var isListDropTargeted = false
     @State private var editorWindow: NSWindow?
-    
+
     init(cursorTheme: CursorThemeModel) {
         self._viewModel = State(initialValue: CursorThemeEditorViewModel(cursorTheme: cursorTheme))
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             themeMetadataSection
-            
+
             Divider()
-            
+
             HSplitView {
                 cursorListPane
                     .frame(minWidth: 160, idealWidth: 200, maxWidth: 280)
-                
+
                 cursorDetailPane
                     .frame(minWidth: 380, idealWidth: 500)
             }
@@ -36,7 +36,7 @@ struct CursorThemeEditorView: View {
                 }
                 .disabled(!viewModel.isDirty)
             }
-            
+
             ToolbarItem(placement: .cancellationAction) {
                 Button("Close") {
                     if viewModel.isDirty {
@@ -70,12 +70,12 @@ struct CursorThemeEditorView: View {
             return true
         }))
     }
-    
+
     private func closeWindow() {
         editorWindow?.close()
     }
-    
-    
+
+
     private var themeMetadataSection: some View {
         HStack(spacing: 12) {
             LabeledContent("Name:") {
@@ -84,33 +84,33 @@ struct CursorThemeEditorView: View {
                     .frame(maxWidth: 180)
                     .onChange(of: viewModel.editingName) { _, _ in viewModel.markDirty() }
             }
-            
+
             LabeledContent("Creator:") {
                 TextField("Creator", text: $viewModel.editingCreator)
                     .textFieldStyle(.roundedBorder)
                     .frame(maxWidth: 130)
                     .onChange(of: viewModel.editingCreator) { _, _ in viewModel.markDirty() }
             }
-            
+
             LabeledContent("Version:") {
                 TextField("", value: $viewModel.editingVersion, format: .number.precision(.fractionLength(1)))
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 50)
                     .onChange(of: viewModel.editingVersion) { _, _ in viewModel.markDirty() }
             }
-            
+
             Toggle("HiDPI", isOn: $viewModel.editingHiDPI)
                 .toggleStyle(.checkbox)
                 .onChange(of: viewModel.editingHiDPI) { _, _ in viewModel.markDirty() }
-            
+
             Spacer()
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
         .background(.bar)
     }
-    
-    
+
+
     private var cursorListPane: some View {
         VStack(spacing: 0) {
             List(viewModel.visibleEditingCursors, selection: $viewModel.selectedCursorId) { cursor in
@@ -135,7 +135,7 @@ struct CursorThemeEditorView: View {
             }
             .listStyle(.sidebar)
             .frame(maxHeight: .infinity)
-            
+
             HStack(spacing: 4) {
                 Button(action: { viewModel.addCursor() }) {
                     Image(systemName: "plus")
@@ -143,7 +143,7 @@ struct CursorThemeEditorView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.borderless)
-                
+
                 Button(action: {
                     if let cursor = viewModel.selectedCursor {
                         viewModel.removeCursor(cursor)
@@ -155,9 +155,9 @@ struct CursorThemeEditorView: View {
                 }
                 .buttonStyle(.borderless)
                 .disabled(viewModel.selectedCursor == nil)
-                
+
                 Spacer()
-                
+
                 Text("\(viewModel.visibleEditingCursors.count) cursors")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
@@ -187,8 +187,8 @@ struct CursorThemeEditorView: View {
             }
         }
     }
-    
-    
+
+
     private var cursorDetailPane: some View {
         Group {
             if let cursor = viewModel.selectedCursor {
@@ -213,11 +213,11 @@ struct CursorThemeEditorView: View {
 private struct WindowAccessor: NSViewRepresentable {
     @Binding var window: NSWindow?
     var onCloseAttempt: () -> Bool
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(onCloseAttempt: onCloseAttempt)
     }
-    
+
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
         DispatchQueue.main.async {
@@ -226,13 +226,13 @@ private struct WindowAccessor: NSViewRepresentable {
         }
         return view
     }
-    
+
     func updateNSView(_ nsView: NSView, context: Context) {
         self.window = nsView.window
         context.coordinator.onCloseAttempt = onCloseAttempt
         installDelegate(on: nsView.window, coordinator: context.coordinator)
     }
-    
+
     private func installDelegate(on window: NSWindow?, coordinator: Coordinator) {
         guard let window else { return }
         if window.delegate as? Coordinator !== coordinator {
@@ -240,27 +240,27 @@ private struct WindowAccessor: NSViewRepresentable {
             window.delegate = coordinator
         }
     }
-    
+
     final class Coordinator: NSObject, NSWindowDelegate {
         var onCloseAttempt: () -> Bool
         weak var originalDelegate: (any NSWindowDelegate)?
-        
+
         init(onCloseAttempt: @escaping () -> Bool) {
             self.onCloseAttempt = onCloseAttempt
         }
-        
+
         func windowShouldClose(_ sender: NSWindow) -> Bool {
             return onCloseAttempt()
         }
-        
+
         func windowWillClose(_ notification: Notification) {
             originalDelegate?.windowWillClose?(notification)
         }
-        
+
         func windowDidBecomeKey(_ notification: Notification) {
             originalDelegate?.windowDidBecomeKey?(notification)
         }
-        
+
         func windowDidResignKey(_ notification: Notification) {
             originalDelegate?.windowDidResignKey?(notification)
         }

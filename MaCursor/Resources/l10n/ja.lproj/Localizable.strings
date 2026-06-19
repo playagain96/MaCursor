@@ -13,145 +13,145 @@
 "%lld × %lld" = "%1$lld × %2$lld";
 
 /* Format: cursor count in theme */
-"%lld cursors" = "%lld cursors";
+"%lld cursors" = "%lld個のカーソル";
 
 /* Format: additional cursor count overflow */
 "+%lld" = "+%lld";
 
 /* Settings tab title */
-"About" = "About";
+"About" = "概要";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "MaCursorについて";
 
 /* Undo: add cursor */
-"Add Cursor" = "Add Cursor";
+"Add Cursor" = "カーソルを追加";
 
 /* Button: add shortcut slot */
-"Add shortcut slot" = "Add shortcut slot";
+"Add shortcut slot" = "ショートカットスロットを追加";
 
 /* Button: add new theme */
-"Add Theme" = "Add Theme";
+"Add Theme" = "テーマを追加";
 
 /* Section: animation settings */
-"Animation" = "Animation";
+"Animation" = "アニメーション";
 
 /* Label: appearance picker */
-"Appearance" = "Appearance";
+"Appearance" = "外観";
 
 /* Badge: theme is applied */
-"Applied" = "Applied";
+"Applied" = "適用済み";
 
 /* Context menu: apply theme */
-"Apply" = "Apply";
+"Apply" = "適用";
 
 
 /* Label: theme creator */
-"Creator" = "Creator";
+"Creator" = "作成者";
 
 /* Label: theme creator (with colon) */
-"Creator:" = "Creator:";
+"Creator:" = "作成者：";
 
 
 /* Format: theme subtitle (creator and version) */
-"by %@ • v%.1f" = "by %1$@ • v%2$.1f";
+"by %@ • v%.1f" = "作成者：%1$@ • v%2$.1f";
 
 /* Button: cancel action */
-"Cancel" = "Cancel";
+"Cancel" = "キャンセル";
 
 /* Undo: change theme creator */
-"Change Creator" = "Change Creator";
+"Change Creator" = "作成者を変更";
 
 /* Undo: change theme HiDPI */
-"Change HiDPI" = "Change HiDPI";
+"Change HiDPI" = "HiDPIを変更";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Change Identifier";
+"Change Identifier" = "識別子を変更";
 
 /* Undo: change theme name */
-"Change Name" = "Change Name";
+"Change Name" = "名前を変更";
 
 /* Undo: change theme version */
-"Change Version" = "Change Version";
+"Change Version" = "バージョンを変更";
 
 /* Placeholder: no cursor selected */
-"Choose a cursor from the list to edit its properties." = "Choose a cursor from the list to edit its properties.";
+"Choose a cursor from the list to edit its properties." = "リストからカーソルを選択して、そのプロパティを編集してください。";
 
 /* Placeholder: no theme selected */
-"Choose a cursor theme from the sidebar to view its cursors." = "Choose a cursor theme from the sidebar to view its cursors.";
+"Choose a cursor theme from the sidebar to view its cursors." = "サイドバーからカーソルテーマを選択すると、そのテーマのカーソルが表示されます。";
 
 /* Import panel description */
-"Choose cursor theme files to import (.cursor)" = "Choose cursor theme files to import (.cursor)";
+"Choose cursor theme files to import (.cursor)" = "読み込むカーソルテーマファイル（.cursor）を選択してください";
 
 /* Button: close window */
-"Close" = "Close";
+"Close" = "閉じる";
 
 /* About: copyright notice */
 "Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
 
 /* Section: cursor settings */
-"Cursor" = "Cursor";
+"Cursor" = "カーソル";
 
 /* Label: cursor scale slider */
-"Cursor Scale" = "Cursor Scale";
+"Cursor Scale" = "カーソルの拡大率";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Cursor Theme";
+"Cursor Theme" = "カーソルテーマ";
 
 /* Undo suffix: cursor type */
-"cursor type" = "cursor type";
+"cursor type" = "カーソルの種類";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Cursor Type:";
+"Cursor Type:" = "カーソルの種類：";
 
 /* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
+"Custom cursor themes for macOS" = "macOS用のカスタムカーソルテーマ";
 
 /* Appearance mode: dark */
-"Dark" = "Dark";
+"Dark" = "ダーク";
 
 /* Button: delete cursor */
-"Delete" = "Delete";
+"Delete" = "削除";
 
 /* Undo suffix: dimensions */
-"dimensions" = "dimensions";
+"dimensions" = "寸法";
 
 /* Button: discard changes */
-"Discard" = "Discard";
+"Discard" = "破棄";
 
 
 /* Label: drop zone */
-"Drop" = "Drop";
+"Drop" = "ドロップ";
 
 /* Button: duplicate cursor */
-"Duplicate" = "Duplicate";
+"Duplicate" = "複製";
 
 /* Button: edit theme */
-"Edit" = "Edit";
+"Edit" = "編集";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edit Theme";
+"Edit Theme" = "テーマを編集";
 
 /* Error: write failure */
-"Error writing cursor theme to disk." = "Error writing cursor theme to disk.";
+"Error writing cursor theme to disk." = "カーソルテーマをディスクに書き込む際にエラーが発生しました。";
 
 /* Error: theme file creation failure */
-"Failed to create cursor theme file" = "Failed to create cursor theme file";
+"Failed to create cursor theme file" = "カーソルテーマファイルの作成に失敗しました";
 
 /* Undo suffix: frame count */
-"frame count" = "frame count";
+"frame count" = "フレーム数";
 
 /* Label: frame count */
-"Frame Count:" = "Frame Count:";
+"Frame Count:" = "フレーム数：";
 
 /* Undo suffix: frame duration */
-"frame duration" = "frame duration";
+"frame duration" = "フレーム時間";
 
 /* Label: frame duration */
-"Frame Duration:" = "Frame Duration:";
+"Frame Duration:" = "フレーム時間：";
 
 /* Settings tab: general */
-"General" = "General";
+"General" = "一般";
 
 /* About: license */
 "GPL-3.0" = "GPL-3.0";
@@ -160,211 +160,211 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Helper Not Found";
+"Helper Not Found" = "ヘルパーツールが見つかりません";
 
 /* Section: helper tool */
-"Helper Tool" = "Helper Tool";
+"Helper Tool" = "ヘルパーツール";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Hot Spot";
+"Hot Spot" = "ホットスポット";
 
 /* Undo suffix: hotspot */
-"hotspot" = "hotspot";
+"hotspot" = "ホットスポット";
 
 /* Button: import */
-"Import" = "Import";
+"Import" = "読み込む";
 
 /* Menu: import theme */
-"Import Theme..." = "Import Theme...";
+"Import Theme..." = "テーマを読み込む…";
 
 /* Button: install helper */
-"Install" = "Install";
+"Install" = "インストール";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Installed & Active";
+"Installed & Active" = "インストール済み・有効";
 
 /* Section/Picker: language setting */
-"Language" = "Language";
+"Language" = "言語";
 
 /* Button: dismiss restart prompt */
-"Later" = "Later";
+"Later" = "あとで";
 
 /* Appearance mode: light */
-"Light" = "Light";
+"Light" = "ライト";
 
 /* App name */
 "MaCursor" = "MaCursor";
 
 /* Default cursor dump file name */
-"MaCursor Dump" = "MaCursor Dump";
+"MaCursor Dump" = "MaCursorダンプ";
 
 /* About: tagline */
-"Made with ❤️" = "Made with ❤️";
+"Made with ❤️" = "❤️を込めて制作";
 
 /* Error: duplicate cursor names */
-"Multiple cursors with the name(s): %@ exist." = "Multiple cursors with the name(s): %@ exist.";
+"Multiple cursors with the name(s): %@ exist." = "名前が「%@」のカーソルが複数存在します。";
 
 /* Label: theme name */
-"Name:" = "Name:";
+"Name:" = "名前：";
 
 /* Button: new theme */
-"New Theme" = "New Theme";
+"New Theme" = "新規テーマ";
 
 /* Error: no file URL */
-"No file URL set." = "No file URL set.";
+"No file URL set." = "ファイルのURLが設定されていません。";
 
 /* Error: directory not found */
-"No path found for directory in domain." = "No path found for directory in domain.";
+"No path found for directory in domain." = "ドメイン内のディレクトリへのパスが見つかりませんでした。";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "No Shortcuts";
+"No Shortcuts" = "ショートカットなし";
 
 /* Placeholder: no theme selected */
-"None" = "None";
+"None" = "なし";
 
 /* Helper status: not installed */
-"Not Installed" = "Not Installed";
+"Not Installed" = "未インストール";
 
 /* Placeholder: shortcut instructions */
-"Press + to add a favorite cursor shortcut." = "Press + to add a favorite cursor shortcut.";
+"Press + to add a favorite cursor shortcut." = "「+」を押して、お気に入りのカーソルショートカットを追加します。";
 
 /* Button: recording shortcut */
-"Press shortcut…" = "Press shortcut…";
+"Press shortcut…" = "ショートカットを入力…";
 
 /* Section: cursor preview */
-"Preview" = "Preview";
+"Preview" = "プレビュー";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Record Shortcut";
+"Record Shortcut" = "ショートカットを記録";
 
 /* Tooltip: remove representation */
-"Remove %@ representation" = "Remove %@ representation";
+"Remove %@ representation" = "%@の表現を削除";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Remove Cursor";
+"Remove Cursor" = "カーソルを削除";
 
 /* Button: remove shortcut slot */
-"Remove selected slot" = "Remove selected slot";
+"Remove selected slot" = "選択したスロットを削除";
 
 /* Section: cursor representations */
-"Representations" = "Representations";
+"Representations" = "表現";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Requires Approval in System Settings";
+"Requires Approval in System Settings" = "システム設定での承認が必要です";
 
 /* Button: reset settings */
-"Reset" = "Reset";
+"Reset" = "リセット";
 
 /* Description: reset button */
-"Reset all settings to default values (cannot be undone)" = "Reset all settings to default values (cannot be undone)";
+"Reset all settings to default values (cannot be undone)" = "すべての設定をデフォルト値にリセットします（元に戻すことはできません）";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Reset All Settings?";
+"Reset All Settings?" = "すべての設定をリセットしますか？";
 
 /* Section: reset settings */
-"Reset Settings" = "Reset Settings";
+"Reset Settings" = "設定をリセット";
 
 /* Button: restart app */
-"Restart Now" = "Restart Now";
+"Restart Now" = "今すぐ再起動";
 
 /* Alert title: restart required */
-"Restart Required" = "Restart Required";
+"Restart Required" = "再起動が必要です";
 
 /* Button: restore cursors */
-"Restore" = "Restore";
+"Restore" = "復元";
 
 /* Button: restore system cursors */
-"Restore system cursors" = "Restore system cursors";
+"Restore system cursors" = "システムカーソルを復元";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Restore System Cursors";
+"Restore System Cursors" = "システムカーソルを復元";
 
 /* Button: save theme */
-"Save" = "Save";
+"Save" = "保存";
 
 /* Alert title: save failure */
-"Save failed" = "Save failed";
+"Save failed" = "保存に失敗しました";
 
 /* Unit: seconds */
-"sec" = "sec";
+"sec" = "秒";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Select a Cursor";
+"Select a Cursor" = "カーソルを選択";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Select a Cursor Theme";
+"Select a Cursor Theme" = "カーソルテーマを選択";
 
 /* Window title: settings */
-"Settings" = "Settings";
+"Settings" = "設定";
 
 /* Menu: open settings */
-"Settings..." = "Settings...";
+"Settings..." = "設定…";
 
 /* Settings tab: shortcut */
-"Shortcut" = "Shortcut";
+"Shortcut" = "ショートカット";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "ショートカットを使用するには、ヘルパーツールのインストールが必要です。「一般」→「ヘルパーツール」からインストールできます。";
 
 /* Context menu: show in Finder */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Finderで表示";
 
 /* Label: cursor size */
-"Size:" = "Size:";
+"Size:" = "サイズ：";
 
 /* Appearance mode: system */
-"System" = "System";
+"System" = "システム";
 
 /* Language picker: system default */
-"System Default" = "System Default";
+"System Default" = "システムのデフォルト";
 
 /* Alert message: cursor theme load failure */
-"The cursor theme could not be loaded." = "The cursor theme could not be loaded.";
+"The cursor theme could not be loaded." = "カーソルテーマを読み込めませんでした。";
 
 /* Error: destination not writable */
-"The destination, %@, is not writable." = "The destination, %@, is not writable.";
+"The destination, %@, is not writable." = "保存先 %@ は書き込みできません。";
 
 /* Alert message: language restart */
-"The language change will take effect after restarting MaCursor." = "The language change will take effect after restarting MaCursor.";
+"The language change will take effect after restarting MaCursor." = "言語の変更は、MaCursorを再起動した後に反映されます。";
 
 /* Section: theme settings */
-"Theme" = "Theme";
+"Theme" = "テーマ";
 
 /* Label: theme name */
-"Theme Name" = "Theme Name";
+"Theme Name" = "テーマ名";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Theme Not Found";
+"Theme Not Found" = "テーマが見つかりません";
 
 /* Alert message: reset confirmation */
-"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone.";
+"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "すべてのカーソルテーマを削除し、システムカーソルを復元し、すべての設定をデフォルト値にリセットします。この操作は元に戻せません。";
 
 /* Error: invalid directory */
-"Unable to create a cursor theme from the directory specified." = "Unable to create a cursor theme from the directory specified.";
+"Unable to create a cursor theme from the directory specified." = "指定されたディレクトリからカーソルテーマを作成できませんでした。";
 
 /* Button: uninstall helper */
-"Uninstall" = "Uninstall";
+"Uninstall" = "アンインストール";
 
 /* Default creator */
-"Unknown" = "Unknown";
+"Unknown" = "不明";
 
 /* Default new theme name */
-"Unnamed" = "Unnamed";
+"Unnamed" = "名称未設定";
 
 /* Alert title: unsaved changes */
-"Unsaved Changes" = "Unsaved Changes";
+"Unsaved Changes" = "保存されていない変更";
 
 /* About: version label */
-"Version %@" = "Version %@";
+"Version %@" = "バージョン%@";
 
 /* Label: theme version */
-"Version:" = "Version:";
+"Version:" = "バージョン：";
 
 /* Link: website */
-"Visit Website" = "Visit Website";
+"Visit Website" = "Webサイトを開く";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -373,4 +373,28 @@
 "Y:" = "Y:";
 
 /* Alert message: unsaved changes */
-"Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+"Your changes will be discarded if you don't save them." = "保存しない場合、変更内容は破棄されます。";
+
+/* Toggle: hide Tahoe-specific cursor variants */
+"Hide Tahoe cursors" = "Tahoeカーソルを非表示にする";
+
+/* Caption: Hide Tahoe cursors explanation */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "この機能を有効にすると、Tahoe固有のカーソルバリアント（ArrowS、IBeamS）が非表示になります。カーソルを削除すると、対応するTahoeのカーソルも削除されます。";
+
+/* Picker: mouse handedness */
+"Mouse Hand" = "マウスの利き手";
+
+/* Mouse Hand option: left-handed */
+"Left Hand" = "左手";
+
+/* Mouse Hand option: right-handed */
+"Right Hand" = "右手";
+
+/* Section: software updates */
+"Software Updates" = "ソフトウェアアップデート";
+
+/* Toggle: automatically check for updates */
+"Automatically check for updates" = "アップデートを自動的に確認";
+
+/* Menu: check for updates (Sparkle) */
+"Check for Updates…" = "アップデートを確認…";

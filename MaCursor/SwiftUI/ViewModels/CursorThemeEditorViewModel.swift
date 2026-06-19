@@ -4,29 +4,29 @@ import Observation
 @Observable
 class CursorThemeEditorViewModel {
     let cursorTheme: CursorThemeModel
-    
+
     var editingName: String
     var editingCreator: String
     var editingVersion: Double
     var editingHiDPI: Bool
     var editingCursors: [CursorModel]
-    
+
     var selectedCursorId: String?
     var isShowingUnsavedAlert = false
-    
+
     var isDirty: Bool = false
-    
+
     private var pendingAdditions: [MACCursorSwift] = []
     private var pendingRemovals: Set<String> = []
     private var originalMapping: [String: CursorModel] = [:]
-    
+
     init(cursorTheme: CursorThemeModel) {
         self.cursorTheme = cursorTheme
         self.editingName = cursorTheme.name
         self.editingCreator = cursorTheme.creator
         self.editingVersion = cursorTheme.version
         self.editingHiDPI = cursorTheme.isHiDPI
-        
+
         var copies: [CursorModel] = []
         var mapping: [String: CursorModel] = [:]
         for original in cursorTheme.cursors {
@@ -38,14 +38,14 @@ class CursorThemeEditorViewModel {
         self.editingCursors = copies
         self.originalMapping = mapping
     }
-    
+
     var selectedCursor: CursorModel? {
         guard let id = selectedCursorId else { return nil }
         return editingCursors.first { $0.id == id }
     }
-    
+
     var hideTahoeCursors: Bool = MACPreferences.hideTahoeCursors
-    
+
     var visibleEditingCursors: [CursorModel] {
         if hideTahoeCursors {
             return editingCursors.filter {
@@ -54,33 +54,33 @@ class CursorThemeEditorViewModel {
         }
         return editingCursors
     }
-    
+
     func markDirty() {
         isDirty = true
     }
-    
+
     func usedIdentifiers(excluding cursorId: String) -> Set<String> {
         Set(editingCursors.compactMap { $0.id == cursorId ? nil : $0.identifier })
     }
-    
+
     func save() -> Error? {
         for editingModel in editingCursors {
             editingModel.syncToBacking()
-            
+
             if let original = originalMapping[editingModel.id] {
                 original.identifier = editingModel.identifier
                 original.frameCount = editingModel.frameCount
                 original.frameDuration = editingModel.frameDuration
                 original.hotSpot = editingModel.hotSpot
                 original.size = editingModel.size
-                
+
                 if let reps = editingModel.backingCursor.representations as NSDictionary? {
                     original.backingCursor.setValue(reps.mutableCopy(), forKey: "representations")
                 }
                 original.representationRevision += 1
             }
         }
-        
+
         for editingModel in editingCursors {
             let backingId = editingModel.backingCursor.identifier
             if backingId == nil || backingId!.isEmpty {
@@ -93,12 +93,12 @@ class CursorThemeEditorViewModel {
                 }
             }
         }
-        
+
         cursorTheme.name = editingName
         cursorTheme.creator = editingCreator
         cursorTheme.version = editingVersion
         cursorTheme.isHiDPI = editingHiDPI
-        
+
         var finalCursors: [CursorModel] = []
         for editingModel in editingCursors {
             if let original = originalMapping[editingModel.id] {
@@ -108,34 +108,34 @@ class CursorThemeEditorViewModel {
             }
         }
         cursorTheme.cursors = finalCursors
-        
+
         for cursor in pendingAdditions {
             cursorTheme.backingLibrary.addCursor(cursor)
         }
         pendingAdditions.removeAll()
-        
+
         for originalId in pendingRemovals {
             if let original = cursorTheme.backingLibrary.cursors.first(where: { $0.identifier == originalId }) {
                 cursorTheme.backingLibrary.removeCursor(original)
             }
         }
         pendingRemovals.removeAll()
-        
+
         let error = cursorTheme.save()
         if error == nil {
             isDirty = false
-            
+
             if cursorTheme.isApplied {
                 CursorService.applyTheme(from: cursorTheme.backingLibrary)
             }
         }
         return error
     }
-    
+
     func revertToSaved() {
         pendingAdditions.removeAll()
         pendingRemovals.removeAll()
-        
+
         var copies: [CursorModel] = []
         var mapping: [String: CursorModel] = [:]
         for original in cursorTheme.cursors {
@@ -144,17 +144,17 @@ class CursorThemeEditorViewModel {
             copies.append(copy)
             mapping[copy.id] = original
         }
-        
+
         editingName = cursorTheme.name
         editingCreator = cursorTheme.creator
         editingVersion = cursorTheme.version
         editingHiDPI = cursorTheme.isHiDPI
         editingCursors = copies
         originalMapping = mapping
-        
+
         isDirty = false
     }
-    
+
     func addCursor() {
         let newCursor = MACCursorSwift()
         pendingAdditions.append(newCursor)
@@ -163,10 +163,10 @@ class CursorThemeEditorViewModel {
         editingCursors.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         markDirty()
     }
-    
+
     func removeCursor(_ cursor: CursorModel) {
         performRemoveCursor(cursor)
-        
+
         if hideTahoeCursors {
             let aliases = MACConstants.tahoeAliases(for: cursor.identifier)
             for alias in aliases {
@@ -175,10 +175,10 @@ class CursorThemeEditorViewModel {
                 }
             }
         }
-        
+
         markDirty()
     }
-    
+
     private func performRemoveCursor(_ cursor: CursorModel) {
         if selectedCursorId == cursor.id {
             selectedCursorId = nil
@@ -191,7 +191,7 @@ class CursorThemeEditorViewModel {
         originalMapping.removeValue(forKey: cursor.id)
         editingCursors.removeAll { $0.id == cursor.id }
     }
-    
+
     func duplicateCursor(_ cursor: CursorModel) {
         if let copy = cursor.backingCursor.copy() as? MACCursorSwift {
             copy.identifier = UUID().uuidString.replacingOccurrences(of: "-", with: "")
@@ -202,7 +202,7 @@ class CursorThemeEditorViewModel {
             markDirty()
         }
     }
-    
+
     func importWindowsCursors(from urls: [URL]) {
         for url in urls {
             do {

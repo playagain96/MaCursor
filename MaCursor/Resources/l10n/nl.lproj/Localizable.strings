@@ -19,139 +19,139 @@
 "+%lld" = "+%lld";
 
 /* Settings tab title */
-"About" = "About";
+"About" = "Over";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "Over MaCursor";
 
 /* Undo: add cursor */
-"Add Cursor" = "Add Cursor";
+"Add Cursor" = "Cursor toevoegen";
 
 /* Button: add shortcut slot */
-"Add shortcut slot" = "Add shortcut slot";
+"Add shortcut slot" = "Sneltoetsvak toevoegen";
 
 /* Button: add new theme */
-"Add Theme" = "Add Theme";
+"Add Theme" = "Thema toevoegen";
 
 /* Section: animation settings */
-"Animation" = "Animation";
+"Animation" = "Animatie";
 
 /* Label: appearance picker */
-"Appearance" = "Appearance";
+"Appearance" = "Weergave";
 
 /* Badge: theme is applied */
-"Applied" = "Applied";
+"Applied" = "Toegepast";
 
 /* Context menu: apply theme */
-"Apply" = "Apply";
+"Apply" = "Pas toe";
 
 
 /* Label: theme creator */
-"Creator" = "Creator";
+"Creator" = "Maker";
 
 /* Label: theme creator (with colon) */
-"Creator:" = "Creator:";
+"Creator:" = "Maker:";
 
 
 /* Format: theme subtitle (creator and version) */
-"by %@ • v%.1f" = "by %1$@ • v%2$.1f";
+"by %@ • v%.1f" = "door %1$@ • v%2$.1f";
 
 /* Button: cancel action */
-"Cancel" = "Cancel";
+"Cancel" = "Annuleer";
 
 /* Undo: change theme creator */
-"Change Creator" = "Change Creator";
+"Change Creator" = "Maker wijzigen";
 
 /* Undo: change theme HiDPI */
-"Change HiDPI" = "Change HiDPI";
+"Change HiDPI" = "HiDPI wijzigen";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Change Identifier";
+"Change Identifier" = "Identifier wijzigen";
 
 /* Undo: change theme name */
-"Change Name" = "Change Name";
+"Change Name" = "Naam wijzigen";
 
 /* Undo: change theme version */
-"Change Version" = "Change Version";
+"Change Version" = "Versie wijzigen";
 
 /* Placeholder: no cursor selected */
-"Choose a cursor from the list to edit its properties." = "Choose a cursor from the list to edit its properties.";
+"Choose a cursor from the list to edit its properties." = "Kies een cursor uit de lijst om de eigenschappen ervan te bewerken.";
 
 /* Placeholder: no theme selected */
-"Choose a cursor theme from the sidebar to view its cursors." = "Choose a cursor theme from the sidebar to view its cursors.";
+"Choose a cursor theme from the sidebar to view its cursors." = "Kies een cursorthema in de zijbalk om de bijbehorende cursors te bekijken.";
 
 /* Import panel description */
-"Choose cursor theme files to import (.cursor)" = "Choose cursor theme files to import (.cursor)";
+"Choose cursor theme files to import (.cursor)" = "Kies cursorthemabestanden die je wilt importeren (.cursor)";
 
 /* Button: close window */
-"Close" = "Close";
+"Close" = "Sluit";
 
 /* About: copyright notice */
-"Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
+"Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. Alle rechten voorbehouden.";
 
 /* Section: cursor settings */
 "Cursor" = "Cursor";
 
 /* Label: cursor scale slider */
-"Cursor Scale" = "Cursor Scale";
+"Cursor Scale" = "Cursorschaal";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Cursor Theme";
+"Cursor Theme" = "Cursorthema";
 
 /* Undo suffix: cursor type */
-"cursor type" = "cursor type";
+"cursor type" = "cursortype";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Cursor Type:";
+"Cursor Type:" = "Cursortype:";
 
 /* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
+"Custom cursor themes for macOS" = "Aangepaste cursorthema's voor macOS";
 
 /* Appearance mode: dark */
-"Dark" = "Dark";
+"Dark" = "Donker";
 
 /* Button: delete cursor */
-"Delete" = "Delete";
+"Delete" = "Verwijder";
 
 /* Undo suffix: dimensions */
-"dimensions" = "dimensions";
+"dimensions" = "afmetingen";
 
 /* Button: discard changes */
-"Discard" = "Discard";
+"Discard" = "Negeer";
 
 
 /* Label: drop zone */
-"Drop" = "Drop";
+"Drop" = "Zet neer";
 
 /* Button: duplicate cursor */
-"Duplicate" = "Duplicate";
+"Duplicate" = "Dupliceer";
 
 /* Button: edit theme */
-"Edit" = "Edit";
+"Edit" = "Wijzig";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edit Theme";
+"Edit Theme" = "Thema bewerken";
 
 /* Error: write failure */
-"Error writing cursor theme to disk." = "Error writing cursor theme to disk.";
+"Error writing cursor theme to disk." = "Fout bij het schrijven van het cursorthema naar de schijf.";
 
 /* Error: theme file creation failure */
-"Failed to create cursor theme file" = "Failed to create cursor theme file";
+"Failed to create cursor theme file" = "Kan cursorthemabestand niet aanmaken";
 
 /* Undo suffix: frame count */
-"frame count" = "frame count";
+"frame count" = "aantal frames";
 
 /* Label: frame count */
-"Frame Count:" = "Frame Count:";
+"Frame Count:" = "Aantal frames:";
 
 /* Undo suffix: frame duration */
-"frame duration" = "frame duration";
+"frame duration" = "frameduur";
 
 /* Label: frame duration */
-"Frame Duration:" = "Frame Duration:";
+"Frame Duration:" = "Frameduur:";
 
 /* Settings tab: general */
-"General" = "General";
+"General" = "Algemeen";
 
 /* About: license */
 "GPL-3.0" = "GPL-3.0";
@@ -160,211 +160,211 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Helper Not Found";
+"Helper Not Found" = "Hulpprogramma niet gevonden";
 
 /* Section: helper tool */
-"Helper Tool" = "Helper Tool";
+"Helper Tool" = "Hulpprogramma";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Hot Spot";
+"Hot Spot" = "Hotspot";
 
 /* Undo suffix: hotspot */
 "hotspot" = "hotspot";
 
 /* Button: import */
-"Import" = "Import";
+"Import" = "Importeer";
 
 /* Menu: import theme */
-"Import Theme..." = "Import Theme...";
+"Import Theme..." = "Importeer thema…";
 
 /* Button: install helper */
-"Install" = "Install";
+"Install" = "Installeer";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Installed & Active";
+"Installed & Active" = "Geïnstalleerd en actief";
 
 /* Section/Picker: language setting */
-"Language" = "Language";
+"Language" = "Taal";
 
 /* Button: dismiss restart prompt */
 "Later" = "Later";
 
 /* Appearance mode: light */
-"Light" = "Light";
+"Light" = "Licht";
 
 /* App name */
 "MaCursor" = "MaCursor";
 
 /* Default cursor dump file name */
-"MaCursor Dump" = "MaCursor Dump";
+"MaCursor Dump" = "MaCursor-dump";
 
 /* About: tagline */
-"Made with ❤️" = "Made with ❤️";
+"Made with ❤️" = "Met ❤️ gemaakt";
 
 /* Error: duplicate cursor names */
-"Multiple cursors with the name(s): %@ exist." = "Multiple cursors with the name(s): %@ exist.";
+"Multiple cursors with the name(s): %@ exist." = "Er bestaan meerdere cursors met de naam/namen: %@.";
 
 /* Label: theme name */
-"Name:" = "Name:";
+"Name:" = "Naam:";
 
 /* Button: new theme */
-"New Theme" = "New Theme";
+"New Theme" = "Nieuw thema";
 
 /* Error: no file URL */
-"No file URL set." = "No file URL set.";
+"No file URL set." = "Er is geen bestands-URL ingesteld.";
 
 /* Error: directory not found */
-"No path found for directory in domain." = "No path found for directory in domain.";
+"No path found for directory in domain." = "Geen pad gevonden voor map in domein.";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "No Shortcuts";
+"No Shortcuts" = "Geen sneltoetsen";
 
 /* Placeholder: no theme selected */
-"None" = "None";
+"None" = "Geen";
 
 /* Helper status: not installed */
-"Not Installed" = "Not Installed";
+"Not Installed" = "Niet geïnstalleerd";
 
 /* Placeholder: shortcut instructions */
-"Press + to add a favorite cursor shortcut." = "Press + to add a favorite cursor shortcut.";
+"Press + to add a favorite cursor shortcut." = "Druk op + om een sneltoets voor een favoriete cursor toe te voegen.";
 
 /* Button: recording shortcut */
-"Press shortcut…" = "Press shortcut…";
+"Press shortcut…" = "Druk op sneltoets…";
 
 /* Section: cursor preview */
-"Preview" = "Preview";
+"Preview" = "Voorvertoning";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Record Shortcut";
+"Record Shortcut" = "Sneltoets opnemen";
 
 /* Tooltip: remove representation */
-"Remove %@ representation" = "Remove %@ representation";
+"Remove %@ representation" = "Verwijder %@-weergave";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Remove Cursor";
+"Remove Cursor" = "Cursor verwijderen";
 
 /* Button: remove shortcut slot */
-"Remove selected slot" = "Remove selected slot";
+"Remove selected slot" = "Geselecteerd vak verwijderen";
 
 /* Section: cursor representations */
-"Representations" = "Representations";
+"Representations" = "Weergaven";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Requires Approval in System Settings";
+"Requires Approval in System Settings" = "Goedkeuring vereist in Systeeminstellingen";
 
 /* Button: reset settings */
-"Reset" = "Reset";
+"Reset" = "Herstel standaardwaarden";
 
 /* Description: reset button */
-"Reset all settings to default values (cannot be undone)" = "Reset all settings to default values (cannot be undone)";
+"Reset all settings to default values (cannot be undone)" = "Herstel alle instellingen naar de standaardwaarden (kan niet ongedaan worden gemaakt)";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Reset All Settings?";
+"Reset All Settings?" = "Alle instellingen herstellen naar standaardwaarden?";
 
 /* Section: reset settings */
-"Reset Settings" = "Reset Settings";
+"Reset Settings" = "Instellingen herstellen naar standaardwaarden";
 
 /* Button: restart app */
-"Restart Now" = "Restart Now";
+"Restart Now" = "Start nu opnieuw";
 
 /* Alert title: restart required */
-"Restart Required" = "Restart Required";
+"Restart Required" = "Opnieuw opstarten vereist";
 
 /* Button: restore cursors */
-"Restore" = "Restore";
+"Restore" = "Herstel";
 
 /* Button: restore system cursors */
-"Restore system cursors" = "Restore system cursors";
+"Restore system cursors" = "Herstel systeemcursors";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Restore System Cursors";
+"Restore System Cursors" = "Herstel systeemcursors";
 
 /* Button: save theme */
-"Save" = "Save";
+"Save" = "Bewaar";
 
 /* Alert title: save failure */
-"Save failed" = "Save failed";
+"Save failed" = "Bewaren is mislukt";
 
 /* Unit: seconds */
 "sec" = "sec";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Select a Cursor";
+"Select a Cursor" = "Kies een cursor";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Select a Cursor Theme";
+"Select a Cursor Theme" = "Kies een cursorthema";
 
 /* Window title: settings */
-"Settings" = "Settings";
+"Settings" = "Instellingen";
 
 /* Menu: open settings */
-"Settings..." = "Settings...";
+"Settings..." = "Instellingen…";
 
 /* Settings tab: shortcut */
-"Shortcut" = "Shortcut";
+"Shortcut" = "Sneltoets";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Voor sneltoetsen moet het Hulpprogramma zijn geïnstalleerd. Je kunt het installeren via Algemeen → Hulpprogramma.";
 
 /* Context menu: show in Finder */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Toon in Finder";
 
 /* Label: cursor size */
-"Size:" = "Size:";
+"Size:" = "Grootte:";
 
 /* Appearance mode: system */
-"System" = "System";
+"System" = "Systeem";
 
 /* Language picker: system default */
-"System Default" = "System Default";
+"System Default" = "Systeemstandaard";
 
 /* Alert message: cursor theme load failure */
-"The cursor theme could not be loaded." = "The cursor theme could not be loaded.";
+"The cursor theme could not be loaded." = "Het cursorthema kon niet worden geladen.";
 
 /* Error: destination not writable */
-"The destination, %@, is not writable." = "The destination, %@, is not writable.";
+"The destination, %@, is not writable." = "De bestemming, %@, is niet beschrijfbaar.";
 
 /* Alert message: language restart */
-"The language change will take effect after restarting MaCursor." = "The language change will take effect after restarting MaCursor.";
+"The language change will take effect after restarting MaCursor." = "De taalwijziging wordt van kracht nadat MaCursor opnieuw is opgestart.";
 
 /* Section: theme settings */
-"Theme" = "Theme";
+"Theme" = "Thema";
 
 /* Label: theme name */
-"Theme Name" = "Theme Name";
+"Theme Name" = "Themanaam";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Theme Not Found";
+"Theme Not Found" = "Thema niet gevonden";
 
 /* Alert message: reset confirmation */
-"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone.";
+"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "Hierdoor worden alle cursorthema's verwijderd, worden de systeemcursors hersteld en worden alle instellingen teruggezet naar hun standaardwaarden. Deze handeling kan niet ongedaan worden gemaakt.";
 
 /* Error: invalid directory */
-"Unable to create a cursor theme from the directory specified." = "Unable to create a cursor theme from the directory specified.";
+"Unable to create a cursor theme from the directory specified." = "Kan geen cursorthema aanmaken op basis van de opgegeven map.";
 
 /* Button: uninstall helper */
-"Uninstall" = "Uninstall";
+"Uninstall" = "Verwijder";
 
 /* Default creator */
-"Unknown" = "Unknown";
+"Unknown" = "Onbekend";
 
 /* Default new theme name */
-"Unnamed" = "Unnamed";
+"Unnamed" = "Naamloos";
 
 /* Alert title: unsaved changes */
-"Unsaved Changes" = "Unsaved Changes";
+"Unsaved Changes" = "Niet-bewaarde wijzigingen";
 
 /* About: version label */
-"Version %@" = "Version %@";
+"Version %@" = "Versie %@";
 
 /* Label: theme version */
-"Version:" = "Version:";
+"Version:" = "Versie:";
 
 /* Link: website */
-"Visit Website" = "Visit Website";
+"Visit Website" = "Bezoek website";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -373,4 +373,28 @@
 "Y:" = "Y:";
 
 /* Alert message: unsaved changes */
-"Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+"Your changes will be discarded if you don't save them." = "Je wijzigingen worden genegeerd als je ze niet bewaart.";
+
+/* Toggle: hide Tahoe-specific cursor variants */
+"Hide Tahoe cursors" = "Verberg Tahoe-cursors";
+
+/* Caption: Hide Tahoe cursors explanation */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "Wanneer dit is ingeschakeld, worden Tahoe-specifieke cursorvarianten (ArrowS, IBeamS) verborgen. Als je een cursor verwijdert, wordt ook de bijbehorende Tahoe-variant verwijderd.";
+
+/* Picker: mouse handedness */
+"Mouse Hand" = "Muishand";
+
+/* Mouse Hand option: left-handed */
+"Left Hand" = "Linkerhand";
+
+/* Mouse Hand option: right-handed */
+"Right Hand" = "Rechterhand";
+
+/* Section: software updates */
+"Software Updates" = "Software-updates";
+
+/* Toggle: automatically check for updates */
+"Automatically check for updates" = "Automatisch controleren op updates";
+
+/* Menu: check for updates (Sparkle) */
+"Check for Updates…" = "Controleer op updates…";

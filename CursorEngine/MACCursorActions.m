@@ -1,6 +1,8 @@
 #import "MACCursorActions.h"
 #import "MACCursorDefs.h"
 
+static NSSet *gThemeProvidedIdentifiers = nil;
+
 static BOOL MACCursorRequiresFlipForHandMode(NSString *identifier) {
     static NSSet *excludedFromFlip = nil;
     static dispatch_once_t onceToken;
@@ -40,9 +42,17 @@ BOOL applyCursorForIdentifier(NSUInteger frameCount, CGFloat frameDuration, CGPo
         return NO;
     }
 
+    int primaryActivateSeed = 0;
+    CGSSetRegisteredCursor(CGSMainConnectionID(),
+                          (char *)identifier,
+                          &primaryActivateSeed);
 
     NSArray *aliases = MACTahoeCursorAliasesForIdentifier(ident);
     for (NSString *alias in aliases) {
+        if ([gThemeProvidedIdentifiers containsObject:alias]) {
+            MMLog("Tahoe: skipping alias %s — theme defines it directly", alias.UTF8String);
+            continue;
+        }
         int aliasSeed = 0;
         CGError aliasErr = CGSRegisterCursorWithImages(CGSMainConnectionID(),
                                                        (char *)alias.UTF8String,
@@ -67,6 +77,37 @@ BOOL applyCursorForIdentifier(NSUInteger frameCount, CGFloat frameDuration, CGPo
         }
     }
 
+    NSArray *browserAliases = MACBrowserCursorAliasesForIdentifier(ident);
+    for (NSString *bAlias in browserAliases) {
+        if ([gThemeProvidedIdentifiers containsObject:bAlias]) {
+            MMLog("Browser alias: skipping %s → %s — theme defines it directly",
+                  ident.UTF8String, bAlias.UTF8String);
+            continue;
+        }
+        int bAliasSeed = 0;
+        CGError bErr = CGSRegisterCursorWithImages(CGSMainConnectionID(),
+                                                    (char *)bAlias.UTF8String,
+                                                    true,
+                                                    true,
+                                                    size,
+                                                    hotSpot,
+                                                    frameCount,
+                                                    frameDuration,
+                                                    (__bridge CFArrayRef)images,
+                                                    &bAliasSeed);
+        if (bErr == kCGErrorSuccess) {
+            MMLog("Browser alias: registered %s → %s (seed=%d)",
+                  ident.UTF8String, bAlias.UTF8String, bAliasSeed);
+            int bActivateSeed = 0;
+            CGSSetRegisteredCursor(CGSMainConnectionID(),
+                                  (char *)bAlias.UTF8String,
+                                  &bActivateSeed);
+        } else {
+            MMLog(BOLD YELLOW "Browser alias: failed %s → %s (err=%d)" RESET,
+                  ident.UTF8String, bAlias.UTF8String, bErr);
+        }
+    }
+
     return YES;
 }
 
@@ -79,7 +120,7 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
     BOOL lefty = MACFlag(MACPreferencesHandednessKey);
     NSNumber *frameCount    = cursor[MACCursorDictionaryFrameCountKey];
     NSNumber *frameDuration = cursor[MACCursorDictionaryFrameDurationKey];
-    
+
     CGPoint hotSpot         = CGPointMake([cursor[MACCursorDictionaryHotSpotXKey] doubleValue],
                                           [cursor[MACCursorDictionaryHotSpotYKey] doubleValue]);
     CGSize size             = CGSizeMake([cursor[MACCursorDictionaryPointsWideKey] doubleValue],
@@ -111,7 +152,7 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
             CGImageRef cgImg = [rep CGImage];
             CGImageRetain(cgImg);
             [images addObject:(__bridge_transfer id)(cgImg)];
-            
+
         } else {
             CGColorSpaceRef cs = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
             CGContextRef ctx = CGBitmapContextCreate(NULL,
@@ -133,11 +174,59 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
             [images addObject:(__bridge_transfer id)(flippedImg)];
         }
     }
-    
+
     NSUInteger fc = frameCount.unsignedIntegerValue;
     CGFloat fd = frameDuration.doubleValue;
-    
-    if ((fc > MACMaxFrameCount && images.count >= 1) || (images.count == 1 && fc > 1)) {
+
+    BOOL sheetsRebuilt = NO;
+    if (fc > MACMaxFrameCount && images.count > 1) {
+        NSUInteger targetCount = MACMaxFrameCount;
+        NSMutableArray *rebuiltSheets = [NSMutableArray arrayWithCapacity:images.count];
+        BOOL allRebuilt = YES;
+
+        for (id sheet in images) {
+            CGImageRef sheetImg = (__bridge CGImageRef)sheet;
+            size_t sw = CGImageGetWidth(sheetImg);
+            size_t sh = CGImageGetHeight(sheetImg);
+            size_t fh = sh / fc;
+            if (fh == 0 || fh * fc > sh) { allRebuilt = NO; break; }
+
+            CGColorSpaceRef cs = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+            CGContextRef ctx = CGBitmapContextCreate(NULL, sw, fh * targetCount,
+                                                     8, 0, cs,
+                                                     (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+            CGColorSpaceRelease(cs);
+            if (!ctx) { allRebuilt = NO; break; }
+            CGContextClearRect(ctx, CGRectMake(0, 0, sw, fh * targetCount));
+
+            for (NSUInteger i = 0; i < targetCount && allRebuilt; i++) {
+                NSUInteger srcIndex = (i * fc) / targetCount;
+                CGImageRef frame = CGImageCreateWithImageInRect(sheetImg,
+                    CGRectMake(0, srcIndex * fh, sw, fh));
+                if (!frame) { allRebuilt = NO; break; }
+                CGContextDrawImage(ctx,
+                                   CGRectMake(0, (targetCount - 1 - i) * fh, sw, fh),
+                                   frame);
+                CGImageRelease(frame);
+            }
+
+            CGImageRef rebuilt = allRebuilt ? CGBitmapContextCreateImage(ctx) : NULL;
+            CGContextRelease(ctx);
+            if (!rebuilt) { allRebuilt = NO; break; }
+            [rebuiltSheets addObject:(__bridge_transfer id)rebuilt];
+        }
+
+        if (allRebuilt && rebuiltSheets.count == images.count) {
+            CGFloat totalDuration = fd * fc;
+            images = rebuiltSheets;
+            fc = targetCount;
+            fd = totalDuration / targetCount;
+            sheetsRebuilt = YES;
+        }
+    }
+
+    if (!sheetsRebuilt &&
+        ((fc > MACMaxFrameCount && images.count >= 1) || (images.count == 1 && fc > 1))) {
         CGImageRef firstSheet = (__bridge CGImageRef)images[0];
         NSUInteger sheetHeight = CGImageGetHeight(firstSheet);
         NSUInteger frameHeight = sheetHeight / fc;
@@ -187,23 +276,23 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
             }
         }
     }
-    
+
     if (images.count > MACMaxFrameCount) {
         NSUInteger originalCount = images.count;
         CGFloat totalDuration = fd * originalCount;
         NSUInteger targetCount = MACMaxFrameCount;
-        
+
         NSMutableArray *downsampled = [NSMutableArray arrayWithCapacity:targetCount];
         for (NSUInteger i = 0; i < targetCount; i++) {
             NSUInteger srcIndex = (i * originalCount) / targetCount;
             [downsampled addObject:images[srcIndex]];
         }
-        
+
         images = downsampled;
         fc = targetCount;
         fd = totalDuration / targetCount;
     }
-    
+
     return applyCursorForIdentifier(fc, fd, hotSpot, size, images, identifier, 0);
 }
 
@@ -212,13 +301,13 @@ BOOL applyTheme(NSDictionary *dictionary) {
         NSDictionary *cursors = dictionary[MACCursorDictionaryCursorsKey];
         NSString *name = dictionary[MACCursorDictionaryThemeNameKey];
         NSNumber *version = dictionary[MACCursorDictionaryThemeVersionKey];
-        
+
         CGSConnectionID cid = CGSMainConnectionID();
         CoreCursorUnregisterAll(cid);
         for (int x = 0; x <= MC_MAX_CORE_CURSOR_ID; x++) {
             CoreCursorSet(cid, x);
         }
-        
+
         NSString *defaultPath = MACSystemDefaultCursorPath();
         NSData *defaultData = [NSData dataWithContentsOfFile:defaultPath];
         if (defaultData) {
@@ -227,43 +316,61 @@ BOOL applyTheme(NSDictionary *dictionary) {
                                                                                format:NULL
                                                                                 error:NULL];
             NSDictionary *defaultCursors = defaults[MACCursorDictionaryCursorsKey];
+            gThemeProvidedIdentifiers = [NSSet setWithArray:defaultCursors.allKeys];
             for (NSString *key in defaultCursors) {
                 applyThemeForIdentifier(defaultCursors[key], key, YES);
             }
+            gThemeProvidedIdentifiers = nil;
         }
-        
+
         MMLog("Applying cursor theme: %s %.02f", name.UTF8String, version.floatValue);
-        
+
+        gThemeProvidedIdentifiers = [NSSet setWithArray:cursors.allKeys];
         for (NSString *key in cursors) {
             NSDictionary *theme = cursors[key];
             MMLog("Hooking for %s", key.UTF8String);
-            
+
             BOOL success = applyThemeForIdentifier(theme, key, NO);
             if (!success) {
                 MMLog(BOLD YELLOW "Failed to hook identifier %s, continuing with remaining cursors..." RESET, key.UTF8String);
             }
         }
-        
+        gThemeProvidedIdentifiers = nil;
+
+        for (NSString *key in cursors) {
+            int activateSeed = 0;
+            CGSSetRegisteredCursor(CGSMainConnectionID(),
+                                  (char *)key.UTF8String,
+                                  &activateSeed);
+            NSArray *bAliases = MACBrowserCursorAliasesForIdentifier(key);
+            for (NSString *alias in bAliases) {
+                int aliasSeed = 0;
+                CGSSetRegisteredCursor(CGSMainConnectionID(),
+                                      (char *)alias.UTF8String,
+                                      &aliasSeed);
+            }
+        }
+
         MACSetDefault(dictionary[MACCursorDictionaryIdentifierKey], MACPreferencesAppliedCursorKey);
 
         MACFinalizeCursorApply(MACCursorRefreshScaleBumpSmall);
-        
+
         MMLog(BOLD GREEN "Applied %s successfully!" RESET, name.UTF8String);
-        
+
         return YES;
     }
 }
 
 void MACFinalizeCursorApply(float scaleBump) {
     CGSSetDockCursorOverride(CGSMainConnectionID(), true);
-    
+
     float scale;
     CGSGetCursorScale(CGSMainConnectionID(), &scale);
     CGSSetCursorScale(CGSMainConnectionID(), scale + scaleBump);
     CGSSetCursorScale(CGSMainConnectionID(), scale);
-    
+
     CGSSetSystemDefinedCursor(CGSMainConnectionID(), 0);
-    
+
     MMLog(BOLD GREEN "Enabled dock cursor override, forced refresh, reset to Arrow" RESET);
 }
 
@@ -288,13 +395,13 @@ BOOL applyThemeAtPath(NSString *path) {
 
 NSError *createCursorTheme(NSString *input, NSString *output) {
     NSDictionary *theme = createCursorThemeFromDirectory(input);
-    
+
     if (!theme) {
         return [NSError errorWithDomain:MACErrorDomain code:MACErrorInvalidThemeCode userInfo:@{
                                                                                               NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to create cursor theme file", nil),
                                                                                               NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Unable to create a cursor theme from the directory specified.", nil) }];
     }
-    
+
     NSError *writeError = nil;
     NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:theme
                                                                   format:NSPropertyListBinaryFormat_v1_0
@@ -316,19 +423,19 @@ NSError *createCursorTheme(NSString *input, NSString *output) {
 
 NSDictionary *createCursorThemeFromDirectory(NSString *path) {
     NSFileManager *manager = [NSFileManager defaultManager];
-    
+
     BOOL isDir;
     BOOL exists = [manager fileExistsAtPath:path isDirectory:&isDir];
-    
+
     if (!exists || !isDir)
         return nil;
-    
+
     NSArray *contents = [manager contentsOfDirectoryAtPath:path error:nil];
-    
+
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
 
     CGFloat version = 0.0;
-    
+
     MMLog(BOLD "Enter metadata for cursor theme:" RESET);
     NSString *creator = MMGet(@"Creator");
     NSString *identifier = MMGet(@"Identifier");
@@ -339,31 +446,31 @@ NSDictionary *createCursorThemeFromDirectory(NSString *path) {
         return nil;
     }
     NSString *hidpi = MMGet(@"HiDPI? (y/n)");
-    
+
     MMLog("");
-    
+
     BOOL HiDPI = [hidpi isEqualToString:@"y"];
-    
+
     [dictionary setObject:creator forKey:MACCursorDictionaryCreatorKey];
     [dictionary setObject:identifier forKey:MACCursorDictionaryIdentifierKey];
     [dictionary setObject:name forKey:MACCursorDictionaryThemeNameKey];
     [dictionary setObject:@(version) forKey:MACCursorDictionaryThemeVersionKey];
     [dictionary setObject:@(HiDPI) forKey:MACCursorDictionaryHiDPIKey];
     [dictionary setObject:[[NSUUID UUID] UUIDString] forKey:MACCursorDictionaryUUIDKey];
-    
+
     NSMutableDictionary *cursors = [NSMutableDictionary dictionary];
-    
+
     for (NSString *subpath in contents) {
         NSString *fullPath = [path stringByAppendingPathComponent:subpath];
-        
+
         [manager fileExistsAtPath:fullPath isDirectory:&isDir];
-        
+
         if (!isDir)
             continue;
-        
+
         NSString *ident = subpath;
         NSMutableDictionary *data = [NSMutableDictionary dictionary];
-        
+
         NSUInteger fC;
         CGFloat hotX, hotY, pW, pH, fD;
         printf(BOLD "Need metadata for %s." RESET, [ident cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -399,40 +506,40 @@ NSDictionary *createCursorThemeFromDirectory(NSString *path) {
             MMLog(BOLD RED "Invalid frame duration input" RESET);
             return nil;
         }
-        
+
         NSMutableArray *representations = [NSMutableArray array];
         NSArray *repNames = [manager contentsOfDirectoryAtPath:fullPath error:nil];
         for (NSString *rep in repNames) {
             NSString *repPath = [fullPath stringByAppendingPathComponent:rep];
-            
+
             [manager fileExistsAtPath:repPath isDirectory:&isDir];
             if (isDir || [rep isEqualToString:@".DS_Store"])
                 continue;
-            
+
             NSBitmapImageRep *image = [NSBitmapImageRep imageRepWithData:[NSData dataWithContentsOfFile:repPath]];
             if (image) {
                 NSData *pngData = [image.ensuredSRGBSpace representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
                 [representations addObject:pngData];
             }
-            
+
         }
-        
+
         [data setObject:@(hotX) forKey:MACCursorDictionaryHotSpotXKey];
         [data setObject:@(hotY) forKey:MACCursorDictionaryHotSpotYKey];
         [data setObject:@(pW) forKey:MACCursorDictionaryPointsWideKey];
         [data setObject:@(pH) forKey:MACCursorDictionaryPointsHighKey];
         [data setObject:@(fC) forKey:MACCursorDictionaryFrameCountKey];
         [data setObject:@(fD) forKey:MACCursorDictionaryFrameDurationKey];
-        
+
         [data setObject:representations forKey:MACCursorDictionaryRepresentationsKey];
         [cursors setObject:data forKey:ident];
     }
-    
+
     if (cursors.count == 0)
         return nil;
-    
+
     [dictionary setObject:cursors forKey:MACCursorDictionaryCursorsKey];
-    
+
     return dictionary;
 }
 
@@ -440,27 +547,27 @@ NSDictionary *processedCursorThemeWithIdentifier(NSString *identifier) {
     NSMutableDictionary *dict = cursorThemeWithIdentifier(identifier).mutableCopy;
     if (!dict)
         return nil;
-    
+
     NSDictionary *cursors = dict[MACCursorDictionaryRepresentationsKey];
     NSMutableArray *reps = [NSMutableArray array];
-    
+
     for (id image in cursors) {
         CGImageRef im = (__bridge CGImageRef)image;
         NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:im];
-    
+
         [reps addObject:pngDataForImage(rep.ensuredSRGBSpace)];
     }
-    
+
     dict[MACCursorDictionaryRepresentationsKey] = reps;
     return dict;
 }
 
 BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUInteger total)) {
     MMLog("Dumping cursors...");
-        
+
     float originalScale;
     CGSGetCursorScale(CGSMainConnectionID(), &originalScale);
-    
+
     CGSSetCursorScale(CGSMainConnectionID(), MACDumpCursorScale);
     CGSHideCursor(CGSMainConnectionID());
 
@@ -484,7 +591,7 @@ BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUI
         cursors[key] = processedCursorThemeWithIdentifier(key);
         i++;
     }
-    
+
     for (int x = 0; x <= MC_MAX_CORE_CURSOR_ID; x++) {
         if (progress) {
             current = i + x;
@@ -499,9 +606,9 @@ BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUI
         NSDictionary *theme = processedCursorThemeWithIdentifier(key);
         if (!theme)
             continue;
-        
+
         MMLog("Gathering data for %s", key.UTF8String);
-        
+
         cursors[key] = theme;
     }
 
@@ -517,10 +624,10 @@ BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUI
     theme[MACCursorDictionaryHiDPIKey] = @YES;
     theme[MACCursorDictionaryIdentifierKey] = [NSString stringWithFormat:@"com.writronic.macursor.dump"];
     theme[MACCursorDictionaryUUIDKey] = [[NSUUID UUID] UUIDString];
-    
+
     CGSSetCursorScale(CGSMainConnectionID(), originalScale);
     CGSShowCursor(CGSMainConnectionID());
-    
+
     NSError *writeError = nil;
     NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:theme
                                                                   format:NSPropertyListBinaryFormat_v1_0
@@ -602,6 +709,7 @@ BOOL resetAllCursors(NSError **error) {
     }
 
     NSUInteger restoredCount = 0;
+    gThemeProvidedIdentifiers = [NSSet setWithArray:cursors.allKeys];
     for (NSString *key in cursors) {
         NSDictionary *cursorData = cursors[key];
         BOOL success = applyThemeForIdentifier(cursorData, key, YES);
@@ -611,6 +719,7 @@ BOOL resetAllCursors(NSError **error) {
             MMLog(BOLD YELLOW "Failed to restore cursor: %s" RESET, key.UTF8String);
         }
     }
+    gThemeProvidedIdentifiers = nil;
 
     MMLog("Restored %lu/%lu cursors from disk", (unsigned long)restoredCount, (unsigned long)cursors.count);
 

@@ -50,13 +50,13 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willSaveNotification:) name:MACLibraryWillSaveNotificationName object:nil];
         [self loadLibrary];
     }
-    
+
     return self;
 }
 
 - (void)loadLibrary {
     [self.undoManager disableUndoRegistration];
-    
+
     self.themes = [NSMutableSet set];
     NSString *themesPath = self.libraryURL.path;
     NSArray  *contents  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:themesPath error:NULL];
@@ -68,14 +68,14 @@
 
         NSURL *fileURL = [NSURL fileURLWithPathComponents:@[ themesPath, filename ]];
         MACCursorLibrary *library = [MACCursorLibrary cursorLibraryWithContentsOfURL:fileURL];
-        
+
         if ([library.identifier isEqualToString:applied]) {
             self.appliedTheme = library;
         }
-        
+
         [self addTheme:library];
     }
-    
+
     [self.undoManager enableUndoRegistration];
 }
 
@@ -85,7 +85,7 @@
 
 - (void)importTheme:(MACCursorLibrary *)lib {
     lib.identifier = [MACCursorLibrary sanitizeName:lib.name];
-    
+
     NSSet *existingIds = [self.themes valueForKeyPath:@"identifier"];
     if ([existingIds containsObject:lib.identifier]) {
         NSString *baseName = lib.name;
@@ -102,7 +102,7 @@
 
     lib.fileURL = [self URLForTheme:lib];
     [lib writeToFile:lib.fileURL.path atomically:NO];
-    
+
     [self addTheme:lib];
 }
 
@@ -127,7 +127,7 @@
     if (!self.undoManager.isUndoing) {
         [self.undoManager setActionName:[@"Add " stringByAppendingString:theme.name ?: @"Theme"]];
     }
-    
+
     [self didChangeValueForKey:@"themes" withSetMutation:NSKeyValueUnionSetMutation usingObjects:change];
 
     [theme.undoManager removeAllActions];
@@ -135,19 +135,19 @@
 
 - (void)removeTheme:(MACCursorLibrary *)theme {
     NSSet *change = [NSSet setWithObject:theme];
-    
+
     [self willChangeValueForKey:@"themes" withSetMutation:NSKeyValueMinusSetMutation usingObjects:change];
     if (theme == self.appliedTheme)
         [self restoreTheme];
 
     if (theme.library == self)
         theme.library = nil;
-    
+
     [self.themes removeObject:theme];
-    
+
     NSFileManager *manager = [NSFileManager defaultManager];
     NSURL *destinationURL = [NSURL fileURLWithPath:[[@"~/.Trash" stringByExpandingTildeInPath] stringByAppendingPathComponent:theme.fileURL.lastPathComponent] isDirectory:NO];
-    
+
     [manager removeItemAtURL:destinationURL error:NULL];
     [manager moveItemAtURL:theme.fileURL toURL:destinationURL error:NULL];
 
@@ -155,7 +155,7 @@
     if (!self.undoManager.isUndoing) {
         [self.undoManager setActionName:[@"Remove " stringByAppendingString:theme.name ?: @"Theme"]];
     }
-    
+
     [self didChangeValueForKey:@"themes" withSetMutation:NSKeyValueMinusSetMutation usingObjects:change];
 }
 

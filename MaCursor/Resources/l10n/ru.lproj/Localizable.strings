@@ -13,145 +13,145 @@
 "%lld × %lld" = "%1$lld × %2$lld";
 
 /* Format: cursor count in theme */
-"%lld cursors" = "%lld cursors";
+"%lld cursors" = "%lld курсоров";
 
 /* Format: additional cursor count overflow */
 "+%lld" = "+%lld";
 
 /* Settings tab title */
-"About" = "About";
+"About" = "О программе";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "О программе MaCursor";
 
 /* Undo: add cursor */
-"Add Cursor" = "Add Cursor";
+"Add Cursor" = "Добавить курсор";
 
 /* Button: add shortcut slot */
-"Add shortcut slot" = "Add shortcut slot";
+"Add shortcut slot" = "Добавить ячейку для сочетания клавиш";
 
 /* Button: add new theme */
-"Add Theme" = "Add Theme";
+"Add Theme" = "Добавить тему";
 
 /* Section: animation settings */
-"Animation" = "Animation";
+"Animation" = "Анимация";
 
 /* Label: appearance picker */
-"Appearance" = "Appearance";
+"Appearance" = "Оформление";
 
 /* Badge: theme is applied */
-"Applied" = "Applied";
+"Applied" = "Применено";
 
 /* Context menu: apply theme */
-"Apply" = "Apply";
+"Apply" = "Применить";
 
 
 /* Label: theme creator */
-"Creator" = "Creator";
+"Creator" = "Автор";
 
 /* Label: theme creator (with colon) */
-"Creator:" = "Creator:";
+"Creator:" = "Автор:";
 
 
 /* Format: theme subtitle (creator and version) */
-"by %@ • v%.1f" = "by %1$@ • v%2$.1f";
+"by %@ • v%.1f" = "от %1$@ • v%2$.1f";
 
 /* Button: cancel action */
-"Cancel" = "Cancel";
+"Cancel" = "Отменить";
 
 /* Undo: change theme creator */
-"Change Creator" = "Change Creator";
+"Change Creator" = "Изменить автора";
 
 /* Undo: change theme HiDPI */
-"Change HiDPI" = "Change HiDPI";
+"Change HiDPI" = "Изменить HiDPI";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Change Identifier";
+"Change Identifier" = "Изменить идентификатор";
 
 /* Undo: change theme name */
-"Change Name" = "Change Name";
+"Change Name" = "Изменить имя";
 
 /* Undo: change theme version */
-"Change Version" = "Change Version";
+"Change Version" = "Изменить версию";
 
 /* Placeholder: no cursor selected */
-"Choose a cursor from the list to edit its properties." = "Choose a cursor from the list to edit its properties.";
+"Choose a cursor from the list to edit its properties." = "Выберите курсор из списка, чтобы изменить его свойства.";
 
 /* Placeholder: no theme selected */
-"Choose a cursor theme from the sidebar to view its cursors." = "Choose a cursor theme from the sidebar to view its cursors.";
+"Choose a cursor theme from the sidebar to view its cursors." = "Выберите тему курсора в боковой панели, чтобы просмотреть её курсоры.";
 
 /* Import panel description */
-"Choose cursor theme files to import (.cursor)" = "Choose cursor theme files to import (.cursor)";
+"Choose cursor theme files to import (.cursor)" = "Выберите файлы тем курсоров для импорта (.cursor)";
 
 /* Button: close window */
-"Close" = "Close";
+"Close" = "Закрыть";
 
 /* About: copyright notice */
-"Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
+"Copyright © %@ Writronic. All rights reserved." = "© %@ Writronic. Все права защищены.";
 
 /* Section: cursor settings */
-"Cursor" = "Cursor";
+"Cursor" = "Курсор";
 
 /* Label: cursor scale slider */
-"Cursor Scale" = "Cursor Scale";
+"Cursor Scale" = "Масштаб курсора";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Cursor Theme";
+"Cursor Theme" = "Тема курсора";
 
 /* Undo suffix: cursor type */
-"cursor type" = "cursor type";
+"cursor type" = "тип курсора";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Cursor Type:";
+"Cursor Type:" = "Тип курсора:";
 
 /* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
+"Custom cursor themes for macOS" = "Пользовательские темы курсоров для macOS";
 
 /* Appearance mode: dark */
-"Dark" = "Dark";
+"Dark" = "Тёмное";
 
 /* Button: delete cursor */
-"Delete" = "Delete";
+"Delete" = "Удалить";
 
 /* Undo suffix: dimensions */
-"dimensions" = "dimensions";
+"dimensions" = "размеры";
 
 /* Button: discard changes */
-"Discard" = "Discard";
+"Discard" = "Не сохранять";
 
 
 /* Label: drop zone */
-"Drop" = "Drop";
+"Drop" = "Перетащите";
 
 /* Button: duplicate cursor */
-"Duplicate" = "Duplicate";
+"Duplicate" = "Дублировать";
 
 /* Button: edit theme */
-"Edit" = "Edit";
+"Edit" = "Редактировать";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edit Theme";
+"Edit Theme" = "Изменить тему";
 
 /* Error: write failure */
-"Error writing cursor theme to disk." = "Error writing cursor theme to disk.";
+"Error writing cursor theme to disk." = "Ошибка записи темы курсора на диск.";
 
 /* Error: theme file creation failure */
-"Failed to create cursor theme file" = "Failed to create cursor theme file";
+"Failed to create cursor theme file" = "Не удалось создать файл темы курсора";
 
 /* Undo suffix: frame count */
-"frame count" = "frame count";
+"frame count" = "количество кадров";
 
 /* Label: frame count */
-"Frame Count:" = "Frame Count:";
+"Frame Count:" = "Количество кадров:";
 
 /* Undo suffix: frame duration */
-"frame duration" = "frame duration";
+"frame duration" = "длительность кадра";
 
 /* Label: frame duration */
-"Frame Duration:" = "Frame Duration:";
+"Frame Duration:" = "Длительность кадра:";
 
 /* Settings tab: general */
-"General" = "General";
+"General" = "Основные";
 
 /* About: license */
 "GPL-3.0" = "GPL-3.0";
@@ -160,211 +160,211 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Helper Not Found";
+"Helper Not Found" = "Вспомогательный инструмент не найден";
 
 /* Section: helper tool */
-"Helper Tool" = "Helper Tool";
+"Helper Tool" = "Вспомогательный инструмент";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Hot Spot";
+"Hot Spot" = "Активная точка";
 
 /* Undo suffix: hotspot */
-"hotspot" = "hotspot";
+"hotspot" = "активная точка";
 
 /* Button: import */
-"Import" = "Import";
+"Import" = "Импортировать";
 
 /* Menu: import theme */
-"Import Theme..." = "Import Theme...";
+"Import Theme..." = "Импортировать тему…";
 
 /* Button: install helper */
-"Install" = "Install";
+"Install" = "Установить";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Installed & Active";
+"Installed & Active" = "Установлен и активен";
 
 /* Section/Picker: language setting */
-"Language" = "Language";
+"Language" = "Язык";
 
 /* Button: dismiss restart prompt */
-"Later" = "Later";
+"Later" = "Позже";
 
 /* Appearance mode: light */
-"Light" = "Light";
+"Light" = "Светлое";
 
 /* App name */
 "MaCursor" = "MaCursor";
 
 /* Default cursor dump file name */
-"MaCursor Dump" = "MaCursor Dump";
+"MaCursor Dump" = "Дамп MaCursor";
 
 /* About: tagline */
-"Made with ❤️" = "Made with ❤️";
+"Made with ❤️" = "Сделано с ❤️";
 
 /* Error: duplicate cursor names */
-"Multiple cursors with the name(s): %@ exist." = "Multiple cursors with the name(s): %@ exist.";
+"Multiple cursors with the name(s): %@ exist." = "Существует несколько курсоров с именем (именами): %@.";
 
 /* Label: theme name */
-"Name:" = "Name:";
+"Name:" = "Имя:";
 
 /* Button: new theme */
-"New Theme" = "New Theme";
+"New Theme" = "Новая тема";
 
 /* Error: no file URL */
-"No file URL set." = "No file URL set.";
+"No file URL set." = "URL-адрес файла не указан.";
 
 /* Error: directory not found */
-"No path found for directory in domain." = "No path found for directory in domain.";
+"No path found for directory in domain." = "Не найден путь к каталогу в домене.";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "No Shortcuts";
+"No Shortcuts" = "Нет сочетаний клавиш";
 
 /* Placeholder: no theme selected */
-"None" = "None";
+"None" = "Нет";
 
 /* Helper status: not installed */
-"Not Installed" = "Not Installed";
+"Not Installed" = "Не установлен";
 
 /* Placeholder: shortcut instructions */
-"Press + to add a favorite cursor shortcut." = "Press + to add a favorite cursor shortcut.";
+"Press + to add a favorite cursor shortcut." = "Нажмите +, чтобы добавить сочетание клавиш для избранного курсора.";
 
 /* Button: recording shortcut */
-"Press shortcut…" = "Press shortcut…";
+"Press shortcut…" = "Нажмите сочетание клавиш…";
 
 /* Section: cursor preview */
-"Preview" = "Preview";
+"Preview" = "Предпросмотр";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Record Shortcut";
+"Record Shortcut" = "Записать сочетание клавиш";
 
 /* Tooltip: remove representation */
-"Remove %@ representation" = "Remove %@ representation";
+"Remove %@ representation" = "Удалить представление %@";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Remove Cursor";
+"Remove Cursor" = "Удалить курсор";
 
 /* Button: remove shortcut slot */
-"Remove selected slot" = "Remove selected slot";
+"Remove selected slot" = "Удалить выбранную ячейку";
 
 /* Section: cursor representations */
-"Representations" = "Representations";
+"Representations" = "Представления";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Requires Approval in System Settings";
+"Requires Approval in System Settings" = "Требуется подтверждение в Системных настройках";
 
 /* Button: reset settings */
-"Reset" = "Reset";
+"Reset" = "Сбросить";
 
 /* Description: reset button */
-"Reset all settings to default values (cannot be undone)" = "Reset all settings to default values (cannot be undone)";
+"Reset all settings to default values (cannot be undone)" = "Сбросить все настройки до значений по умолчанию (нельзя отменить)";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Reset All Settings?";
+"Reset All Settings?" = "Сбросить все настройки?";
 
 /* Section: reset settings */
-"Reset Settings" = "Reset Settings";
+"Reset Settings" = "Сброс настроек";
 
 /* Button: restart app */
-"Restart Now" = "Restart Now";
+"Restart Now" = "Перезапустить сейчас";
 
 /* Alert title: restart required */
-"Restart Required" = "Restart Required";
+"Restart Required" = "Требуется перезапуск";
 
 /* Button: restore cursors */
-"Restore" = "Restore";
+"Restore" = "Восстановить";
 
 /* Button: restore system cursors */
-"Restore system cursors" = "Restore system cursors";
+"Restore system cursors" = "Восстановить системные курсоры";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Restore System Cursors";
+"Restore System Cursors" = "Восстановить системные курсоры";
 
 /* Button: save theme */
-"Save" = "Save";
+"Save" = "Сохранить";
 
 /* Alert title: save failure */
-"Save failed" = "Save failed";
+"Save failed" = "Не удалось сохранить";
 
 /* Unit: seconds */
-"sec" = "sec";
+"sec" = "сек";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Select a Cursor";
+"Select a Cursor" = "Выберите курсор";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Select a Cursor Theme";
+"Select a Cursor Theme" = "Выберите тему курсора";
 
 /* Window title: settings */
-"Settings" = "Settings";
+"Settings" = "Настройки";
 
 /* Menu: open settings */
-"Settings..." = "Settings...";
+"Settings..." = "Настройки…";
 
 /* Settings tab: shortcut */
-"Shortcut" = "Shortcut";
+"Shortcut" = "Сочетания клавиш";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Для работы с сочетаниями клавиш необходимо установить вспомогательный инструмент. Его можно установить в разделе «Основные» → «Вспомогательный инструмент».";
 
 /* Context menu: show in Finder */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Показать в Finder";
 
 /* Label: cursor size */
-"Size:" = "Size:";
+"Size:" = "Размер:";
 
 /* Appearance mode: system */
-"System" = "System";
+"System" = "Системное";
 
 /* Language picker: system default */
-"System Default" = "System Default";
+"System Default" = "Системный язык";
 
 /* Alert message: cursor theme load failure */
-"The cursor theme could not be loaded." = "The cursor theme could not be loaded.";
+"The cursor theme could not be loaded." = "Не удалось загрузить тему курсора.";
 
 /* Error: destination not writable */
-"The destination, %@, is not writable." = "The destination, %@, is not writable.";
+"The destination, %@, is not writable." = "Папка назначения %@ недоступна для записи.";
 
 /* Alert message: language restart */
-"The language change will take effect after restarting MaCursor." = "The language change will take effect after restarting MaCursor.";
+"The language change will take effect after restarting MaCursor." = "Изменение языка вступит в силу после перезапуска MaCursor.";
 
 /* Section: theme settings */
-"Theme" = "Theme";
+"Theme" = "Тема";
 
 /* Label: theme name */
-"Theme Name" = "Theme Name";
+"Theme Name" = "Название темы";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Theme Not Found";
+"Theme Not Found" = "Тема не найдена";
 
 /* Alert message: reset confirmation */
-"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone.";
+"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "Это приведёт к удалению всех тем курсоров, восстановлению системных курсоров и сбросу всех настроек до значений по умолчанию. Это действие нельзя отменить.";
 
 /* Error: invalid directory */
-"Unable to create a cursor theme from the directory specified." = "Unable to create a cursor theme from the directory specified.";
+"Unable to create a cursor theme from the directory specified." = "Не удалось создать тему курсора из указанного каталога.";
 
 /* Button: uninstall helper */
-"Uninstall" = "Uninstall";
+"Uninstall" = "Удалить";
 
 /* Default creator */
-"Unknown" = "Unknown";
+"Unknown" = "Неизвестно";
 
 /* Default new theme name */
-"Unnamed" = "Unnamed";
+"Unnamed" = "Без названия";
 
 /* Alert title: unsaved changes */
-"Unsaved Changes" = "Unsaved Changes";
+"Unsaved Changes" = "Несохранённые изменения";
 
 /* About: version label */
-"Version %@" = "Version %@";
+"Version %@" = "Версия %@";
 
 /* Label: theme version */
-"Version:" = "Version:";
+"Version:" = "Версия:";
 
 /* Link: website */
-"Visit Website" = "Visit Website";
+"Visit Website" = "Посетить сайт";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -373,4 +373,28 @@
 "Y:" = "Y:";
 
 /* Alert message: unsaved changes */
-"Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+"Your changes will be discarded if you don't save them." = "Если не сохранить изменения, они будут потеряны.";
+
+/* Toggle: hide Tahoe-specific cursor variants */
+"Hide Tahoe cursors" = "Скрывать курсоры Tahoe";
+
+/* Caption: Hide Tahoe cursors explanation */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "Если включено, варианты курсора для Tahoe (ArrowS, IBeamS) скрываются. При удалении курсора также удаляется его аналог в Tahoe.";
+
+/* Picker: mouse handedness */
+"Mouse Hand" = "Рука для мыши";
+
+/* Mouse Hand option: left-handed */
+"Left Hand" = "Левая рука";
+
+/* Mouse Hand option: right-handed */
+"Right Hand" = "Правая рука";
+
+/* Section: software updates */
+"Software Updates" = "Обновления ПО";
+
+/* Toggle: automatically check for updates */
+"Automatically check for updates" = "Автоматически проверять обновления";
+
+/* Menu: check for updates (Sparkle) */
+"Check for Updates…" = "Проверить наличие обновлений…";

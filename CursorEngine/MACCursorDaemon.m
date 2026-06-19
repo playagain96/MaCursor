@@ -28,10 +28,10 @@ static void forceCursorVisualRefresh(void) {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSPoint loc = [NSEvent mouseLocation];
         NSRect windowRect = NSMakeRect(loc.x, loc.y, 1, 1);
-        
-        NSWindow *invisibleWindow = [[NSWindow alloc] initWithContentRect:windowRect 
-                                                                styleMask:NSWindowStyleMaskBorderless 
-                                                                  backing:NSBackingStoreBuffered 
+
+        NSWindow *invisibleWindow = [[NSWindow alloc] initWithContentRect:windowRect
+                                                                styleMask:NSWindowStyleMaskBorderless
+                                                                  backing:NSBackingStoreBuffered
                                                                     defer:NO];
         [invisibleWindow setReleasedWhenClosed:NO];
         [invisibleWindow setOpaque:NO];
@@ -39,14 +39,14 @@ static void forceCursorVisualRefresh(void) {
         [invisibleWindow setIgnoresMouseEvents:NO];
         [invisibleWindow setLevel:NSFloatingWindowLevel];
         [invisibleWindow setHasShadow:NO];
-        
+
         [invisibleWindow orderFront:nil];
-        
+
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(MACWindowDismissDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [invisibleWindow close];
         });
     });
-    
+
     MMLog(BOLD CYAN "Forcing visual refresh via Invisible Window trick" RESET);
 }
 
@@ -66,27 +66,27 @@ static OSStatus hotKeyEventHandler(EventHandlerCallRef nextHandler,
         MMLog(BOLD RED "Failed to get hotkey ID from event: %d" RESET, (int)err);
         return err;
     }
-    
+
     if (hotKeyID.signature != kMACHotKeySignature) {
         return eventNotHandledErr;
     }
-    
+
     NSString *themeId = sRegisteredThemes[@(hotKeyID.id)];
     if (!themeId) {
         MMLog(BOLD YELLOW "Hotkey %u fired but no theme mapping found" RESET, hotKeyID.id);
         return eventNotHandledErr;
     }
-    
+
     NSString *path = themePathForIdentifier(themeId);
     MMLog(BOLD GREEN "Hotkey %u fired, applying theme: %s" RESET,
           hotKeyID.id, [themeId UTF8String]);
-    
+
     if (!applyThemeAtPath(path)) {
         MMLog(BOLD RED "Failed to apply theme for hotkey %u" RESET, hotKeyID.id);
     } else {
         forceCursorVisualRefresh();
     }
-    
+
     return noErr;
 }
 
@@ -94,11 +94,11 @@ static OSStatus hotKeyEventHandler(EventHandlerCallRef nextHandler,
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 static void installCarbonEventHandlerIfNeeded(void) {
     if (sHandlerInstalled) return;
-    
+
     EventTypeSpec eventType;
     eventType.eventClass = kEventClassKeyboard;
     eventType.eventKind = kEventHotKeyPressed;
-    
+
     OSStatus err = InstallEventHandler(GetApplicationEventTarget(),
                                         NewEventHandlerUPP(hotKeyEventHandler),
                                         1,
@@ -109,7 +109,7 @@ static void installCarbonEventHandlerIfNeeded(void) {
         MMLog(BOLD RED "Failed to install Carbon event handler: %d" RESET, (int)err);
         return;
     }
-    
+
     sHandlerInstalled = YES;
     MMLog(BOLD CYAN "Carbon hotkey event handler installed" RESET);
 }
@@ -126,7 +126,7 @@ static UInt32 carbonModifiersFromNSModifiers(NSUInteger nsModFlags) {
 
 void unregisterAllHotKeys(void) {
     if (!sRegisteredRefs || sRegisteredRefs.count == 0) return;
-    
+
     for (NSValue *refValue in sRegisteredRefs) {
         EventHotKeyRef ref = (EventHotKeyRef)[refValue pointerValue];
         OSStatus err = UnregisterEventHotKey(ref);
@@ -134,7 +134,7 @@ void unregisterAllHotKeys(void) {
             MMLog(BOLD YELLOW "Warning: UnregisterEventHotKey returned %d" RESET, (int)err);
         }
     }
-    
+
     MMLog(BOLD CYAN "Unregistered %lu hotkeys" RESET, (unsigned long)sRegisteredRefs.count);
     [sRegisteredRefs removeAllObjects];
     [sRegisteredThemes removeAllObjects];
@@ -143,17 +143,17 @@ void unregisterAllHotKeys(void) {
 void registerHotKeysFromPreferences(void) {
     if (!sRegisteredThemes) sRegisteredThemes = [NSMutableDictionary new];
     if (!sRegisteredRefs) sRegisteredRefs = [NSMutableArray new];
-    
+
     installCarbonEventHandlerIfNeeded();
-    
+
     id rawValue = (__bridge_transfer id)CFPreferencesCopyAppValue(
         CFSTR("MACFavoriteCursors"), CFSTR("com.writronic.MaCursor"));
-    
+
     if (!rawValue) {
         MMLog(BOLD YELLOW "No MACFavoriteCursors found in preferences" RESET);
         return;
     }
-    
+
     NSData *jsonData = nil;
     if ([rawValue isKindOfClass:[NSData class]]) {
         jsonData = (NSData *)rawValue;
@@ -162,7 +162,7 @@ void registerHotKeysFromPreferences(void) {
               [NSStringFromClass([rawValue class]) UTF8String]);
         return;
     }
-    
+
     NSError *jsonError = nil;
     NSArray *slots = [NSJSONSerialization JSONObjectWithData:jsonData
                                                     options:0
@@ -172,57 +172,57 @@ void registerHotKeysFromPreferences(void) {
               [jsonError.localizedDescription UTF8String]);
         return;
     }
-    
+
     NSUInteger registered = 0;
-    
+
     for (NSUInteger i = 0; i < slots.count; i++) {
         NSDictionary *slot = slots[i];
         if (![slot isKindOfClass:[NSDictionary class]]) continue;
-        
+
         NSString *themeId = slot[@"themeIdentifier"];
         if (!themeId || ![themeId isKindOfClass:[NSString class]]) continue;
-        
+
         NSDictionary *shortcut = slot[@"shortcut"];
         if (!shortcut || ![shortcut isKindOfClass:[NSDictionary class]]) continue;
-        
+
         NSNumber *keyCodeNum = shortcut[@"keyCode"];
         NSNumber *modFlagsNum = shortcut[@"modifierFlagsRaw"];
         if (!keyCodeNum || !modFlagsNum) continue;
-        
+
         UInt32 keyCode = [keyCodeNum unsignedIntValue];
         NSUInteger nsModFlags = [modFlagsNum unsignedIntegerValue];
-        
+
         UInt32 carbonMods = carbonModifiersFromNSModifiers(nsModFlags);
-        
+
         UInt32 hotkeyIndex = (UInt32)(i + 1);
-        
+
         EventHotKeyID hotKeyID;
         hotKeyID.signature = kMACHotKeySignature;
         hotKeyID.id = hotkeyIndex;
-        
+
         EventHotKeyRef hotKeyRef = NULL;
-        
+
         OSStatus err = RegisterEventHotKey(keyCode,
                                             carbonMods,
                                             hotKeyID,
                                             GetApplicationEventTarget(),
                                             0,
                                             &hotKeyRef);
-        
+
         if (err != noErr) {
             MMLog(BOLD RED "RegisterEventHotKey failed for slot %lu (key=%u, mods=0x%X): error %d" RESET,
                   (unsigned long)i, keyCode, carbonMods, (int)err);
             continue;
         }
-        
+
         sRegisteredThemes[@(hotkeyIndex)] = themeId;
         [sRegisteredRefs addObject:[NSValue valueWithPointer:hotKeyRef]];
         registered++;
-        
+
         MMLog(BOLD GREEN "Registered hotkey %u: key=%u carbonMods=0x%X → %s" RESET,
               hotkeyIndex, keyCode, carbonMods, [themeId UTF8String]);
     }
-    
+
     MMLog(BOLD CYAN "Registered %lu hotkeys from preferences" RESET, (unsigned long)registered);
 }
 
@@ -235,23 +235,23 @@ NSString *appliedThemePathForUser(NSString *user) {
 
 static void UserSpaceChanged(SCDynamicStoreRef	store, CFArrayRef changedKeys, void *info) {
     CFStringRef currentConsoleUser = SCDynamicStoreCopyConsoleUser(store, NULL, NULL);
-    
+
     MMLog("Current user is %s", [(__bridge NSString *)currentConsoleUser UTF8String]);
-    
+
     if (!currentConsoleUser) return;
     if (CFEqual(currentConsoleUser, CFSTR("loginwindow"))) {
         CFRelease(currentConsoleUser);
         return;
     }
-    
+
     NSString *appliedPath = appliedThemePathForUser((__bridge NSString *)currentConsoleUser);
     MMLog(BOLD GREEN "User Space Changed to %s, applying cursor theme..." RESET, [(__bridge NSString *)currentConsoleUser UTF8String]);
     if (!applyThemeAtPath(appliedPath)) {
         MMLog(BOLD RED "Application of cursor theme failed" RESET);
     }
-    
+
     setCursorScale(defaultCursorScale());
-    
+
     CFRelease(currentConsoleUser);
 }
 
@@ -317,14 +317,14 @@ void listener(void) {
         MMLog(BOLD RED "Failed to create SCDynamicStore" RESET);
         return;
     }
-    
+
     CFStringRef key = SCDynamicStoreKeyCreateConsoleUser(NULL);
     if (!key) {
         MMLog(BOLD RED "Failed to create console user key" RESET);
         CFRelease(store);
         return;
     }
-    
+
     CFArrayRef keys = CFArrayCreate(NULL, (const void **)&key, 1, &kCFTypeArrayCallBacks);
     if (!keys) {
         MMLog(BOLD RED "Failed to create notification keys array" RESET);
@@ -332,7 +332,7 @@ void listener(void) {
         CFRelease(store);
         return;
     }
-    
+
     Boolean success = SCDynamicStoreSetNotificationKeys(store, keys, NULL);
     if (!success) {
         MMLog(BOLD RED "Failed to set notification keys" RESET);
@@ -341,12 +341,12 @@ void listener(void) {
         CFRelease(store);
         return;
     }
-    
+
     [NSApplication sharedApplication];
-    
+
     CGDisplayRegisterReconfigurationCallback(reconfigurationCallback, NULL);
     MMLog(BOLD CYAN "Listening for Display changes" RESET);
-    
+
     CFRunLoopSourceRef rls = SCDynamicStoreCreateRunLoopSource(NULL, store, 0);
     if (!rls) {
         MMLog(BOLD RED "Failed to create run loop source" RESET);
@@ -356,7 +356,7 @@ void listener(void) {
         return;
     }
     MMLog(BOLD CYAN "Listening for User changes" RESET);
-    
+
     NSString *systemDefaultPath = MACSystemDefaultCursorPath();
     if (![[NSFileManager defaultManager] fileExistsAtPath:systemDefaultPath]) {
         MMLog("Helper: Capturing system default cursors before first apply...");
@@ -365,7 +365,7 @@ void listener(void) {
 
     applyThemeAtPath(appliedThemePathForUser(NSUserName()));
     setCursorScale(defaultCursorScale());
-    
+
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserverForName:NSWorkspaceDidActivateApplicationNotification
         object:nil
@@ -374,9 +374,9 @@ void listener(void) {
             appActivationCallback(note);
         }];
     MMLog(BOLD CYAN "Listening for App activation changes" RESET);
-    
+
     registerHotKeysFromPreferences();
-    
+
     CFNotificationCenterAddObserver(
         CFNotificationCenterGetDistributedCenter(),
         NULL,
@@ -386,9 +386,9 @@ void listener(void) {
         CFNotificationSuspensionBehaviorDeliverImmediately
     );
     MMLog(BOLD CYAN "Listening for Shortcut config changes" RESET);
-    
+
     CFRunLoopAddSource(CFRunLoopGetCurrent(), rls, kCFRunLoopDefaultMode);
-    
+
     [NSApp run];
 
     CFRunLoopSourceInvalidate(rls);

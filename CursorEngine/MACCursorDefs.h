@@ -67,6 +67,7 @@ extern NSString *MMGet(NSString *prompt);
 extern CGError MACIsCursorRegistered(CGSConnectionID cid, char *cursorName, bool *registered);
 extern BOOL MACCursorIsPointer(NSString *identifier);
 extern NSArray * _Nullable MACTahoeCursorAliasesForIdentifier(NSString *identifier);
+extern NSArray * _Nullable MACBrowserCursorAliasesForIdentifier(NSString *identifier);
 extern BOOL MACIsTahoeOrLater(void);
 extern BOOL MACCaptureSystemDefaults(NSString *outputPath);
 extern BOOL MACPerformCursorCapture(NSString *outputPath);

@@ -8,21 +8,21 @@ import Observation
 class LibraryViewModel {
     var cursorThemes: [CursorThemeModel] = []
     var appliedThemeId: String?
-    
+
     private let backingController: LibraryController
     private nonisolated(unsafe) var didSaveObserver: Any?
     private nonisolated(unsafe) var identifierChangeObserver: Any?
-    
+
     init() {
         let cursorsPath = (try? FileManager.default.findOrCreateDirectory(
             .applicationSupportDirectory,
             in: .userDomainMask,
             appendPathComponent: "MaCursor/cursors"
         )) ?? ""
-        
+
         backingController = LibraryController(url: URL(fileURLWithPath: cursorsPath))
         reload()
-        
+
         didSaveObserver = NotificationCenter.default.addObserver(
             forName: .cursorLibraryDidSave,
             object: nil,
@@ -32,7 +32,7 @@ class LibraryViewModel {
                 self?.reload()
             }
         }
-        
+
         identifierChangeObserver = NotificationCenter.default.addObserver(
             forName: .cursorLibraryIdentifierDidChange,
             object: nil,
@@ -48,7 +48,7 @@ class LibraryViewModel {
             }
         }
     }
-    
+
     deinit {
         if let observer = didSaveObserver {
             NotificationCenter.default.removeObserver(observer)
@@ -57,16 +57,16 @@ class LibraryViewModel {
             NotificationCenter.default.removeObserver(observer)
         }
     }
-    
-    
+
+
     func reload() {
         let appliedId = backingController.appliedTheme?.identifier
-        
+
         var existingByIdentity: [ObjectIdentifier: CursorThemeModel] = [:]
         for model in cursorThemes {
             existingByIdentity[ObjectIdentifier(model.backingLibrary)] = model
         }
-        
+
         cursorThemes = backingController.themes
             .map { lib -> CursorThemeModel in
                 let key = ObjectIdentifier(lib)
@@ -81,29 +81,29 @@ class LibraryViewModel {
                 }
             }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
-        
+
         appliedThemeId = appliedId
     }
-    
-    
+
+
     func theme(withId id: String?) -> CursorThemeModel? {
         guard let id else { return nil }
         return cursorThemes.first { $0.id == id }
     }
-    
-    
+
+
     func apply(_ cursorTheme: CursorThemeModel) {
         let success = CursorService.applyTheme(from: cursorTheme.backingLibrary)
         guard success else { return }
-        
+
         backingController.appliedTheme = cursorTheme.backingLibrary
-        
+
         for c in cursorThemes {
             c.isApplied = (c.id == cursorTheme.id)
         }
         appliedThemeId = cursorTheme.id
     }
-    
+
     func restoreCursors() {
         backingController.restoreTheme()
         for c in cursorThemes {
@@ -111,7 +111,7 @@ class LibraryViewModel {
         }
         appliedThemeId = nil
     }
-    
+
     @discardableResult
     func addNewTheme() -> String {
         let newLib = CursorLibrary()
@@ -119,7 +119,7 @@ class LibraryViewModel {
         reload()
         return newLib.identifier
     }
-    
+
     func remove(_ cursorTheme: CursorThemeModel) {
         backingController.removeTheme(cursorTheme.backingLibrary)
         cursorThemes.removeAll { $0.id == cursorTheme.id }
@@ -127,17 +127,17 @@ class LibraryViewModel {
             appliedThemeId = nil
         }
     }
-    
+
     func removeAllThemes() {
         backingController.removeAllThemes()
         cursorThemes = []
         appliedThemeId = nil
     }
-    
+
     @discardableResult
     func duplicateTheme(_ cursorTheme: CursorThemeModel) -> String? {
         guard let copy = cursorTheme.backingLibrary.copy() as? CursorLibrary else { return nil }
-        
+
         let baseName = cursorTheme.name
         let existingNames = Set(cursorThemes.map { $0.name })
         var suffix = 2
@@ -150,18 +150,18 @@ class LibraryViewModel {
         copy.name = candidateName
         copy.identifier = CursorLibrary.updateIdentifier(copy.identifier, newName: candidateName)
         copy.undoManager.enableUndoRegistration()
-        
+
         backingController.importTheme(copy)
         reload()
         return copy.identifier
     }
-    
+
     func importTheme(at url: URL) {
         backingController.importTheme(at: url)
         reload()
     }
-    
-    
+
+
     func showImportPanel() {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [
@@ -171,22 +171,22 @@ class LibraryViewModel {
         panel.title = NSLocalizedString("Import", comment: "MaCursor Import Title")
         panel.message = NSLocalizedString("Choose cursor theme files to import (.cursor)", comment: "MaCursor Import description")
         panel.prompt = NSLocalizedString("Import", comment: "MaCursor Import Prompt")
-        
+
         if panel.runModal() == .OK {
             for url in panel.urls where url.pathExtension.lowercased() == "cursor" {
                 importTheme(at: url)
             }
         }
     }
-    
-    
+
+
     func handleDrop(_ providers: [NSItemProvider]) -> Bool {
         let _ = Task { @MainActor [weak self] in
             for provider in providers {
                 if let item = try? await provider.loadItem(forTypeIdentifier: "public.file-url", options: nil),
                    let data = item as? Data,
                    let url = URL(dataRepresentation: data, relativeTo: nil) {
-                    
+
                     if url.pathExtension.lowercased() == "cursor" {
                         self?.importTheme(at: url)
                     }
@@ -195,8 +195,8 @@ class LibraryViewModel {
         }
         return true
     }
-    
-    
+
+
     nonisolated func dumpCursors(progress: @Sendable @escaping (UInt, UInt) -> Bool, completion: @MainActor @Sendable @escaping () -> Void) {
         DispatchQueue.global(qos: .background).async { [backingController] in
             let _ = backingController.dumpCursors { current, total in

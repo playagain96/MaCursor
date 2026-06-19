@@ -1,7 +1,7 @@
 import AppKit
 
 extension NSBitmapImageRep {
-    
+
     var retaggedSRGBSpace: NSBitmapImageRep {
         var targetSpace = NSColorSpace.sRGB
         if colorSpace.numberOfColorComponents == 1 {
@@ -9,7 +9,7 @@ extension NSBitmapImageRep {
         }
         return retagging(with: targetSpace) ?? self
     }
-    
+
     var ensuredSRGBSpace: NSBitmapImageRep {
         var targetSpace = NSColorSpace.sRGB
         if colorSpace.numberOfColorComponents == 1 {

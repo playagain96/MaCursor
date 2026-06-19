@@ -1,14 +1,14 @@
 import Foundation
 
 extension FileManager {
-    
+
     @objc func findOrCreateDirectory(
         _ searchPathDirectory: FileManager.SearchPathDirectory,
         in domainMask: FileManager.SearchPathDomainMask,
         appendPathComponent appendComponent: String?
     ) throws -> String {
         let paths = NSSearchPathForDirectoriesInDomains(searchPathDirectory, domainMask, true)
-        
+
         guard var resolvedPath = paths.first else {
             throw NSError(
                 domain: "DirectoryLocationDomain",
@@ -23,16 +23,16 @@ extension FileManager {
                 ]
             )
         }
-        
+
         if let appendComponent, !appendComponent.isEmpty {
             resolvedPath = (resolvedPath as NSString).appendingPathComponent(appendComponent)
         }
-        
+
         try createDirectory(atPath: resolvedPath, withIntermediateDirectories: true, attributes: nil)
-        
+
         return resolvedPath
     }
-    
+
     @objc var applicationSupportDirectory: String {
         let executableName = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String ?? "MaCursor"
         do {

@@ -13,145 +13,145 @@
 "%lld × %lld" = "%1$lld × %2$lld";
 
 /* Format: cursor count in theme */
-"%lld cursors" = "%lld cursors";
+"%lld cursors" = "%lld مؤشر";
 
 /* Format: additional cursor count overflow */
 "+%lld" = "+%lld";
 
 /* Settings tab title */
-"About" = "About";
+"About" = "نبذة";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "نبذة عن MaCursor";
 
 /* Undo: add cursor */
-"Add Cursor" = "Add Cursor";
+"Add Cursor" = "إضافة المؤشر";
 
 /* Button: add shortcut slot */
-"Add shortcut slot" = "Add shortcut slot";
+"Add shortcut slot" = "إضافة خانة اختصار";
 
 /* Button: add new theme */
-"Add Theme" = "Add Theme";
+"Add Theme" = "إضافة سمة";
 
 /* Section: animation settings */
-"Animation" = "Animation";
+"Animation" = "الرسوم المتحركة";
 
 /* Label: appearance picker */
-"Appearance" = "Appearance";
+"Appearance" = "المظهر";
 
 /* Badge: theme is applied */
-"Applied" = "Applied";
+"Applied" = "مُطبَّق";
 
 /* Context menu: apply theme */
-"Apply" = "Apply";
+"Apply" = "تطبيق";
 
 
 /* Label: theme creator */
-"Creator" = "Creator";
+"Creator" = "المُنشئ";
 
 /* Label: theme creator (with colon) */
-"Creator:" = "Creator:";
+"Creator:" = "المُنشئ:";
 
 
 /* Format: theme subtitle (creator and version) */
-"by %@ • v%.1f" = "by %1$@ • v%2$.1f";
+"by %@ • v%.1f" = "بواسطة %1$@ • v%2$.1f";
 
 /* Button: cancel action */
-"Cancel" = "Cancel";
+"Cancel" = "إلغاء";
 
 /* Undo: change theme creator */
-"Change Creator" = "Change Creator";
+"Change Creator" = "تغيير المُنشئ";
 
 /* Undo: change theme HiDPI */
-"Change HiDPI" = "Change HiDPI";
+"Change HiDPI" = "تغيير HiDPI";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Change Identifier";
+"Change Identifier" = "تغيير المُعرّف";
 
 /* Undo: change theme name */
-"Change Name" = "Change Name";
+"Change Name" = "تغيير الاسم";
 
 /* Undo: change theme version */
-"Change Version" = "Change Version";
+"Change Version" = "تغيير الإصدار";
 
 /* Placeholder: no cursor selected */
-"Choose a cursor from the list to edit its properties." = "Choose a cursor from the list to edit its properties.";
+"Choose a cursor from the list to edit its properties." = "اختر مؤشرًا من القائمة لتعديل خصائصه.";
 
 /* Placeholder: no theme selected */
-"Choose a cursor theme from the sidebar to view its cursors." = "Choose a cursor theme from the sidebar to view its cursors.";
+"Choose a cursor theme from the sidebar to view its cursors." = "اختر سمة مؤشر من الشريط الجانبي لعرض مؤشراتها.";
 
 /* Import panel description */
-"Choose cursor theme files to import (.cursor)" = "Choose cursor theme files to import (.cursor)";
+"Choose cursor theme files to import (.cursor)" = "اختر ملفات سمات المؤشر المراد استيرادها (.cursor)";
 
 /* Button: close window */
-"Close" = "Close";
+"Close" = "إغلاق";
 
 /* About: copyright notice */
-"Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
+"Copyright © %@ Writronic. All rights reserved." = "حقوق النشر © %@ Writronic. جميع الحقوق محفوظة.";
 
 /* Section: cursor settings */
-"Cursor" = "Cursor";
+"Cursor" = "المؤشر";
 
 /* Label: cursor scale slider */
-"Cursor Scale" = "Cursor Scale";
+"Cursor Scale" = "مقياس المؤشر";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Cursor Theme";
+"Cursor Theme" = "سمة المؤشر";
 
 /* Undo suffix: cursor type */
-"cursor type" = "cursor type";
+"cursor type" = "نوع المؤشر";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Cursor Type:";
+"Cursor Type:" = "نوع المؤشر:";
 
 /* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
+"Custom cursor themes for macOS" = "سمات مؤشر مخصصة لنظام macOS";
 
 /* Appearance mode: dark */
-"Dark" = "Dark";
+"Dark" = "داكن";
 
 /* Button: delete cursor */
-"Delete" = "Delete";
+"Delete" = "حذف";
 
 /* Undo suffix: dimensions */
-"dimensions" = "dimensions";
+"dimensions" = "الأبعاد";
 
 /* Button: discard changes */
-"Discard" = "Discard";
+"Discard" = "تجاهل";
 
 
 /* Label: drop zone */
-"Drop" = "Drop";
+"Drop" = "إفلات";
 
 /* Button: duplicate cursor */
-"Duplicate" = "Duplicate";
+"Duplicate" = "تكرار";
 
 /* Button: edit theme */
-"Edit" = "Edit";
+"Edit" = "تحرير";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edit Theme";
+"Edit Theme" = "تحرير السمة";
 
 /* Error: write failure */
-"Error writing cursor theme to disk." = "Error writing cursor theme to disk.";
+"Error writing cursor theme to disk." = "حدث خطأ أثناء كتابة سمة المؤشر على القرص.";
 
 /* Error: theme file creation failure */
-"Failed to create cursor theme file" = "Failed to create cursor theme file";
+"Failed to create cursor theme file" = "فشل إنشاء ملف سمة المؤشر";
 
 /* Undo suffix: frame count */
-"frame count" = "frame count";
+"frame count" = "عدد الإطارات";
 
 /* Label: frame count */
-"Frame Count:" = "Frame Count:";
+"Frame Count:" = "عدد الإطارات:";
 
 /* Undo suffix: frame duration */
-"frame duration" = "frame duration";
+"frame duration" = "مدة الإطار";
 
 /* Label: frame duration */
-"Frame Duration:" = "Frame Duration:";
+"Frame Duration:" = "مدة الإطار:";
 
 /* Settings tab: general */
-"General" = "General";
+"General" = "عام";
 
 /* About: license */
 "GPL-3.0" = "GPL-3.0";
@@ -160,211 +160,211 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Helper Not Found";
+"Helper Not Found" = "لم يتم العثور على الأداة المساعدة";
 
 /* Section: helper tool */
-"Helper Tool" = "Helper Tool";
+"Helper Tool" = "الأداة المساعدة";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Hot Spot";
+"Hot Spot" = "النقطة النشطة";
 
 /* Undo suffix: hotspot */
-"hotspot" = "hotspot";
+"hotspot" = "النقطة النشطة";
 
 /* Button: import */
-"Import" = "Import";
+"Import" = "استيراد";
 
 /* Menu: import theme */
-"Import Theme..." = "Import Theme...";
+"Import Theme..." = "استيراد السمة...";
 
 /* Button: install helper */
-"Install" = "Install";
+"Install" = "تثبيت";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Installed & Active";
+"Installed & Active" = "مُثبَّتة ونشطة";
 
 /* Section/Picker: language setting */
-"Language" = "Language";
+"Language" = "اللغة";
 
 /* Button: dismiss restart prompt */
-"Later" = "Later";
+"Later" = "لاحقًا";
 
 /* Appearance mode: light */
-"Light" = "Light";
+"Light" = "فاتح";
 
 /* App name */
 "MaCursor" = "MaCursor";
 
 /* Default cursor dump file name */
-"MaCursor Dump" = "MaCursor Dump";
+"MaCursor Dump" = "تفريغ MaCursor";
 
 /* About: tagline */
-"Made with ❤️" = "Made with ❤️";
+"Made with ❤️" = "صُنع بحب ❤️";
 
 /* Error: duplicate cursor names */
-"Multiple cursors with the name(s): %@ exist." = "Multiple cursors with the name(s): %@ exist.";
+"Multiple cursors with the name(s): %@ exist." = "توجد مؤشرات متعددة تحمل الاسم (الأسماء): %@.";
 
 /* Label: theme name */
-"Name:" = "Name:";
+"Name:" = "الاسم:";
 
 /* Button: new theme */
-"New Theme" = "New Theme";
+"New Theme" = "سمة جديدة";
 
 /* Error: no file URL */
-"No file URL set." = "No file URL set.";
+"No file URL set." = "لم يتم تعيين عنوان URL للملف.";
 
 /* Error: directory not found */
-"No path found for directory in domain." = "No path found for directory in domain.";
+"No path found for directory in domain." = "لم يتم العثور على مسار للدليل في المجال.";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "No Shortcuts";
+"No Shortcuts" = "لا توجد اختصارات";
 
 /* Placeholder: no theme selected */
-"None" = "None";
+"None" = "لا شيء";
 
 /* Helper status: not installed */
-"Not Installed" = "Not Installed";
+"Not Installed" = "غير مُثبَّتة";
 
 /* Placeholder: shortcut instructions */
-"Press + to add a favorite cursor shortcut." = "Press + to add a favorite cursor shortcut.";
+"Press + to add a favorite cursor shortcut." = "اضغط + لإضافة اختصار مؤشر مفضّل.";
 
 /* Button: recording shortcut */
-"Press shortcut…" = "Press shortcut…";
+"Press shortcut…" = "اضغط الاختصار…";
 
 /* Section: cursor preview */
-"Preview" = "Preview";
+"Preview" = "معاينة";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Record Shortcut";
+"Record Shortcut" = "تسجيل الاختصار";
 
 /* Tooltip: remove representation */
-"Remove %@ representation" = "Remove %@ representation";
+"Remove %@ representation" = "إزالة تمثيل %@";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Remove Cursor";
+"Remove Cursor" = "إزالة المؤشر";
 
 /* Button: remove shortcut slot */
-"Remove selected slot" = "Remove selected slot";
+"Remove selected slot" = "إزالة الخانة المحددة";
 
 /* Section: cursor representations */
-"Representations" = "Representations";
+"Representations" = "التمثيلات";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Requires Approval in System Settings";
+"Requires Approval in System Settings" = "يتطلب الموافقة في إعدادات النظام";
 
 /* Button: reset settings */
-"Reset" = "Reset";
+"Reset" = "إعادة تعيين";
 
 /* Description: reset button */
-"Reset all settings to default values (cannot be undone)" = "Reset all settings to default values (cannot be undone)";
+"Reset all settings to default values (cannot be undone)" = "إعادة تعيين جميع الإعدادات إلى القيم الافتراضية (لا يمكن التراجع عنها)";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Reset All Settings?";
+"Reset All Settings?" = "إعادة تعيين جميع الإعدادات؟";
 
 /* Section: reset settings */
-"Reset Settings" = "Reset Settings";
+"Reset Settings" = "إعادة تعيين الإعدادات";
 
 /* Button: restart app */
-"Restart Now" = "Restart Now";
+"Restart Now" = "إعادة التشغيل الآن";
 
 /* Alert title: restart required */
-"Restart Required" = "Restart Required";
+"Restart Required" = "يلزم إعادة التشغيل";
 
 /* Button: restore cursors */
-"Restore" = "Restore";
+"Restore" = "استعادة";
 
 /* Button: restore system cursors */
-"Restore system cursors" = "Restore system cursors";
+"Restore system cursors" = "استعادة مؤشرات النظام";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Restore System Cursors";
+"Restore System Cursors" = "استعادة مؤشرات النظام";
 
 /* Button: save theme */
-"Save" = "Save";
+"Save" = "حفظ";
 
 /* Alert title: save failure */
-"Save failed" = "Save failed";
+"Save failed" = "فشل الحفظ";
 
 /* Unit: seconds */
-"sec" = "sec";
+"sec" = "ث";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Select a Cursor";
+"Select a Cursor" = "اختر مؤشرًا";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Select a Cursor Theme";
+"Select a Cursor Theme" = "اختر سمة مؤشر";
 
 /* Window title: settings */
-"Settings" = "Settings";
+"Settings" = "الإعدادات";
 
 /* Menu: open settings */
-"Settings..." = "Settings...";
+"Settings..." = "الإعدادات...";
 
 /* Settings tab: shortcut */
-"Shortcut" = "Shortcut";
+"Shortcut" = "اختصار";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "تتطلب الاختصارات تثبيت «الأداة المساعدة». يمكنك تثبيتها من «عام» ← «الأداة المساعدة».";
 
 /* Context menu: show in Finder */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "عرض في Finder";
 
 /* Label: cursor size */
-"Size:" = "Size:";
+"Size:" = "الحجم:";
 
 /* Appearance mode: system */
-"System" = "System";
+"System" = "النظام";
 
 /* Language picker: system default */
-"System Default" = "System Default";
+"System Default" = "افتراضي النظام";
 
 /* Alert message: cursor theme load failure */
-"The cursor theme could not be loaded." = "The cursor theme could not be loaded.";
+"The cursor theme could not be loaded." = "تعذّر تحميل سمة المؤشر.";
 
 /* Error: destination not writable */
-"The destination, %@, is not writable." = "The destination, %@, is not writable.";
+"The destination, %@, is not writable." = "الوجهة، %@، غير قابلة للكتابة.";
 
 /* Alert message: language restart */
-"The language change will take effect after restarting MaCursor." = "The language change will take effect after restarting MaCursor.";
+"The language change will take effect after restarting MaCursor." = "سيصبح تغيير اللغة ساري المفعول بعد إعادة تشغيل MaCursor.";
 
 /* Section: theme settings */
-"Theme" = "Theme";
+"Theme" = "السمة";
 
 /* Label: theme name */
-"Theme Name" = "Theme Name";
+"Theme Name" = "اسم السمة";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Theme Not Found";
+"Theme Not Found" = "لم يتم العثور على السمة";
 
 /* Alert message: reset confirmation */
-"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone.";
+"This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "سيؤدي هذا إلى إزالة جميع سمات المؤشر، واستعادة مؤشرات النظام، وإعادة تعيين كل تفضيل إلى قيمته الافتراضية. لا يمكن التراجع عن هذا الإجراء.";
 
 /* Error: invalid directory */
-"Unable to create a cursor theme from the directory specified." = "Unable to create a cursor theme from the directory specified.";
+"Unable to create a cursor theme from the directory specified." = "تعذّر إنشاء سمة مؤشر من الدليل المحدد.";
 
 /* Button: uninstall helper */
-"Uninstall" = "Uninstall";
+"Uninstall" = "إزالة";
 
 /* Default creator */
-"Unknown" = "Unknown";
+"Unknown" = "غير معروف";
 
 /* Default new theme name */
-"Unnamed" = "Unnamed";
+"Unnamed" = "بلا اسم";
 
 /* Alert title: unsaved changes */
-"Unsaved Changes" = "Unsaved Changes";
+"Unsaved Changes" = "تغييرات غير محفوظة";
 
 /* About: version label */
-"Version %@" = "Version %@";
+"Version %@" = "الإصدار %@";
 
 /* Label: theme version */
-"Version:" = "Version:";
+"Version:" = "الإصدار:";
 
 /* Link: website */
-"Visit Website" = "Visit Website";
+"Visit Website" = "زيارة الموقع الإلكتروني";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -373,4 +373,28 @@
 "Y:" = "Y:";
 
 /* Alert message: unsaved changes */
-"Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+"Your changes will be discarded if you don't save them." = "سيتم تجاهل تغييراتك إذا لم تحفظها.";
+
+/* Toggle: hide Tahoe-specific cursor variants */
+"Hide Tahoe cursors" = "إخفاء مؤشرات Tahoe";
+
+/* Caption: Hide Tahoe cursors explanation */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "عند التمكين، يتم إخفاء أشكال المؤشر الخاصة بـ Tahoe (ArrowS، IBeamS). كما أن إزالة أحد المؤشرات ستؤدي إلى إزالة نظيره من Tahoe أيضًا.";
+
+/* Picker: mouse handedness */
+"Mouse Hand" = "يد الماوس";
+
+/* Mouse Hand option: left-handed */
+"Left Hand" = "اليد اليسرى";
+
+/* Mouse Hand option: right-handed */
+"Right Hand" = "اليد اليمنى";
+
+/* Section: software updates */
+"Software Updates" = "تحديثات البرامج";
+
+/* Toggle: automatically check for updates */
+"Automatically check for updates" = "التحقق من التحديثات تلقائيًا";
+
+/* Menu: check for updates (Sparkle) */
+"Check for Updates…" = "التحقق من وجود تحديثات…";

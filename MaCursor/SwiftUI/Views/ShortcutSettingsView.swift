@@ -4,25 +4,25 @@ struct KeyboardShortcutData: Codable, Hashable, Equatable {
     var keyCode: UInt16
     var modifierFlagsRaw: UInt
     var keyCharacter: String?
-    
+
     var modifierFlags: NSEvent.ModifierFlags {
         NSEvent.ModifierFlags(rawValue: modifierFlagsRaw)
     }
-    
+
     var displayString: String {
         var parts: [String] = []
         if modifierFlags.contains(.control) { parts.append("⌃") }
         if modifierFlags.contains(.option) { parts.append("⌥") }
         if modifierFlags.contains(.shift) { parts.append("⇧") }
         if modifierFlags.contains(.command) { parts.append("⌘") }
-        
+
         let keyStr: String
         if let char = keyCharacter, !char.isEmpty {
             keyStr = char == " " ? "Space" : char.uppercased()
         } else {
             keyStr = "?"
         }
-        
+
         parts.append(keyStr)
         return parts.joined()
     }
@@ -32,7 +32,7 @@ struct FavoriteCursorSlot: Identifiable, Codable, Hashable {
     let id: UUID
     var themeIdentifier: String?
     var shortcut: KeyboardShortcutData?
-    
+
     init(id: UUID = UUID(), themeIdentifier: String? = nil, shortcut: KeyboardShortcutData? = nil) {
         self.id = id
         self.themeIdentifier = themeIdentifier
@@ -42,11 +42,11 @@ struct FavoriteCursorSlot: Identifiable, Codable, Hashable {
 
 struct ShortcutSettingsView: View {
     @Environment(LibraryViewModel.self) private var library
-    
+
     @State private var helperManager = HelperToolManager.shared
     @State private var slots: [FavoriteCursorSlot] = []
     @State private var selectedSlotId: UUID?
-    
+
     var body: some View {
         VStack(spacing: 0) {
             if !helperManager.isInstalled {
@@ -54,7 +54,7 @@ struct ShortcutSettingsView: View {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundStyle(.yellow)
                         .font(.title3)
-                    
+
                     Text("Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool.")
                         .font(.callout)
                         .foregroundStyle(.secondary)
@@ -69,7 +69,7 @@ struct ShortcutSettingsView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 4)
             }
-            
+
             ScrollView {
                 LazyVStack(spacing: 8) {
                     if slots.isEmpty {
@@ -97,9 +97,9 @@ struct ShortcutSettingsView: View {
                 .padding(16)
             }
             .frame(maxHeight: .infinity)
-            
+
             Divider()
-            
+
             HStack(spacing: 4) {
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
@@ -113,7 +113,7 @@ struct ShortcutSettingsView: View {
                 }
                 .buttonStyle(.borderless)
                 .help("Add shortcut slot")
-                
+
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         if let selectedId = selectedSlotId {
@@ -129,7 +129,7 @@ struct ShortcutSettingsView: View {
                 .buttonStyle(.borderless)
                 .disabled(selectedSlotId == nil)
                 .help("Remove selected slot")
-                
+
                 Spacer()
             }
             .padding(.horizontal, 12)
@@ -142,8 +142,8 @@ struct ShortcutSettingsView: View {
         .onChange(of: slots) { _, _ in
         }
     }
-    
-    
+
+
     private func binding(for slot: FavoriteCursorSlot) -> Binding<FavoriteCursorSlot> {
         guard let index = slots.firstIndex(where: { $0.id == slot.id }) else {
             return .constant(slot)
@@ -156,8 +156,8 @@ struct ShortcutSettingsView: View {
             }
         )
     }
-    
-    
+
+
     private func loadSlots() {
         guard let data = MACPreferences.value(forKey: MACPreferences.favoriteCursorsKey) as? Data,
               let decoded = try? JSONDecoder().decode([FavoriteCursorSlot].self, from: data) else {
@@ -166,7 +166,7 @@ struct ShortcutSettingsView: View {
         }
         slots = decoded
     }
-    
+
     private func saveSlots() {
         guard let data = try? JSONEncoder().encode(slots) else { return }
         MACPreferences.set(data, forKey: MACPreferences.favoriteCursorsKey)
@@ -178,7 +178,7 @@ struct ShortcutSettingsView: View {
 final class ShortcutManager {
     static let shared = ShortcutManager()
     private init() {}
-    
+
     func notifyConfigChanged() {
         DistributedNotificationCenter.default().postNotificationName(
             .init("MACShortcutsDidChange"),
@@ -193,18 +193,18 @@ private struct SlotCardView: View {
     @Binding var slot: FavoriteCursorSlot
     let themes: [CursorThemeModel]
     let isSelected: Bool
-    
+
     var body: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text("Cursor Theme")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
-                
+
                 Picker("", selection: $slot.themeIdentifier) {
                     Text("None")
                         .tag(nil as String?)
-                    
+
                     ForEach(themes) { theme in
                         Text(theme.name)
                             .tag(theme.id as String?)
@@ -214,15 +214,15 @@ private struct SlotCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             Divider()
                 .frame(height: 32)
-            
+
             VStack(alignment: .center, spacing: 4) {
                 Text("Shortcut")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
-                
+
                 KeyRecorderView(shortcut: $slot.shortcut)
             }
             .frame(width: 145)
@@ -248,7 +248,7 @@ private struct KeyRecorderView: View {
     @Binding var shortcut: KeyboardShortcutData?
     @State private var isRecording: Bool = false
     @State private var eventMonitor: Any?
-    
+
     var body: some View {
         Button {
             if isRecording {
@@ -291,33 +291,33 @@ private struct KeyRecorderView: View {
             stopRecording()
         }
     }
-    
+
     private func startRecording() {
         isRecording = true
-        
+
         eventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
             let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
-            
+
             if event.keyCode == 53 {
                 stopRecording()
                 return nil
             }
-            
+
             if event.keyCode == 51 || event.keyCode == 117 {
                 shortcut = nil
                 stopRecording()
                 return nil
             }
-            
+
             let hasModifier = flags.contains(.command) || flags.contains(.control) || flags.contains(.option) || flags.contains(.shift)
             guard hasModifier else {
                 return nil
             }
-            
+
             if event.specialKey != nil {
                 return nil
             }
-            
+
             shortcut = KeyboardShortcutData(
                 keyCode: event.keyCode,
                 modifierFlagsRaw: flags.rawValue,
@@ -327,7 +327,7 @@ private struct KeyRecorderView: View {
             return nil
         }
     }
-    
+
     private func stopRecording() {
         isRecording = false
         if let eventMonitor {

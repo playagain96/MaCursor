@@ -6,7 +6,7 @@ enum MACCursorScaleValue: Int, CaseIterable {
     case x2   = 200
     case x5   = 500
     case x10  = 1000
-    
+
     static func from(scale: CGFloat) -> MACCursorScaleValue {
         guard scale >= 0 else { return .none }
         return MACCursorScaleValue(rawValue: Int(scale * 100)) ?? .none
@@ -14,20 +14,20 @@ enum MACCursorScaleValue: Int, CaseIterable {
 }
 
 enum MACConstants {
-    
-    
+
+
     static let errorDomain = "com.writronic.macursor.error"
-    
-    
+
+
     enum ErrorCode: Int {
         case invalidTheme             = -1
         case writeFail                = -2
         case invalidFormat            = -100
         case multipleCursorIdentifiers = -101
     }
-    
-    
-    
+
+
+
     static let cursorsKey        = "Cursors"
     static let creatorKey        = "Creator"
     static let hiDPIKey          = "HiDPI"
@@ -35,8 +35,8 @@ enum MACConstants {
     static let themeNameKey      = "ThemeName"
     static let themeVersionKey   = "ThemeVersion"
     static let uuidKey           = "UUID"
-    
-    
+
+
     static let frameCountKey       = "FrameCount"
     static let frameDurationKey    = "FrameDuration"
     static let hotSpotXKey         = "HotSpotX"
@@ -44,18 +44,18 @@ enum MACConstants {
     static let pointsWideKey       = "PointsWide"
     static let pointsHighKey       = "PointsHigh"
     static let representationsKey  = "Representations"
-    
-    
+
+
     static let hiddenCursorAliases: Set<String> = [
         "com.apple.coregraphics.ArrowS",
         "com.apple.coregraphics.IBeamS",
     ]
-    
+
     static let redundantCursorAliases: Set<String> = [
         "com.apple.cursor.0",
         "com.apple.cursor.1",
     ]
-    
+
     static let cursorMap: [String: String] = [
         "com.apple.coregraphics.Arrow":    "Arrow",
         "com.apple.coregraphics.IBeam":    "IBeam",
@@ -112,7 +112,7 @@ enum MACConstants {
         "com.apple.coregraphics.ArrowS": "Arrow (Tahoe)",
         "com.apple.coregraphics.IBeamS": "IBeam (Tahoe)",
     ]
-    
+
     static func tahoeAliases(for identifier: String) -> [String] {
         let map: [String: [String]] = [
             "com.apple.coregraphics.Arrow":  ["com.apple.coregraphics.ArrowS"],
@@ -122,7 +122,7 @@ enum MACConstants {
         ]
         return map[identifier] ?? []
     }
-    
+
     private static let reverseMap: [String: String] = {
         var map = [String: String]()
         for (key, value) in cursorMap {
@@ -130,12 +130,12 @@ enum MACConstants {
         }
         return map
     }()
-    
-    
+
+
     static func nameForIdentifier(_ identifier: String) -> String {
         return cursorMap[identifier] ?? "Unknown"
     }
-    
+
     static func identifierForName(_ name: String) -> String? {
         return reverseMap[name]
     }

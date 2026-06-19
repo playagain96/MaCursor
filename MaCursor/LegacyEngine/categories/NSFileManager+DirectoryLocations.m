@@ -5,7 +5,7 @@ enum
 	DirectoryLocationErrorNoPathFound,
 	DirectoryLocationErrorFileExistsAtLocation
 };
-	
+
 NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 
 @implementation NSFileManager (DirectoryLocations)
@@ -36,14 +36,14 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 					@"NSSearchPathDomainMask",
 				nil];
 			*errorOut =
-				[NSError 
+				[NSError
 					errorWithDomain:DirectoryLocationDomain
 					code:DirectoryLocationErrorNoPathFound
 					userInfo:userInfo];
 		}
 		return nil;
 	}
-	
+
 	NSString *resolvedPath = [paths objectAtIndex:0];
 
 	if (appendComponent)
@@ -51,14 +51,14 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 		resolvedPath = [resolvedPath
 			stringByAppendingPathComponent:appendComponent];
 	}
-	
+
 	NSError *error = nil;
 	BOOL success = [self
 		createDirectoryAtPath:resolvedPath
 		withIntermediateDirectories:YES
 		attributes:nil
 		error:&error];
-	if (!success) 
+	if (!success)
 	{
 		if (errorOut)
 		{
@@ -66,7 +66,7 @@ NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 		}
 		return nil;
 	}
-	
+
 	if (errorOut)
 	{
 		*errorOut = nil;

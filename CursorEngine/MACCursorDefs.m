@@ -49,7 +49,7 @@ NSData *pngDataForImage(id image) {
     if ([image isKindOfClass:[NSBitmapImageRep class]]) {
         return [(NSBitmapImageRep *)image representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
     }
-    
+
     CFTypeID typeID = CFGetTypeID((__bridge CFTypeRef)image);
     if (typeID == CGImageGetTypeID()) {
         CGImageRef obj = (__bridge CGImageRef)image;
@@ -57,25 +57,25 @@ NSData *pngDataForImage(id image) {
         CGImageDestinationRef dest = CGImageDestinationCreateWithData(mutableData, (__bridge CFStringRef)UTTypePNG.identifier, 1, NULL);
         CGImageDestinationAddImage(dest, obj, NULL);
         CGImageDestinationFinalize(dest);
-        
+
         CFRelease(dest);
-        
+
         return CFBridgingRelease(mutableData);
     }
-    
+
     MMLog("pngDataForImage: unsupported type");
     return nil;
 }
 
 NSDictionary *cursorThemeWithIdentifier(NSString *identifier) {
-    
+
     NSUInteger frameCount;
     CGFloat frameDuration;
     CGPoint hotSpot;
     CGSize size;
     CFArrayRef representations;
     bool registered = false;
-    
+
     MACIsCursorRegistered(CGSMainConnectionID(), (char *)identifier.UTF8String, &registered);
     if (!registered)
         return nil;
@@ -86,12 +86,12 @@ NSDictionary *cursorThemeWithIdentifier(NSString *identifier) {
     } else {
         error = CoreCursorCopyImages(CGSMainConnectionID(), [[identifier pathExtension] intValue], &representations, &size, &hotSpot, &frameCount, &frameDuration);
     }
-    
+
     if (error || !representations || !CFArrayGetCount(representations))
         return nil;
-    
+
     NSDictionary *dict = @{MACCursorDictionaryFrameCountKey: @(frameCount), MACCursorDictionaryFrameDurationKey: @(frameDuration), MACCursorDictionaryHotSpotXKey: @(hotSpot.x), MACCursorDictionaryHotSpotYKey: @(hotSpot.y), MACCursorDictionaryPointsWideKey: @(size.width), MACCursorDictionaryPointsHighKey: @(size.height), MACCursorDictionaryRepresentationsKey: CFBridgingRelease(representations)};
-    
+
     return dict;
 }
 
@@ -156,7 +156,7 @@ NSDictionary *cursorMap(void) {
                           @"IBeam (Tahoe)", @"com.apple.coregraphics.IBeamS",
                           nil];
     });
-    
+
     return cursorNameMap;
 }
 
@@ -173,13 +173,13 @@ NSString *cursorIdentifierForName(NSString *name) {
 }
 
 CGError MACIsCursorRegistered(CGSConnectionID cid, char *cursorName, bool *registered) {
-    
+
     size_t size = 0;
     CGError err = 0;
     err = CGSGetRegisteredCursorDataSize(cid, cursorName, &size);
-    
+
     *registered = !((BOOL)err) && size > 0;
-    
+
     return err;
 }
 
@@ -253,6 +253,67 @@ NSArray *MACTahoeCursorAliasesForIdentifier(NSString *identifier) {
     return aliasMap[identifier];
 }
 
+NSArray *MACBrowserCursorAliasesForIdentifier(NSString *identifier) {
+    static NSDictionary *browserAliasMap = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        browserAliasMap = @{
+            @"com.apple.coregraphics.Arrow":    @[ @"com.apple.cursor.0" ],
+            @"com.apple.cursor.0":              @[ @"com.apple.coregraphics.Arrow" ],
+            @"com.apple.coregraphics.IBeam":    @[ @"com.apple.cursor.1" ],
+            @"com.apple.cursor.1":              @[ @"com.apple.coregraphics.IBeam" ],
+            @"com.apple.coregraphics.Alias":    @[ @"com.apple.cursor.2" ],
+            @"com.apple.cursor.2":              @[ @"com.apple.coregraphics.Alias" ],
+            @"com.apple.cursor.3":              @[ @"com.apple.coregraphics.NotAllowed" ],
+            @"com.apple.coregraphics.Wait":     @[ @"com.apple.cursor.4" ],
+            @"com.apple.cursor.4":              @[ @"com.apple.coregraphics.Wait" ],
+            @"com.apple.coregraphics.Copy":     @[ @"com.apple.cursor.5" ],
+            @"com.apple.cursor.5":              @[ @"com.apple.coregraphics.Copy" ],
+            @"com.apple.cursor.7":              @[ @"com.apple.cursor.20" ],
+            @"com.apple.cursor.8":              @[ @"com.apple.cursor.20" ],
+            @"com.apple.cursor.20":             @[ @"com.apple.cursor.7" ],
+            @"com.apple.cursor.9":              @[ @"com.apple.coregraphics.ScreenshotWindow" ],
+            @"com.apple.cursor.10":             @[ @"com.apple.coregraphics.ScreenshotSelection" ],
+            @"com.apple.cursor.11":             @[ @"com.apple.coregraphics.ClosedHand" ],
+            @"com.apple.cursor.12":             @[ @"com.apple.coregraphics.OpenHand" ],
+            @"com.apple.cursor.13":             @[ @"com.apple.coregraphics.PointingHand" ],
+            @"com.apple.cursor.14":             @[ @"com.apple.coregraphics.CountingUpHand" ],
+            @"com.apple.cursor.15":             @[ @"com.apple.coregraphics.CountingDownHand" ],
+            @"com.apple.cursor.16":             @[ @"com.apple.coregraphics.CountingUpAndDownHand" ],
+            @"com.apple.cursor.17":             @[ @"com.apple.coregraphics.ResizeLeft" ],
+            @"com.apple.cursor.18":             @[ @"com.apple.coregraphics.ResizeRight" ],
+            @"com.apple.cursor.19":             @[ @"com.apple.coregraphics.ResizeLeftRight" ],
+            @"com.apple.cursor.21":             @[ @"com.apple.coregraphics.ResizeUp" ],
+            @"com.apple.cursor.22":             @[ @"com.apple.coregraphics.ResizeDown" ],
+            @"com.apple.cursor.23":             @[ @"com.apple.coregraphics.ResizeUpDown" ],
+            @"com.apple.cursor.24":             @[ @"com.apple.coregraphics.ArrowCtx" ],
+            @"com.apple.coregraphics.ArrowCtx": @[ @"com.apple.cursor.24" ],
+            @"com.apple.cursor.25":             @[ @"com.apple.coregraphics.Poof" ],
+            @"com.apple.cursor.26":             @[ @"com.apple.coregraphics.IBeamH" ],
+            @"com.apple.cursor.27":             @[ @"com.apple.coregraphics.WindowResizeEast" ],
+            @"com.apple.cursor.28":             @[ @"com.apple.coregraphics.WindowResizeEastWest" ],
+            @"com.apple.cursor.29":             @[ @"com.apple.coregraphics.WindowResizeNortheast" ],
+            @"com.apple.cursor.30":             @[ @"com.apple.coregraphics.WindowResizeNortheastSouthwest" ],
+            @"com.apple.cursor.31":             @[ @"com.apple.coregraphics.WindowResizeNorth" ],
+            @"com.apple.cursor.32":             @[ @"com.apple.coregraphics.WindowResizeNorthSouth" ],
+            @"com.apple.cursor.33":             @[ @"com.apple.coregraphics.WindowResizeNorthwest" ],
+            @"com.apple.cursor.34":             @[ @"com.apple.coregraphics.WindowResizeNorthwestSoutheast" ],
+            @"com.apple.cursor.35":             @[ @"com.apple.coregraphics.WindowResizeSoutheast" ],
+            @"com.apple.cursor.36":             @[ @"com.apple.coregraphics.WindowResizeSouth" ],
+            @"com.apple.cursor.37":             @[ @"com.apple.coregraphics.WindowResizeSouthwest" ],
+            @"com.apple.cursor.38":             @[ @"com.apple.coregraphics.WindowResizeWest" ],
+            @"com.apple.coregraphics.Move":     @[ @"com.apple.cursor.39" ],
+            @"com.apple.cursor.39":             @[ @"com.apple.coregraphics.Move" ],
+            @"com.apple.cursor.40":             @[ @"com.apple.coregraphics.Help" ],
+            @"com.apple.cursor.41":             @[ @"com.apple.coregraphics.Cell" ],
+            @"com.apple.cursor.42":             @[ @"com.apple.coregraphics.ZoomIn" ],
+            @"com.apple.cursor.43":             @[ @"com.apple.coregraphics.ZoomOut" ],
+        };
+    });
+
+    return browserAliasMap[identifier];
+}
+
 static NSString *const kHIServicesCursorsPath =
     @"/System/Library/Frameworks/ApplicationServices.framework"
     @"/Versions/A/Frameworks/HIServices.framework"
@@ -318,9 +379,8 @@ static NSDictionary<NSString *, NSString *> *MACNamedCursorToHIServicesMap(void)
             @"com.apple.coregraphics.Copy":     @"copy",
             @"com.apple.coregraphics.ArrowCtx": @"contextualmenu",
             @"com.apple.coregraphics.Move":     @"move",
-            @"com.apple.coregraphics.IBeam":    @"ibeamvertical",
-            @"com.apple.coregraphics.IBeamXOR": @"ibeamvertical",
-
+            @"com.apple.coregraphics.IBeam":    @"ibeamhorizontal",
+            @"com.apple.coregraphics.IBeamXOR": @"ibeamhorizontal",
         };
     });
     return map;
@@ -402,8 +462,8 @@ static NSDictionary *MACCursorThemeFromHIServicesPDF(NSString *folderName) {
         pointsHigh = pointsHigh / frames;
     }
 
-    int scales[] = { 1, 2 };
-    int scaleCount = 2;
+    int scales[] = { 1, 2, 5, 10 };
+    int scaleCount = (int)(sizeof(scales) / sizeof(scales[0]));
     NSMutableArray *pngReps = [NSMutableArray array];
 
     for (int s = 0; s < scaleCount; s++) {
@@ -521,67 +581,72 @@ static NSDictionary *MACCaptureCursorTheme(CGSConnectionID cid, NSString *identi
         }
     }
 
+    if (!isBadData && ![identifier hasPrefix:@"com.apple.cursor."]) {
+        NSString *hiName = MACNamedCursorToHIServicesMap()[identifier];
+        if (hiName) {
+            isBadData = YES;
+            MMLog("  Named cursor %s — forcing HIServices PDF (CGS data unreliable)",
+                  identifier.UTF8String);
+        }
+    }
+
     if (isBadData) {
-        float currentScale;
-        CGSGetCursorScale(cid, &currentScale);
-        if (currentScale > 1.0f) {
-            MMLog("  Bad data for %s at %.0fx, retrying at 1x...",
-                  identifier.UTF8String, currentScale);
-            CGSSetCursorScale(cid, 1.0f);
+        if ([identifier hasPrefix:@"com.apple.cursor."]) {
+            float currentScale;
+            CGSGetCursorScale(cid, &currentScale);
+            if (currentScale > 1.0f) {
+                MMLog("  Bad data for %s at %.0fx, retrying at 1x...",
+                      identifier.UTF8String, currentScale);
+                CGSSetCursorScale(cid, 1.0f);
 
-            NSUInteger retryFC = 0;
-            CGFloat retryDur = 0.0;
-            CGPoint retryHot = CGPointZero;
-            CGSize retrySize = CGSizeZero;
-            CFArrayRef retryReps = NULL;
-            CGError retryErr;
+                NSUInteger retryFC = 0;
+                CGFloat retryDur = 0.0;
+                CGPoint retryHot = CGPointZero;
+                CGSize retrySize = CGSizeZero;
+                CFArrayRef retryReps = NULL;
+                CGError retryErr;
 
-            if (![identifier hasPrefix:@"com.apple.cursor."]) {
-                retryErr = CGSCopyRegisteredCursorImages(cid,
-                    (char *)identifier.UTF8String,
-                    &retrySize, &retryHot, &retryFC, &retryDur, &retryReps);
-            } else {
                 int cursorID = [[identifier pathExtension] intValue];
                 retryErr = CoreCursorCopyImages(cid, cursorID,
                     &retryReps, &retrySize, &retryHot, &retryFC, &retryDur);
-            }
 
-            CGSSetCursorScale(cid, currentScale);
+                CGSSetCursorScale(cid, currentScale);
 
-            if (retryErr == kCGErrorSuccess && retryReps && CFArrayGetCount(retryReps) > 0) {
-                NSArray *retryImages = CFBridgingRelease(retryReps);
-                CGImageRef retryFirst = (__bridge CGImageRef)retryImages[0];
+                if (retryErr == kCGErrorSuccess && retryReps && CFArrayGetCount(retryReps) > 0) {
+                    NSArray *retryImages = CFBridgingRelease(retryReps);
+                    CGImageRef retryFirst = (__bridge CGImageRef)retryImages[0];
 
-                if (!MACIsRedPlaceholder(retryFirst)) {
-                    size_t rw = CGImageGetWidth(retryFirst);
-                    size_t rh = CGImageGetHeight(retryFirst);
-                    if (rh >= (size_t)retrySize.height && rw >= (size_t)retrySize.width) {
-                        MMLog("  1x retry succeeded for %s (%zux%zu, %lu frames)",
-                              identifier.UTF8String, rw, rh, (unsigned long)retryFC);
-                        NSMutableArray *retryPngs = [NSMutableArray arrayWithCapacity:retryImages.count];
-                        for (id img in retryImages) {
-                            CGImageRef cgImg = (__bridge CGImageRef)img;
-                            NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:cgImg];
-                            NSBitmapImageRep *srgbRep = MACEnsureSRGB(rep);
-                            CGImageRef srgbImg = [srgbRep CGImage];
-                            NSData *png = pngDataForImage((__bridge id)srgbImg);
-                            if (png) [retryPngs addObject:png];
-                        }
-                        if (retryPngs.count > 0) {
-                            return @{
-                                MACCursorDictionaryFrameCountKey:      @(retryFC),
-                                MACCursorDictionaryFrameDurationKey:    @(retryDur),
-                                MACCursorDictionaryHotSpotXKey:         @(retryHot.x),
-                                MACCursorDictionaryHotSpotYKey:         @(retryHot.y),
-                                MACCursorDictionaryPointsWideKey:       @(retrySize.width),
-                                MACCursorDictionaryPointsHighKey:       @(retrySize.height),
-                                MACCursorDictionaryRepresentationsKey:  retryPngs,
-                            };
+                    if (!MACIsRedPlaceholder(retryFirst)) {
+                        size_t rw = CGImageGetWidth(retryFirst);
+                        size_t rh = CGImageGetHeight(retryFirst);
+                        if (rh >= (size_t)retrySize.height && rw >= (size_t)retrySize.width) {
+                            MMLog("  1x retry succeeded for %s (%zux%zu, %lu frames)",
+                                  identifier.UTF8String, rw, rh, (unsigned long)retryFC);
+                            NSMutableArray *retryPngs = [NSMutableArray arrayWithCapacity:retryImages.count];
+                            for (id img in retryImages) {
+                                CGImageRef cgImg = (__bridge CGImageRef)img;
+                                NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithCGImage:cgImg];
+                                NSBitmapImageRep *srgbRep = MACEnsureSRGB(rep);
+                                CGImageRef srgbImg = [srgbRep CGImage];
+                                NSData *png = pngDataForImage((__bridge id)srgbImg);
+                                if (png) [retryPngs addObject:png];
+                            }
+                            if (retryPngs.count > 0) {
+                                return @{
+                                    MACCursorDictionaryFrameCountKey:      @(retryFC),
+                                    MACCursorDictionaryFrameDurationKey:    @(retryDur),
+                                    MACCursorDictionaryHotSpotXKey:         @(retryHot.x),
+                                    MACCursorDictionaryHotSpotYKey:         @(retryHot.y),
+                                    MACCursorDictionaryPointsWideKey:       @(retrySize.width),
+                                    MACCursorDictionaryPointsHighKey:       @(retrySize.height),
+                                    MACCursorDictionaryRepresentationsKey:  retryPngs,
+                                };
+                            }
                         }
                     }
+                } else {
+                    if (retryReps) CFRelease(retryReps);
                 }
-            } else {
-                if (retryReps) CFRelease(retryReps);
             }
         }
 

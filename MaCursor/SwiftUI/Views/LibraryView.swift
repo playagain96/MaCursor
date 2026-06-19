@@ -6,10 +6,10 @@ struct LibraryView: View {
     @Environment(\.openWindow) private var openWindow
     @State private var selectedThemeId: String?
     @State private var columnVisibility = NavigationSplitViewVisibility.all
-    
+
     var body: some View {
         @Bindable var library = library
-        
+
         NavigationSplitView(columnVisibility: $columnVisibility) {
             ScrollViewReader { proxy in
             List(library.cursorThemes, selection: $selectedThemeId) { cursorTheme in
@@ -66,7 +66,7 @@ struct LibraryView: View {
                             .padding(.vertical, 4)
                             .contentShape(Rectangle())
                     }
-                    
+
                     Button(action: { library.restoreCursors() }) {
                         Label("Restore", systemImage: "arrow.counterclockwise")
                             .padding(.horizontal, 5)
@@ -124,7 +124,7 @@ struct LibraryView: View {
             selectedThemeId = newId
         }
     }
-    
+
     private func openEditorWindow(for cursorTheme: CursorThemeModel) {
         openWindow(value: cursorTheme.id)
     }

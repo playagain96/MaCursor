@@ -5,20 +5,20 @@ struct CursorPreviewView: View {
     var showHotSpot: Bool = true
     var scale: Int = 200
     var showCheckerboard: Bool = true
-    
+
     @State private var currentFrame: Int = 0
     @State private var animationTimer: Timer?
-    
+
     private var isAnimated: Bool {
         cursor.frameCount > 1
     }
-    
+
     var body: some View {
         ZStack {
             if showCheckerboard {
                 checkerboardBackground
             }
-            
+
             if let frameImage = cursor.frame(at: currentFrame, scale: scale) {
                 Image(nsImage: frameImage)
                     .resizable()
@@ -39,12 +39,12 @@ struct CursorPreviewView: View {
                     .font(.system(size: 32))
                     .foregroundStyle(.secondary)
             }
-            
+
             if showHotSpot, cursor.size.width > 0, cursor.size.height > 0 {
                 GeometryReader { geo in
                     let xRatio = cursor.hotSpot.x / cursor.size.width
                     let yRatio = cursor.hotSpot.y / cursor.size.height
-                    
+
                     Circle()
                         .fill(.red.opacity(0.7))
                         .frame(width: 6, height: 6)
@@ -81,13 +81,13 @@ struct CursorPreviewView: View {
             }
         }
     }
-    
+
     private var checkerboardBackground: some View {
         Canvas { context, size in
             let cellSize: CGFloat = 8
             let rows = Int(size.height / cellSize) + 1
             let cols = Int(size.width / cellSize) + 1
-            
+
             for row in 0..<rows {
                 for col in 0..<cols {
                     let isLight = (row + col) % 2 == 0
@@ -105,7 +105,7 @@ struct CursorPreviewView: View {
             }
         }
     }
-    
+
     private func startAnimation() {
         guard cursor.frameDuration > 0, cursor.frameCount > 1 else { return }
         animationTimer?.invalidate()
@@ -122,14 +122,14 @@ struct CursorPreviewView: View {
 struct CursorThumbnailView: View {
     let cursor: CursorModel
     var size: CGFloat = 24
-    
+
     private var thumbnailImage: NSImage? {
         if cursor.frameCount > 1 {
             return cursor.frame(at: 0, scale: 200) ?? cursor.frame(at: 0, scale: 100)
         }
         return cursor.primaryImage
     }
-    
+
     var body: some View {
         ZStack {
             if let image = thumbnailImage {

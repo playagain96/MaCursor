@@ -6,7 +6,7 @@ import Observation
 class CursorModel: Identifiable, Hashable {
     let id: String
     var identifier: String
-    
+
     var name: String {
         let resolved = CursorIdentifier.displayName(for: identifier)
         if resolved == identifier || resolved.isEmpty {
@@ -17,26 +17,26 @@ class CursorModel: Identifiable, Hashable {
         }
         return resolved
     }
-    
+
     var frameCount: Int
     var frameDuration: Double
     var hotSpot: CGPoint
     var size: CGSize
-    
+
     var representationRevision: Int = 0
-    
+
     let backingCursor: MACCursorSwift
-    
-    
+
+
     @ObservationIgnored private var _primaryImageCache: NSImage?
     @ObservationIgnored private var _primaryImageCacheRevision: Int = -1
-    
+
     @ObservationIgnored private var _scaleImageCache: [Int: NSImage] = [:]
     @ObservationIgnored private var _scaleImageCacheRevision: Int = -1
-    
+
     @ObservationIgnored private var _frameCache: [String: NSImage] = [:]
     @ObservationIgnored private var _frameCacheRevision: Int = -1
-    
+
     init(from cursor: MACCursorSwift, parentIdentifier: String? = nil) {
         self.backingCursor = cursor
         let rawId = (cursor.identifier?.isEmpty == false) ? cursor.identifier! : UUID().uuidString
@@ -46,13 +46,13 @@ class CursorModel: Identifiable, Hashable {
             self.id = rawId
         }
         self.identifier = cursor.identifier ?? ""
-        
+
         self.frameCount = Int(cursor.frameCount)
         self.frameDuration = cursor.frameDuration
         self.hotSpot = CGPoint(x: cursor.hotSpot.x, y: cursor.hotSpot.y)
         self.size = CGSize(width: cursor.size.width, height: cursor.size.height)
     }
-    
+
     func syncToBacking() {
         backingCursor.identifier = identifier
         backingCursor.frameCount = UInt(frameCount)
@@ -60,19 +60,19 @@ class CursorModel: Identifiable, Hashable {
         backingCursor.hotSpot = NSPoint(x: hotSpot.x, y: hotSpot.y)
         backingCursor.size = NSSize(width: size.width, height: size.height)
     }
-    
+
     func image(forScale scale: Int) -> NSImage? {
         _ = representationRevision
-        
+
         if _scaleImageCacheRevision == representationRevision, let cached = _scaleImageCache[scale] {
             return cached
         }
-        
+
         if _scaleImageCacheRevision != representationRevision {
             _scaleImageCache.removeAll()
             _scaleImageCacheRevision = representationRevision
         }
-        
+
         guard let scaleEnum = MACCursorScale(rawValue: UInt(scale)),
               let rep = backingCursor.representation(for: scaleEnum) else {
             return nil
@@ -86,20 +86,20 @@ class CursorModel: Identifiable, Hashable {
         _scaleImageCache[scale] = image
         return image
     }
-    
+
     var primaryImage: NSImage? {
         _ = representationRevision
-        
+
         if _primaryImageCacheRevision == representationRevision {
             return _primaryImageCache
         }
-        
+
         let img = image(forScale: 200) ?? image(forScale: 100) ?? backingCursor.imageWithAllReps()
         _primaryImageCache = img
         _primaryImageCacheRevision = representationRevision
         return img
     }
-    
+
     var cursorTypeName: String {
         guard !identifier.isEmpty else { return "Unassigned" }
         let parts = identifier.split(separator: ".")
@@ -108,58 +108,58 @@ class CursorModel: Identifiable, Hashable {
         }
         return identifier
     }
-    
+
     func frame(at index: Int, scale: Int = 100) -> NSImage? {
         _ = representationRevision
-        
+
         let cacheKey = "\(scale)_\(index)"
         if _frameCacheRevision == representationRevision, let cached = _frameCache[cacheKey] {
             return cached
         }
-        
+
         if _frameCacheRevision != representationRevision {
             _frameCache.removeAll()
             _frameCacheRevision = representationRevision
         }
-        
+
         guard let scaleEnum = MACCursorScale(rawValue: UInt(scale)),
               let rep = backingCursor.representation(for: scaleEnum) else {
             return nil
         }
-        
+
         let frameHeight = Int(size.height)
         guard frameHeight > 0, index < frameCount else { return nil }
-        
+
         let s = CGFloat(scale) / 100.0
         let pixelFrameHeight = Int(CGFloat(frameHeight) * s)
         let yOffset = index * pixelFrameHeight
-        
+
         let fullImage = NSImage(size: NSSize(width: rep.pixelsWide, height: rep.pixelsHigh))
         fullImage.addRepresentation(rep)
-        
+
         var proposedRect = CGRect(origin: .zero, size: CGSize(width: rep.pixelsWide, height: rep.pixelsHigh))
         guard let fullCGImage = fullImage.cgImage(forProposedRect: &proposedRect, context: nil, hints: nil) else { return nil }
         let cropRect = CGRect(x: 0, y: yOffset, width: fullCGImage.width, height: pixelFrameHeight)
         guard let croppedCGImage = fullCGImage.cropping(to: cropRect) else { return nil }
-        
+
         let frameImage = NSImage(size: NSSize(width: size.width, height: size.height))
         let frameRep = NSBitmapImageRep(cgImage: croppedCGImage)
         frameRep.size = NSSize(width: size.width, height: size.height)
         frameImage.addRepresentation(frameRep)
-        
+
         _frameCache[cacheKey] = frameImage
         return frameImage
     }
-    
-    
+
+
     func setRepresentation(_ rep: NSBitmapImageRep, forScale scale: Int) {
         guard let scaleEnum = MACCursorScale(rawValue: UInt(scale)) else { return }
-        
+
         backingCursor.frameCount = UInt(frameCount)
-        
+
         backingCursor.setRepresentation(rep, for: scaleEnum)
         representationRevision += 1
-        
+
         let s = CGFloat(scale) / 100.0
         let calculatedSize = CGSize(
             width: CGFloat(rep.pixelsWide) / s,
@@ -170,18 +170,18 @@ class CursorModel: Identifiable, Hashable {
             size = calculatedSize
         }
     }
-    
+
     func removeRepresentation(forScale scale: Int) {
         guard let scaleEnum = MACCursorScale(rawValue: UInt(scale)) else { return }
         backingCursor.removeRepresentation(for: scaleEnum)
         representationRevision += 1
     }
-    
-    
+
+
     static func == (lhs: CursorModel, rhs: CursorModel) -> Bool {
         lhs === rhs
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

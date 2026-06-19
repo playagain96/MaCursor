@@ -18,7 +18,7 @@ struct MaCursorApp: App {
             userDriverDelegate: nil
         )
     }
-    
+
     var body: some Scene {
         WindowGroup("MaCursor") {
             LibraryView()
@@ -27,9 +27,9 @@ struct MaCursorApp: App {
                 .environment(languageManager)
                 .onAppear {
                     appearanceManager.applyOnLaunch()
-                    
+
                     appDelegate.isViewReady = true
-                    
+
                     let pendingURLs = appDelegate.consumePendingImports()
                     for url in pendingURLs {
                         library.importTheme(at: url)
@@ -55,7 +55,7 @@ struct MaCursorApp: App {
             CommandGroup(after: .appInfo) {
                 CheckForUpdatesView(updater: updaterController.updater)
             }
-            
+
             CommandGroup(replacing: .appSettings) {
                 Button("Settings...") {
                     NSApp.windows.first(where: { $0.title.hasPrefix("About MaCursor") })?.close()
@@ -65,25 +65,25 @@ struct MaCursorApp: App {
                 }
                 .keyboardShortcut(",", modifiers: .command)
             }
-            
+
             CommandGroup(replacing: .newItem) {
                 Button("New Theme") {
                     library.addNewTheme()
                 }
                 .keyboardShortcut("n")
-                
+
                 Button("Import Theme...") {
                     library.showImportPanel()
                 }
                 .keyboardShortcut("o")
             }
-            
+
             CommandGroup(after: .pasteboard) {
                 Button("Restore System Cursors") {
                     library.restoreCursors()
                 }
             }
-            
+
             CommandGroup(replacing: .help) {
                 Button("MaCursor Help") {
                     if let url = URL(string: "https://github.com/writronic/MaCursor") {
@@ -93,7 +93,7 @@ struct MaCursorApp: App {
                 .keyboardShortcut("/", modifiers: .command)
             }
         }
-        
+
         WindowGroup("Edit Theme", for: String.self) { $themeId in
             if let themeId, let cursorTheme = library.theme(withId: themeId) {
                 CursorThemeEditorView(cursorTheme: cursorTheme)
@@ -115,7 +115,7 @@ struct MaCursorApp: App {
         .defaultSize(width: 720, height: 520)
         .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
-        
+
         Window("About MaCursor", id: "about") {
             AboutWindowView()
                 .windowMinimizeBehavior(.disabled)
