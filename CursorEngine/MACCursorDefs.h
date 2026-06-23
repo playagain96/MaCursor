@@ -25,7 +25,7 @@ static const float      MACDumpCursorScale             = 16.0f;
 static const float      MACCursorRefreshScaleBumpSmall = 0.1f;
 static const float      MACCursorRefreshScaleBumpLarge = 0.3f;
 static const float      MACMaxCursorScale              = 32.0f;
-static const float      MACMinCursorScale              = 1.0f;
+static const float      MACMinCursorScale              = 0.5f;
 static const float      MACMaxDefaultCursorScale       = 16.0f;
 static const NSTimeInterval MACWindowDismissDelay       = 0.05;
 

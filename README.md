@@ -31,14 +31,14 @@ Requires **macOS 15 Sequoia** or later.
 - **Full Theme Editor** — Create and edit themes with a split-pane editor: metadata, cursor list, per-cursor image slots, hotspot editing, and animated cursor preview
 - **Windows Cursor Import** — Drag & drop `.cur` and `.ani` files to import Windows cursors, including animated cursors with sprite sheet composition
 - **HiDPI / Retina Support** — Separate 1× and 2× image representations per cursor for crisp rendering on Retina displays
-- **Cursor Scale** — Adjust cursor size from 1.0× to 4.0× with a live slider
+- **Cursor Scale** — Adjust cursor size from 0.50× to 4.00× with a precision slider (0.1× steps), or type any custom value and press Enter to apply
 - **Left / Right Hand Mode** — Switch cursor orientation for left-handed or right-handed mouse usage directly from Settings
 - **Global Hotkeys** — Assign keyboard shortcuts to favorite themes for instant switching from anywhere
 - **Background Helper Tool** — Lightweight login item (`macursorhelper`) that keeps shortcuts active and reapplies your theme across user switches
 - **Auto-Updates** — Built-in Sparkle integration for seamless over-the-air updates
 - **Light / Dark / System Appearance** — Full appearance mode control
 - **10 Languages** — English, Deutsch, Español, Français, Nederlands, Русский, Türkçe, 日本語, 简体中文, العربية
-- **macOS Tahoe Ready** — Full support for macOS 26 Tahoe, including automatic handling of new S-variant cursor identifiers
+- **macOS Tahoe & Golden Gate Ready** — Full support for macOS 26 Tahoe and macOS 27 Golden Gate, including automatic handling of new S-variant cursor identifiers
 
 ## Quick Start
 
@@ -81,6 +81,16 @@ Select a theme from the sidebar and click **Apply**, or simply double-click it. 
 
 Click the **Restore** button (↺) in the toolbar to reset all cursors to macOS defaults.
 
+### Adjusting Cursor Scale
+
+Fine-tune the size of every system cursor from the Settings panel:
+
+1. Open **MaCursor → Settings → General**.
+2. Use the **Cursor Scale** slider to pick a value between **0.50×** and **4.00×** (each tick moves in **0.1×** increments).
+3. For a precise value outside the slider stops, type the desired number directly into the scale field and press **Enter** to apply.
+
+The new scale takes effect immediately.
+
 ### Importing Themes
 
 Import `.cursor` theme files by double-clicking, dragging onto the library window, or via **File → Import Theme**.
@@ -91,7 +101,7 @@ Right-click a theme → **Edit**, or select it and click **Edit** in the toolbar
 
 | Pane              | Description                                                                                                        |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Metadata**      | Theme name, author, version, HiDPI toggle                                                                          |
+| **Metadata**      | Theme name, creator, version, HiDPI toggle                                                                         |
 | **Cursor List**   | All cursors in the theme, sorted alphabetically                                                                    |
 | **Cursor Detail** | Image drop zones for 1×, 2×, 5×, and 10× representations, hotspot coordinates, frame count, and animation duration |
 

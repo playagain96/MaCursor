@@ -8,9 +8,9 @@ struct GeneralSettingsView: View {
     @Environment(LanguageManager.self) private var languageManager
     @Environment(LibraryViewModel.self) private var library
 
-    @State private var cursorScaleValue: Double = {
-        (MACPreferences.value(forKey: MACPreferences.cursorScaleKey) as? NSNumber)?.doubleValue ?? 1.0
-    }()
+    @State private var cursorScaleValue: Double = GeneralSettingsView.initialScale()
+    @State private var scaleText: String = GeneralSettingsView.formatScaleStatic(GeneralSettingsView.initialScale())
+    @FocusState private var scaleFieldFocused: Bool
 
 
     @State private var hideTahoeCursors: Bool = MACPreferences.hideTahoeCursors
@@ -47,16 +47,52 @@ struct GeneralSettingsView: View {
                     HStack {
                         Text("Cursor Scale")
                         Spacer()
-                        Text("\(cursorScaleValue, specifier: "%.2f")×")
+                        TextField("", text: $scaleText)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
                             .monospacedDigit()
+                            .frame(width: 64)
+                            .focused($scaleFieldFocused)
+                            .onChange(of: scaleText) { _, newValue in
+                                let sanitized = sanitizeScaleInput(newValue)
+                                if sanitized != newValue {
+                                    scaleText = sanitized
+                                }
+                            }
+                            .onSubmit {
+                                commitScaleText()
+                            }
+                            .onChange(of: scaleFieldFocused) { _, focused in
+                                if !focused {
+                                    commitScaleText()
+                                }
+                            }
+                            .accessibilityLabel("Cursor Scale")
+                        Text("×")
                             .foregroundStyle(.secondary)
                     }
 
-                    Slider(value: $cursorScaleValue, in: 1.0...4.0, step: 0.25)
+                    Slider(value: sliderBinding, in: 0.5...4.0) { editing in
+                        if !editing {
+                            reapplyForCursorScale()
+                        }
+                    }
                         .onChange(of: cursorScaleValue) { _, newValue in
                             MACPreferences.set(NSNumber(value: newValue), forKey: MACPreferences.cursorScaleKey)
-                            CursorService.setScale(Float(newValue))
+                            CursorService.setScale(Float(max(1.0, newValue)))
+                            let formatted = formatScale(newValue)
+                            if scaleFieldFocused {
+                                DispatchQueue.main.async {
+                                    scaleText = formatted
+                                }
+                            } else {
+                                scaleText = formatted
+                            }
                         }
+                        .accessibilityValue(String(format: "%.2f×", cursorScaleValue))
+                }
+                .onAppear {
+                    scaleText = formatScale(cursorScaleValue)
                 }
 
                 Toggle("Hide Tahoe cursors", isOn: $hideTahoeCursors)
@@ -139,6 +175,12 @@ struct GeneralSettingsView: View {
                 showRestartAlert = true
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .cursorSettingsDidReset)) { _ in
+            let stored = (MACPreferences.value(forKey: MACPreferences.cursorScaleKey) as? NSNumber)?.doubleValue ?? 1.0
+            cursorScaleValue = max(0.5, min(4.0, stored))
+            scaleText = formatScale(cursorScaleValue)
+            isLeftHanded = MACPreferences.isLeftHanded
+        }
     }
 
 
@@ -172,10 +214,13 @@ struct GeneralSettingsView: View {
         UserDefaults.standard.removeObject(forKey: "SUEnableAutomaticChecks")
 
         cursorScaleValue = 1.0
+        scaleText = formatScale(1.0)
+        MACPreferences.set(NSNumber(value: 1.0), forKey: MACPreferences.cursorScaleKey)
+        CursorService.setScale(1.0)
         hideTahoeCursors = true
         isLeftHanded = false
 
-        reapplyActiveThemeIfNeeded()
+        reapplyForCursorScale()
 
         let helperManager = HelperToolManager.shared
         if helperManager.isInstalled {
@@ -189,5 +234,84 @@ struct GeneralSettingsView: View {
         if let appliedTheme = library.cursorThemes.first(where: { $0.isApplied }) {
             library.apply(appliedTheme)
         }
+    }
+
+    private func reapplyForCursorScale() {
+        if let appliedTheme = library.cursorThemes.first(where: { $0.isApplied }) {
+            library.apply(appliedTheme)
+        } else {
+            CursorService.restoreAll()
+        }
+    }
+
+    private var sliderBinding: Binding<Double> {
+        Binding(
+            get: { cursorScaleValue },
+            set: { newValue in
+                let tenth = (newValue / 0.1).rounded() / 10.0
+                cursorScaleValue = GeneralSettingsView.clampScale(tenth)
+            }
+        )
+    }
+
+    private static func clampScale(_ value: Double) -> Double {
+        let snapped = (value * 100).rounded() / 100
+        return Swift.max(0.5, Swift.min(4.0, snapped))
+    }
+
+    private static func initialScale() -> Double {
+        let stored = (MACPreferences.value(forKey: MACPreferences.cursorScaleKey) as? NSNumber)?.doubleValue ?? 1.0
+        return clampScale(stored)
+    }
+
+    private static func formatScaleStatic(_ value: Double) -> String {
+        return value.formatted(.number.precision(.fractionLength(2)).grouping(.never))
+    }
+
+    private func formatScale(_ value: Double) -> String {
+        return GeneralSettingsView.formatScaleStatic(value)
+    }
+
+    private func parseScale(_ text: String) -> Double? {
+        let normalized = text
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: ",", with: ".")
+        return Double(normalized)
+    }
+
+    private func sanitizeScaleInput(_ input: String) -> String {
+        var result = ""
+        var separatorSeen = false
+        var fractionDigits = 0
+        for character in input {
+            if character.isASCII && character.isNumber {
+                if separatorSeen {
+                    if fractionDigits < 2 {
+                        result.append(character)
+                        fractionDigits += 1
+                    }
+                } else {
+                    result.append(character)
+                }
+            } else if (character == "." || character == ",") && !separatorSeen {
+                separatorSeen = true
+                result.append(character)
+            }
+        }
+        return result
+    }
+
+    private func commitScaleText() {
+        guard let parsed = parseScale(scaleText) else {
+            scaleText = formatScale(cursorScaleValue)
+            return
+        }
+        let clamped = GeneralSettingsView.clampScale(parsed)
+        scaleText = formatScale(clamped)
+        guard abs(clamped - cursorScaleValue) > 0.0001 else { return }
+        cursorScaleValue = clamped
+        MACPreferences.set(NSNumber(value: clamped), forKey: MACPreferences.cursorScaleKey)
+        CursorService.setScale(Float(max(1.0, clamped)))
+        reapplyForCursorScale()
     }
 }

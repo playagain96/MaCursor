@@ -23,11 +23,7 @@
 		1175491A9678EDD562DA7214 /* MACCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C27736576C36C2373197271 /* MACCursor.m */; };
 		C7D34A3585984CE3D3BEF4EE /* SwiftUI/ViewModels/LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD64CEAC408967BEF748EE /* SwiftUI/ViewModels/LibraryViewModel.swift */; };
 		FBE6219110EC183B1AA821F3 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C8DA561E196CEECE976572 /* FileManagerExtensions.swift */; };
-		AA77001100110022 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77001100110011 /* hotkeys.m */; };
-		AA77002200220022 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77001100110011 /* hotkeys.m */; };
-		AA77003300330022 /* hotkeys.m in Sources */ = {isa = PBXBuildFile; fileRef = AA77001100110011 /* hotkeys.m */; };
 		AA88001100110022 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA88001100110011 /* Carbon.framework */; };
-		AA88002200220022 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA88001100110011 /* Carbon.framework */; };
 		AA88003300330022 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA88001100110011 /* Carbon.framework */; };
 		AABB001100110022 /* SwiftUI/Views/GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB001100110011 /* SwiftUI/Views/GeneralSettingsView.swift */; };
 		AACC007700770022 /* SwiftUI/Views/CheckForUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACC007700770011 /* SwiftUI/Views/CheckForUpdatesView.swift */; };
@@ -57,15 +53,12 @@
 		23EDBD1BA5C2E2C697C49929 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20E996ED042D7B7C3E0BBC3 /* Security.framework */; };
 		13D664923ACB96A3584B1C2B /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF9A6FADCC03B87EB3BB62BF /* ServiceManagement.framework */; };
 
-		6C595BDC02703B2C5DDE4ADE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */; };
-		406D49426BAD30193E2382B7 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A253C7C28F873B6822EED /* ApplicationServices.framework */; };
 
 		9B14F74D538D67E0A24164E2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */; };
 		F2901D0B04355C207AE1B308 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */; };
 		A04556B70615A052BAEF57C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */; };
 		CAB5B3CA3AB8BCCE0FD42EBA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B36FDC21A51D11AA8B8598 /* Cocoa.framework */; };
 		3D925D9ED4B83520AD7AD9BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */; };
-		421D78DEB5F216548CD0A23B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B36FDC21A51D11AA8B8598 /* Cocoa.framework */; };
 
 		C11F9AF8600979EC9727613C /* com.writronic.macursorhelper.app in Copy Helper */ = {isa = PBXBuildFile; fileRef = B11C4EE7A55FDC4E3A771DC1 /* com.writronic.macursorhelper.app */; };
 		CE10000100000001 /* MACCursorDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000100000002 /* MACCursorDefs.m */; };
@@ -110,8 +103,6 @@
 		2C5596005C577340FA0593E1 /* SwiftUI/MaCursorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/MaCursorApp.swift; sourceTree = "<group>"; };
 		72606524D0D8D0C086C00580 /* MACCursorSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MACCursorSwift.swift; path = SwiftUI/Models/MACCursorSwift.swift; sourceTree = "<group>"; };
 		CAD767DFBA548141D844E0FC /* SwiftUI/Views/CursorThemeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/CursorThemeEditorView.swift; sourceTree = "<group>"; };
-		AA77001100110011 /* hotkeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotkeys.m; sourceTree = "<group>"; };
-		AA77001100110044 /* hotkeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hotkeys.h; sourceTree = "<group>"; };
 		AA88001100110011 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		32B39A20A0BDB42CB178B2F9 /* SwiftUI/Views/HelperToolStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/HelperToolStatusView.swift; sourceTree = "<group>"; };
 		AABB001100110011 /* SwiftUI/Views/GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Views/GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -143,26 +134,19 @@
 		897480CACDA0C15040C7EE47 /* SwiftUI/Models/CursorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/CursorModel.swift; sourceTree = "<group>"; };
 		2FD8C57FC7AAC15C0A4FFF14 /* LibraryController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LibraryController.swift; path = SwiftUI/Services/LibraryController.swift; sourceTree = "<group>"; };
 		789F1C67CA1B3541A668CE97 /* SwiftUI/Models/CursorIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/CursorIdentifier.swift; sourceTree = "<group>"; };
-		0EEBAF91AF8402F49A80EC0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C4D60249E6F374B02871AB67 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D20E996ED042D7B7C3E0BBC3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FF9A6FADCC03B87EB3BB62BF /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		949BBEC71127967367FD74F9 /* MaCursor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MaCursor.entitlements; sourceTree = "<group>"; };
 		7F778D392ABC460D8A6CBF35 /* MaCursor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaCursor-Bridging-Header.h"; sourceTree = "<group>"; };
-		D16A253C7C28F873B6822EED /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = ../../../../../../../../../System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<group>"; };
 		A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B1BDFEED205B0D8A7B5E5EE6 /* MaCursor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaCursor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44B36FDC21A51D11AA8B8598 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		0093F39CDFA8B9CBCA2F23F4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		C4AA203AB31933561FD59703 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		61B1C20A60501C3FE6B7405F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		41A4C26D18636B4380C8058A /* MaCursor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MaCursor-Info.plist"; sourceTree = "<group>"; };
 		4B35E1828BA082BA61A49C5B /* MaCursor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaCursor-Prefix.pch"; sourceTree = "<group>"; };
 		DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C8131B95BCE2C686CE2130EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		2F24430B7D565F07B5DD8277 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 
 
 		BEE90051E8E0556B6119A86A /* CGSPrivateAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivateAccessibility.h; sourceTree = "<group>"; };
@@ -281,9 +265,7 @@
 		22F9E82E530772BC541F91B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0EEBAF91AF8402F49A80EC0D /* CoreGraphics.framework */,
 				AA88001100110011 /* Carbon.framework */,
-				D16A253C7C28F873B6822EED /* ApplicationServices.framework */,
 				8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */,
 				A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */,
 				FF9A6FADCC03B87EB3BB62BF /* ServiceManagement.framework */,
@@ -291,21 +273,8 @@
 				2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */,
 				C4D60249E6F374B02871AB67 /* ApplicationServices.framework */,
 				44B36FDC21A51D11AA8B8598 /* Cocoa.framework */,
-				C8131B95BCE2C686CE2130EF /* XCTest.framework */,
-				2F24430B7D565F07B5DD8277 /* Foundation.framework */,
-				751CD4BCBE18650A0A95B274 /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		751CD4BCBE18650A0A95B274 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0093F39CDFA8B9CBCA2F23F4 /* AppKit.framework */,
-				C4AA203AB31933561FD59703 /* CoreData.framework */,
-				61B1C20A60501C3FE6B7405F /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		9A92BFF79FC93FD7F3646E06 /* MaCursor */ = {
@@ -473,7 +442,6 @@
 				991547DA531E3639CC409EC1 /* Sources */,
 				9B6CCD6347D04B1070331F83 /* Resources */,
 				086D7FA9D63F99220E13BB7F /* Frameworks */,
-				767AC31FA4C5A5C65E033D3B /* Build Number */,
 				FE60BD3E8C11BFCFFB6A3097 /* Copy Helper */,
 			);
 			buildRules = (
@@ -577,25 +545,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		767AC31FA4C5A5C65E033D3B /* Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build Number";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nbuildPlist=${INFOPLIST_FILE}\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $buildPlist)\nBuildNumberINCR=$((CFBundleVersion + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BuildNumberINCR\" $buildPlist\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		991547DA531E3639CC409EC1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -699,7 +648,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"PROJECT_DIR=\\\"\"$(PROJECT_DIR)\"\\\"",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -755,7 +703,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "PROJECT_DIR=\\\"\"$(PROJECT_DIR)\"\\\"";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -776,7 +723,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
@@ -789,7 +736,7 @@
 					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -811,7 +758,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
@@ -824,7 +771,7 @@
 					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -851,7 +798,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -873,7 +820,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursorhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -895,7 +842,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -913,7 +860,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursorhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";

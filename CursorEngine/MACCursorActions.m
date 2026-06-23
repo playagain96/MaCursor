@@ -133,6 +133,14 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
         hotSpot.x = size.width - hotSpot.x - 1;
     }
 
+    float renderScale = [MACDefault(MACPreferencesCursorScaleKey) floatValue];
+    if (renderScale >= MACMinCursorScale && renderScale < 1.0f) {
+        size.width  *= renderScale;
+        size.height *= renderScale;
+        hotSpot.x   *= renderScale;
+        hotSpot.y   *= renderScale;
+    }
+
     for (id object in reps) {
         CFTypeID type = CFGetTypeID((__bridge CFTypeRef)object);
         NSBitmapImageRep *rep;
@@ -750,7 +758,7 @@ float cursorScale() {
 
 float defaultCursorScale() {
     float scale = [MACDefault(MACPreferencesCursorScaleKey) floatValue];
-    if (scale < MACMinCursorScale || scale > MACMaxDefaultCursorScale)
+    if (scale < 1.0f || scale > MACMaxDefaultCursorScale)
         scale = 1;
     return scale;
 }
@@ -758,6 +766,9 @@ float defaultCursorScale() {
 BOOL setCursorScale(float dbl) {
     if (dbl > MACMaxCursorScale) {
         MMLog("Not a good idea...");
+        return NO;
+    } else if (dbl < MACMinCursorScale || dbl <= 0) {
+        MMLog("Scale below minimum, ignoring.");
         return NO;
     } else if (CGSSetCursorScale(CGSMainConnectionID(), dbl) == noErr) {
         MMLog("Successfully set cursor scale!");

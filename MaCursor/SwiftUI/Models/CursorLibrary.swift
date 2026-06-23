@@ -5,6 +5,7 @@ extension Notification.Name {
     static let cursorLibraryDidSave  = Notification.Name("MACLibraryDidSave")
     static let cursorLibraryIdentifierDidChange = Notification.Name("MACLibraryIdentifierDidChange")
     static let hideTahoeCursorsChanged = Notification.Name("MACHideTahoeCursorsChanged")
+    static let cursorSettingsDidReset = Notification.Name("MACCursorSettingsDidReset")
 }
 
 class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {

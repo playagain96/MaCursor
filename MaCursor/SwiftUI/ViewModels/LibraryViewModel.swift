@@ -105,11 +105,15 @@ class LibraryViewModel {
     }
 
     func restoreCursors() {
+        MACPreferences.set(NSNumber(value: 1.0), forKey: MACPreferences.cursorScaleKey)
+        MACPreferences.setFlag(false, forKey: MACPreferences.handednessKey)
+        CursorService.setScale(1.0)
         backingController.restoreTheme()
         for c in cursorThemes {
             c.isApplied = false
         }
         appliedThemeId = nil
+        NotificationCenter.default.post(name: .cursorSettingsDidReset, object: nil)
     }
 
     @discardableResult
