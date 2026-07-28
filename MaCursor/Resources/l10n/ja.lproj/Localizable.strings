@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "カーソル";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "カーソルの拡大率";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "カーソルの種類：";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "macOS用のカスタムカーソルテーマ";
 
 /* Appearance mode: dark */
 "Dark" = "ダーク";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "アップデートを確認…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "テーマを変換…";
+
+"Convert Theme" = "テーマを変換";
+
+"Convert" = "変換";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "Mousecapeの.capeファイル、Windowsのカーソルフォルダ（.cur/.ani）、またはLinuxのXcursorテーマフォルダを選択してください。";
+
+"Mapped" = "割り当て済み";
+
+"2nd" = "副";
+
+"Warnings & ignored (%d)" = "警告と無視された項目（%d）";
+
+"Add to Library" = "ライブラリに追加";
+
+"Conversion Failed" = "変換に失敗しました";
+
+"OK" = "OK";
+
+/* Add to library then edit button */
+"Add & Edit…" = "追加して編集…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "ポインタを重ねてカーソルを試し、クリックしてホットスポットを確認します";
+
+/* Show all slots checkbox */
+"Show All" = "すべてを表示";
+
+/* Sidebar list layout */
+"List View" = "リスト表示";
+
+/* Sidebar grid layout */
+"Grid View" = "グリッド表示";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "カーソルが割り当てられていません";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "ソースファイルを選択するか、セルにドロップしてください。";
+
+/* Choose cursor source button */
+"Choose Source…" = "ソースを選択…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "カーソルまたは画像ファイル（.cur、.ani、Xcursor、.png、.gif）を選択してください";
+
+/* Sidebar search field placeholder */
+"Search" = "検索";
+
+/* Replace cursor source button */
+"Replace Source…" = "ソースを置き換える…";
+
+/* Clear slot button */
+"Clear Slot" = "スロットをクリア";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "カーソルを置き換えられませんでした";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "“%@”はカーソルまたは画像ファイルとして読み込めませんでした。";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "このテーマを適用する前に、少なくとも1つのカーソルを追加してください。";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "このテーマを適用する前に、カーソルの種類に少なくとも1つのカーソルを割り当ててください。";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "MaCursorヘルプ";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "作成者：%@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "未割り当て";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "カーソルに画像がありません。";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "ホットスポット%lld,%lldは%lld×%lldの画像の範囲外です。";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "入力内のどのカーソルも、macOSのカーソルスロットに割り当てられませんでした。";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "入力を読み込めません：%@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "そのようなファイルまたはフォルダはありません：%@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "%@を読み込めません";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "%@の一覧を取得できません";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@「テーマを変換」では、Mousecapeの.capeファイル、Windowsのカーソルフォルダ、またはLinuxのXcursorテーマフォルダを使用できます。";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@はアーカイブです。まず展開してから、その中のテーマフォルダを選択してください。";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@は画像であり、カーソルテーマではありません。「テーマを編集」を使って、画像をカーソルスロットにドロップしてください。";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "このフォルダには%lld個のテーマファイルがあります。変換するものを1つ選択してください。";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "テーマに書き出すカーソルがありません。";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "テーマ名「%@」に使用できる文字が含まれていません。";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "スロットサイズの順序が正しくありません";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "スロットの画像はサイズ順（10× > 5× > 2× > 1×）を保つ必要があります。%2$@スロットの画像があるため、この画像は%1$@スロットに追加できません。";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "「%@」のスロット画像はサイズ順（10× > 5× > 2× > 1×）に反しています。保存する前にスロットを修正してください。";

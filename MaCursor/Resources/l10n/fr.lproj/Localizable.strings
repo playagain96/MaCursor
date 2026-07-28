@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "Curseur";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "Échelle du curseur";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "Type de curseur :";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "Thèmes de curseur personnalisés pour macOS";
 
 /* Appearance mode: dark */
 "Dark" = "Sombre";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "Rechercher les mises à jour…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "Convertir un thème…";
+
+"Convert Theme" = "Convertir un thème";
+
+"Convert" = "Convertir";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "Sélectionnez un fichier .cape de Mousecape, un dossier de curseurs Windows (.cur/.ani) ou un dossier de thèmes Xcursor sous Linux.";
+
+"Mapped" = "Associés";
+
+"2nd" = "2ᵉ";
+
+"Warnings & ignored (%d)" = "Avertissements et ignorés (%d)";
+
+"Add to Library" = "Ajouter à la bibliothèque";
+
+"Conversion Failed" = "Échec de la conversion";
+
+"OK" = "OK";
+
+/* Add to library then edit button */
+"Add & Edit…" = "Ajouter et modifier…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "Survolez pour essayer le curseur — cliquez pour vérifier le point actif";
+
+/* Show all slots checkbox */
+"Show All" = "Tout afficher";
+
+/* Sidebar list layout */
+"List View" = "Présentation en liste";
+
+/* Sidebar grid layout */
+"Grid View" = "Présentation en grille";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "Aucun curseur assigné";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "Choisissez un fichier source ou déposez-en un sur la cellule.";
+
+/* Choose cursor source button */
+"Choose Source…" = "Choisir la source…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "Choisissez un fichier de curseur ou d’image (.cur, .ani, Xcursor, .png, .gif)";
+
+/* Sidebar search field placeholder */
+"Search" = "Rechercher";
+
+/* Replace cursor source button */
+"Replace Source…" = "Remplacer la source…";
+
+/* Clear slot button */
+"Clear Slot" = "Effacer l’emplacement";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "Impossible de remplacer le curseur";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "« %@ » n’a pas pu être lu comme fichier de curseur ou d’image.";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "Ajoutez au moins un curseur à ce thème avant de l'appliquer.";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "Attribuez au moins un curseur à un type de curseur avant d'appliquer ce thème.";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "Aide MaCursor";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "par %@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "Non assigné";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "Le curseur ne contient aucune image.";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "Le point actif %lld,%lld se situe en dehors de l’image %lld×%lld.";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "Aucun curseur fourni n’a pu être associé à un emplacement de curseur macOS.";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "Impossible de lire l’entrée : %@.";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "fichier ou dossier introuvable : %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "impossible de lire %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "impossible de lister %@";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ « Convertir un thème » accepte un fichier .cape de Mousecape, un dossier de curseurs Windows ou un dossier de thèmes Xcursor sous Linux.";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ est une archive. Décompressez-la d’abord, puis sélectionnez le dossier de thème qu’elle contient.";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ est une image, et non un thème de curseur. Utilisez « Modifier le thème » pour déposer des images sur un emplacement de curseur.";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "Ce dossier contient %lld fichiers de thème. Choisissez-en un seul à convertir.";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "Le thème ne contient aucun curseur à écrire.";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "Le nom de thème « %@ » ne contient aucun caractère utilisable.";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "Tailles d’emplacement dans le désordre";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "Les images des emplacements doivent rester dans l’ordre des tailles (10× > 5× > 2× > 1×). Cette image ne convient pas à l’emplacement %1$@ à cause de l’image de l’emplacement %2$@.";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "« %@ » contient des images d’emplacement dans le désordre des tailles (10× > 5× > 2× > 1×). Corrigez les emplacements avant d’enregistrer.";

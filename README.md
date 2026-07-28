@@ -4,7 +4,7 @@
 
 # MaCursor
 
-**Custom cursor themes for macOS.**
+**Cursor Control for macOS**
 
 [![Download](https://img.shields.io/badge/Download-Latest-brightgreen?style=flat-square)](https://github.com/writronic/MaCursor/releases/latest)
 ![Platform](https://img.shields.io/badge/Platform-macOS-blue?style=flat-square)
@@ -16,7 +16,7 @@
 
 ---
 
-MaCursor lets you replace every macOS system cursor — arrow, I-beam, crosshair, wait spinner, and more — with custom artwork of your own. Browse 75+ ready-to-apply themes, import Windows `.cur` / `.ani` cursor files, design your own from scratch in the visual editor, and switch between themes instantly with global hotkeys.
+MaCursor gives you control over system cursors on macOS. You can replace macOS cursors with your own artwork or with ready-made themes, fine-tune every detail in the visual editor, and switch between them instantly with global hotkeys.
 
 Requires **macOS 15 Sequoia** or later.
 
@@ -26,10 +26,14 @@ Requires **macOS 15 Sequoia** or later.
 
 ## Features
 
-- **75+ Ready-to-Apply Themes** — Browse and download curated cursor themes from the Theme Gallery
+- **80+ Ready-to-Apply Themes** — Browse and download curated cursor themes from the Theme Gallery
 - **One-Click Apply** — Double-click any theme to instantly replace all system cursors
+- **Convert Windows, Linux & Mousecape Themes** — Rebuild a Windows cursor folder (`.cur` / `.ani`), a Linux Xcursor theme folder, or a Mousecape `.cape` file as a native `.cursor` theme, with every mapped cursor listed for review before it reaches your library
 - **Full Theme Editor** — Create and edit themes with a split-pane editor: metadata, cursor list, per-cursor image slots, hotspot editing, and animated cursor preview
+- **Live Hotspot Editor** — Drag the click point directly on the cursor image and watch the marker follow, with X / Y values updating as you go
+- **Live Preview** — Hover the preview strip to try the cursor for real, click to check where it actually clicks, and see it against black and white side by side
 - **Windows Cursor Import** — Drag & drop `.cur` and `.ani` files to import Windows cursors, including animated cursors with sprite sheet composition
+- **Animated GIF Import** — Drop an animated `.gif` onto a cursor slot and MaCursor builds the sprite sheet and frame timing for you
 - **HiDPI / Retina Support** — Separate 1× and 2× image representations per cursor for crisp rendering on Retina displays
 - **Cursor Scale** — Adjust cursor size from 0.50× to 4.00× with a precision slider (0.1× steps), or type any custom value and press Enter to apply
 - **Left / Right Hand Mode** — Switch cursor orientation for left-handed or right-handed mouse usage directly from Settings
@@ -50,7 +54,7 @@ Download the latest `.dmg` from the [Releases page](https://github.com/writronic
 
 ### 2. Get Themes
 
-Browse `.cursor` theme files in the [Theme Gallery](https://github.com/writronic/MaCursor/blob/main/themes/README.md) or grab them all from the [Releases page](https://github.com/writronic/MaCursor/releases/latest).
+Browse `.cursor` theme files in the [Theme Gallery](https://github.com/writronic/MaCursor/blob/main/themes/README.md) or grab them all from the [Releases page](https://github.com/writronic/MaCursor/releases/latest). Already have a Windows or Linux cursor theme? Use **File → Convert Theme…** instead.
 
 ### 3. Import & Apply
 
@@ -95,30 +99,58 @@ The new scale takes effect immediately.
 
 Import `.cursor` theme files by double-clicking, dragging onto the library window, or via **File → Import Theme**.
 
+### Converting Windows, Linux & Mousecape Themes
+
+**Convert Theme** rebuilds a cursor theme made for another platform as a native `.cursor` theme. Three kinds of source are accepted:
+
+| Source                   | What to choose                                                            |
+| ------------------------ | ------------------------------------------------------------------------- |
+| **Windows cursor theme** | The folder holding the `.cur` / `.ani` files (and its `.inf` file, if any) |
+| **Linux Xcursor theme**  | The theme folder that contains the `cursors` subfolder                     |
+| **Mousecape cape**       | A single `.cape` file                                                     |
+
+1. Choose **File → Convert Theme…** (⇧⌘O), then select the cursor theme folder or .cape file.
+2. MaCursor reads the source and maps each cursor to its macOS counterpart, then opens a review sheet.
+3. Check the **Mapped** list — every cursor that found a macOS slot is shown with its identifier. Open **Warnings & ignored** to see what was skipped and why.
+4. Click **Add to Library**, or **Add & Edit…** to go straight into the editor and fine-tune the result.
+
+Theme name and creator are filled in automatically from the source — an `.inf` file, `index.theme`, a `README`, or the cape's own metadata.
+
 ### Editing a Theme
 
 Right-click a theme → **Edit**, or select it and click **Edit** in the toolbar. The editor opens in a dedicated window with:
 
-| Pane              | Description                                                                                                        |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Metadata**      | Theme name, creator, version, HiDPI toggle                                                                         |
-| **Cursor List**   | All cursors in the theme, sorted alphabetically                                                                    |
-| **Cursor Detail** | Image drop zones for 1×, 2×, 5×, and 10× representations, hotspot coordinates, frame count, and animation duration |
+| Pane              | Description                                                                                                                                              |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Metadata**      | Theme name, creator, version, HiDPI toggle                                                                                                               |
+| **Cursor List**   | All cursors in the theme, sorted alphabetically, shown as a list or a grid, with a search field and a **Show All** toggle that reveals the empty slots     |
+| **Cursor Detail** | Image drop zones for 1×, 2×, 5×, and 10× representations, hotspot coordinates and hotspot editor, live preview, frame count, and animation duration        |
 
-Drop `.png`, `.cur`, or `.ani` files directly onto the representation slots in the editor to add or replace cursor images.
+Drop `.png`, `.gif`, `.cur`, or `.ani` files directly onto the representation slots in the editor to add or replace cursor images.
 
-### Importing Windows Cursors (.cur / .ani)
+### Editing the Hotspot
 
-You can add Windows cursor files directly into any theme via the editor:
+The hotspot is the single point that actually clicks. In the **Hot Spot** section of the cursor detail pane:
 
-1. Right-click a theme → **Edit** (or select it and click **Edit** in the toolbar).
-2. Drag `.cur` or `.ani` files from Finder onto the **Cursor List** pane (left side of the editor).
-3. Each dropped file is imported as a new cursor entry with its images and animation data preserved.
-4. Assign the imported cursor to the desired cursor type (e.g., Arrow, I-Beam, Wait) from the cursor detail pane.
-5. Click **Save**.
+1. Drag anywhere on the cursor image — the marker follows your pointer and the **X** and **Y** fields update live.
+2. Or type exact coordinates into **X** and **Y** for pixel-perfect placement.
 
-> [!TIP]
-> You can drag multiple `.cur` and `.ani` files at once. Animated `.ani` files are imported with their full sprite sheet and animation timing intact.
+The checkerboard behind the image shows transparency, so you can see exactly where the artwork ends.
+
+### Live Preview
+
+The **Preview** strip under the hotspot editor lets you try a cursor before you save it:
+
+- **Hover** the strip and your real pointer becomes the cursor you're editing.
+- **Click** anywhere to drop a bullseye at the exact point the cursor clicked — the quickest way to confirm the hotspot is right.
+- The strip is split **black and white**, so you can check that light and dark artwork stays visible on both.
+- Animated cursors play at their real frame rate while you hover.
+
+### Tahoe Cursor Variants
+
+macOS 26 Tahoe added S-variant cursor identifiers (`ArrowS`, `IBeamS`). MaCursor keeps them in sync for you: whatever you set for Arrow and I-Beam is mirrored into the matching variant, both when a theme is converted and when you edit one.
+
+Open **Settings → General** and turn off **Hide Tahoe cursors** if you'd rather see and edit those variants yourself.
 
 ### Global Shortcuts
 

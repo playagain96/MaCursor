@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "İmleç";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "İmleç Ölçeği";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "İmleç Türü:";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "macOS için özel imleç temaları";
 
 /* Appearance mode: dark */
 "Dark" = "Koyu";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "Güncellemeleri Denetle…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "Temayı Dönüştür...";
+
+"Convert Theme" = "Temayı Dönüştür";
+
+"Convert" = "Dönüştür";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "Bir Mousecape .cape dosyası, bir Windows imleç klasörü (.cur/.ani) veya bir Linux Xcursor tema klasörü seçin.";
+
+"Mapped" = "Eşlenenler";
+
+"2nd" = "2.";
+
+"Warnings & ignored (%d)" = "Uyarılar ve yok sayılanlar (%d)";
+
+"Add to Library" = "Kitaplığa Ekle";
+
+"Conversion Failed" = "Dönüştürme Başarısız";
+
+"OK" = "Tamam";
+
+/* Add to library then edit button */
+"Add & Edit…" = "Ekle ve Düzenle…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "İmleci denemek için üzerine gelin — etkin noktayı denetlemek için tıklayın";
+
+/* Show all slots checkbox */
+"Show All" = "Tümünü Göster";
+
+/* Sidebar list layout */
+"List View" = "Liste Görünümü";
+
+/* Sidebar grid layout */
+"Grid View" = "Izgara Görünümü";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "Atanmış imleç yok";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "Bir kaynak dosyası seçin veya hücrenin üzerine bırakın.";
+
+/* Choose cursor source button */
+"Choose Source…" = "Kaynak Seç…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "Bir imleç veya görüntü dosyası seçin (.cur, .ani, Xcursor, .png, .gif)";
+
+/* Sidebar search field placeholder */
+"Search" = "Ara";
+
+/* Replace cursor source button */
+"Replace Source…" = "Kaynağı Değiştir…";
+
+/* Clear slot button */
+"Clear Slot" = "Yuvayı Temizle";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "İmleç Değiştirilemedi";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "“%@” bir imleç veya görüntü dosyası olarak okunamadı.";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "Bu temayı uygulamadan önce en az bir imleç ekleyin.";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "Bu temayı uygulamadan önce, bir imleç türüne en az bir imleç atayın.";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "MaCursor Yardımı";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "%@ tarafından";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "Atanmamış";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "İmleçte görüntü yok.";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "%lld,%lld etkin noktası, %lld×%lld boyutundaki görüntünün dışında kalıyor.";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "Girdideki hiçbir imleç, macOS imleç yuvalarıyla eşleştirilemedi.";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "Girdi okunamadı: %@.";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "böyle bir dosya veya dizin yok: %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "%@ okunamıyor";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "%@ listelenemiyor";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ Temayı Dönüştür özelliği; bir Mousecape .cape dosyasını, bir Windows imleç klasörünü veya bir Linux Xcursor tema klasörünü kabul eder.";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ bir arşivdir. Önce arşivi açın, ardından içindeki tema klasörünü seçin.";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ bir görüntüdür, imleç teması değildir. İmleç yuvasına görüntü bırakmak için Temayı Düzenle özelliğini kullanın.";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "Bu klasörde %lld tema dosyası var. Dönüştürmek için tek bir tane seçin.";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "Temada yazılacak imleç yok.";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "“%@” tema adı kullanılabilir karakter içermiyor.";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "Yuva Boyutları Sıralamaya Aykırı";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "Yuva görselleri boyut sıralamasına uymalıdır (10× > 5× > 2× > 1×). Bu görsel, %2$@ yuvasındaki görsel nedeniyle %1$@ yuvasına eklenemez.";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "“%@” imlecinin yuva görselleri boyut sıralamasına aykırı (10× > 5× > 2× > 1×). Kaydetmeden önce yuvaları düzeltin.";

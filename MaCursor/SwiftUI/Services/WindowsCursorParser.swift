@@ -11,11 +11,13 @@ struct WindowsCursorParser {
             let image: NSBitmapImageRep
             let width: Int
             let height: Int
+            let hotspot: CGPoint
         }
     }
 
     struct AnimatedCursorData {
         let frames: [CursorData]
+        let frameOrdinals: [Int]
         let frameRate: Double
         let perFrameRates: [Double]?
         let sequence: [Int]?
@@ -129,11 +131,17 @@ struct WindowsCursorParser {
             guard entry.dataOffset + entry.dataSize <= data.count else { continue }
             let imageData = data[entry.dataOffset..<(entry.dataOffset + entry.dataSize)]
 
-            if let rep = try? decodeImageData(Data(imageData), expectedWidth: entry.width, expectedHeight: entry.height) {
+            if let rep = try? decodeImageData(Data(imageData)) {
+                var hotspotX = entry.hotspotX
+                var hotspotY = entry.hotspotY
+                if !(0..<rep.pixelsWide).contains(hotspotX) { hotspotX = 0 }
+                if !(0..<rep.pixelsHigh).contains(hotspotY) { hotspotY = 0 }
+
                 imageEntries.append(CursorData.ImageEntry(
                     image: rep,
                     width: rep.pixelsWide,
-                    height: rep.pixelsHigh
+                    height: rep.pixelsHigh,
+                    hotspot: CGPoint(x: hotspotX, y: hotspotY)
                 ))
             }
         }
@@ -142,10 +150,7 @@ struct WindowsCursorParser {
             throw ParseError.corruptedImageData("No valid images found in CUR file")
         }
 
-        let bestEntry = entries[0]
-        let hotspot = CGPoint(x: bestEntry.hotspotX, y: bestEntry.hotspotY)
-
-        return CursorData(images: imageEntries, hotspot: hotspot)
+        return CursorData(images: imageEntries, hotspot: imageEntries[0].hotspot)
     }
 
 
@@ -163,6 +168,8 @@ struct WindowsCursorParser {
         var rateTable: [UInt32]?
         var seqTable: [UInt32]?
         var frames: [CursorData] = []
+        var frameOrdinals: [Int] = []
+        var iconChunkCount = 0
         var title: String?
         var creator: String?
 
@@ -184,8 +191,11 @@ struct WindowsCursorParser {
                 creator = parseZString(chunkData)
 
             case "icon":
+                let ordinal = iconChunkCount
+                iconChunkCount += 1
                 if let cursorData = try? parseCUR(chunkData) {
                     frames.append(cursorData)
+                    frameOrdinals.append(ordinal)
                 }
 
             default:
@@ -208,6 +218,7 @@ struct WindowsCursorParser {
 
         return AnimatedCursorData(
             frames: frames,
+            frameOrdinals: frameOrdinals,
             frameRate: defaultFrameRate > 0 ? defaultFrameRate : 1.0 / 60.0,
             perFrameRates: perFrameRates,
             sequence: sequence,
@@ -299,7 +310,7 @@ struct WindowsCursorParser {
     }
 
 
-    private static func decodeImageData(_ data: Data, expectedWidth: Int, expectedHeight: Int) throws -> NSBitmapImageRep {
+    private static func decodeImageData(_ data: Data) throws -> NSBitmapImageRep {
         if data.count >= 8 && data[data.startIndex] == 0x89
             && data[data.startIndex + 1] == 0x50
             && data[data.startIndex + 2] == 0x4E
@@ -308,173 +319,19 @@ struct WindowsCursorParser {
             return try decodePNG(data)
         }
 
-        return try decodeBMPDIB(data, expectedWidth: expectedWidth, expectedHeight: expectedHeight)
+        do {
+            return NSBitmapImageRep(cgImage: try DIBDecoder.decode(data)).canonicalRGBA
+        } catch {
+            throw ParseError.corruptedImageData(
+                error.localizedDescription.isEmpty ? "\(error)" : error.localizedDescription)
+        }
     }
 
     private static func decodePNG(_ data: Data) throws -> NSBitmapImageRep {
         guard let rep = NSBitmapImageRep(data: data) else {
             throw ParseError.corruptedImageData("Failed to decode PNG data")
         }
-        return rep
-    }
-
-    private static func decodeBMPDIB(_ data: Data, expectedWidth: Int, expectedHeight: Int) throws -> NSBitmapImageRep {
-        guard data.count >= 40 else { throw ParseError.truncatedFile }
-
-        let biSize = Int(readUInt32(data, offset: 0))
-        let biWidth = Int(Int32(bitPattern: readUInt32(data, offset: 4)))
-        let biBitCount = Int(readUInt16(data, offset: 14))
-        let biCompression = readUInt32(data, offset: 16)
-
-        let biHeight = Int(Int32(bitPattern: readUInt32(data, offset: 8)))
-        let actualHeight = abs(biHeight) / 2
-        let actualWidth = biWidth > 0 ? biWidth : expectedWidth
-
-        if biBitCount == 32 && biCompression == 0 {
-            return try decode32bppBGRA(data, headerSize: biSize, width: actualWidth, height: actualHeight)
-        }
-
-        return try decodeBMPViaFullFile(data, expectedWidth: actualWidth, expectedHeight: actualHeight, biBitCount: biBitCount, headerSize: biSize)
-    }
-
-    private static func decode32bppBGRA(_ data: Data, headerSize: Int, width: Int, height: Int) throws -> NSBitmapImageRep {
-        guard width > 0 && height > 0 else {
-            throw ParseError.corruptedImageData("Invalid dimensions: \(width)x\(height)")
-        }
-
-        let rowBytes = width * 4
-        let xorDataSize = rowBytes * height
-
-        guard headerSize + xorDataSize <= data.count else {
-            throw ParseError.truncatedFile
-        }
-
-        guard let rep = NSBitmapImageRep(
-            bitmapDataPlanes: nil,
-            pixelsWide: width,
-            pixelsHigh: height,
-            bitsPerSample: 8,
-            samplesPerPixel: 4,
-            hasAlpha: true,
-            isPlanar: false,
-            colorSpaceName: .deviceRGB,
-            bitmapFormat: .alphaNonpremultiplied,
-            bytesPerRow: rowBytes,
-            bitsPerPixel: 32
-        ) else {
-            throw ParseError.corruptedImageData("Failed to create bitmap rep")
-        }
-
-        guard let bitmapData = rep.bitmapData else {
-            throw ParseError.corruptedImageData("Failed to get bitmap data pointer")
-        }
-
-        var hasAnyAlpha = false
-
-        for y in 0..<height {
-            let srcRow = height - 1 - y
-            let srcOffset = data.startIndex + headerSize + srcRow * rowBytes
-            let dstOffset = y * rowBytes
-
-            for x in 0..<width {
-                let srcPixel = srcOffset + x * 4
-                guard srcPixel + 3 < data.endIndex else { continue }
-
-                let b = data[srcPixel]
-                let g = data[srcPixel + 1]
-                let r = data[srcPixel + 2]
-                let a = data[srcPixel + 3]
-
-                if a > 0 { hasAnyAlpha = true }
-
-                let dstIdx = dstOffset + x * 4
-                bitmapData[dstIdx]     = r
-                bitmapData[dstIdx + 1] = g
-                bitmapData[dstIdx + 2] = b
-                bitmapData[dstIdx + 3] = a
-            }
-        }
-
-        if !hasAnyAlpha {
-            let andMaskRowBytes = ((width + 31) / 32) * 4
-            let andMaskStart = data.startIndex + headerSize + xorDataSize
-            let andMaskSize = andMaskRowBytes * height
-
-            if andMaskStart + andMaskSize <= data.endIndex {
-                for y in 0..<height {
-                    let srcRow = height - 1 - y
-                    let maskOffset = andMaskStart + srcRow * andMaskRowBytes
-                    let dstOffset = y * rowBytes
-
-                    for x in 0..<width {
-                        let byteIdx = maskOffset + x / 8
-                        guard byteIdx < data.endIndex else { continue }
-                        let bitIdx = 7 - (x % 8)
-                        let isTransparent = (data[byteIdx] >> bitIdx) & 1
-
-                        let dstIdx = dstOffset + x * 4
-                        bitmapData[dstIdx + 3] = isTransparent == 1 ? 0 : 255
-                    }
-                }
-            } else {
-                for y in 0..<height {
-                    let dstOffset = y * rowBytes
-                    for x in 0..<width {
-                        bitmapData[dstOffset + x * 4 + 3] = 255
-                    }
-                }
-            }
-        }
-
-        return rep
-    }
-
-    private static func decodeBMPViaFullFile(_ data: Data, expectedWidth: Int, expectedHeight: Int, biBitCount: Int, headerSize: Int) throws -> NSBitmapImageRep {
-        var mutableData = Data(data)
-
-        let actualHeight = Int32(expectedHeight)
-        withUnsafeBytes(of: actualHeight.littleEndian) { bytes in
-            mutableData.replaceSubrange(8..<12, with: bytes)
-        }
-
-        let colorTableEntries: Int
-        if biBitCount <= 8 {
-            let biClrUsed = Int(readUInt32(data, offset: 32))
-            colorTableEntries = biClrUsed > 0 ? biClrUsed : (1 << biBitCount)
-        } else {
-            colorTableEntries = 0
-        }
-        let colorTableSize = colorTableEntries * 4
-
-        let pixelDataOffset = 14 + headerSize + colorTableSize
-
-        let rowBits = expectedWidth * biBitCount
-        let rowBytes = ((rowBits + 31) / 32) * 4
-        let pixelDataSize = rowBytes * expectedHeight
-
-        let xorDataEnd = headerSize + colorTableSize + pixelDataSize
-        if xorDataEnd < mutableData.count {
-            mutableData = mutableData[mutableData.startIndex..<(mutableData.startIndex + xorDataEnd)]
-        }
-
-        var bmpFile = Data()
-        bmpFile.append(contentsOf: [0x42, 0x4D])
-
-        let fileSize = UInt32(14 + mutableData.count)
-        appendLEUInt32(&bmpFile, fileSize)
-
-        appendLEUInt16(&bmpFile, 0)
-        appendLEUInt16(&bmpFile, 0)
-
-        appendLEUInt32(&bmpFile, UInt32(pixelDataOffset))
-
-        bmpFile.append(mutableData)
-
-        guard let rep = NSBitmapImageRep(data: bmpFile) else {
-            throw ParseError.corruptedImageData("NSBitmapImageRep failed to decode BMP")
-        }
-
-        return rep
+        return rep.canonicalRGBA
     }
 
 
@@ -491,13 +348,5 @@ struct WindowsCursorParser {
             | (UInt32(data[idx + 1]) << 8)
             | (UInt32(data[idx + 2]) << 16)
             | (UInt32(data[idx + 3]) << 24)
-    }
-
-    private static func appendLEUInt16(_ data: inout Data, _ value: UInt16) {
-        withUnsafeBytes(of: value.littleEndian) { data.append(contentsOf: $0) }
-    }
-
-    private static func appendLEUInt32(_ data: inout Data, _ value: UInt32) {
-        withUnsafeBytes(of: value.littleEndian) { data.append(contentsOf: $0) }
     }
 }

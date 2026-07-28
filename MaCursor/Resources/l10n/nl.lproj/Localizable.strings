@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "Cursor";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "Cursorschaal";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "Cursortype:";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "Aangepaste cursorthema's voor macOS";
 
 /* Appearance mode: dark */
 "Dark" = "Donker";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "Controleer op updates…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "Converteer thema…";
+
+"Convert Theme" = "Converteer thema";
+
+"Convert" = "Converteer";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "Kies een Mousecape .cape-bestand, een Windows-cursormap (.cur/.ani) of een Linux Xcursor-themamap.";
+
+"Mapped" = "Toegewezen";
+
+"2nd" = "2e";
+
+"Warnings & ignored (%d)" = "Waarschuwingen en genegeerd (%d)";
+
+"Add to Library" = "Aan bibliotheek toevoegen";
+
+"Conversion Failed" = "Conversie mislukt";
+
+"OK" = "OK";
+
+/* Add to library then edit button */
+"Add & Edit…" = "Toevoegen en bewerken…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "Beweeg eroverheen om de cursor te proberen — klik om de hotspot te controleren";
+
+/* Show all slots checkbox */
+"Show All" = "Alles tonen";
+
+/* Sidebar list layout */
+"List View" = "Lijstweergave";
+
+/* Sidebar grid layout */
+"Grid View" = "Rasterweergave";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "Geen cursor toegewezen";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "Kies een bronbestand of sleep er een naar de cel.";
+
+/* Choose cursor source button */
+"Choose Source…" = "Kies bron…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "Kies een cursor- of afbeeldingsbestand (.cur, .ani, Xcursor, .png, .gif)";
+
+/* Sidebar search field placeholder */
+"Search" = "Zoeken";
+
+/* Replace cursor source button */
+"Replace Source…" = "Vervang bron…";
+
+/* Clear slot button */
+"Clear Slot" = "Wis vak";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "Kan bron niet vervangen";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "“%@” kan niet worden gelezen als cursor- of afbeeldingsbestand.";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "Voeg ten minste één cursor toe aan dit thema voordat je het toepast.";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "Wijs ten minste één cursor toe aan een cursortype voordat je dit thema toepast.";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "MaCursor Help";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "door %@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "Niet toegewezen";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "De cursor heeft geen afbeeldingen.";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "Hotspot %lld,%lld ligt buiten de afbeelding van %lld×%lld.";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "Geen enkele cursor in de invoer kon worden toegewezen aan een macOS-cursorvak.";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "Kan de invoer niet lezen: %@.";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "bestand of map bestaat niet: %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "kan %@ niet lezen";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "kan %@ niet weergeven";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ ‘Converteer thema’ accepteert een Mousecape .cape-bestand, een Windows-cursormap of een Linux Xcursor-themamap.";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ is een archief. Pak het eerst uit en kies dan de themamap die erin zit.";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ is een afbeelding, geen cursorthema. Gebruik ‘Thema bewerken’ om afbeeldingen naar een cursorvak te slepen.";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "Deze map bevat %lld themabestanden. Kies er één om te converteren.";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "Het thema bevat geen cursors om weg te schrijven.";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "De themanaam “%@” bevat geen bruikbare tekens.";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "Vakgroottes niet op volgorde";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "Vak-afbeeldingen moeten op grootte geordend blijven (10× > 5× > 2× > 1×). Deze afbeelding past niet in het %1$@-vak vanwege de afbeelding in het %2$@-vak.";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "“%@” heeft vak-afbeeldingen die niet op grootte geordend zijn (10× > 5× > 2× > 1×). Corrigeer de vakken voordat je bewaart.";

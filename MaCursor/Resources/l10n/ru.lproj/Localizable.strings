@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "Курсор";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "Масштаб курсора";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "Тип курсора:";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "Пользовательские темы курсоров для macOS";
 
 /* Appearance mode: dark */
 "Dark" = "Тёмное";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "Проверить наличие обновлений…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "Преобразовать тему…";
+
+"Convert Theme" = "Преобразовать тему";
+
+"Convert" = "Преобразовать";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "Выберите файл Mousecape с расширением .cape, папку с курсорами Windows (.cur/.ani) или папку с темами Xcursor для Linux.";
+
+"Mapped" = "Сопоставлено";
+
+"2nd" = "2-й";
+
+"Warnings & ignored (%d)" = "Предупреждения и пропущенное (%d)";
+
+"Add to Library" = "Добавить в библиотеку";
+
+"Conversion Failed" = "Не удалось преобразовать";
+
+"OK" = "ОК";
+
+/* Add to library then edit button */
+"Add & Edit…" = "Добавить и изменить…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "Наведите, чтобы опробовать курсор — щёлкните, чтобы проверить активную точку";
+
+/* Show all slots checkbox */
+"Show All" = "Показать все";
+
+/* Sidebar list layout */
+"List View" = "Список";
+
+/* Sidebar grid layout */
+"Grid View" = "Сетка";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "Курсор не назначен";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "Выберите исходный файл или перетащите его на ячейку.";
+
+/* Choose cursor source button */
+"Choose Source…" = "Выбрать источник…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "Выберите файл курсора или изображения (.cur, .ani, Xcursor, .png, .gif)";
+
+/* Sidebar search field placeholder */
+"Search" = "Поиск";
+
+/* Replace cursor source button */
+"Replace Source…" = "Заменить источник…";
+
+/* Clear slot button */
+"Clear Slot" = "Очистить ячейку";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "Не удалось заменить курсор";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "Не удалось прочитать «%@» как файл курсора или изображения.";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "Перед применением этой темы добавьте в неё хотя бы один курсор.";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "Перед применением этой темы назначьте хотя бы один курсор типу курсора.";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "Справка по MaCursor";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "от %@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "Не назначен";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "У курсора нет изображений.";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "Активная точка %lld,%lld находится за пределами изображения %lld×%lld.";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "Ни один курсор из входных данных не удалось сопоставить с ячейками курсоров macOS.";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "Не удалось прочитать входные данные: %@.";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "файл или папка не найдены: %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "не удалось прочитать %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "не удалось получить список %@";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ «Преобразовать тему» принимает файл Mousecape с расширением .cape, папку с курсорами Windows или папку с темами Xcursor для Linux.";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ — это архив. Сначала распакуйте его, а затем выберите папку с темой внутри.";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ — это изображение, а не тема курсора. Используйте «Изменить тему», чтобы перетащить изображения в ячейку курсора.";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "В этой папке %lld файлов тем. Выберите только один для преобразования.";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "В теме нет курсоров для записи.";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "Название темы «%@» не содержит допустимых символов.";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "Размеры ячеек нарушают порядок";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "Изображения в ячейках должны сохранять порядок размеров (10× > 5× > 2× > 1×). Это изображение не подходит для ячейки %1$@ из-за изображения в ячейке %2$@.";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "«%@» содержит изображения ячеек с нарушенным порядком размеров (10× > 5× > 2× > 1×). Исправьте ячейки перед сохранением.";

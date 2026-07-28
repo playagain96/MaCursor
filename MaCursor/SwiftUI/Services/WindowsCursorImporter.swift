@@ -73,7 +73,7 @@ struct WindowsCursorImporter {
             guard let best = parsed.images.first else {
                 throw WindowsCursorParser.ParseError.corruptedImageData("No images in CUR file")
             }
-            return (best.image, parsed.hotspot, 1, 1.0)
+            return (best.image, best.hotspot, 1, 1.0)
 
         case .ani:
             let parsed = try WindowsCursorParser.parseANI(data)
@@ -91,17 +91,33 @@ struct WindowsCursorImporter {
         cursor.identifier = ""
         cursor.frameCount = 1
         cursor.frameDuration = 1.0
-        cursor.hotSpot = NSPoint(x: parsed.hotspot.x, y: parsed.hotspot.y)
 
-        let (rep1x, rep2x) = selectBestRepresentations(from: parsed.images)
+        let (entry1x, entry2x) = selectBestRepresentations(from: parsed.images)
 
-        if let rep = rep1x {
-            cursor.setRepresentation(rep, for: .scale100)
-            cursor.size = NSSize(width: rep.pixelsWide, height: rep.pixelsHigh)
+        guard let baseEntry = entry1x ?? entry2x else {
+            cursor.hotSpot = NSPoint(x: parsed.hotspot.x, y: parsed.hotspot.y)
+            return cursor
         }
 
-        if let rep = rep2x {
-            cursor.setRepresentation(rep, for: .scale200)
+        let base = baseEntry.image
+        let size = CursorGeometry.baseSize(matchingAspectOf: base, frameCount: 1)
+        cursor.size = size
+        let pointWidth = CursorGeometry.normalizedPointWidth(size.width)
+        let hotSpotScale = base.pixelsWide > 0 ? size.width / CGFloat(base.pixelsWide) : 1
+
+        cursor.hotSpot = NSPoint(x: baseEntry.hotspot.x * hotSpotScale,
+                                 y: baseEntry.hotspot.y * hotSpotScale)
+
+        if let rep = entry1x?.image {
+            cursor.setRepresentation(
+                SlotImageImporter.normalized(rep, forScaleValue: 100, pointWidth: pointWidth),
+                for: .scale100)
+        }
+
+        if let rep = entry2x?.image {
+            cursor.setRepresentation(
+                SlotImageImporter.normalized(rep, forScaleValue: 200, pointWidth: pointWidth),
+                for: .scale200)
         }
 
         return cursor
@@ -116,13 +132,30 @@ struct WindowsCursorImporter {
 
         cursor.frameCount = UInt(result.frameCount)
         cursor.frameDuration = result.frameDuration
-        cursor.hotSpot = NSPoint(x: result.hotspot.x, y: result.hotspot.y)
 
-        cursor.setRepresentation(result.spriteSheet, for: .scale100)
-        cursor.size = result.frameSize
+        let size = CursorGeometry.baseSize(matchingAspectOf: result.spriteSheet,
+                                           frameCount: result.frameCount)
+        cursor.size = size
+        let pointWidth = CursorGeometry.normalizedPointWidth(size.width)
+        let hotSpotScale = result.spriteSheet.pixelsWide > 0
+            ? size.width / CGFloat(result.spriteSheet.pixelsWide)
+            : 1
+
+        cursor.hotSpot = NSPoint(x: result.hotspot.x * hotSpotScale,
+                                 y: result.hotspot.y * hotSpotScale)
+
+        cursor.setRepresentation(
+            SlotImageImporter.normalized(result.spriteSheet, forScaleValue: 100,
+                                         pointWidth: pointWidth,
+                                         frameCount: result.frameCount),
+            for: .scale100)
 
         if let sheet2x = result.spriteSheet2x {
-            cursor.setRepresentation(sheet2x, for: .scale200)
+            cursor.setRepresentation(
+                SlotImageImporter.normalized(sheet2x, forScaleValue: 200,
+                                             pointWidth: pointWidth,
+                                             frameCount: result.frameCount),
+                for: .scale200)
         }
 
         return cursor
@@ -140,22 +173,19 @@ struct WindowsCursorImporter {
     private static func buildSpriteSheet(from parsed: WindowsCursorParser.AnimatedCursorData) -> SpriteSheetResult {
         let orderedFrames: [WindowsCursorParser.CursorData]
         if let seq = parsed.sequence {
-            orderedFrames = seq.compactMap { idx in
-                idx < parsed.frames.count ? parsed.frames[idx] : nil
+            var byOrdinal: [Int: WindowsCursorParser.CursorData] = [:]
+            for (index, ordinal) in parsed.frameOrdinals.enumerated()
+            where parsed.frames.indices.contains(index) {
+                byOrdinal[ordinal] = parsed.frames[index]
             }
+            orderedFrames = seq.compactMap { byOrdinal[$0] }
         } else {
             orderedFrames = parsed.frames
         }
 
         guard !orderedFrames.isEmpty else {
-            let rep = NSBitmapImageRep(
-                bitmapDataPlanes: nil, pixelsWide: 1, pixelsHigh: 1,
-                bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,
-                isPlanar: false, colorSpaceName: .deviceRGB,
-                bytesPerRow: 4, bitsPerPixel: 32
-            )!
             return SpriteSheetResult(
-                spriteSheet: rep, spriteSheet2x: nil, hotspot: .zero,
+                spriteSheet: blankRepresentation(), spriteSheet2x: nil, hotspot: .zero,
                 frameCount: 1, frameDuration: 1.0,
                 frameSize: NSSize(width: 1, height: 1)
             )
@@ -163,36 +193,34 @@ struct WindowsCursorImporter {
 
         var frameReps: [NSBitmapImageRep] = []
         var frameReps2x: [NSBitmapImageRep] = []
+        var baseEntries: [WindowsCursorParser.CursorData.ImageEntry] = []
         for frame in orderedFrames {
-            let (rep1x, rep2x) = selectBestRepresentations(from: frame.images)
-            if let r = rep1x { frameReps.append(r) }
-            if let r = rep2x { frameReps2x.append(r) }
+            let (entry1x, entry2x) = selectBestRepresentations(from: frame.images)
+            if let e = entry1x {
+                frameReps.append(e.image)
+                baseEntries.append(e)
+            }
+            if let e = entry2x { frameReps2x.append(e.image) }
         }
 
         guard !frameReps.isEmpty else {
-            let rep = NSBitmapImageRep(
-                bitmapDataPlanes: nil, pixelsWide: 1, pixelsHigh: 1,
-                bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,
-                isPlanar: false, colorSpaceName: .deviceRGB,
-                bytesPerRow: 4, bitsPerPixel: 32
-            )!
             return SpriteSheetResult(
-                spriteSheet: rep, spriteSheet2x: nil, hotspot: .zero,
+                spriteSheet: blankRepresentation(), spriteSheet2x: nil, hotspot: .zero,
                 frameCount: 1, frameDuration: 1.0,
                 frameSize: NSSize(width: 1, height: 1)
             )
         }
 
-        let spriteSheet = composeSpriteSheetRaw(frames: frameReps)
+        let spriteSheet = composeSpriteSheet(frames: frameReps)
 
         let spriteSheet2x: NSBitmapImageRep?
         if frameReps2x.count == frameReps.count {
-            spriteSheet2x = composeSpriteSheetRaw(frames: frameReps2x)
+            spriteSheet2x = composeSpriteSheet(frames: frameReps2x)
         } else {
             spriteSheet2x = nil
         }
 
-        let hotspot = orderedFrames[0].hotspot
+        let hotspot = baseEntries.first?.hotspot ?? orderedFrames[0].hotspot
 
         let frameWidth = frameReps[0].pixelsWide
         let frameHeight = frameReps[0].pixelsHigh
@@ -214,60 +242,49 @@ struct WindowsCursorImporter {
         )
     }
 
-    private static func composeSpriteSheetRaw(frames: [NSBitmapImageRep]) -> NSBitmapImageRep {
-        guard !frames.isEmpty else {
-            return NSBitmapImageRep(
-                bitmapDataPlanes: nil, pixelsWide: 1, pixelsHigh: 1,
-                bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,
-                isPlanar: false, colorSpaceName: .deviceRGB,
-                bytesPerRow: 4, bitsPerPixel: 32
-            )!
-        }
-        if frames.count == 1 { return frames[0] }
+    private static func composeSpriteSheet(frames: [NSBitmapImageRep]) -> NSBitmapImageRep {
+        guard let first = frames.first else { return blankRepresentation() }
+        if frames.count == 1 { return first.canonicalRGBA }
 
-        let width = frames[0].pixelsWide
-        let totalHeight = frames.reduce(0) { $0 + $1.pixelsHigh }
-        let dstRowBytes = width * 4
-
-        guard let sheet = NSBitmapImageRep(
-            bitmapDataPlanes: nil,
-            pixelsWide: width,
-            pixelsHigh: totalHeight,
-            bitsPerSample: 8,
-            samplesPerPixel: 4,
-            hasAlpha: true,
-            isPlanar: false,
-            colorSpaceName: .deviceRGB,
-            bitmapFormat: .alphaNonpremultiplied,
-            bytesPerRow: dstRowBytes,
-            bitsPerPixel: 32
-        ), let dstBase = sheet.bitmapData else {
-            return MACCursorSwift.composeRepresentation(withFrames: frames) ?? frames[0]
+        let width = first.pixelsWide
+        let frameHeight = first.pixelsHigh
+        guard width > 0, frameHeight > 0,
+              let ctx = try? ImageScaler.rgbaContext(width: width,
+                                                     height: frameHeight * frames.count)
+        else {
+            return MACCursorSwift.composeRepresentation(withFrames: frames) ?? first
         }
 
-        var yOffset = 0
-        for frame in frames {
-            let frameHeight = frame.pixelsHigh
-            let srcRowBytes = frame.bytesPerRow
+        let uniform = frames.allSatisfy { $0.pixelsWide == width && $0.pixelsHigh == frameHeight }
+        ctx.interpolationQuality = uniform ? .none : .high
 
-            if let srcBase = frame.bitmapData {
-                for row in 0..<frameHeight {
-                    let srcRow = srcBase.advanced(by: row * srcRowBytes)
-                    let dstRow = dstBase.advanced(by: (yOffset + row) * dstRowBytes)
-                    memcpy(dstRow, srcRow, min(dstRowBytes, srcRowBytes))
-                }
-            }
-
-            yOffset += frameHeight
+        for (index, frame) in frames.enumerated() {
+            guard let image = frame.cgImage else { continue }
+            let y = CGFloat((frames.count - 1 - index) * frameHeight)
+            ctx.draw(image, in: CGRect(x: 0, y: y,
+                                       width: CGFloat(width), height: CGFloat(frameHeight)))
         }
 
-        return sheet
+        guard let sheet = ctx.makeImage() else {
+            return MACCursorSwift.composeRepresentation(withFrames: frames) ?? first
+        }
+        return NSBitmapImageRep(cgImage: sheet).canonicalRGBA
+    }
+
+    private static func blankRepresentation() -> NSBitmapImageRep {
+        NSBitmapImageRep(
+            bitmapDataPlanes: nil, pixelsWide: 1, pixelsHigh: 1,
+            bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,
+            isPlanar: false, colorSpaceName: .deviceRGB,
+            bytesPerRow: 4, bitsPerPixel: 32
+        )!
     }
 
 
     private static func selectBestRepresentations(
         from images: [WindowsCursorParser.CursorData.ImageEntry]
-    ) -> (rep1x: NSBitmapImageRep?, rep2x: NSBitmapImageRep?) {
+    ) -> (entry1x: WindowsCursorParser.CursorData.ImageEntry?,
+          entry2x: WindowsCursorParser.CursorData.ImageEntry?) {
         guard !images.isEmpty else { return (nil, nil) }
 
         let img32 = images.first { $0.width == 32 && $0.height == 32 }
@@ -275,20 +292,12 @@ struct WindowsCursorImporter {
 
         let usable = images.filter { $0.width > 16 || $0.height > 16 }
 
-        let rep1x: NSBitmapImageRep?
-        let rep2x: NSBitmapImageRep?
-
         if let img32 {
-            rep1x = img32.image
-            rep2x = img64?.image
-        } else if let first = usable.first {
-            rep1x = first.image
-            rep2x = nil
-        } else {
-            rep1x = images.first?.image
-            rep2x = nil
+            return (img32, img64)
         }
-
-        return (rep1x, rep2x)
+        if let first = usable.first {
+            return (first, nil)
+        }
+        return (images.first, nil)
     }
 }

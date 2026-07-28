@@ -4,9 +4,27 @@ class MACCursorSwift: MACCursor, @unchecked Sendable {
 
     private var _cachedBitmapReps: [String: NSBitmapImageRep]?
 
+    override func setValue(_ value: Any?, forKey key: String) {
+        if key == "representations" {
+            _cachedBitmapReps = nil
+        }
+        super.setValue(value, forKey: key)
+    }
+
 
     override var name: String {
         return MACConstants.nameForIdentifier(identifier ?? "")
+    }
+
+
+    var hasImageData: Bool {
+        guard let reps = representations as? [String: NSBitmapImageRep] else { return false }
+        return !reps.isEmpty
+    }
+
+
+    var isApplicable: Bool {
+        hasImageData && MACConstants.isKnownIdentifier(identifier ?? "")
     }
 
 
@@ -21,7 +39,8 @@ class MACCursorSwift: MACCursor, @unchecked Sendable {
 
         var pngs = [Data]()
         if let reps = representations as? [String: NSBitmapImageRep] {
-            for key in reps.keys.sorted() {
+            let ordered = reps.keys.sorted { (UInt($0) ?? 0) < (UInt($1) ?? 0) }
+            for key in ordered {
                 guard let rep = reps[key] else { continue }
                 if let pngData = rep.ensuredSRGBSpace.representation(using: .png, properties: [:]) {
                     pngs.append(pngData)
@@ -75,15 +94,9 @@ class MACCursorSwift: MACCursor, @unchecked Sendable {
             newMutableDict[dictKey] = bitmapRep
             setValue(newMutableDict, forKey: "representations")
 
-            if (representations as? NSDictionary)?.count == 1 {
-                let s = CGFloat(scale.rawValue) / 100.0
-                let newSize = NSSize(
-                    width: Double(bitmapRep.pixelsWide) / Double(s),
-                    height: Double(bitmapRep.pixelsHigh) / Double(frameCount) / Double(s)
-                )
-                if newSize != .zero {
-                    self.size = newSize
-                }
+            if size.width <= 0 || size.height <= 0 {
+                self.size = CursorGeometry.baseSize(matchingAspectOf: bitmapRep,
+                                                    frameCount: Int(frameCount))
             }
         } else {
             let existingDict = (representations as? [String: Any]) ?? [:]
@@ -105,7 +118,10 @@ class MACCursorSwift: MACCursor, @unchecked Sendable {
         guard let existingRep = representation(for: scale) else { return }
         guard let newRep = MACCursorSwift.composeRepresentation(withFrames: [existingRep, frame] as? [NSBitmapImageRep] ?? []) else { return }
 
-        let frames = Int(newRep.pixelsHigh) / Int(size.height)
+        let scaleFactor = CGFloat(scale.rawValue) / 100.0
+        let framePixelHeight = size.height * scaleFactor
+        guard framePixelHeight > 0 else { return }
+        let frames = Int((CGFloat(newRep.pixelsHigh) / framePixelHeight).rounded())
         if frameCount < frames {
             frameCount = UInt(frames)
         }

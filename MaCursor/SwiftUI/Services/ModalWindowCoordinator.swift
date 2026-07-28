@@ -1,5 +1,11 @@
 import AppKit
 import Foundation
+import Observation
+
+enum ModalWindowRole {
+    case main
+    case modal
+}
 
 private enum ModalWindowTitles {
     static let mainWindow = "MaCursor"
@@ -8,13 +14,38 @@ private enum ModalWindowTitles {
     static let settingsIdentifiers = ["Settings", "Preferences"]
 }
 
-private class BlockingOverlayView: NSView {
+enum ModalWindowPlacement {
+    static func centeredOrigin(
+        size: NSSize,
+        over parentFrame: NSRect,
+        constrainedTo visibleFrame: NSRect
+    ) -> NSPoint {
+        var x = parentFrame.midX - size.width / 2
+        var y = parentFrame.midY - size.height / 2
+
+        x = min(x, visibleFrame.maxX - size.width)
+        y = min(y, visibleFrame.maxY - size.height)
+        x = max(x, visibleFrame.minX)
+        y = max(y, visibleFrame.minY)
+
+        return NSPoint(x: x, y: y)
+    }
+}
+
+private struct WeakWindow {
+    weak var window: NSWindow?
+}
+
+class BlockingOverlayView: NSView {
     weak var modalWindowToFocus: NSWindow?
+
+    static let blockedDragTypes: [NSPasteboard.PasteboardType] = [.fileURL, .URL]
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         wantsLayer = true
         layer?.backgroundColor = NSColor.black.withAlphaComponent(0.15).cgColor
+        registerForDraggedTypes(Self.blockedDragTypes)
     }
 
     required init?(coder: NSCoder) {
@@ -54,6 +85,12 @@ private class BlockingOverlayView: NSView {
     override func otherMouseUp(with event: NSEvent) {}
 
 
+    override func draggingEntered(_ sender: any NSDraggingInfo) -> NSDragOperation { [] }
+    override func draggingUpdated(_ sender: any NSDraggingInfo) -> NSDragOperation { [] }
+    override func prepareForDragOperation(_ sender: any NSDraggingInfo) -> Bool { false }
+    override func performDragOperation(_ sender: any NSDraggingInfo) -> Bool { false }
+
+
     private func beepAndRefocusModal() {
         NSSound.beep()
         if let modal = modalWindowToFocus, modal.isVisible {
@@ -62,16 +99,47 @@ private class BlockingOverlayView: NSView {
     }
 }
 
+@Observable
 @MainActor
 final class ModalWindowCoordinator {
+    @ObservationIgnored
     static let shared = ModalWindowCoordinator()
 
-    private var blockingWindowNumbers: Set<Int> = []
-    private var overlayView: BlockingOverlayView?
-    private weak var mainWindow: NSWindow?
-    private var eventMonitor: Any?
+    @ObservationIgnored
+    var windowProvider: () -> [NSWindow] = { NSApp.windows }
 
-    private init() {}
+    @ObservationIgnored
+    var isApplicationActive: () -> Bool = { NSApp.isActive }
+
+    private(set) var isMainWindowBlocked = false
+
+    @ObservationIgnored private var modalStack: [WeakWindow] = []
+    @ObservationIgnored private var registeredMain: [WeakWindow] = []
+    @ObservationIgnored private var registeredModals: [WeakWindow] = []
+    @ObservationIgnored private var overlayView: BlockingOverlayView?
+    @ObservationIgnored private weak var overlayHost: NSWindow?
+    @ObservationIgnored private weak var mainWindow: NSWindow?
+    @ObservationIgnored private var eventMonitor: Any?
+    @ObservationIgnored private var isReassertingOrder = false
+
+    init() {}
+
+
+    private func refreshBlockedState() {
+        let blocked = !modalStack.isEmpty
+        guard isMainWindowBlocked != blocked else { return }
+        isMainWindowBlocked = blocked
+        if !blocked { unblockMainWindow() }
+    }
+
+    func runIfMainWindowIsUsable(_ action: () -> Void) {
+        guard !isMainWindowBlocked else {
+            NSSound.beep()
+            activeModalWindow?.makeKeyAndOrderFront(nil)
+            return
+        }
+        action()
+    }
 
 
     func start() {
@@ -84,14 +152,81 @@ final class ModalWindowCoordinator {
 
         NotificationCenter.default.addObserver(
             self,
+            selector: #selector(handleWindowBecameKey(_:)),
+            name: NSWindow.didBecomeMainNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
             selector: #selector(handleWindowWillClose(_:)),
             name: NSWindow.willCloseNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAppBecameActive(_:)),
+            name: NSApplication.didBecomeActiveNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAppResignedActive(_:)),
+            name: NSApplication.didResignActiveNotification,
             object: nil
         )
     }
 
 
-    private func isMainLibraryWindow(_ window: NSWindow) -> Bool {
+    func register(_ window: NSWindow, as role: ModalWindowRole) {
+        switch role {
+        case .main:
+            guard !isRegisteredMain(window) else { return }
+            pruneRegistrations()
+            registeredModals.removeAll { $0.window === window }
+            if modalStack.contains(where: { $0.window === window }) {
+                releaseModal(window)
+            }
+            registeredMain.append(WeakWindow(window: window))
+            mainWindow = window
+
+        case .modal:
+            let alreadyRegistered = isRegisteredModal(window)
+            if !alreadyRegistered {
+                pruneRegistrations()
+                registeredMain.removeAll { $0.window === window }
+                registeredModals.append(WeakWindow(window: window))
+                if mainWindow === window { mainWindow = nil }
+            }
+            if window.isKeyWindow, modalStack.last?.window !== window {
+                windowDidBecomeKey(window)
+            }
+        }
+    }
+
+    private func pruneRegistrations() {
+        registeredMain.removeAll { $0.window == nil }
+        registeredModals.removeAll { $0.window == nil }
+        modalStack.removeAll { $0.window == nil }
+        refreshBlockedState()
+    }
+
+    private func isRegisteredMain(_ window: NSWindow) -> Bool {
+        registeredMain.contains { $0.window === window }
+    }
+
+    private func isRegisteredModal(_ window: NSWindow) -> Bool {
+        registeredModals.contains { $0.window === window }
+    }
+
+
+    func isMainLibraryWindow(_ window: NSWindow) -> Bool {
+        if isRegisteredMain(window) { return true }
+        if isRegisteredModal(window) { return false }
+        if modalStack.contains(where: { $0.window === window }) { return false }
+
         guard !window.isSheet,
               !(window is NSPanel),
               !isBlockingWindow(window) else { return false }
@@ -100,7 +235,10 @@ final class ModalWindowCoordinator {
         return title == ModalWindowTitles.mainWindow || title.isEmpty
     }
 
-    private func isBlockingWindow(_ window: NSWindow) -> Bool {
+    func isBlockingWindow(_ window: NSWindow) -> Bool {
+        if isRegisteredModal(window) { return true }
+        if isRegisteredMain(window) { return false }
+
         let title = window.title
 
         if title.hasPrefix(ModalWindowTitles.editThemePrefix) { return true }
@@ -117,60 +255,123 @@ final class ModalWindowCoordinator {
     }
 
 
-    private func findMainWindow() -> NSWindow? {
-        if let cached = mainWindow, cached.isVisible { return cached }
+    var trackedModalWindows: [NSWindow] {
+        modalStack.compactMap { $0.window }
+    }
 
-        let candidate = NSApp.windows.first(where: { isMainLibraryWindow($0) })
+    var activeModalWindow: NSWindow? {
+        let live = trackedModalWindows
+        return live.last(where: { $0.isVisible }) ?? live.last
+    }
+
+    var resolvedMainWindow: NSWindow? {
+        findMainWindow()
+    }
+
+    var hasEventMonitor: Bool {
+        eventMonitor != nil
+    }
+
+    var hasOverlay: Bool {
+        overlayView != nil
+    }
+
+
+    private func findMainWindow() -> NSWindow? {
+        let registered = registeredMain.compactMap { $0.window }
+        if !registered.isEmpty {
+            let candidate =
+                registered.first(where: { $0.isKeyWindow || $0.isMainWindow })
+                ?? registered.first(where: { $0 === mainWindow })
+                ?? registered.first(where: { $0.isVisible })
+                ?? registered.first
+            mainWindow = candidate
+            return candidate
+        }
+
+        if let cached = mainWindow, cached.isVisible, isMainLibraryWindow(cached) { return cached }
+
+        let windows = windowProvider()
+        let candidate =
+            windows.first(where: { $0.title == ModalWindowTitles.mainWindow && isMainLibraryWindow($0) })
+            ?? windows.first(where: { isMainLibraryWindow($0) })
+
         mainWindow = candidate
         return candidate
     }
 
 
     private func blockMainWindow(for modalWindow: NSWindow) {
-        guard let main = findMainWindow() else { return }
+        modalWindow.parent?.removeChildWindow(modalWindow)
+        modalWindow.collectionBehavior.insert(.fullScreenAuxiliary)
+        applyModalLevel(to: modalWindow)
 
-        modalWindow.level = .normal
-        main.addChildWindow(modalWindow, ordered: .above)
+        installEventMonitor()
+
+        guard let main = findMainWindow(), main !== modalWindow else { return }
+
+        modalWindow.order(.above, relativeTo: main.windowNumber)
         installOverlay(on: main, targeting: modalWindow)
-        installEventMonitor(targeting: modalWindow)
     }
 
     private func unblockMainWindow() {
-        guard let main = findMainWindow() else { return }
-
         removeOverlay()
         removeEventMonitor()
-
-        for num in blockingWindowNumbers {
-            if let w = NSApp.windows.first(where: { $0.windowNumber == num }) {
-                main.removeChildWindow(w)
-                w.level = .normal
-            }
-        }
-
-        main.makeKeyAndOrderFront(nil)
+        findMainWindow()?.makeKeyAndOrderFront(nil)
     }
 
 
-    private func installEventMonitor(targeting modal: NSWindow) {
-        removeEventMonitor()
+    private func applyModalLevel(to window: NSWindow, active: Bool) {
+        window.level = active ? .floating : .normal
+    }
+
+    private func applyModalLevel(to window: NSWindow) {
+        applyModalLevel(to: window, active: isApplicationActive())
+    }
+
+    private func refreshModalLevels(active: Bool) {
+        for modal in trackedModalWindows {
+            applyModalLevel(to: modal, active: active)
+        }
+    }
+
+
+    @discardableResult
+    func raiseActiveModal(above window: NSWindow) -> NSWindow? {
+        guard !isReassertingOrder,
+              isMainLibraryWindow(window),
+              let modal = activeModalWindow,
+              modal !== window else { return nil }
+
+        isReassertingOrder = true
+        defer { isReassertingOrder = false }
+
+        modal.order(.above, relativeTo: window.windowNumber)
+        modal.makeKeyAndOrderFront(nil)
+        return modal
+    }
+
+
+    private func installEventMonitor() {
+        guard eventMonitor == nil else { return }
         eventMonitor = NSEvent.addLocalMonitorForEvents(
-            matching: [.leftMouseDown, .rightMouseDown, .otherMouseDown]
+            matching: [.leftMouseDown, .rightMouseDown, .otherMouseDown, .keyDown]
         ) { [weak self] event in
             guard let self else { return event }
-            if let eventWindow = event.window,
-               self.isMainLibraryWindow(eventWindow),
-               !self.blockingWindowNumbers.isEmpty {
-                NSSound.beep()
-                if let activeModal = NSApp.windows.first(where: {
-                    self.blockingWindowNumbers.contains($0.windowNumber) && $0.isVisible
-                }) {
-                    activeModal.makeKeyAndOrderFront(nil)
-                }
-                return nil
-            }
-            return event
+            guard let eventWindow = event.window,
+                  self.shouldSwallow(event, in: eventWindow),
+                  let modal = self.activeModalWindow else { return event }
+            if event.type != .keyDown { NSSound.beep() }
+            modal.makeKeyAndOrderFront(nil)
+            return nil
         }
+    }
+
+    func shouldSwallow(_ event: NSEvent, in window: NSWindow) -> Bool {
+        if event.type == .keyDown {
+            return isRegisteredMain(window) && !isRegisteredModal(window)
+        }
+        return isMainLibraryWindow(window)
     }
 
     private func removeEventMonitor() {
@@ -182,67 +383,109 @@ final class ModalWindowCoordinator {
 
 
     private func installOverlay(on window: NSWindow, targeting modal: NSWindow) {
-        if overlayView == nil {
-            guard let themeFrame = window.contentView?.superview else { return }
-
-            let overlay = BlockingOverlayView()
-            overlay.autoresizingMask = [.width, .height]
-            overlay.frame = themeFrame.bounds
-            overlay.modalWindowToFocus = modal
-            themeFrame.addSubview(overlay)
-            overlayView = overlay
-        } else {
-            overlayView?.modalWindowToFocus = modal
+        if let existing = overlayView,
+           overlayHost === window,
+           existing.window === window,
+           existing.superview != nil {
+            existing.modalWindowToFocus = modal
+            return
         }
+
+        removeOverlay()
+
+        guard let themeFrame = window.contentView?.superview else { return }
+
+        let overlay = BlockingOverlayView()
+        overlay.autoresizingMask = [.width, .height]
+        overlay.frame = themeFrame.bounds
+        overlay.modalWindowToFocus = modal
+        themeFrame.addSubview(overlay)
+        overlayView = overlay
+        overlayHost = window
     }
 
     private func removeOverlay() {
         overlayView?.removeFromSuperview()
         overlayView = nil
+        overlayHost = nil
     }
 
 
-    private func pruneStaleEntries() {
-        blockingWindowNumbers = blockingWindowNumbers.filter { num in
-            NSApp.windows.contains(where: { $0.windowNumber == num && $0.isVisible })
-        }
+    private func promoteToTopOfModalStack(_ window: NSWindow) {
+        modalStack.removeAll { $0.window == nil || $0.window === window }
+        modalStack.append(WeakWindow(window: window))
+        refreshBlockedState()
     }
 
     private func refocusRemainingModal() {
-        guard let nextModal = NSApp.windows.first(where: {
-            blockingWindowNumbers.contains($0.windowNumber) && $0.isVisible
-        }) else { return }
-
-        overlayView?.modalWindowToFocus = nextModal
-        nextModal.makeKeyAndOrderFront(nil)
+        guard let modal = activeModalWindow else { return }
+        overlayView?.modalWindowToFocus = modal
+        modal.makeKeyAndOrderFront(nil)
     }
 
 
-    @objc private func handleWindowBecameKey(_ notification: Notification) {
-        guard let window = notification.object as? NSWindow,
-              isBlockingWindow(window) else { return }
+    func windowDidBecomeKey(_ window: NSWindow) {
+        pruneRegistrations()
 
-        let isNew = blockingWindowNumbers.insert(window.windowNumber).inserted
-        if isNew {
+        if isBlockingWindow(window) {
+            promoteToTopOfModalStack(window)
             blockMainWindow(for: window)
+            return
+        }
+
+        if isMainLibraryWindow(window) {
+            mainWindow = window
+            raiseActiveModal(above: window)
         }
     }
 
-    @objc private func handleWindowWillClose(_ notification: Notification) {
-        guard let window = notification.object as? NSWindow,
-              blockingWindowNumbers.contains(window.windowNumber) else { return }
-
-        if let main = findMainWindow() {
-            main.removeChildWindow(window)
-        }
+    private func releaseModal(_ window: NSWindow) {
+        window.parent?.removeChildWindow(window)
         window.level = .normal
-        blockingWindowNumbers.remove(window.windowNumber)
-        pruneStaleEntries()
+        modalStack.removeAll { $0.window == nil || $0.window === window }
+        refreshBlockedState()
 
-        if blockingWindowNumbers.isEmpty {
+        if modalStack.isEmpty {
             unblockMainWindow()
         } else {
             refocusRemainingModal()
         }
+    }
+
+    func windowWillClose(_ window: NSWindow) {
+        registeredModals.removeAll { $0.window === window }
+        registeredMain.removeAll { $0.window === window }
+
+        guard modalStack.contains(where: { $0.window === window }) else { return }
+        releaseModal(window)
+    }
+
+
+    @objc private func handleWindowBecameKey(_ notification: Notification) {
+        guard let window = notification.object as? NSWindow else { return }
+        windowDidBecomeKey(window)
+    }
+
+    @objc private func handleWindowWillClose(_ notification: Notification) {
+        guard let window = notification.object as? NSWindow else { return }
+        windowWillClose(window)
+    }
+
+    func applicationDidBecomeActive() {
+        refreshModalLevels(active: true)
+        guard let main = findMainWindow() else { return }
+        raiseActiveModal(above: main)
+    }
+
+    func applicationDidResignActive() {
+        refreshModalLevels(active: false)
+    }
+
+    @objc private func handleAppBecameActive(_ notification: Notification) {
+        applicationDidBecomeActive()
+    }
+
+    @objc private func handleAppResignedActive(_ notification: Notification) {
+        applicationDidResignActive()
     }
 }

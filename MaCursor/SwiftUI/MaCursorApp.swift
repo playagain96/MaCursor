@@ -67,22 +67,10 @@ struct MaCursorApp: App {
             }
 
             CommandGroup(replacing: .newItem) {
-                Button("New Theme") {
-                    library.addNewTheme()
-                }
-                .keyboardShortcut("n")
-
-                Button("Import Theme...") {
-                    library.showImportPanel()
-                }
-                .keyboardShortcut("o")
+                LibraryFileCommands(library: library)
             }
 
-            CommandGroup(after: .pasteboard) {
-                Button("Restore System Cursors") {
-                    library.restoreCursors()
-                }
-            }
+            CommandGroup(replacing: .pasteboard) { }
 
             CommandGroup(replacing: .help) {
                 Button("MaCursor Help") {
@@ -112,7 +100,7 @@ struct MaCursorApp: App {
                 )
             }
         }
-        .defaultSize(width: 720, height: 520)
+        .defaultSize(width: 1000, height: 700)
         .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
 
@@ -124,5 +112,32 @@ struct MaCursorApp: App {
         .windowResizability(.contentSize)
         .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
+        .commandsRemoved()
+    }
+}
+
+private struct LibraryFileCommands: View {
+    let library: LibraryViewModel
+
+    private var coordinator: ModalWindowCoordinator { .shared }
+
+    var body: some View {
+        Button("New Theme") {
+            coordinator.runIfMainWindowIsUsable { library.addNewTheme() }
+        }
+        .keyboardShortcut("n")
+        .disabled(coordinator.isMainWindowBlocked)
+
+        Button("Import Theme...") {
+            coordinator.runIfMainWindowIsUsable { library.showImportPanel() }
+        }
+        .keyboardShortcut("o")
+        .disabled(coordinator.isMainWindowBlocked)
+
+        Button("Convert Theme...") {
+            coordinator.runIfMainWindowIsUsable { library.showConvertPanel() }
+        }
+        .keyboardShortcut("o", modifiers: [.command, .shift])
+        .disabled(coordinator.isMainWindowBlocked)
     }
 }

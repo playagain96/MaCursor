@@ -4,9 +4,9 @@
 
 # Theme Gallery
 
-**Browse 75+ cursor themes — click any name to download, or grab them all from the [Releases page](https://github.com/writronic/MaCursor/releases/latest).**
+**Browse 80+ cursor themes — click any name to download, or grab them all from the [Releases page](https://github.com/writronic/MaCursor/releases/latest).**
 
-![Themes](https://img.shields.io/badge/Themes-79-brightgreen?style=flat-square)
+![Themes](https://img.shields.io/badge/Themes-83-brightgreen?style=flat-square)
 [![Contribute a Theme](https://img.shields.io/badge/Contribute%20a%20Theme-8A2BE2?style=flat-square)](https://github.com/writronic/MaCursor/blob/main/.github/CONTRIBUTING.md#submitting-a-theme-to-the-gallery)
 
 </div>
@@ -190,6 +190,12 @@
 ### [CaptaineCursorsWhite](https://github.com/writronic/MaCursor/blob/main/themes/CaptaineCursorsWhite.cursor)
 
 <img src="screenshots/CaptaineCursorsWhite.png" alt="CaptaineCursorsWhite">
+
+---
+
+### [Empty-Butterfly-White](https://github.com/writronic/MaCursor/blob/main/themes/Empty-Butterfly-White.cursor)
+
+<img src="screenshots/Empty-Butterfly-White.png" alt="Empty-Butterfly-White">
 
 ---
 
@@ -391,6 +397,12 @@
 
 ---
 
+### [OreoSparkDarkCursors](https://github.com/writronic/MaCursor/blob/main/themes/OreoSparkDarkCursors.cursor)
+
+<img src="screenshots/OreoSparkDarkCursors.png" alt="OreoSparkDarkCursors">
+
+---
+
 ### [See](https://github.com/writronic/MaCursor/blob/main/themes/See.cursor)
 
 <img src="screenshots/See.png" alt="See">
@@ -479,8 +491,24 @@
 
 <img src="screenshots/VisionCursorBlack.png" alt="VisionCursorBlack">
 
+*Design by [IDarques](https://www.deviantart.com/idarques) · port by [playagain96](https://github.com/playagain96)*
+
 ---
 
 ### [VisionCursorWhite](https://github.com/writronic/MaCursor/blob/main/themes/VisionCursorWhite.cursor)
 
 <img src="screenshots/VisionCursorWhite.png" alt="VisionCursorWhite">
+
+*Design by [IDarques](https://www.deviantart.com/idarques) · port by [playagain96](https://github.com/playagain96)*
+
+---
+
+### [VolantesCursors](https://github.com/writronic/MaCursor/blob/main/themes/VolantesCursors.cursor)
+
+<img src="screenshots/VolantesCursors.png" alt="VolantesCursors">
+
+---
+
+### [VolantesLightCursors](https://github.com/writronic/MaCursor/blob/main/themes/VolantesLightCursors.cursor)
+
+<img src="screenshots/VolantesLightCursors.png" alt="VolantesLightCursors">

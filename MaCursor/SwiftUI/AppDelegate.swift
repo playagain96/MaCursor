@@ -8,8 +8,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var isViewReady = false
 
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        NSWindow.allowsAutomaticWindowTabbing = false
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         ModalWindowCoordinator.shared.start()
+        TextEditingFocusCoordinator.shared.start()
 
         let systemDefaultPath = MACSystemDefaultCursorPath()
         if !FileManager.default.fileExists(atPath: systemDefaultPath) {

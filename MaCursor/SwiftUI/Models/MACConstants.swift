@@ -24,6 +24,7 @@ enum MACConstants {
         case writeFail                = -2
         case invalidFormat            = -100
         case multipleCursorIdentifiers = -101
+        case slotOrderConflict        = -102
     }
 
 
@@ -134,6 +135,10 @@ enum MACConstants {
 
     static func nameForIdentifier(_ identifier: String) -> String {
         return cursorMap[identifier] ?? "Unknown"
+    }
+
+    static func isKnownIdentifier(_ identifier: String) -> Bool {
+        return cursorMap[identifier] != nil
     }
 
     static func identifierForName(_ name: String) -> String? {

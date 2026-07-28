@@ -135,7 +135,7 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
         else {
             NSImageRep *rep = [self representationForScale:cursorScaleForScale(scale)];
             if (rep) {
-                NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(rep.pixelsWide / scale, rep.pixelsHigh / scale)];
+                NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(self.size.width, self.size.height * self.frameCount)];
                 [image addRepresentation:rep];
                 return image;
             }
@@ -173,11 +173,11 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
     else
         [self.representations removeObjectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)scale, nil]];
 
-    if (self.representations.count == 1) {
-        NSSize size = NSMakeSize((double)imageRep.pixelsWide / (scale / 100.0), (double)imageRep.pixelsHigh / self.frameCount / (scale / 100.0));
-        if (!NSEqualSizes(size, NSZeroSize)) {
-            self.size = size;
-        }
+    if (imageRep && (self.size.width <= 0 || self.size.height <= 0) && imageRep.pixelsWide > 0 && imageRep.pixelsHigh > 0) {
+        NSUInteger frameCount = MAX(self.frameCount, 1);
+        CGFloat frameHeight = (CGFloat)imageRep.pixelsHigh / frameCount;
+        CGFloat pointHeight = round(MACBaseCursorPointSize * frameHeight / imageRep.pixelsWide);
+        self.size = NSMakeSize(MACBaseCursorPointSize, MAX(1.0, pointHeight));
     }
 
     [self didChangeValueForKey:key];
@@ -188,7 +188,9 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
     NSImageRep *rep = [self representationForScale:scale];
     NSImageRep *newRep = [self.class composeRepresentationWithFrames:@[ rep, frame ]];
 
-    NSInteger frames = newRep.pixelsHigh / self.size.height;
+    CGFloat scaleFactor = scale / 100.0;
+    CGFloat framePixelHeight = self.size.height * scaleFactor;
+    NSInteger frames = framePixelHeight > 0 ? lround(newRep.pixelsHigh / framePixelHeight) : 0;
 
     if (self.frameCount < frames) {
         self.frameCount = frames;
@@ -239,7 +241,9 @@ MACCursorScale cursorScaleForScale(CGFloat scale) {
 }
 
 - (NSInteger)framesForScale:(MACCursorScale)scale {
-    return [self representationForScale:scale].pixelsHigh / self.size.height;
+    NSImageRep *rep = [self representationForScale:scale];
+    CGFloat framePixelHeight = self.size.height * (scale / 100.0);
+    return rep && framePixelHeight > 0 ? lround(rep.pixelsHigh / framePixelHeight) : 0;
 }
 
 - (void)removeRepresentationForScale:(MACCursorScale)scale {

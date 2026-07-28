@@ -14,9 +14,14 @@ enum MACPreferences {
     static let appearanceModeKey         = "MACAppearanceMode"
     static let languageKey               = "MACLanguage"
     static let hideTahoeCursorsKey       = "MACHideTahoeCursors"
+    static let advancedEditorLayoutKey   = "MACAdvancedEditorLayout"
 
     static var hideTahoeCursors: Bool {
         (value(forKey: hideTahoeCursorsKey) as? NSNumber)?.boolValue ?? true
+    }
+
+    static var advancedEditorLayout: String {
+        (value(forKey: advancedEditorLayoutKey) as? String) ?? "list"
     }
 
     static var isLeftHanded: Bool {

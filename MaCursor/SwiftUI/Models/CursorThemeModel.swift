@@ -67,6 +67,10 @@ class CursorThemeModel: Identifiable, Hashable {
         backingLibrary.isDirty
     }
 
+    var isApplicable: Bool {
+        cursors.contains { $0.backingCursor.isApplicable }
+    }
+
     func refreshFromObjC() {
         name = backingLibrary.name
         creator = backingLibrary.creator

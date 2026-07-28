@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "المؤشر";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "مقياس المؤشر";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "نوع المؤشر:";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "سمات مؤشر مخصصة لنظام macOS";
 
 /* Appearance mode: dark */
 "Dark" = "داكن";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "التحقق من وجود تحديثات…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "تحويل السمة...";
+
+"Convert Theme" = "تحويل السمة";
+
+"Convert" = "تحويل";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "اختر ملف .cape لـ Mousecape، أو مجلد مؤشرات Windows (.cur/.ani)، أو مجلد سمة Xcursor لنظام Linux.";
+
+"Mapped" = "المُطابَقة";
+
+"2nd" = "ثانوي";
+
+"Warnings & ignored (%d)" = "التحذيرات والمُتجاهَل (%d)";
+
+"Add to Library" = "إضافة إلى المكتبة";
+
+"Conversion Failed" = "فشل التحويل";
+
+"OK" = "موافق";
+
+/* Add to library then edit button */
+"Add & Edit…" = "إضافة وتحرير…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "مرّر الماوس لتجربة المؤشر — انقر للتحقق من النقطة النشطة";
+
+/* Show all slots checkbox */
+"Show All" = "إظهار الكل";
+
+/* Sidebar list layout */
+"List View" = "عرض القائمة";
+
+/* Sidebar grid layout */
+"Grid View" = "عرض الشبكة";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "لم يتم تعيين مؤشر";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "اختر ملف مصدر أو أفلت ملفًا على الخلية.";
+
+/* Choose cursor source button */
+"Choose Source…" = "اختيار المصدر…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "اختر ملف مؤشر أو صورة (.cur، .ani، Xcursor، .png، .gif)";
+
+/* Sidebar search field placeholder */
+"Search" = "بحث";
+
+/* Replace cursor source button */
+"Replace Source…" = "استبدال المصدر…";
+
+/* Clear slot button */
+"Clear Slot" = "مسح الخانة";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "تعذّر استبدال المؤشر";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "تعذّرت قراءة «%@» كملف مؤشر أو صورة.";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "أضف مؤشرًا واحدًا على الأقل إلى هذه السمة قبل تطبيقها.";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "قم بتعيين مؤشر واحد على الأقل لنوع مؤشر معين قبل تطبيق هذه السمة.";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "مساعدة MaCursor";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "بواسطة %@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "غير معيَّن";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "لا يحتوي المؤشر على أي صور.";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "النقطة النشطة %lld,%lld خارج حدود الصورة %lld×%lld.";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "تعذّرت مطابقة أي مؤشر في المُدخلات مع خانات مؤشرات macOS.";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "تعذّرت قراءة المُدخل: %@.";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "لا يوجد ملف أو مجلد بهذا الاسم: %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "تعذّرت قراءة %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "تعذّر سرد %@";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ تقبل ميزة «تحويل السمة» ملف .cape لـ Mousecape، أو مجلد مؤشرات Windows، أو مجلد سمة Xcursor لنظام Linux.";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ ملف أرشيف. فُكّ ضغطه أولاً، ثم اختر مجلد السمة الموجود بداخله.";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ صورة، وليست سمة مؤشر. استخدم «تحرير السمة» لإفلات الصور في خانة مؤشر.";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "يحتوي هذا المجلد على %lld ملف سمة. اختر ملفًا واحدًا لتحويله.";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "لا تحتوي السمة على مؤشرات لكتابتها.";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "اسم السمة «%@» لا يحتوي على أحرف قابلة للاستخدام.";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "أحجام الخانات خارج الترتيب";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "يجب أن تحافظ صور الخانات على ترتيب الحجم (10× > 5× > 2× > 1×). لا تناسب هذه الصورة خانة %1$@ بسبب الصورة في خانة %2$@.";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "تحتوي «%@» على صور خانات خارج ترتيب الحجم (10× > 5× > 2× > 1×). صحّح الخانات قبل الحفظ.";

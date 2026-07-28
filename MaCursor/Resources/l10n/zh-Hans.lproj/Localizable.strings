@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "指针";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "指针缩放";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "指针类型：";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "适用于 macOS 的自定指针主题";
 
 /* Appearance mode: dark */
 "Dark" = "深色";
@@ -398,3 +398,135 @@
 
 /* Menu: check for updates (Sparkle) */
 "Check for Updates…" = "检查更新…";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+"Convert Theme..." = "转换主题…";
+
+"Convert Theme" = "转换主题";
+
+"Convert" = "转换";
+
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "请选择一个 Mousecape .cape 文件、一个 Windows 光标文件夹（.cur/.ani）或一个 Linux Xcursor 主题文件夹。";
+
+"Mapped" = "已映射";
+
+"2nd" = "副";
+
+"Warnings & ignored (%d)" = "警告和已忽略项（%d）";
+
+"Add to Library" = "添加到资源库";
+
+"Conversion Failed" = "转换失败";
+
+"OK" = "好";
+
+/* Add to library then edit button */
+"Add & Edit…" = "添加并编辑…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "悬停以试用指针，点按以检查热点";
+
+/* Show all slots checkbox */
+"Show All" = "显示全部";
+
+/* Sidebar list layout */
+"List View" = "列表视图";
+
+/* Sidebar grid layout */
+"Grid View" = "网格视图";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "未分配指针";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "选择一个源文件，或将其拖放到单元格上。";
+
+/* Choose cursor source button */
+"Choose Source…" = "选择源…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "选择一个指针或图像文件（.cur、.ani、Xcursor、.png、.gif）";
+
+/* Sidebar search field placeholder */
+"Search" = "搜索";
+
+/* Replace cursor source button */
+"Replace Source…" = "替换源…";
+
+/* Clear slot button */
+"Clear Slot" = "清除槽";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "无法替换指针";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "“%@”无法作为指针或图像文件读取。";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "在应用此主题之前，请先向其中添加至少一个指针。";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "在应用此主题之前，请为某个指针类型分配至少一个指针。";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "MaCursor 帮助";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "创作者 %@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "未分配";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "该指针没有图像。";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "热点 %lld,%lld 位于 %lld×%lld 图像之外。";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "输入中没有任何指针能够映射到 macOS 指针槽。";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "无法读取输入：%@。";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "没有此文件或文件夹：%@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "无法读取 %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "无法列出 %@";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@“转换主题”支持 Mousecape .cape 文件、Windows 光标文件夹或 Linux Xcursor 主题文件夹。";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ 是一个归档文件。请先解压，然后选择其中的主题文件夹。";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ 是一张图像，而非指针主题。请使用“编辑主题”将图像拖放到指针槽中。";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "此文件夹包含 %lld 个主题文件。请选择其中一个进行转换。";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "该主题没有可写入的指针。";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "主题名称“%@”不包含可用字符。";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "槽尺寸顺序错误";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "各槽的图像必须保持尺寸顺序（10× > 5× > 2× > 1×）。由于 %2$@ 槽中已有图像，此图像无法放入 %1$@ 槽。";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "“%@”的槽图像尺寸顺序错误（10× > 5× > 2× > 1×）。请先修正各槽再存储。";

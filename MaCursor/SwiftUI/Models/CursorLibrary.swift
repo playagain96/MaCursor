@@ -84,7 +84,7 @@ class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {
     }
 
 
-    private(set) var cursors: Set<MACCursorSwift> = []
+    private(set) var cursors: [MACCursorSwift] = []
 
 
     let undoManager: UndoManager
@@ -162,7 +162,7 @@ class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {
         }
     }
 
-    convenience init(cursors: Set<MACCursorSwift>) {
+    convenience init(cursors: [MACCursorSwift]) {
         self.init()
         self.cursors = cursors
     }
@@ -266,12 +266,12 @@ class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {
     }
 
 
-    func cursors(withIdentifier identifier: String) -> Set<MACCursorSwift> {
-        Set(cursors.filter { $0.identifier == identifier })
+    func cursors(withIdentifier identifier: String) -> [MACCursorSwift] {
+        cursors.filter { $0.identifier == identifier }
     }
 
     func addCursor(_ cursor: MACCursorSwift) {
-        guard !cursors.contains(cursor) else { return }
+        guard !cursors.contains(where: { $0 === cursor }) else { return }
 
         undoManager.registerUndo(withTarget: self) { target in
             target.removeCursor(cursor)
@@ -280,7 +280,7 @@ class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {
             undoManager.setActionName(NSLocalizedString("Add Cursor", comment: "Add Cursor Undo Title"))
         }
 
-        cursors.insert(cursor)
+        cursors.append(cursor)
     }
 
     func removeCursor(_ cursor: MACCursorSwift) {
@@ -291,7 +291,7 @@ class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {
             undoManager.setActionName(NSLocalizedString("Remove Cursor", comment: "Remove Cursor Undo Title"))
         }
 
-        cursors.remove(cursor)
+        cursors.removeAll { $0 === cursor }
     }
 
     func removeCursors(withIdentifier identifier: String) {
@@ -402,7 +402,14 @@ class CursorLibrary: NSObject, NSCopying, @unchecked Sendable {
             && identifier == other.identifier
             && version == other.version
             && isHiDPI == other.isHiDPI
-            && cursors == other.cursors
+            && hasSameCursors(as: other)
+    }
+
+    private func hasSameCursors(as other: CursorLibrary) -> Bool {
+        guard cursors.count == other.cursors.count else { return false }
+        return cursors.allSatisfy { cursor in
+            other.cursors.contains { $0.isEqual(cursor) }
+        }
     }
 
     override var hash: Int {

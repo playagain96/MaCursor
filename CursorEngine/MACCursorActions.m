@@ -133,6 +133,16 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
         hotSpot.x = size.width - hotSpot.x - 1;
     }
 
+    if (size.width > MACMaxCursorPointSize || size.height > MACMaxCursorPointSize) {
+        CGFloat excess = MAX(size.width, size.height) / MACMaxCursorPointSize;
+        MMLog(BOLD YELLOW "Cursor %s declares %.1fx%.1f points — clamping by %.2fx" RESET,
+              identifier.UTF8String, size.width, size.height, excess);
+        size.width  /= excess;
+        size.height /= excess;
+        hotSpot.x   /= excess;
+        hotSpot.y   /= excess;
+    }
+
     float renderScale = [MACDefault(MACPreferencesCursorScaleKey) floatValue];
     if (renderScale >= MACMinCursorScale && renderScale < 1.0f) {
         size.width  *= renderScale;

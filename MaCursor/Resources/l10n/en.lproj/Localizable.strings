@@ -92,6 +92,9 @@
 /* Section: cursor settings */
 "Cursor" = "Cursor";
 
+/* About: app description */
+"Cursor Control for macOS" = "Cursor Control for macOS";
+
 /* Label: cursor scale slider */
 "Cursor Scale" = "Cursor Scale";
 
@@ -103,9 +106,6 @@
 
 /* Label: cursor type picker */
 "Cursor Type:" = "Cursor Type:";
-
-/* About: app description */
-"Custom cursor themes for macOS" = "Custom cursor themes for macOS";
 
 /* Appearance mode: dark */
 "Dark" = "Dark";
@@ -374,3 +374,171 @@
 
 /* Alert message: unsaved changes */
 "Your changes will be discarded if you don't save them." = "Your changes will be discarded if you don't save them.";
+
+
+/* --- Theme conversion (import from other formats) --- */
+
+
+/* Menu: convert theme from another format */
+"Convert Theme..." = "Convert Theme...";
+
+/* Convert theme panel title */
+"Convert Theme" = "Convert Theme";
+
+/* Convert theme prompt */
+"Convert" = "Convert";
+
+/* Convert theme panel message */
+"Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder." = "Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder.";
+
+/* Mapped cursors group title */
+"Mapped" = "Mapped";
+
+/* Secondary mapping tag */
+"2nd" = "2nd";
+
+/* Warnings and ignored group title */
+"Warnings & ignored (%d)" = "Warnings & ignored (%d)";
+
+/* Add converted theme to library */
+"Add to Library" = "Add to Library";
+
+/* Conversion failure alert title */
+"Conversion Failed" = "Conversion Failed";
+
+/* OK button */
+"OK" = "OK";
+
+/* Add to library then edit button */
+"Add & Edit…" = "Add & Edit…";
+
+/* Try area hint */
+"Hover to try the cursor — click to check the hotspot" = "Hover to try the cursor — click to check the hotspot";
+
+/* Show all slots checkbox */
+"Show All" = "Show All";
+
+/* Sidebar list layout */
+"List View" = "List View";
+
+/* Sidebar grid layout */
+"Grid View" = "Grid View";
+
+/* Empty slot inspector title */
+"No cursor assigned" = "No cursor assigned";
+
+/* Empty slot inspector description */
+"Choose a source file or drop one onto the cell." = "Choose a source file or drop one onto the cell.";
+
+/* Choose cursor source button */
+"Choose Source…" = "Choose Source…";
+
+/* Choose source panel message */
+"Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)";
+
+/* Sidebar search field placeholder */
+"Search" = "Search";
+
+/* Replace cursor source button */
+"Replace Source…" = "Replace Source…";
+
+/* Clear slot button */
+"Clear Slot" = "Clear Slot";
+
+/* Replace source failure alert title */
+"Could Not Replace Cursor" = "Could Not Replace Cursor";
+
+/* Replace source failure alert message */
+"“%@” could not be read as a cursor or image file." = "“%@” could not be read as a cursor or image file.";
+
+/* Tooltip: Apply stays disabled until the theme has a cursor */
+"Add at least one cursor to this theme before applying it." = "Add at least one cursor to this theme before applying it.";
+
+/* Tooltip: Apply stays disabled until a cursor is bound to a cursor type */
+"Assign at least one cursor to a cursor type before applying this theme." = "Assign at least one cursor to a cursor type before applying this theme.";
+
+/* --- Settings: cursor handedness, Tahoe variants, software updates --- */
+/* Settings section: Sparkle software updates */
+"Software Updates" = "Software Updates";
+
+/* Toggle: let Sparkle check for updates on its own */
+"Automatically check for updates" = "Automatically check for updates";
+
+/* Menu item: run a Sparkle update check now */
+"Check for Updates…" = "Check for Updates…";
+
+/* Toggle: hide the Tahoe cursor variants */
+"Hide Tahoe cursors" = "Hide Tahoe cursors";
+
+/* Explanation under the Hide Tahoe cursors toggle */
+"When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart.";
+
+/* Picker: which hand holds the mouse */
+"Mouse Hand" = "Mouse Hand";
+
+/* Handedness option: left */
+"Left Hand" = "Left Hand";
+
+/* Handedness option: right */
+"Right Hand" = "Right Hand";
+
+/* --- Convert Theme results, failures, and the Help menu --- */
+/* Help menu: opens the project page */
+"MaCursor Help" = "MaCursor Help";
+
+/* Theme creator attribution in the conversion review */
+"by %@" = "by %@";
+
+/* Conversion review: an ignored entry and the reason it was ignored */
+"%@: %@" = "%@: %@";
+
+/* Cursor list label: the slot has no cursor type assigned */
+"Unassigned" = "Unassigned";
+
+/* Conversion error: the cursor carries no image data */
+"The cursor has no images." = "The cursor has no images.";
+
+/* Conversion error: the hot spot lies outside the cursor image */
+"Hotspot %lld,%lld is outside the %lld×%lld image." = "Hotspot %lld,%lld is outside the %lld×%lld image.";
+
+/* Conversion error: nothing in the source maps to a macOS cursor slot */
+"No cursors in the input could be mapped to macOS cursor slots." = "No cursors in the input could be mapped to macOS cursor slots.";
+
+/* Conversion error: the chosen file or folder could not be read */
+"Cannot read input: %@." = "Cannot read input: %@.";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"no such file or directory: %@" = "no such file or directory: %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot read %@" = "cannot read %@";
+
+/* Convert Theme failure detail, embedded in “Cannot read input: …” */
+"cannot list %@" = "cannot list %@";
+
+/* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder.";
+
+/* Convert Theme rejection: the chosen file is a compressed archive */
+"%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ is an archive. Expand it first, then choose the theme folder inside it.";
+
+/* Convert Theme rejection: the chosen file is a plain image */
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot.";
+
+/* Conversion error: the chosen folder holds more than one theme */
+"This folder holds %lld theme files. Choose a single one to convert." = "This folder holds %lld theme files. Choose a single one to convert.";
+
+/* Conversion error: the converted theme ended up with no cursors */
+"The theme has no cursors to write." = "The theme has no cursors to write.";
+
+/* Conversion error: the theme name yields no valid identifier */
+"Theme name “%@” contains no usable characters." = "Theme name “%@” contains no usable characters.";
+
+/* Slot order rejection alert title */
+"Slot Sizes Out of Order" = "Slot Sizes Out of Order";
+
+/* Slot order rejection alert message */
+"Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot.";
+
+/* Save blocked: cursor slot pixel sizes out of order */
+"“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving.";

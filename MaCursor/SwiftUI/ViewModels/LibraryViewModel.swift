@@ -8,6 +8,7 @@ import Observation
 class LibraryViewModel {
     var cursorThemes: [CursorThemeModel] = []
     var appliedThemeId: String?
+    let conversion = ThemeConversionCoordinator()
 
     private let backingController: LibraryController
     private nonisolated(unsafe) var didSaveObserver: Any?
@@ -165,6 +166,16 @@ class LibraryViewModel {
         reload()
     }
 
+    @discardableResult
+    func importThemeReturningId(at url: URL) -> String? {
+        let existing = Set(cursorThemes.map(\.id))
+        importTheme(at: url)
+        guard let landed = cursorThemes.first(where: { !existing.contains($0.id) }),
+              let fileURL = landed.fileURL,
+              FileManager.default.fileExists(atPath: fileURL.path) else { return nil }
+        return landed.id
+    }
+
 
     func showImportPanel() {
         let panel = NSOpenPanel()
@@ -183,16 +194,38 @@ class LibraryViewModel {
         }
     }
 
+    func showConvertPanel() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = false
+        panel.title = NSLocalizedString("Convert Theme", comment: "Convert theme panel title")
+        panel.message = NSLocalizedString("Choose a Mousecape .cape file, a Windows cursor folder (.cur/.ani), or a Linux Xcursor theme folder.", comment: "Convert theme panel message")
+        panel.prompt = NSLocalizedString("Convert", comment: "Convert theme prompt")
+
+        let filter = ConvertPanelFilter()
+        panel.delegate = filter
+
+        let response = withExtendedLifetime(filter) { panel.runModal() }
+        if response == .OK, let url = panel.url {
+            Task { await conversion.convert(url) }
+        }
+    }
+
 
     func handleDrop(_ providers: [NSItemProvider]) -> Bool {
         let _ = Task { @MainActor [weak self] in
+            guard let self else { return }
             for provider in providers {
                 if let item = try? await provider.loadItem(forTypeIdentifier: "public.file-url", options: nil),
                    let data = item as? Data,
                    let url = URL(dataRepresentation: data, relativeTo: nil) {
 
                     if url.pathExtension.lowercased() == "cursor" {
-                        self?.importTheme(at: url)
+                        self.importTheme(at: url)
+                    } else {
+                        await self.conversion.convert(url)
+                        break
                     }
                 }
             }
@@ -212,3 +245,5 @@ class LibraryViewModel {
         }
     }
 }
+
+extension LibraryViewModel: ThemeLibraryLanding {}

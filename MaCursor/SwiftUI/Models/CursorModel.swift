@@ -77,10 +77,9 @@ class CursorModel: Identifiable, Hashable {
               let rep = backingCursor.representation(for: scaleEnum) else {
             return nil
         }
-        let s = CGFloat(scale) / 100.0
         let image = NSImage(size: NSSize(
-            width: CGFloat(rep.pixelsWide) / s,
-            height: CGFloat(rep.pixelsHigh) / s
+            width: size.width,
+            height: size.height * CGFloat(max(1, frameCount))
         ))
         image.addRepresentation(rep)
         _scaleImageCache[scale] = image
@@ -94,14 +93,25 @@ class CursorModel: Identifiable, Hashable {
             return _primaryImageCache
         }
 
-        let img = image(forScale: 200) ?? image(forScale: 100) ?? backingCursor.imageWithAllReps()
+        let staticImage = image(forScale: 200) ?? image(forScale: 100) ?? backingCursor.imageWithAllReps()
+        let img = frameCount > 1 ? (previewFrame(at: 0) ?? staticImage) : staticImage
         _primaryImageCache = img
         _primaryImageCacheRevision = representationRevision
         return img
     }
 
+    func thumbnailImage(forScale scale: Int) -> NSImage? {
+        if frameCount > 1, let firstFrame = frame(at: 0, scale: scale) {
+            return firstFrame
+        }
+        return image(forScale: scale)
+    }
+
     var cursorTypeName: String {
-        guard !identifier.isEmpty else { return "Unassigned" }
+        guard !identifier.isEmpty else {
+            return String(localized: "Unassigned",
+                          comment: "Cursor list label: the slot has no cursor type assigned")
+        }
         let parts = identifier.split(separator: ".")
         if parts.count >= 2 {
             return parts.suffix(2).joined(separator: ".")
@@ -112,7 +122,7 @@ class CursorModel: Identifiable, Hashable {
     func frame(at index: Int, scale: Int = 100) -> NSImage? {
         _ = representationRevision
 
-        let cacheKey = "\(scale)_\(index)"
+        let cacheKey = "\(scale)_\(index)_\(frameCount)_\(size.width)x\(size.height)"
         if _frameCacheRevision == representationRevision, let cached = _frameCache[cacheKey] {
             return cached
         }
@@ -127,11 +137,10 @@ class CursorModel: Identifiable, Hashable {
             return nil
         }
 
-        let frameHeight = Int(size.height)
-        guard frameHeight > 0, index < frameCount else { return nil }
+        guard frameCount > 0, index < frameCount, size.height > 0 else { return nil }
 
-        let s = CGFloat(scale) / 100.0
-        let pixelFrameHeight = Int(CGFloat(frameHeight) * s)
+        let pixelFrameHeight = rep.pixelsHigh / frameCount
+        guard pixelFrameHeight > 0 else { return nil }
         let yOffset = index * pixelFrameHeight
 
         let fullImage = NSImage(size: NSSize(width: rep.pixelsWide, height: rep.pixelsHigh))
@@ -151,30 +160,118 @@ class CursorModel: Identifiable, Hashable {
         return frameImage
     }
 
+    func previewFrame(at index: Int) -> NSImage? {
+        frame(at: index, scale: 200) ?? frame(at: index, scale: 100)
+            ?? frame(at: index, scale: 500) ?? frame(at: index, scale: 1000)
+    }
+
+    var hasRepresentations: Bool {
+        _ = representationRevision
+        return ((backingCursor.representations as? [String: Any])?.isEmpty == false)
+    }
+
 
     func setRepresentation(_ rep: NSBitmapImageRep, forScale scale: Int) {
         guard let scaleEnum = MACCursorScale(rawValue: UInt(scale)) else { return }
 
         backingCursor.frameCount = UInt(frameCount)
 
-        backingCursor.setRepresentation(rep, for: scaleEnum)
+        if size.width <= 0 || size.height <= 0 {
+            size = CursorGeometry.baseSize(matchingAspectOf: rep, frameCount: frameCount)
+        }
+
+        let normalized = SlotImageImporter.normalized(
+            rep,
+            forScaleValue: UInt(scale),
+            pointWidth: CursorGeometry.normalizedPointWidth(size.width),
+            frameCount: max(1, frameCount)
+        )
+
+        backingCursor.setRepresentation(normalized, for: scaleEnum)
         representationRevision += 1
 
-        let s = CGFloat(scale) / 100.0
-        let calculatedSize = CGSize(
-            width: CGFloat(rep.pixelsWide) / s,
-            height: CGFloat(rep.pixelsHigh) / CGFloat(frameCount) / s
-        )
-        if calculatedSize != .zero {
-            backingCursor.size = NSSize(width: calculatedSize.width, height: calculatedSize.height)
-            size = calculatedSize
-        }
+        backingCursor.size = NSSize(width: size.width, height: size.height)
     }
 
     func removeRepresentation(forScale scale: Int) {
         guard let scaleEnum = MACCursorScale(rawValue: UInt(scale)) else { return }
         backingCursor.removeRepresentation(for: scaleEnum)
         representationRevision += 1
+    }
+
+    struct SlotOrderConflict: Equatable {
+        let targetScale: Int
+        let conflictingScale: Int
+    }
+
+    func slotOrderConflict(pixelsWide: Int, pixelsHigh: Int, frameCount incomingFrameCount: Int?, targetScale: Int) -> SlotOrderConflict? {
+        guard pixelsWide > 0, pixelsHigh > 0 else { return nil }
+        let effectiveFrames = max(1, incomingFrameCount ?? frameCount)
+        let incomingWidth = pixelsWide
+        let incomingHeight = pixelsHigh / effectiveFrames
+        guard incomingHeight > 0 else { return nil }
+
+        let reps = (backingCursor.representations as? [String: NSBitmapImageRep]) ?? [:]
+        let occupied = reps.compactMap { key, rep -> (scale: Int, width: Int, height: Int)? in
+            guard let scale = Int(key), scale > 0,
+                  CursorGeometry.ladder.contains(UInt(scale)),
+                  scale != targetScale else { return nil }
+            let width = rep.pixelsWide
+            let height = rep.pixelsHigh / effectiveFrames
+            guard width > 0, height > 0 else { return nil }
+            return (scale, width, height)
+        }.sorted { $0.scale < $1.scale }
+
+        for slot in occupied {
+            if slot.scale < targetScale {
+                if incomingWidth <= slot.width || incomingHeight <= slot.height {
+                    return SlotOrderConflict(targetScale: targetScale, conflictingScale: slot.scale)
+                }
+            } else if incomingWidth >= slot.width || incomingHeight >= slot.height {
+                return SlotOrderConflict(targetScale: targetScale, conflictingScale: slot.scale)
+            }
+        }
+        return nil
+    }
+
+    func applyOrderedRepresentation(_ rep: NSBitmapImageRep,
+                                    forScale scale: Int,
+                                    frameCount incomingFrameCount: Int? = nil,
+                                    frameDuration incomingFrameDuration: Double = 0) -> SlotOrderConflict? {
+        if let conflict = slotOrderConflict(pixelsWide: rep.pixelsWide,
+                                            pixelsHigh: rep.pixelsHigh,
+                                            frameCount: incomingFrameCount,
+                                            targetScale: scale) {
+            return conflict
+        }
+        if let installedFrameCount = incomingFrameCount {
+            frameCount = installedFrameCount
+            frameDuration = incomingFrameDuration
+        }
+        setRepresentation(rep, forScale: scale)
+        return nil
+    }
+
+    func canAcceptAnimatedRepresentation(frameCount newFrameCount: Int, pixelsWide: Int, pixelsHigh: Int, replacingScale scale: Int) -> Bool {
+        guard newFrameCount > 0,
+              pixelsWide > 0,
+              pixelsHigh > 0,
+              pixelsHigh.isMultiple(of: newFrameCount) else { return false }
+
+        let reps = (backingCursor.representations as? [String: Any]) ?? [:]
+        let hasOtherScales = reps.keys.contains { $0 != "\(scale)" }
+        if hasOtherScales, frameCount != newFrameCount { return false }
+
+        guard size.width.isFinite,
+              size.height.isFinite,
+              size.width > 0,
+              size.height > 0 else { return !hasOtherScales }
+
+        let frameHeight = CGFloat(pixelsHigh / newFrameCount)
+        let artworkAspect = CGFloat(pixelsWide) / frameHeight
+        let pointAspect = size.width / size.height
+        let relativeDifference = abs(artworkAspect - pointAspect) / pointAspect
+        return relativeDifference <= 0.05
     }
 
 
