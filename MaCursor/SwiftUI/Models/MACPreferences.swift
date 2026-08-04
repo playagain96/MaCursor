@@ -8,6 +8,7 @@ enum MACPreferences {
     static let clickActionKey            = "MACLibraryClickAction"
     static let cursorScaleKey            = "MACCursorScale"
     static let handednessKey             = "MACHandedness"
+    static let cursorShadowKey           = "MACCursorShadow"
     static let suppressDeleteLibraryKey  = "MACSuppressDeleteLibraryConfirmationKey"
     static let suppressDeleteCursorKey   = "MACSuppressDeleteCursorConfirmationKey"
     static let favoriteCursorsKey        = "MACFavoriteCursors"
@@ -15,6 +16,22 @@ enum MACPreferences {
     static let languageKey               = "MACLanguage"
     static let hideTahoeCursorsKey       = "MACHideTahoeCursors"
     static let advancedEditorLayoutKey   = "MACAdvancedEditorLayout"
+    static let autoSwitchRulesKey        = "MACAutoSwitchRules"
+
+    static let resetKeys: [String] = [
+        appliedCursorKey,
+        clickActionKey,
+        cursorScaleKey,
+        handednessKey,
+        suppressDeleteLibraryKey,
+        suppressDeleteCursorKey,
+        favoriteCursorsKey,
+        appearanceModeKey,
+        languageKey,
+        hideTahoeCursorsKey,
+        cursorShadowKey,
+        autoSwitchRulesKey
+    ]
 
     static var hideTahoeCursors: Bool {
         (value(forKey: hideTahoeCursorsKey) as? NSNumber)?.boolValue ?? true

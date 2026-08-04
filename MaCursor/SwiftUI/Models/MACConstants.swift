@@ -19,6 +19,10 @@ enum MACConstants {
     static let errorDomain = "com.writronic.macursor.error"
 
 
+    static let websiteURL = URL(string: "https://writronic.com")!
+    static let donateURL  = URL(string: "https://writronic.com/donate")!
+
+
     enum ErrorCode: Int {
         case invalidTheme             = -1
         case writeFail                = -2

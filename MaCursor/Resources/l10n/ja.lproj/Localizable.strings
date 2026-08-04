@@ -90,7 +90,7 @@
 "Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. All rights reserved.";
 
 /* Section: cursor settings */
-"Cursor" = "カーソル";
+"Cursor Control" = "カーソル制御";
 
 /* About: app description */
 "Cursor Control for macOS" = "Cursor Control for macOS";
@@ -390,6 +390,12 @@
 /* Mouse Hand option: right-handed */
 "Right Hand" = "右手";
 
+/* Toggle: cursor drop shadow */
+"Cursor Shadow" = "カーソルの影";
+
+/* Caption explaining the cursor shadow toggle */
+"When enabled, a soft drop shadow is drawn under the cursor, similar to the pointer shadow on Windows. The shadow appears while a cursor theme is applied." = "オンにすると、Windows のポインタの影のように、カーソルの下に柔らかいドロップシャドウが描画されます。影はカーソルテーマの適用中に表示されます。";
+
 /* Section: software updates */
 "Software Updates" = "ソフトウェアアップデート";
 
@@ -530,3 +536,42 @@
 
 /* Save blocked: cursor slot pixel sizes out of order */
 "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "「%@」のスロット画像はサイズ順（10× > 5× > 2× > 1×）に反しています。保存する前にスロットを修正してください。";
+
+/* Cursor settings section header for scheduled theme switching */
+"Automatic Switching" = "自動切り替え";
+
+/* Toggle enabling scheduled cursor theme switching */
+"Switch cursor automatically" = "カーソルを自動的に切り替える";
+
+/* Warning shown when the helper tool is required for automatic switching */
+"Automatic switching requires the Helper Tool. You can install it from General → Helper Tool." = "自動切り替えにはヘルパーツールが必要です。「一般」→「ヘルパーツール」からインストールできます。";
+
+/* Label for the daytime scheduled switch */
+"Day mode" = "デイモード";
+
+/* Label for the nighttime scheduled switch */
+"Night mode" = "ナイトモード";
+
+/* Radio group choosing between AM/PM and a 24-hour clock */
+"Time Format" = "時刻の表示形式";
+
+/* 12-hour clock option */
+"AM/PM" = "AM/PM";
+
+/* 24-hour clock option */
+"24 hours" = "24時間";
+
+/* Explanation of scheduled cursor switching in Cursor settings */
+"Pick a time and a cursor theme for each mode. MaCursor switches at those times and keeps that theme until the next one." = "各モードごとに時刻とカーソルテーマを選択してください。MaCursor はその時刻に切り替わり、次の切り替え時までそのテーマを維持します。";
+
+/* Warning when both scheduled modes are given the same clock time */
+"Day mode and Night mode must start at different times, so the time was moved by one minute." = "デイモードとナイトモードは異なる時刻に開始する必要があるため、時刻を 1 分ずらしました。";
+
+/* Accessibility label for the hour pop-up menu */
+"Hour" = "時";
+
+/* Accessibility label for the minute pop-up menu */
+"Minute" = "分";
+
+/* Button opening the donation page */
+"Donate" = "寄付";

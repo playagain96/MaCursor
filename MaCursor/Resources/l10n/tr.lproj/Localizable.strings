@@ -90,7 +90,7 @@
 "Copyright © %@ Writronic. All rights reserved." = "Telif hakkı © %@ Writronic. Tüm hakları saklıdır.";
 
 /* Section: cursor settings */
-"Cursor" = "İmleç";
+"Cursor Control" = "İmleç Kontrolü";
 
 /* About: app description */
 "Cursor Control for macOS" = "Cursor Control for macOS";
@@ -390,6 +390,12 @@
 /* Mouse Hand option: right-handed */
 "Right Hand" = "Sağ El";
 
+/* Toggle: cursor drop shadow */
+"Cursor Shadow" = "İmleç Gölgesi";
+
+/* Caption explaining the cursor shadow toggle */
+"When enabled, a soft drop shadow is drawn under the cursor, similar to the pointer shadow on Windows. The shadow appears while a cursor theme is applied." = "Etkinleştirildiğinde, imlecin altına Windows’taki işaretçi gölgesine benzer yumuşak bir gölge çizilir. Gölge, bir imleç teması uygulandığında görünür.";
+
 /* Section: software updates */
 "Software Updates" = "Yazılım Güncellemeleri";
 
@@ -530,3 +536,42 @@
 
 /* Save blocked: cursor slot pixel sizes out of order */
 "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "“%@” imlecinin yuva görselleri boyut sıralamasına aykırı (10× > 5× > 2× > 1×). Kaydetmeden önce yuvaları düzeltin.";
+
+/* Cursor settings section header for scheduled theme switching */
+"Automatic Switching" = "Otomatik Değiştirme";
+
+/* Toggle enabling scheduled cursor theme switching */
+"Switch cursor automatically" = "İmleci otomatik olarak değiştir";
+
+/* Warning shown when the helper tool is required for automatic switching */
+"Automatic switching requires the Helper Tool. You can install it from General → Helper Tool." = "Otomatik değiştirme için Yardımcı Araç gereklidir. Genel → Yardımcı Araç bölümünden yükleyebilirsiniz.";
+
+/* Label for the daytime scheduled switch */
+"Day mode" = "Gündüz modu";
+
+/* Label for the nighttime scheduled switch */
+"Night mode" = "Gece modu";
+
+/* Radio group choosing between AM/PM and a 24-hour clock */
+"Time Format" = "Saat Biçimi";
+
+/* 12-hour clock option */
+"AM/PM" = "AM/PM";
+
+/* 24-hour clock option */
+"24 hours" = "24 saat";
+
+/* Explanation of scheduled cursor switching in Cursor settings */
+"Pick a time and a cursor theme for each mode. MaCursor switches at those times and keeps that theme until the next one." = "Her mod için bir saat ve bir imleç teması seçin. MaCursor belirlediğiniz saatlerde geçiş yapar ve bir sonraki geçişe kadar o temayı kullanır.";
+
+/* Warning when both scheduled modes are given the same clock time */
+"Day mode and Night mode must start at different times, so the time was moved by one minute." = "Gündüz modu ve Gece modu farklı saatlerde başlamalıdır, bu nedenle saat bir dakika kaydırıldı.";
+
+/* Accessibility label for the hour pop-up menu */
+"Hour" = "Saat";
+
+/* Accessibility label for the minute pop-up menu */
+"Minute" = "Dakika";
+
+/* Button opening the donation page */
+"Donate" = "Bağış Yap";

@@ -47,16 +47,8 @@ struct AboutSettingsView: View {
                     .foregroundStyle(.secondary)
                     .padding(.top, 10)
 
-                Link("Visit Website", destination: URL(string: "https://writronic.com")!)
-                    .font(.system(size: 14))
-                    .padding(.top, 5)
-                    .onHover { hovering in
-                        if hovering {
-                            NSCursor.pointingHand.push()
-                        } else {
-                            NSCursor.pop()
-                        }
-                    }
+                AboutActionButtons(fontSize: 13)
+                    .padding(.top, 12)
             }
 
             Spacer()
@@ -121,16 +113,8 @@ struct AboutWindowView: View {
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
 
-                Link("Visit Website", destination: URL(string: "https://writronic.com")!)
-                    .font(.system(size: 12))
-                    .padding(.top, 1)
-                    .onHover { hovering in
-                        if hovering {
-                            NSCursor.pointingHand.push()
-                        } else {
-                            NSCursor.pop()
-                        }
-                    }
+                AboutActionButtons(fontSize: 12)
+                    .padding(.top, 8)
             }
 
             Spacer()
@@ -142,7 +126,7 @@ struct AboutWindowView: View {
         }
         .padding(.vertical, 20)
         .padding(.horizontal, 32)
-        .frame(minWidth: 320, minHeight: 320)
+        .frame(minWidth: 360, minHeight: 320)
         .background(AboutWindowAccessor(window: $aboutWindow))
         .background(WindowRoleAccessor(role: .modal))
         .overlay {
@@ -152,6 +136,33 @@ struct AboutWindowView: View {
                 .opacity(0)
                 .allowsHitTesting(false)
         }
+    }
+}
+
+private struct AboutActionButtons: View {
+    let fontSize: CGFloat
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 10) { buttons }
+            VStack(spacing: 8) { buttons }
+        }
+        .font(.system(size: fontSize))
+    }
+
+    @ViewBuilder
+    private var buttons: some View {
+        Button("Visit Website") {
+            NSWorkspace.shared.open(MACConstants.websiteURL)
+        }
+        .buttonStyle(.bordered)
+
+        Button {
+            NSWorkspace.shared.open(MACConstants.donateURL)
+        } label: {
+            Label("Donate", systemImage: "heart.fill")
+        }
+        .buttonStyle(.borderedProminent)
     }
 }
 

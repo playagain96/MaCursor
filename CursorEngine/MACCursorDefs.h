@@ -82,10 +82,12 @@ extern NSString *MACPreferencesAppliedClickActionKey;
 extern NSString *MACPreferencesCursorScaleKey;
 extern NSString *MACPreferencesDoubleActionKey;
 extern NSString *MACPreferencesHandednessKey;
+extern NSString *MACPreferencesCursorShadowKey;
 extern NSString *MACSuppressDeleteLibraryConfirmationKey;
 extern NSString *MACSuppressDeleteCursorConfirmationKey;
 extern id MACDefaultFor(NSString *key, NSString *user, NSString *host);
 extern id MACDefault(NSString *key);
+extern BOOL MACResolvePreferredCursorScale(NSNumber * _Nullable prefValue, float * _Nullable outScale);
 #define MACFlag(key) [MACDefault(key) boolValue]
 extern void MACSetDefaultFor(id value, NSString *key, NSString *user, NSString *host);
 #define MACSetDefault(value, key) MACSetDefaultFor(value, key, (__bridge NSString *)kCFPreferencesCurrentUser, (__bridge NSString *)kCFPreferencesCurrentHost)

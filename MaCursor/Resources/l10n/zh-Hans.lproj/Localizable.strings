@@ -90,7 +90,7 @@
 "Copyright © %@ Writronic. All rights reserved." = "版权所有 © %@ Writronic。保留所有权利。";
 
 /* Section: cursor settings */
-"Cursor" = "指针";
+"Cursor Control" = "指针控制";
 
 /* About: app description */
 "Cursor Control for macOS" = "Cursor Control for macOS";
@@ -390,6 +390,12 @@
 /* Mouse Hand option: right-handed */
 "Right Hand" = "右手";
 
+/* Toggle: cursor drop shadow */
+"Cursor Shadow" = "指针阴影";
+
+/* Caption explaining the cursor shadow toggle */
+"When enabled, a soft drop shadow is drawn under the cursor, similar to the pointer shadow on Windows. The shadow appears while a cursor theme is applied." = "启用后，会在指针下方绘制柔和的投影，类似于 Windows 的指针阴影。该阴影在应用指针主题时显示。";
+
 /* Section: software updates */
 "Software Updates" = "软件更新";
 
@@ -530,3 +536,42 @@
 
 /* Save blocked: cursor slot pixel sizes out of order */
 "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "“%@”的槽图像尺寸顺序错误（10× > 5× > 2× > 1×）。请先修正各槽再存储。";
+
+/* Cursor settings section header for scheduled theme switching */
+"Automatic Switching" = "自动切换";
+
+/* Toggle enabling scheduled cursor theme switching */
+"Switch cursor automatically" = "自动切换光标";
+
+/* Warning shown when the helper tool is required for automatic switching */
+"Automatic switching requires the Helper Tool. You can install it from General → Helper Tool." = "自动切换需要“辅助工具”。你可以从“通用”→“辅助工具”中安装。";
+
+/* Label for the daytime scheduled switch */
+"Day mode" = "日间模式";
+
+/* Label for the nighttime scheduled switch */
+"Night mode" = "夜间模式";
+
+/* Radio group choosing between AM/PM and a 24-hour clock */
+"Time Format" = "时间格式";
+
+/* 12-hour clock option */
+"AM/PM" = "AM/PM";
+
+/* 24-hour clock option */
+"24 hours" = "24 小时制";
+
+/* Explanation of scheduled cursor switching in Cursor settings */
+"Pick a time and a cursor theme for each mode. MaCursor switches at those times and keeps that theme until the next one." = "为每种模式选择一个时间和一个光标主题。MaCursor 将在指定时间切换，并保持该主题直至下次切换。";
+
+/* Warning when both scheduled modes are given the same clock time */
+"Day mode and Night mode must start at different times, so the time was moved by one minute." = "日间模式和夜间模式必须在不同时间开始，因此将时间调整了一分钟。";
+
+/* Accessibility label for the hour pop-up menu */
+"Hour" = "小时";
+
+/* Accessibility label for the minute pop-up menu */
+"Minute" = "分钟";
+
+/* Button opening the donation page */
+"Donate" = "捐赠";

@@ -90,7 +90,7 @@
 "Copyright © %@ Writronic. All rights reserved." = "حقوق النشر © %@ Writronic. جميع الحقوق محفوظة.";
 
 /* Section: cursor settings */
-"Cursor" = "المؤشر";
+"Cursor Control" = "التحكم في المؤشر";
 
 /* About: app description */
 "Cursor Control for macOS" = "Cursor Control for macOS";
@@ -390,6 +390,12 @@
 /* Mouse Hand option: right-handed */
 "Right Hand" = "اليد اليمنى";
 
+/* Toggle: cursor drop shadow */
+"Cursor Shadow" = "ظل المؤشر";
+
+/* Caption explaining the cursor shadow toggle */
+"When enabled, a soft drop shadow is drawn under the cursor, similar to the pointer shadow on Windows. The shadow appears while a cursor theme is applied." = "عند التفعيل، يُرسم ظل ناعم أسفل المؤشر، مشابه لظل المؤشر في Windows. يظهر الظل أثناء تطبيق سمة مؤشر.";
+
 /* Section: software updates */
 "Software Updates" = "تحديثات البرامج";
 
@@ -530,3 +536,42 @@
 
 /* Save blocked: cursor slot pixel sizes out of order */
 "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "تحتوي «%@» على صور خانات خارج ترتيب الحجم (10× > 5× > 2× > 1×). صحّح الخانات قبل الحفظ.";
+
+/* Cursor settings section header for scheduled theme switching */
+"Automatic Switching" = "التبديل التلقائي";
+
+/* Toggle enabling scheduled cursor theme switching */
+"Switch cursor automatically" = "تغيير المؤشر تلقائيًا";
+
+/* Warning shown when the helper tool is required for automatic switching */
+"Automatic switching requires the Helper Tool. You can install it from General → Helper Tool." = "يتطلب التبديل التلقائي الأداة المساعدة. يمكنك تثبيتها من «عام» ← «الأداة المساعدة».";
+
+/* Label for the daytime scheduled switch */
+"Day mode" = "الوضع النهاري";
+
+/* Label for the nighttime scheduled switch */
+"Night mode" = "الوضع الليلي";
+
+/* Radio group choosing between AM/PM and a 24-hour clock */
+"Time Format" = "تنسيق الوقت";
+
+/* 12-hour clock option */
+"AM/PM" = "AM/PM";
+
+/* 24-hour clock option */
+"24 hours" = "24 ساعة";
+
+/* Explanation of scheduled cursor switching in Cursor settings */
+"Pick a time and a cursor theme for each mode. MaCursor switches at those times and keeps that theme until the next one." = "اختر وقتًا وسمة مؤشر لكل وضع. يبدّل MaCursor في تلك الأوقات ويبقي تلك السمة حتى التبديل التالي.";
+
+/* Warning when both scheduled modes are given the same clock time */
+"Day mode and Night mode must start at different times, so the time was moved by one minute." = "يجب أن يبدأ الوضع النهاري والوضع الليلي في أوقات مختلفة، لذا تم تغيير الوقت بمقدار دقيقة واحدة.";
+
+/* Accessibility label for the hour pop-up menu */
+"Hour" = "الساعة";
+
+/* Accessibility label for the minute pop-up menu */
+"Minute" = "الدقيقة";
+
+/* Button opening the donation page */
+"Donate" = "تبرع";

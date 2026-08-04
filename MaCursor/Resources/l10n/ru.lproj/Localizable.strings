@@ -90,7 +90,7 @@
 "Copyright © %@ Writronic. All rights reserved." = "© %@ Writronic. Все права защищены.";
 
 /* Section: cursor settings */
-"Cursor" = "Курсор";
+"Cursor Control" = "Управление курсором";
 
 /* About: app description */
 "Cursor Control for macOS" = "Cursor Control for macOS";
@@ -390,6 +390,12 @@
 /* Mouse Hand option: right-handed */
 "Right Hand" = "Правая рука";
 
+/* Toggle: cursor drop shadow */
+"Cursor Shadow" = "Тень курсора";
+
+/* Caption explaining the cursor shadow toggle */
+"When enabled, a soft drop shadow is drawn under the cursor, similar to the pointer shadow on Windows. The shadow appears while a cursor theme is applied." = "Когда включено, под курсором отрисовывается мягкая тень, похожая на тень указателя в Windows. Тень отображается, пока применена тема курсора.";
+
 /* Section: software updates */
 "Software Updates" = "Обновления ПО";
 
@@ -530,3 +536,42 @@
 
 /* Save blocked: cursor slot pixel sizes out of order */
 "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "«%@» содержит изображения ячеек с нарушенным порядком размеров (10× > 5× > 2× > 1×). Исправьте ячейки перед сохранением.";
+
+/* Cursor settings section header for scheduled theme switching */
+"Automatic Switching" = "Автоматическое переключение";
+
+/* Toggle enabling scheduled cursor theme switching */
+"Switch cursor automatically" = "Автоматически менять курсор";
+
+/* Warning shown when the helper tool is required for automatic switching */
+"Automatic switching requires the Helper Tool. You can install it from General → Helper Tool." = "Для автоматического переключения требуется Вспомогательный инструмент. Его можно установить в разделе «Общие» → «Вспомогательный инструмент».";
+
+/* Label for the daytime scheduled switch */
+"Day mode" = "Дневной режим";
+
+/* Label for the nighttime scheduled switch */
+"Night mode" = "Ночной режим";
+
+/* Radio group choosing between AM/PM and a 24-hour clock */
+"Time Format" = "Формат времени";
+
+/* 12-hour clock option */
+"AM/PM" = "AM/PM";
+
+/* 24-hour clock option */
+"24 hours" = "24 часа";
+
+/* Explanation of scheduled cursor switching in Cursor settings */
+"Pick a time and a cursor theme for each mode. MaCursor switches at those times and keeps that theme until the next one." = "Выберите время и тему курсора для каждого режима. MaCursor переключается в указанное время и использует выбранную тему до следующего переключения.";
+
+/* Warning when both scheduled modes are given the same clock time */
+"Day mode and Night mode must start at different times, so the time was moved by one minute." = "Дневной и ночной режимы должны начинаться в разное время, поэтому время было сдвинуто на одну минуту.";
+
+/* Accessibility label for the hour pop-up menu */
+"Hour" = "Час";
+
+/* Accessibility label for the minute pop-up menu */
+"Minute" = "Минута";
+
+/* Button opening the donation page */
+"Donate" = "Пожертвовать";

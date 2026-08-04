@@ -10,6 +10,7 @@ private class SettingsPanel: NSWindow {
 
 enum SettingsTab: String, CaseIterable, Identifiable {
     case general  = "General"
+    case cursor   = "Cursor Control"
     case shortcut = "Shortcut"
     case about    = "About"
 
@@ -18,6 +19,7 @@ enum SettingsTab: String, CaseIterable, Identifiable {
     var localizedName: String {
         switch self {
         case .general:  return String(localized: "General")
+        case .cursor:   return String(localized: "Cursor Control")
         case .shortcut: return String(localized: "Shortcut")
         case .about:    return String(localized: "About")
         }
@@ -26,6 +28,7 @@ enum SettingsTab: String, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .general:  return "gear"
+        case .cursor:   return "cursorarrow"
         case .shortcut: return "star"
         case .about:    return "info.circle"
         }
@@ -33,15 +36,22 @@ enum SettingsTab: String, CaseIterable, Identifiable {
 }
 
 struct SettingsSidebarView: View {
+    static let rowFontSize: CGFloat = 14
+    static let rowContentHeight: CGFloat = 24
+
     @Binding var selectedTab: SettingsTab
 
     var body: some View {
         List(SettingsTab.allCases, selection: $selectedTab) { tab in
             Label(tab.localizedName, systemImage: tab.icon)
+                .font(.system(size: Self.rowFontSize))
+                .imageScale(.large)
+                .frame(height: Self.rowContentHeight)
                 .tag(tab)
         }
         .listStyle(.sidebar)
         .contentMargins(.top, 12, for: .scrollContent)
+        .environment(\.sidebarRowSize, .medium)
     }
 }
 
@@ -64,7 +74,7 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
 
     private init() {
         let window = SettingsPanel(
-            contentRect: NSRect(x: 0, y: 0, width: 750, height: 475),
+            contentRect: NSRect(x: 0, y: 0, width: 850, height: 525),
             styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
             backing: .buffered, defer: false
         )
@@ -92,8 +102,8 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
 
         let sidebarItem = NSSplitViewItem(sidebarWithViewController: sidebarVC)
         sidebarItem.canCollapse = false
-        sidebarItem.minimumThickness = 160
-        sidebarItem.maximumThickness = 160
+        sidebarItem.minimumThickness = 240
+        sidebarItem.maximumThickness = 240
         sidebarItem.allowsFullHeightLayout = true
 
         let detailItem = NSSplitViewItem(viewController: detailVC)
@@ -103,7 +113,7 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
 
         window.contentViewController = splitVC
 
-        let windowSize = NSSize(width: 750, height: 475)
+        let windowSize = NSSize(width: 850, height: 525)
         window.setContentSize(windowSize)
         window.minSize = windowSize
         window.maxSize = windowSize
@@ -180,6 +190,8 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
         switch selectedTab {
         case .general:
             detailView = AnyView(GeneralSettingsView(updater: updater))
+        case .cursor:
+            detailView = AnyView(CursorSettingsView())
         case .shortcut:
             detailView = AnyView(ShortcutSettingsView())
         case .about:
@@ -229,12 +241,6 @@ struct GeneralSettingsView: View {
     @Environment(LanguageManager.self) private var languageManager
     @Environment(LibraryViewModel.self) private var library
 
-    @State private var cursorScaleValue: Double = GeneralSettingsView.initialScale()
-    @State private var scaleText: String = CursorScaleInput.format(GeneralSettingsView.initialScale())
-    @FocusState private var scaleFieldFocused: Bool
-
-    @State private var hideTahoeCursors: Bool = MACPreferences.hideTahoeCursors
-    @State private var isLeftHanded: Bool = MACPreferences.isLeftHanded
     @State private var showResetConfirmation = false
     @State private var showRestartAlert = false
 
@@ -243,7 +249,7 @@ struct GeneralSettingsView: View {
         @Bindable var langManager = languageManager
 
         Form {
-            Section("Theme") {
+            Section("Appearance") {
                 Picker("Appearance", selection: $manager.currentMode) {
                     ForEach(AppearanceMode.allCases) { mode in
                         Label(mode.label, systemImage: mode.icon)
@@ -261,81 +267,6 @@ struct GeneralSettingsView: View {
                     }
                 }
             }
-
-            Section("Cursor") {
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack {
-                        Text("Cursor Scale")
-                        Spacer()
-                        TextField("", text: $scaleText)
-                            .textFieldStyle(.roundedBorder)
-                            .multilineTextAlignment(.trailing)
-                            .monospacedDigit()
-                            .frame(width: 64)
-                            .focused($scaleFieldFocused)
-                            .onChange(of: scaleText) { _, newValue in
-                                let sanitized = CursorScaleInput.sanitize(newValue)
-                                if sanitized != newValue {
-                                    scaleText = sanitized
-                                }
-                            }
-                            .onSubmit {
-                                commitScaleText()
-                            }
-                            .onChange(of: scaleFieldFocused) { _, focused in
-                                if !focused {
-                                    commitScaleText()
-                                }
-                            }
-                            .accessibilityLabel("Cursor Scale")
-                        Text(verbatim: "×")
-                            .foregroundStyle(.secondary)
-                    }
-
-                    Slider(value: sliderBinding, in: CursorScaleInput.range) { editing in
-                        if !editing {
-                            reapplyForCursorScale()
-                        }
-                    }
-                        .onChange(of: cursorScaleValue) { _, newValue in
-                            MACPreferences.set(NSNumber(value: newValue), forKey: MACPreferences.cursorScaleKey)
-                            CursorService.setScale(Float(max(1.0, newValue)))
-                            let formatted = CursorScaleInput.format(newValue)
-                            if scaleFieldFocused {
-                                DispatchQueue.main.async {
-                                    scaleText = formatted
-                                }
-                            } else {
-                                scaleText = formatted
-                            }
-                        }
-                        .accessibilityValue(String(format: "%.2f×", cursorScaleValue))
-                }
-                .onAppear {
-                    scaleText = CursorScaleInput.format(cursorScaleValue)
-                }
-
-                Toggle("Hide Tahoe cursors", isOn: $hideTahoeCursors)
-                    .onChange(of: hideTahoeCursors) { _, newValue in
-                        MACPreferences.setFlag(newValue, forKey: MACPreferences.hideTahoeCursorsKey)
-                        NotificationCenter.default.post(name: .hideTahoeCursorsChanged, object: nil)
-                    }
-
-                Text("When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart.")
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
-
-                Picker("Mouse Hand", selection: $isLeftHanded) {
-                    Text("Left Hand").tag(true)
-                    Text("Right Hand").tag(false)
-                }
-                .pickerStyle(.radioGroup)
-                .onChange(of: isLeftHanded) { _, newValue in
-                    MACPreferences.setFlag(newValue, forKey: MACPreferences.handednessKey)
-                    reapplyActiveThemeIfNeeded()
-                }
-            }
-
 
             Section("Helper Tool") {
                 HelperToolStatusView()
@@ -395,11 +326,6 @@ struct GeneralSettingsView: View {
                 showRestartAlert = true
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .cursorSettingsDidReset)) { _ in
-            cursorScaleValue = GeneralSettingsView.initialScale()
-            scaleText = CursorScaleInput.format(cursorScaleValue)
-            isLeftHanded = MACPreferences.isLeftHanded
-        }
     }
 
 
@@ -408,22 +334,10 @@ struct GeneralSettingsView: View {
 
         CursorService.setScale(CursorService.defaultScale())
 
-        let allKeys: [String] = [
-            MACPreferences.appliedCursorKey,
-            MACPreferences.clickActionKey,
-            MACPreferences.cursorScaleKey,
-
-            MACPreferences.handednessKey,
-            MACPreferences.suppressDeleteLibraryKey,
-            MACPreferences.suppressDeleteCursorKey,
-            MACPreferences.favoriteCursorsKey,
-            MACPreferences.appearanceModeKey,
-            MACPreferences.languageKey,
-            MACPreferences.hideTahoeCursorsKey
-        ]
-        for key in allKeys {
+        for key in MACPreferences.resetKeys {
             MACPreferences.set(nil, forKey: key)
         }
+        AutoSwitchConfig.notifyHelper()
 
         appearanceManager.currentMode = .system
         languageManager.currentLanguage = .system
@@ -432,14 +346,11 @@ struct GeneralSettingsView: View {
 
         UserDefaults.standard.removeObject(forKey: "SUEnableAutomaticChecks")
 
-        cursorScaleValue = 1.0
-        scaleText = CursorScaleInput.format(1.0)
         MACPreferences.set(NSNumber(value: 1.0), forKey: MACPreferences.cursorScaleKey)
         CursorService.setScale(1.0)
-        hideTahoeCursors = true
-        isLeftHanded = false
+        CursorService.restoreAll()
 
-        reapplyForCursorScale()
+        NotificationCenter.default.post(name: .cursorSettingsDidReset, object: nil)
 
         let helperManager = HelperToolManager.shared
         if helperManager.isInstalled {
@@ -449,47 +360,6 @@ struct GeneralSettingsView: View {
         }
     }
 
-    private func reapplyActiveThemeIfNeeded() {
-        if let appliedTheme = library.cursorThemes.first(where: { $0.isApplied }) {
-            library.apply(appliedTheme)
-        }
-    }
-
-    private func reapplyForCursorScale() {
-        if let appliedTheme = library.cursorThemes.first(where: { $0.isApplied }) {
-            library.apply(appliedTheme)
-        } else {
-            CursorService.restoreAll()
-        }
-    }
-
-    private var sliderBinding: Binding<Double> {
-        Binding(
-            get: { cursorScaleValue },
-            set: { newValue in
-                cursorScaleValue = CursorScaleInput.snapToStep(newValue)
-            }
-        )
-    }
-
-    private static func initialScale() -> Double {
-        let stored = (MACPreferences.value(forKey: MACPreferences.cursorScaleKey) as? NSNumber)?.doubleValue ?? 1.0
-        return CursorScaleInput.clamp(stored)
-    }
-
-    private func commitScaleText() {
-        guard let parsed = CursorScaleInput.parse(scaleText) else {
-            scaleText = CursorScaleInput.format(cursorScaleValue)
-            return
-        }
-        let clamped = CursorScaleInput.clamp(parsed)
-        scaleText = CursorScaleInput.format(clamped)
-        guard abs(clamped - cursorScaleValue) > CursorScaleInput.commitEpsilon else { return }
-        cursorScaleValue = clamped
-        MACPreferences.set(NSNumber(value: clamped), forKey: MACPreferences.cursorScaleKey)
-        CursorService.setScale(Float(max(1.0, clamped)))
-        reapplyForCursorScale()
-    }
 }
 
 struct HelperToolStatusView: View {

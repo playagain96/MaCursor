@@ -1,7 +1,9 @@
 #import "MACCursorActions.h"
 #import "MACCursorDefs.h"
+#import "MACCursorShadow.h"
 
 static NSSet *gThemeProvidedIdentifiers = nil;
+static BOOL gShadowEnabledForApply = NO;
 
 static BOOL MACCursorRequiresFlipForHandMode(NSString *identifier) {
     static NSSet *excludedFromFlip = nil;
@@ -133,6 +135,8 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
         hotSpot.x = size.width - hotSpot.x - 1;
     }
 
+    CGSize declaredSize = size;
+
     if (size.width > MACMaxCursorPointSize || size.height > MACMaxCursorPointSize) {
         CGFloat excess = MAX(size.width, size.height) / MACMaxCursorPointSize;
         MMLog(BOLD YELLOW "Cursor %s declares %.1fx%.1f points — clamping by %.2fx" RESET,
@@ -196,6 +200,85 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
     NSUInteger fc = frameCount.unsignedIntegerValue;
     CGFloat fd = frameDuration.doubleValue;
 
+    NSArray *prepared = MACPrepareCursorImages(images, size, &fc, &fd);
+
+    if (gShadowEnabledForApply && fc <= MACMaxFrameCount) {
+        MACShadowMargins shadowMargins;
+        NSArray *shadowed = MACShadowedCursorImages(prepared, fc, declaredSize,
+                                                    MACShadowParamsDefault, &shadowMargins);
+        if (shadowed) {
+            CGFloat shadowScale = (declaredSize.width > 0.0) ? (size.width / declaredSize.width) : 1.0;
+            MACShadowAdjustRegistration(&size, &hotSpot, shadowMargins, shadowScale);
+            return applyCursorForIdentifier(fc, fd, hotSpot, size, shadowed, identifier, 0);
+        }
+        MMLog(BOLD YELLOW "Shadow skipped for %s (unclassifiable representations)" RESET, identifier.UTF8String);
+    }
+
+    return applyCursorForIdentifier(fc, fd, hotSpot, size, prepared, identifier, 0);
+}
+
+NSArray *MACPrepareCursorImages(NSArray *images, CGSize size, NSUInteger *frameCount, CGFloat *frameDuration) {
+    if (images.count == 0 || frameCount == NULL || frameDuration == NULL) return images;
+
+    NSUInteger fc = *frameCount;
+    CGFloat fd = *frameDuration;
+    if (fc < 2) return images;
+
+    for (id object in images) {
+        if (CFGetTypeID((__bridge CFTypeRef)object) != CGImageGetTypeID()) return images;
+    }
+
+    if (images.count == fc && size.width > 0 && size.height > 0) {
+        CGImageRef first = (__bridge CGImageRef)images[0];
+        size_t fw = CGImageGetWidth(first);
+        size_t fh = CGImageGetHeight(first);
+        BOOL uniform = (fw > 0 && fh > 0);
+        for (id frame in images) {
+            CGImageRef img = (__bridge CGImageRef)frame;
+            if (CGImageGetWidth(img) != fw || CGImageGetHeight(img) != fh) {
+                uniform = NO;
+                break;
+            }
+        }
+        if (uniform) {
+            CGFloat target = size.width / size.height;
+            CGFloat flatAspect = (CGFloat)fw / (CGFloat)fh;
+            CGFloat stripFrameAspect = (CGFloat)(fw * fc) / (CGFloat)fh;
+            BOOL flatMatches = fabs(flatAspect - target) <= 0.05 * target;
+            BOOL stripMatches = fabs(stripFrameAspect - target) <= 0.05 * target;
+            if (flatMatches && !stripMatches) {
+                CGColorSpaceRef cs = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+                CGContextRef ctx = CGBitmapContextCreate(NULL, fw, fh * fc, 8, 0, cs,
+                                                         (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+                CGColorSpaceRelease(cs);
+                if (ctx) {
+                    CGContextClearRect(ctx, CGRectMake(0, 0, fw, fh * fc));
+                    for (NSUInteger i = 0; i < fc; i++) {
+                        CGImageRef img = (__bridge CGImageRef)images[i];
+                        CGContextDrawImage(ctx, CGRectMake(0, (fc - 1 - i) * fh, fw, fh), img);
+                    }
+                    CGImageRef strip = CGBitmapContextCreateImage(ctx);
+                    CGContextRelease(ctx);
+                    if (strip) {
+                        images = @[(__bridge_transfer id)strip];
+                    }
+                }
+            }
+        }
+    }
+
+    if (images.count != fc) {
+        NSUInteger mismatched = 0;
+        for (id sheet in images) {
+            size_t sh = CGImageGetHeight((__bridge CGImageRef)sheet);
+            if (sh % fc != 0) mismatched++;
+        }
+        if (mismatched > 0) {
+            MMLog(BOLD YELLOW "%lu of %lu representation heights not divisible by frame count %lu" RESET,
+                  (unsigned long)mismatched, (unsigned long)images.count, (unsigned long)fc);
+        }
+    }
+
     BOOL sheetsRebuilt = NO;
     if (fc > MACMaxFrameCount && images.count >= 1) {
         NSUInteger targetCount = MACMaxFrameCount;
@@ -207,7 +290,7 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
             size_t sw = CGImageGetWidth(sheetImg);
             size_t sh = CGImageGetHeight(sheetImg);
             size_t fh = sh / fc;
-            if (fh == 0 || fh * fc > sh) { allRebuilt = NO; break; }
+            if (fh == 0) { allRebuilt = NO; break; }
 
             CGColorSpaceRef cs = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
             CGContextRef ctx = CGBitmapContextCreate(NULL, sw, fh * targetCount,
@@ -260,7 +343,7 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
                 NSUInteger sh = CGImageGetHeight(sheetImg);
                 NSUInteger fh = sh / fc;
 
-                if (fh == 0 || fh * fc > sh) {
+                if (fh == 0) {
                     allSplit = NO;
                     break;
                 }
@@ -310,7 +393,9 @@ BOOL applyThemeForIdentifier(NSDictionary *cursor, NSString *identifier, BOOL re
         fd = totalDuration / targetCount;
     }
 
-    return applyCursorForIdentifier(fc, fd, hotSpot, size, images, identifier, 0);
+    *frameCount = fc;
+    *frameDuration = fd;
+    return images;
 }
 
 BOOL applyTheme(NSDictionary *dictionary) {
@@ -318,6 +403,8 @@ BOOL applyTheme(NSDictionary *dictionary) {
         NSDictionary *cursors = dictionary[MACCursorDictionaryCursorsKey];
         NSString *name = dictionary[MACCursorDictionaryThemeNameKey];
         NSNumber *version = dictionary[MACCursorDictionaryThemeVersionKey];
+
+        gShadowEnabledForApply = MACFlag(MACPreferencesCursorShadowKey);
 
         CGSConnectionID cid = CGSMainConnectionID();
         CoreCursorUnregisterAll(cid);
@@ -353,6 +440,7 @@ BOOL applyTheme(NSDictionary *dictionary) {
             }
         }
         gThemeProvidedIdentifiers = nil;
+        gShadowEnabledForApply = NO;
 
         for (NSString *key in cursors) {
             int activateSeed = 0;
@@ -378,13 +466,27 @@ BOOL applyTheme(NSDictionary *dictionary) {
     }
 }
 
+static void MACNudgePreferredCursorScale(CGSConnectionID cid, float scaleBump) {
+    float live = 1.0f;
+    BOOL haveLive = (CGSGetCursorScale(cid, &live) == noErr);
+    BOOL dumpInProgress = (haveLive && live == MACDumpCursorScale);
+
+    float scale = 1.0f;
+    BOOL haveScale = !dumpInProgress
+        && MACResolvePreferredCursorScale(MACDefault(MACPreferencesCursorScaleKey), &scale);
+    if (!haveScale) {
+        if (!haveLive) return;
+        scale = live;
+    }
+
+    CGSSetCursorScale(cid, scale + scaleBump);
+    CGSSetCursorScale(cid, scale);
+}
+
 void MACFinalizeCursorApply(float scaleBump) {
     CGSSetDockCursorOverride(CGSMainConnectionID(), true);
 
-    float scale;
-    CGSGetCursorScale(CGSMainConnectionID(), &scale);
-    CGSSetCursorScale(CGSMainConnectionID(), scale + scaleBump);
-    CGSSetCursorScale(CGSMainConnectionID(), scale);
+    MACNudgePreferredCursorScale(CGSMainConnectionID(), scaleBump);
 
     CGSSetSystemDefinedCursor(CGSMainConnectionID(), 0);
 
@@ -579,11 +681,17 @@ NSDictionary *processedCursorThemeWithIdentifier(NSString *identifier) {
     return dict;
 }
 
+static void MACEndCursorDump(float originalScale) {
+    CGSSetCursorScale(CGSMainConnectionID(), originalScale);
+    CGSShowCursor(CGSMainConnectionID());
+}
+
 BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUInteger total)) {
     MMLog("Dumping cursors...");
 
-    float originalScale;
-    CGSGetCursorScale(CGSMainConnectionID(), &originalScale);
+    float originalScale = 1.0f;
+    if (CGSGetCursorScale(CGSMainConnectionID(), &originalScale) != noErr)
+        originalScale = defaultCursorScale();
 
     CGSSetCursorScale(CGSMainConnectionID(), MACDumpCursorScale);
     CGSHideCursor(CGSMainConnectionID());
@@ -601,6 +709,7 @@ BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUI
             current = i;
 
             if (!progress(current, total)) {
+                MACEndCursorDump(originalScale);
                 return NO;
             }
         }
@@ -614,6 +723,7 @@ BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUI
             current = i + x;
 
             if (!progress(current, total)) {
+                MACEndCursorDump(originalScale);
                 return NO;
             }
         }
@@ -642,8 +752,7 @@ BOOL dumpCursorsToFile(NSString *path, BOOL (^progress)(NSUInteger current, NSUI
     theme[MACCursorDictionaryIdentifierKey] = [NSString stringWithFormat:@"com.writronic.macursor.dump"];
     theme[MACCursorDictionaryUUIDKey] = [[NSUUID UUID] UUIDString];
 
-    CGSSetCursorScale(CGSMainConnectionID(), originalScale);
-    CGSShowCursor(CGSMainConnectionID());
+    MACEndCursorDump(originalScale);
 
     NSError *writeError = nil;
     NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:theme
@@ -673,6 +782,8 @@ void exportCursorTheme(NSDictionary *theme, NSString *destination) {
 
 BOOL resetAllCursors(NSError **error) {
     MMLog("Restoring cursors...");
+
+    gShadowEnabledForApply = NO;
 
     CGSConnectionID cid = CGSMainConnectionID();
 
@@ -745,10 +856,7 @@ BOOL resetAllCursors(NSError **error) {
     if (MACIsTahoeOrLater()) {
         CGSSetDockCursorOverride(cid, false);
 
-        float scale;
-        CGSGetCursorScale(cid, &scale);
-        CGSSetCursorScale(cid, scale + MACCursorRefreshScaleBumpSmall);
-        CGSSetCursorScale(cid, scale);
+        MACNudgePreferredCursorScale(cid, MACCursorRefreshScaleBumpSmall);
 
         MMLog("Tahoe: Disabled dock cursor override and forced cursor refresh");
     }
@@ -760,15 +868,14 @@ BOOL resetAllCursors(NSError **error) {
 }
 
 float cursorScale() {
-    float value;
+    float value = 1.0f;
     CGSGetCursorScale(CGSMainConnectionID(), &value);
     return value;
 }
 
 float defaultCursorScale() {
-    float scale = [MACDefault(MACPreferencesCursorScaleKey) floatValue];
-    if (scale < 1.0f || scale > MACMaxDefaultCursorScale)
-        scale = 1;
+    float scale = 1.0f;
+    MACResolvePreferredCursorScale(MACDefault(MACPreferencesCursorScaleKey), &scale);
     return scale;
 }
 
@@ -786,4 +893,15 @@ BOOL setCursorScale(float dbl) {
         MMLog("Somehow failed to set cursor scale!");
         return NO;
     }
+}
+
+BOOL assertPreferredCursorScale(void) {
+    float live = 1.0f;
+    if (CGSGetCursorScale(CGSMainConnectionID(), &live) == noErr && live == MACDumpCursorScale)
+        return NO;
+
+    float scale = 1.0f;
+    if (!MACResolvePreferredCursorScale(MACDefault(MACPreferencesCursorScaleKey), &scale))
+        return NO;
+    return setCursorScale(scale);
 }

@@ -38,10 +38,11 @@ Requires **macOS 15 Sequoia** or later.
 - **Cursor Scale** — Adjust cursor size from 0.50× to 4.00× with a precision slider (0.1× steps), or type any custom value and press Enter to apply
 - **Left / Right Hand Mode** — Switch cursor orientation for left-handed or right-handed mouse usage directly from Settings
 - **Global Hotkeys** — Assign keyboard shortcuts to favorite themes for instant switching from anywhere
+- **Automatic Day / Night Switching** — Set a start time and a theme for Day mode and Night mode, and MaCursor changes your cursor on schedule
 - **Background Helper Tool** — Lightweight login item (`macursorhelper`) that keeps shortcuts active and reapplies your theme across user switches
 - **Auto-Updates** — Built-in Sparkle integration for seamless over-the-air updates
 - **Light / Dark / System Appearance** — Full appearance mode control
-- **10 Languages** — English, Deutsch, Español, Français, Nederlands, Русский, Türkçe, 日本語, 简体中文, العربية
+- **11 Languages** — English, Deutsch, Español, Français, Nederlands, Polski, Русский, Türkçe, 日本語, 简体中文, العربية
 - **macOS Tahoe & Golden Gate Ready** — Full support for macOS 26 Tahoe and macOS 27 Golden Gate, including automatic handling of new S-variant cursor identifiers
 
 ## Quick Start
@@ -94,6 +95,16 @@ Fine-tune the size of every system cursor from the Settings panel:
 3. For a precise value outside the slider stops, type the desired number directly into the scale field and press **Enter** to apply.
 
 The new scale takes effect immediately.
+
+### Automatic Switching
+
+Let MaCursor change your cursor theme on a schedule:
+
+1. Open **MaCursor → Settings → Cursor Control** and turn on **Switch cursor automatically**. This needs the Helper Tool, which you can install from **General → Helper Tool**.
+2. Pick **AM/PM** or **24 hours** as your time format.
+3. Set a start time and a theme for **Day mode** and for **Night mode**.
+
+MaCursor switches at those times and keeps that theme until the next one. The two modes must start at different times.
 
 ### Importing Themes
 

@@ -45,4 +45,9 @@ enum CursorService {
     static func setScale(_ scale: Float) -> Bool {
         return setCursorScale(scale)
     }
+
+    @discardableResult
+    static func assertPreferredScale() -> Bool {
+        return assertPreferredCursorScale()
+    }
 }

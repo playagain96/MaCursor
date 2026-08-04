@@ -592,7 +592,7 @@ static NSDictionary *MACCaptureCursorTheme(CGSConnectionID cid, NSString *identi
 
     if (isBadData) {
         if ([identifier hasPrefix:@"com.apple.cursor."]) {
-            float currentScale;
+            float currentScale = MACDumpCursorScale;
             CGSGetCursorScale(cid, &currentScale);
             if (currentScale > 1.0f) {
                 MMLog("  Bad data for %s at %.0fx, retrying at 1x...",
@@ -704,8 +704,14 @@ BOOL MACPerformCursorCapture(NSString *outputPath) {
 
         MMLog("Capturing system default cursors...");
 
+        CoreCursorUnregisterAll(cid);
+        for (int x = 0; x <= MC_MAX_CORE_CURSOR_ID; x++) {
+            CoreCursorSet(cid, x);
+        }
+
         float originalScale = 1.0f;
-        CGSGetCursorScale(cid, &originalScale);
+        if (CGSGetCursorScale(cid, &originalScale) != noErr)
+            MACResolvePreferredCursorScale(MACDefault(MACPreferencesCursorScaleKey), &originalScale);
         CGSSetCursorScale(cid, MACDumpCursorScale);
         CGSHideCursor(cid);
 
@@ -811,6 +817,7 @@ NSString *MACPreferencesAppliedClickActionKey     = @"MACLibraryClickAction";
 NSString *MACPreferencesCursorScaleKey            = @"MACCursorScale";
 NSString *MACPreferencesDoubleActionKey           = @"MACDoubleAction";
 NSString *MACPreferencesHandednessKey             = @"MACHandedness";
+NSString *MACPreferencesCursorShadowKey           = @"MACCursorShadow";
 NSString *MACSuppressDeleteLibraryConfirmationKey = @"MACSuppressDeleteLibraryConfirmationKey";
 NSString *MACSuppressDeleteCursorConfirmationKey  = @"MACSuppressDeleteCursorConfirmationKey";
 id MACDefaultFor(NSString *key, NSString *user, NSString *host) {
@@ -825,6 +832,20 @@ id MACDefault(NSString *key) {
 void MACSetDefaultFor(id value, NSString *key, NSString *user, NSString *host) {
     CFPreferencesSetValue((CFStringRef)key, (CFPropertyListRef)value, (CFStringRef)kMACDomain, (CFStringRef)user, (CFStringRef)host);
     CFPreferencesSynchronize((CFStringRef)kMACDomain, (CFStringRef)user, (CFStringRef)host);
+}
+
+BOOL MACResolvePreferredCursorScale(NSNumber *prefValue, float *outScale) {
+    if (!prefValue) return NO;
+
+    float pref = [prefValue floatValue];
+    if (isnan(pref) || pref <= 0.0f || pref == 1.0f) return NO;
+
+    float resolved = pref;
+    if (resolved < 1.0f || resolved > MACMaxDefaultCursorScale)
+        resolved = 1.0f;
+
+    if (outScale) *outScale = resolved;
+    return YES;
 }
 
 @implementation NSBitmapImageRep (ColorSpace)

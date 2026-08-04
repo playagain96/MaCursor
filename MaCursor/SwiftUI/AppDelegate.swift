@@ -23,8 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSLog("MaCursor: System default capture %@", success ? "succeeded" : "failed")
         }
 
+        CursorService.assertPreferredScale()
 
-        let appliedId = MACPreferences.value(forKey: MACPreferences.appliedCursorKey) as? String
+        let scheduledId = MACAutoSwitchResolveThemeIdentifier(
+            MACAutoSwitchReadConfig(), MACAutoSwitchCurrentMinuteOfDay())
+        let appliedId = scheduledId ?? (MACPreferences.value(forKey: MACPreferences.appliedCursorKey) as? String)
         if let appliedId, !appliedId.isEmpty {
 
             guard let cursorsPath = try? FileManager.default.findOrCreateDirectory(
@@ -36,6 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let themePath = (cursorsPath as NSString).appendingPathComponent(appliedId + ".cursor")
             if FileManager.default.fileExists(atPath: themePath) {
                 CursorService.applyTheme(atPath: themePath)
+                if scheduledId != nil {
+                    MACPreferences.set(appliedId as NSString, forKey: MACPreferences.appliedCursorKey)
+                }
             }
         }
 

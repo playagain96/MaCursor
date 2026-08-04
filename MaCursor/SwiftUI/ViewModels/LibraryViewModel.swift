@@ -13,6 +13,7 @@ class LibraryViewModel {
     private let backingController: LibraryController
     private nonisolated(unsafe) var didSaveObserver: Any?
     private nonisolated(unsafe) var identifierChangeObserver: Any?
+    private nonisolated(unsafe) var autoSwitchObserver: Any?
 
     init() {
         let cursorsPath = (try? FileManager.default.findOrCreateDirectory(
@@ -48,6 +49,24 @@ class LibraryViewModel {
                 }
             }
         }
+
+        autoSwitchObserver = DistributedNotificationCenter.default().addObserver(
+            forName: .MACAutoSwitchAppliedThemeDidChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                self?.syncAppliedThemeFromPreferences()
+            }
+        }
+    }
+
+    private func syncAppliedThemeFromPreferences() {
+        let storedId = MACPreferences.value(forKey: MACPreferences.appliedCursorKey) as? String
+        if let storedId, !storedId.isEmpty {
+            backingController.appliedTheme = backingController.themes.first { $0.identifier == storedId }
+        }
+        reload()
     }
 
     deinit {
@@ -56,6 +75,9 @@ class LibraryViewModel {
         }
         if let observer = identifierChangeObserver {
             NotificationCenter.default.removeObserver(observer)
+        }
+        if let observer = autoSwitchObserver {
+            DistributedNotificationCenter.default().removeObserver(observer)
         }
     }
 
@@ -108,6 +130,7 @@ class LibraryViewModel {
     func restoreCursors() {
         MACPreferences.set(NSNumber(value: 1.0), forKey: MACPreferences.cursorScaleKey)
         MACPreferences.setFlag(false, forKey: MACPreferences.handednessKey)
+        MACPreferences.setFlag(false, forKey: MACPreferences.cursorShadowKey)
         CursorService.setScale(1.0)
         backingController.restoreTheme()
         for c in cursorThemes {

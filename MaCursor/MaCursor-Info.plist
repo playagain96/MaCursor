@@ -30,7 +30,7 @@
 	<key>SUEnableAutomaticChecks</key>
 	<false/>
 	<key>SUScheduledCheckInterval</key>
-	<integer>604800</integer>
+	<integer>172800</integer>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

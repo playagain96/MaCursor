@@ -1,6 +1,7 @@
 #import "MACCursorDaemon.h"
 #import "MACCursorActions.h"
 #import "MACCursorDefs.h"
+#import "MACAutoSwitch.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
@@ -14,15 +15,6 @@ static NSMutableArray *sRegisteredRefs = nil;
 static BOOL sHandlerInstalled = NO;
 
 static EventHandlerRef sEventHandlerRef = NULL;
-
-static NSString *themePathForIdentifier(NSString *identifier) {
-    NSURL *appSupportURL = [[NSFileManager defaultManager]
-        URLsForDirectory:NSApplicationSupportDirectory
-               inDomains:NSUserDomainMask].firstObject;
-    return [[[appSupportURL.path stringByAppendingPathComponent:@"MaCursor/cursors"]
-        stringByAppendingPathComponent:identifier]
-        stringByAppendingPathExtension:@"cursor"];
-}
 
 static void forceCursorVisualRefresh(void) {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -77,7 +69,7 @@ static OSStatus hotKeyEventHandler(EventHandlerCallRef nextHandler,
         return eventNotHandledErr;
     }
 
-    NSString *path = themePathForIdentifier(themeId);
+    NSString *path = MACAutoSwitchThemePathForIdentifier(themeId);
     MMLog(BOLD GREEN "Hotkey %u fired, applying theme: %s" RESET,
           hotKeyID.id, [themeId UTF8String]);
 
@@ -250,7 +242,9 @@ static void UserSpaceChanged(SCDynamicStoreRef	store, CFArrayRef changedKeys, vo
         MMLog(BOLD RED "Application of cursor theme failed" RESET);
     }
 
-    setCursorScale(defaultCursorScale());
+    MACAutoSwitchApplyIfNeeded();
+
+    assertPreferredCursorScale();
 
     CFRelease(currentConsoleUser);
 }
@@ -295,9 +289,60 @@ void reconfigurationCallback(CGDirectDisplayID display,
     dispatch_source_set_event_handler(sReconfigTimer, ^{
         MMLog("Reconfigure debounce fired — applying theme");
         applyThemeAtPath(appliedThemePathForUser(NSUserName()));
+        MACAutoSwitchApplyIfNeeded();
+        assertPreferredCursorScale();
         sReconfigTimer = NULL;
     });
     dispatch_resume(sReconfigTimer);
+}
+
+static dispatch_source_t sScheduleTimer = NULL;
+
+static void rescheduleAutoSwitchTimer(void) {
+    if (sScheduleTimer) {
+        dispatch_source_cancel(sScheduleTimer);
+        sScheduleTimer = NULL;
+    }
+
+    NSDictionary *config = MACAutoSwitchReadConfig();
+    if (![config[@"enabled"] boolValue]) {
+        MMLog(BOLD CYAN "Auto-switch disabled, no timer scheduled" RESET);
+        return;
+    }
+
+    NSInteger minutes = MACAutoSwitchMinutesUntilNextBoundary(
+        config[@"scheduleRules"], MACAutoSwitchCurrentMinuteOfDay());
+    if (minutes < 0) {
+        MMLog(BOLD CYAN "Auto-switch has no usable rules, no timer scheduled" RESET);
+        return;
+    }
+
+    int64_t seconds = (int64_t)minutes * 60;
+    sScheduleTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,
+        dispatch_get_main_queue());
+    dispatch_source_set_timer(sScheduleTimer,
+        dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC),
+        DISPATCH_TIME_FOREVER, (uint64_t)(5 * NSEC_PER_SEC));
+    dispatch_source_set_event_handler(sScheduleTimer, ^{
+        MMLog(BOLD CYAN "Auto-switch boundary reached" RESET);
+        if (MACAutoSwitchApplyIfNeeded()) {
+            forceCursorVisualRefresh();
+        }
+        rescheduleAutoSwitchTimer();
+    });
+    dispatch_resume(sScheduleTimer);
+    MMLog(BOLD CYAN "Auto-switch timer set for %ld minutes from now" RESET, (long)minutes);
+}
+
+static void autoSwitchDidChangeCallback(CFNotificationCenterRef center,
+    void *observer, CFNotificationName name, const void *object,
+    CFDictionaryRef userInfo)
+{
+    MMLog(BOLD CYAN "Auto-switch config changed, re-resolving" RESET);
+    if (MACAutoSwitchApplyIfNeeded()) {
+        forceCursorVisualRefresh();
+    }
+    rescheduleAutoSwitchTimer();
 }
 
 static void shortcutsDidChangeCallback(CFNotificationCenterRef center,
@@ -364,7 +409,7 @@ void listener(void) {
     }
 
     applyThemeAtPath(appliedThemePathForUser(NSUserName()));
-    setCursorScale(defaultCursorScale());
+    assertPreferredCursorScale();
 
     [[[NSWorkspace sharedWorkspace] notificationCenter]
         addObserverForName:NSWorkspaceDidActivateApplicationNotification
@@ -386,6 +431,33 @@ void listener(void) {
         CFNotificationSuspensionBehaviorDeliverImmediately
     );
     MMLog(BOLD CYAN "Listening for Shortcut config changes" RESET);
+
+    CFNotificationCenterAddObserver(
+        CFNotificationCenterGetDistributedCenter(),
+        NULL,
+        autoSwitchDidChangeCallback,
+        (__bridge CFStringRef)MACAutoSwitchDidChangeNotification,
+        NULL,
+        CFNotificationSuspensionBehaviorDeliverImmediately
+    );
+    MMLog(BOLD CYAN "Listening for Auto-switch config changes" RESET);
+
+    [[[NSWorkspace sharedWorkspace] notificationCenter]
+        addObserverForName:NSWorkspaceDidWakeNotification
+        object:nil
+        queue:[NSOperationQueue mainQueue]
+        usingBlock:^(NSNotification *note) {
+            MMLog(BOLD CYAN "Woke from sleep, re-resolving auto-switch" RESET);
+            if (MACAutoSwitchApplyIfNeeded()) {
+                forceCursorVisualRefresh();
+            }
+            assertPreferredCursorScale();
+            rescheduleAutoSwitchTimer();
+        }];
+    MMLog(BOLD CYAN "Listening for Wake notifications" RESET);
+
+    MACAutoSwitchApplyIfNeeded();
+    rescheduleAutoSwitchTimer();
 
     CFRunLoopAddSource(CFRunLoopGetCurrent(), rls, kCFRunLoopDefaultMode);
 

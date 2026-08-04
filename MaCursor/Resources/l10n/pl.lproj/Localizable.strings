@@ -22,7 +22,7 @@
 "About" = "O programie";
 
 /* Menu item: about panel */
-"About MaCursor" = "About MaCursor";
+"About MaCursor" = "O MaCursor";
 
 /* Undo: add cursor */
 "Add Cursor" = "Dodaj kursor";
@@ -31,7 +31,7 @@
 "Add shortcut slot" = "Dodaj slot skrótu";
 
 /* Button: add new theme */
-"Add Theme" = "Dodaj Schemat";
+"Add Theme" = "Dodaj schemat";
 
 /* Section: animation settings */
 "Animation" = "Animacje";
@@ -60,19 +60,19 @@
 "Cancel" = "Anuluj";
 
 /* Undo: change theme creator */
-"Change Creator" = "Zmień Twórcę";
+"Change Creator" = "Zmień twórcę";
 
 /* Undo: change theme HiDPI */
 "Change HiDPI" = "Zmień HiDPI";
 
 /* Undo: change theme identifier */
-"Change Identifier" = "Zmień Identyfikator";
+"Change Identifier" = "Zmień identyfikator";
 
 /* Undo: change theme name */
-"Change Name" = "Zmień Nazwę";
+"Change Name" = "Zmień nazwę";
 
 /* Undo: change theme version */
-"Change Version" = "Zmień Wersję";
+"Change Version" = "Zmień wersję";
 
 /* Placeholder: no cursor selected */
 "Choose a cursor from the list to edit its properties." = "Wybierz kursor z listy, aby zmienić jego właściwości.";
@@ -90,7 +90,7 @@
 "Copyright © %@ Writronic. All rights reserved." = "Copyright © %@ Writronic. Wszelkie prawa zastrzeżone.";
 
 /* Section: cursor settings */
-"Cursor" = "Kursor";
+"Cursor Control" = "Sterowanie kursorem";
 
 /* About: app description */
 "Cursor Control for macOS" = "Cursor Control for macOS";
@@ -99,13 +99,13 @@
 "Cursor Scale" = "Skala kursora";
 
 /* Label: cursor theme picker */
-"Cursor Theme" = "Schemat Kursorów";
+"Cursor Theme" = "Schemat kursorów";
 
 /* Undo suffix: cursor type */
 "cursor type" = "typ kursora";
 
 /* Label: cursor type picker */
-"Cursor Type:" = "Typ Kursora:";
+"Cursor Type:" = "Typ kursora:";
 
 /* Appearance mode: dark */
 "Dark" = "Ciemny";
@@ -130,7 +130,7 @@
 "Edit" = "Edytuj";
 
 /* Window title: theme editor */
-"Edit Theme" = "Edytuj Schemat";
+"Edit Theme" = "Edytuj schemat";
 
 /* Error: write failure */
 "Error writing cursor theme to disk." = "Błąd zapisu schematu kursorów na dysku.";
@@ -142,13 +142,13 @@
 "frame count" = "liczba klatek";
 
 /* Label: frame count */
-"Frame Count:" = "Liczba Klatek:";
+"Frame Count:" = "Liczba klatek:";
 
 /* Undo suffix: frame duration */
 "frame duration" = "długość klatki";
 
 /* Label: frame duration */
-"Frame Duration:" = "Długość Klatki:";
+"Frame Duration:" = "Długość klatki:";
 
 /* Settings tab: general */
 "General" = "Ogólne";
@@ -160,16 +160,16 @@
 "HD" = "HD";
 
 /* Helper status: not found */
-"Helper Not Found" = "Nie Znaleziono Narzędzia Pomocniczego";
+"Helper Not Found" = "Nie znaleziono Narzędzia pomocniczego";
 
 /* Section: helper tool */
-"Helper Tool" = "Narzędzie Pomocnicze";
+"Helper Tool" = "Narzędzie pomocnicze";
 
 /* Checkbox: HiDPI cursors */
 "HiDPI" = "HiDPI";
 
 /* Section: hot spot coordinates */
-"Hot Spot" = "Punkt Kliknięcia";
+"Hot Spot" = "Punkt kliknięcia";
 
 /* Undo suffix: hotspot */
 "hotspot" = "punkt kliknięcia";
@@ -178,13 +178,13 @@
 "Import" = "Importuj";
 
 /* Menu: import theme */
-"Import Theme..." = "Importuj Schemat...";
+"Import Theme..." = "Importuj schemat...";
 
 /* Button: install helper */
 "Install" = "Instaluj";
 
 /* Helper status: installed and active */
-"Installed & Active" = "Zainstalowany i Aktywny";
+"Installed & Active" = "Zainstalowany i aktywny";
 
 /* Section/Picker: language setting */
 "Language" = "Język";
@@ -211,7 +211,7 @@
 "Name:" = "Nazwa:";
 
 /* Button: new theme */
-"New Theme" = "Nowy Schemat";
+"New Theme" = "Nowy schemat";
 
 /* Error: no file URL */
 "No file URL set." = "Brak adresu URL pliku.";
@@ -220,7 +220,7 @@
 "No path found for directory in domain." = "Nie znaleziono ścieżki do katalogu w domenie.";
 
 /* Placeholder: no shortcuts */
-"No Shortcuts" = "Brak Skrótów";
+"No Shortcuts" = "Brak skrótów";
 
 /* Placeholder: no theme selected */
 "None" = "Brak";
@@ -238,13 +238,13 @@
 "Preview" = "Podgląd";
 
 /* Button: record shortcut */
-"Record Shortcut" = "Nagraj Skrót";
+"Record Shortcut" = "Nagraj skrót";
 
 /* Tooltip: remove representation */
 "Remove %@ representation" = "Usuń reprezentację %@";
 
 /* Undo: remove cursor */
-"Remove Cursor" = "Usuń Kursor";
+"Remove Cursor" = "Usuń kursor";
 
 /* Button: remove shortcut slot */
 "Remove selected slot" = "Usuń zaznaczony slot";
@@ -253,7 +253,7 @@
 "Representations" = "Reprezentacje";
 
 /* Helper status: requires approval */
-"Requires Approval in System Settings" = "Wymaga Zgody w Ustawieniach Systemowych";
+"Requires Approval in System Settings" = "Wymaga zgody w Ustawieniach systemowych";
 
 /* Button: reset settings */
 "Reset" = "Resetuj";
@@ -262,16 +262,16 @@
 "Reset all settings to default values (cannot be undone)" = "Resetuj wszystkie ustawienia do wartości domyślnych (nie można tego cofnąć)";
 
 /* Alert title: reset confirmation */
-"Reset All Settings?" = "Zresetować Wszystkie Ustawienia?";
+"Reset All Settings?" = "Zresetować wszystkie ustawienia?";
 
 /* Section: reset settings */
-"Reset Settings" = "Resetuj Ustawienia";
+"Reset Settings" = "Resetuj ustawienia";
 
 /* Button: restart app */
-"Restart Now" = "Zrestartuj Teraz";
+"Restart Now" = "Zrestartuj teraz";
 
 /* Alert title: restart required */
-"Restart Required" = "Wymagany Restart";
+"Restart Required" = "Wymagany restart";
 
 /* Button: restore cursors */
 "Restore" = "Przywróć";
@@ -280,7 +280,7 @@
 "Restore system cursors" = "Przywróć systemowe kursory";
 
 /* Menu: restore system cursors */
-"Restore System Cursors" = "Przywróć Systemowe Kursory";
+"Restore System Cursors" = "Przywróć systemowe kursory";
 
 /* Button: save theme */
 "Save" = "Zapisz";
@@ -292,10 +292,10 @@
 "sec" = "sek";
 
 /* Placeholder: select cursor */
-"Select a Cursor" = "Wybierz Kursor";
+"Select a Cursor" = "Wybierz kursor";
 
 /* Placeholder: select theme */
-"Select a Cursor Theme" = "Wybierz Schemat Kursorów";
+"Select a Cursor Theme" = "Wybierz schemat kursorów";
 
 /* Window title: settings */
 "Settings" = "Ustawienia";
@@ -307,7 +307,7 @@
 "Shortcut" = "Skrót";
 
 /* Banner: helper tool required for shortcuts */
-"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Skróty wymagahą Narzędzia Pomocniczego. Możesz go zainstalować w Ogólne → Narzędzie Pomocnicze.";
+"Shortcuts require the Helper Tool to be installed. You can install it from General → Helper Tool." = "Skróty wymagają Narzędzia pomocniczego. Możesz je zainstalować w Ogólne → Narzędzie pomocnicze.";
 
 /* Context menu: show in Finder */
 "Show in Finder" = "Pokaż w Finderze";
@@ -319,7 +319,7 @@
 "System" = "Systemowy";
 
 /* Language picker: system default */
-"System Default" = "Domyślny Systemu";
+"System Default" = "Systemowy";
 
 /* Alert message: cursor theme load failure */
 "The cursor theme could not be loaded." = "Schemat Kursorów nie mógł zostać załadowany.";
@@ -334,10 +334,10 @@
 "Theme" = "Motyw";
 
 /* Label: theme name */
-"Theme Name" = "Nazwa Schematu";
+"Theme Name" = "Nazwa schematu";
 
 /* Placeholder title: theme not found */
-"Theme Not Found" = "Nie Znaleziono Schematu";
+"Theme Not Found" = "Nie znaleziono schematu";
 
 /* Alert message: reset confirmation */
 "This will remove all cursor themes, restore system cursors, and reset every preference to its default value. This action cannot be undone." = "To usunie wszystkie schematy kursorów, przywróci kursory systemowe i zresetuje wszystkie preferencje do wartości domyślnych. Tej czynności nie można cofnąć.";
@@ -364,7 +364,7 @@
 "Version:" = "Wersja:";
 
 /* Link: website */
-"Visit Website" = "Odwiedź Stronę";
+"Visit Website" = "Odwiedź stronę";
 
 /* Label: hotspot X coordinate */
 "X:" = "X:";
@@ -380,10 +380,10 @@
 
 
 /* Menu: convert theme from another format */
-"Convert Theme..." = "Konwertuj Schemat...";
+"Convert Theme..." = "Konwertuj schemat...";
 
 /* Convert theme panel title */
-"Convert Theme" = "Konwertuj Schemat";
+"Convert Theme" = "Konwertuj schemat";
 
 /* Convert theme prompt */
 "Convert" = "Konwertuj";
@@ -401,7 +401,7 @@
 "Warnings & ignored (%d)" = "Ostrzeżenia i zignorowane (%d)";
 
 /* Add converted theme to library */
-"Add to Library" = "Dodaj do Biblioteki";
+"Add to Library" = "Dodaj do biblioteki";
 
 /* Conversion failure alert title */
 "Conversion Failed" = "Konwersja się nie powiodła";
@@ -410,19 +410,19 @@
 "OK" = "OK";
 
 /* Add to library then edit button */
-"Add & Edit…" = "Dodaj i Edytuj…";
+"Add & Edit…" = "Dodaj i edytuj…";
 
 /* Try area hint */
 "Hover to try the cursor — click to check the hotspot" = "Najedź kursorem, aby go przetestować — kliknij, aby sprawdzić punkt kliknięcia";
 
 /* Show all slots checkbox */
-"Show All" = "Pokaż Wszystkie";
+"Show All" = "Pokaż wszystkie";
 
 /* Sidebar list layout */
-"List View" = "Widok Listy";
+"List View" = "Widok listy";
 
 /* Sidebar grid layout */
-"Grid View" = "Widok Siatki";
+"Grid View" = "Widok siatki";
 
 /* Empty slot inspector title */
 "No cursor assigned" = "Brak przypisanego kursora";
@@ -431,7 +431,7 @@
 "Choose a source file or drop one onto the cell." = "Wybierz plik źródłowy lub upuść go do komórki.";
 
 /* Choose cursor source button */
-"Choose Source…" = "Wybierz Źródło…";
+"Choose Source…" = "Wybierz źródło…";
 
 /* Choose source panel message */
 "Choose a cursor or image file (.cur, .ani, Xcursor, .png, .gif)" = "Wybierz plik kursora lub obrazu (.cur, .ani, Xcursor, .png, .gif)";
@@ -440,13 +440,13 @@
 "Search" = "Szukaj";
 
 /* Replace cursor source button */
-"Replace Source…" = "Zamień Źródło…";
+"Replace Source…" = "Zamień źródło…";
 
 /* Clear slot button */
-"Clear Slot" = "Wyczyść Slot";
+"Clear Slot" = "Wyczyść slot";
 
 /* Replace source failure alert title */
-"Could Not Replace Cursor" = "Nie Udało Się Zamienić Kursora";
+"Could Not Replace Cursor" = "Nie udało się zamienić kursora";
 
 /* Replace source failure alert message */
 "“%@” could not be read as a cursor or image file." = "„%@” nie mógł zostać odczytany jako plik kursora lub obrazu.";
@@ -459,13 +459,13 @@
 
 /* --- Settings: cursor handedness, Tahoe variants, software updates --- */
 /* Settings section: Sparkle software updates */
-"Software Updates" = "Aktualizacje Oprogramowania";
+"Software Updates" = "Aktualizacje oprogramowania";
 
 /* Toggle: let Sparkle check for updates on its own */
 "Automatically check for updates" = "Automatycznie sprawdzaj aktualizacje";
 
 /* Menu item: run a Sparkle update check now */
-"Check for Updates…" = "Sprawdź Aktualizacje…";
+"Check for Updates…" = "Sprawdź aktualizacje…";
 
 /* Toggle: hide the Tahoe cursor variants */
 "Hide Tahoe cursors" = "Ukryj kursory Tahoe";
@@ -474,13 +474,13 @@
 "When enabled, Tahoe-specific cursor variants (ArrowS, IBeamS) are hidden. Removing a cursor will also remove its Tahoe counterpart." = "Gdy włączone, warianty kursorów specyficzne dla Tahoe (ArrowS, IBeamS) są ukryte. Usunięcie kursora również usunie jego odpowiednik Tahoe.";
 
 /* Picker: which hand holds the mouse */
-"Mouse Hand" = "Używana Ręka";
+"Mouse Hand" = "Używana ręka";
 
 /* Handedness option: left */
-"Left Hand" = "Lewa Ręka";
+"Left Hand" = "Lewa ręka";
 
 /* Handedness option: right */
-"Right Hand" = "Prawa Ręka";
+"Right Hand" = "Prawa ręka";
 
 /* --- Convert Theme results, failures, and the Help menu --- */
 /* Help menu: opens the project page */
@@ -517,13 +517,13 @@
 "cannot list %@" = "nie można wyświetlić listy %@";
 
 /* Conversion error: unsupported input; %@ is a sentence naming the specific reason */
-"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ Konwertowanie Schematu przyjmuje plik .cape Mousecape, folder kursorów Windows (.cur/.ani) lub folder schematu kursorów Xcursor Linux.";
+"%@ Convert Theme accepts a Mousecape .cape file, a Windows cursor folder, or a Linux Xcursor theme folder." = "%@ Konwertowanie schematu przyjmuje plik .cape Mousecape, folder kursorów Windows (.cur/.ani) lub folder schematu kursorów Xcursor Linux.";
 
 /* Convert Theme rejection: the chosen file is a compressed archive */
 "%@ is an archive. Expand it first, then choose the theme folder inside it." = "%@ jest archiwum. Najpierw go rozpakuj a potem wybierz folder schematu wewnątrz.";
 
 /* Convert Theme rejection: the chosen file is a plain image */
-"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ jest obrazem, nie schematem kursorów. Użyj Edytuj Schemat, aby upuścić obrazy do slotu kursora.";
+"%@ is an image, not a cursor theme. Use Edit Theme to drop images onto a cursor slot." = "%@ jest obrazem, nie schematem kursorów. Użyj Edytuj schemat, aby upuścić obrazy do slotu kursora.";
 
 /* Conversion error: the chosen folder holds more than one theme */
 "This folder holds %lld theme files. Choose a single one to convert." = "Ten folder ma %lld schematów kursorów. Wybierz jeden z nich do konwersji.";
@@ -535,10 +535,55 @@
 "Theme name “%@” contains no usable characters." = "Nazwa schematu „%@” nie posiada znaków, których można użyć.";
 
 /* Slot order rejection alert title */
-"Slot Sizes Out of Order" = "Rozmiary Slotów Nie w Kolejności";
+"Slot Sizes Out of Order" = "Rozmiary slotów nie w kolejności";
 
 /* Slot order rejection alert message */
 "Slot images must stay in size order (10× > 5× > 2× > 1×). This image does not fit the %1$@ slot because of the image in the %2$@ slot." = "Obrazy w slotach muszą być w kolejności (10× > 5× > 2× > 1×). Ten obraz nie mieści się w slocie %1$@ przez obraz w slocie %2$@.";
 
 /* Save blocked: cursor slot pixel sizes out of order */
 "“%@” has slot images out of size order (10× > 5× > 2× > 1×). Fix the slots before saving." = "„%@” posiada obrazy nie w kolejności (10× > 5× > 2× > 1×). Napraw sloty przed zapisem.";
+
+/* Toggle: cursor drop shadow */
+"Cursor Shadow" = "Cień kursora";
+
+/* Caption explaining the cursor shadow toggle */
+"When enabled, a soft drop shadow is drawn under the cursor, similar to the pointer shadow on Windows. The shadow appears while a cursor theme is applied." = "Po włączeniu tej opcji pod kursorem rysowany jest delikatny cień, podobny do cienia wskaźnika w systemie Windows. Cień pojawia się, gdy zastosowany jest schemat kursorów.";
+
+/* Cursor settings section header for scheduled theme switching */
+"Automatic Switching" = "Automatyczne przełączanie";
+
+/* Toggle enabling scheduled cursor theme switching */
+"Switch cursor automatically" = "Automatycznie zmieniaj kursor";
+
+/* Warning shown when the helper tool is required for automatic switching */
+"Automatic switching requires the Helper Tool. You can install it from General → Helper Tool." = "Automatyczne przełączanie wymaga Narzędzia pomocniczego. Możesz je zainstalować w sekcji Ogólne → Narzędzie pomocnicze.";
+
+/* Label for the daytime scheduled switch */
+"Day mode" = "Tryb dzienny";
+
+/* Label for the nighttime scheduled switch */
+"Night mode" = "Tryb nocny";
+
+/* Radio group choosing between AM/PM and a 24-hour clock */
+"Time Format" = "Format czasu";
+
+/* 12-hour clock option */
+"AM/PM" = "AM/PM";
+
+/* 24-hour clock option */
+"24 hours" = "24 godziny";
+
+/* Explanation of scheduled cursor switching in Cursor settings */
+"Pick a time and a cursor theme for each mode. MaCursor switches at those times and keeps that theme until the next one." = "Wybierz godzinę i motyw kursora dla każdego trybu. MaCursor przełącza się o tych porach i zachowuje dany motyw do następnej zmiany.";
+
+/* Warning when both scheduled modes are given the same clock time */
+"Day mode and Night mode must start at different times, so the time was moved by one minute." = "Tryb dzienny i tryb nocny muszą rozpoczynać się o różnych porach, dlatego czas został przesunięty o jedną minutę.";
+
+/* Accessibility label for the hour pop-up menu */
+"Hour" = "Godzina";
+
+/* Accessibility label for the minute pop-up menu */
+"Minute" = "Minuta";
+
+/* Button opening the donation page */
+"Donate" = "Wesprzyj";

@@ -19,6 +19,7 @@
 		2DDE4FA56DC45B934F5C56B1 /* EditThemeSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D49742409994E5C09D2DAC /* EditThemeSidebar.swift */; };
 		2E1702D586C5DBAB452EFD4C /* ThemeConversionReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21C6CCC11C45C8C4992D080 /* ThemeConversionReviewView.swift */; };
 		2F6964BFCA8BA5118217ECDC /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 0C4AD5A867375C3B578C81DC /* Sparkle */; };
+		31EEF90C933696E589A080DD /* MACCursorShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD4FD52B04FE57659C59D /* MACCursorShadow.m */; };
 		3804B72F80269FD7DC394C1F /* CursorIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789F1C67CA1B3541A668CE97 /* CursorIdentifier.swift */; };
 		3D925D9ED4B83520AD7AD9BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */; };
 		40E0269BF8E422F62B2B3E53 /* SlotImageImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504BFF22761DC61FCD6C0448 /* SlotImageImporter.swift */; };
@@ -29,12 +30,14 @@
 		6410AC3D3849C4E072757B9C /* CursorThemeWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE331EFE387FA98D6998FA /* CursorThemeWriter.swift */; };
 		6C6E160DC4605C8616A49F0D /* CursorFormatReaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF4A84746CBBF771D24272E /* CursorFormatReaders.swift */; };
 		714A8A422166D41979210DAD /* CursorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897480CACDA0C15040C7EE47 /* CursorModel.swift */; };
+		806720F335249EDCD5A5CC81 /* MACCursorShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCFD4FD52B04FE57659C59D /* MACCursorShadow.m */; };
 		8704707093E063FC4D016093 /* AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006B454DC8542472D6F23062 /* AppExtensions.swift */; };
 		88F66F5C0E48CE0DB4D7445B /* MACConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C456CE28DACB8867A7DDBA89 /* MACConstants.swift */; };
 		895B5136D150C1B9465AEA4F /* CursorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578387732EEC904403B4CCA9 /* CursorThemeModel.swift */; };
 		95162B85DA31CD92A2229088 /* CursorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4020F786A4F370638B4A68F /* CursorService.swift */; };
 		97C36AEF1F7E28243AD36525 /* AppManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C7FA07B1D33BB6C21FD739 /* AppManagers.swift */; };
 		98E02FBE909CDE7A3B1EF8C5 /* LibraryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DD9415A6628B44339E5711 /* LibraryViews.swift */; };
+		99B7A8789A1EB7A9A418CCBC /* MACAutoSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE157F2EE479227A36F2C60 /* MACAutoSwitch.m */; };
 		9B14F74D538D67E0A24164E2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */; };
 		9E80F15ED68F2DC67BA2281E /* AboutViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711A9CFEAD605223DF8E7B0 /* AboutViews.swift */; };
 		A04556B70615A052BAEF57C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8574FFD83EC52D4A26BA70DB /* QuartzCore.framework */; };
@@ -49,6 +52,8 @@
 		AABB002200220022 /* ShortcutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB002200220011 /* ShortcutSettingsView.swift */; };
 		AABB006600660022 /* ModalWindowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB006600660011 /* ModalWindowCoordinator.swift */; };
 		AE38744ECCC1CCC49CA866BB /* CursorThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD767DFBA548141D844E0FC /* CursorThemeEditorView.swift */; };
+		B305920040B3BDA0F71DD593 /* MACAutoSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE157F2EE479227A36F2C60 /* MACAutoSwitch.m */; };
+		B32EB581CEB55EA339C3A722 /* CursorSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE928E43730D5BEECFA6DEF /* CursorSettingsView.swift */; };
 		BEE9E4E5E9580163B10D6AAE /* HotspotEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C7AC8F1D706B5AEC650A79 /* HotspotEditorView.swift */; };
 		BF23AAFBF178876FCA646CD1 /* ValidatedTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5466634D03C89F32474E964 /* ValidatedTextFields.swift */; };
 		C11F9AF8600979EC9727613C /* com.writronic.macursorhelper.app in Copy Helper */ = {isa = PBXBuildFile; fileRef = B11C4EE7A55FDC4E3A771DC1 /* com.writronic.macursorhelper.app */; };
@@ -66,6 +71,7 @@
 		CE30000100000001 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00000500000001 /* main.m */; };
 		CEB8C86557DE6AF735A1A7DE /* CursorGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C58E3ED8C43E3788815E42 /* CursorGeometry.swift */; };
 		D3BF75CF1CA27559EDBAAC4D /* CursorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF9028122AAB91843F3DD3E /* CursorModels.swift */; };
+		D51177E3C48810FF822EE174 /* AutoSwitchRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81795AA1B42ED1782ABBE4 /* AutoSwitchRules.swift */; };
 		E1F47FE568F219EC557961D9 /* ConversionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B088EBE4AE3E41A939B90B0C /* ConversionErrors.swift */; };
 		E577F3EF2B16EC461B07391F /* HelperToolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB43430C8E46157D3E2AB0EB /* HelperToolManager.swift */; };
 		EA3F0C1A503E5B25F6331647 /* CursorTryAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3F40ADC1D804070A82D1A2 /* CursorTryAreaView.swift */; };
@@ -92,15 +98,18 @@
 		0C80E913C3F3C419701EF5E8 /* MACPreferences.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MACPreferences.swift; path = SwiftUI/Models/MACPreferences.swift; sourceTree = "<group>"; };
 		230AEDCB1251CC7363EF6815 /* ThemeConversion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeConversion.swift; path = SwiftUI/Services/ThemeConversion.swift; sourceTree = "<group>"; };
 		2C5596005C577340FA0593E1 /* MaCursorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/MaCursorApp.swift; sourceTree = "<group>"; };
+		2DCFD4FD52B04FE57659C59D /* MACCursorShadow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MACCursorShadow.m; sourceTree = "<group>"; };
 		2E3F40ADC1D804070A82D1A2 /* CursorTryAreaView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CursorTryAreaView.swift; path = SwiftUI/Views/CursorTryAreaView.swift; sourceTree = "<group>"; };
 		2F0C3B03DB82A9E62EA9E5D5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2FD8C57FC7AAC15C0A4FFF14 /* LibraryController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LibraryController.swift; path = SwiftUI/Services/LibraryController.swift; sourceTree = "<group>"; };
 		30E81350274037A365DAB7BD /* MACCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MACCursor.h; sourceTree = "<group>"; };
 		3ECD64CEAC408967BEF748EE /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/ViewModels/LibraryViewModel.swift; sourceTree = "<group>"; };
+		40A8234CE8A4D5AF9EB96BAA /* MACAutoSwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MACAutoSwitch.h; sourceTree = "<group>"; };
 		40CF68B1C08B9446E1DF697B /* ThemeImporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeImporter.swift; path = SwiftUI/Services/ThemeImporter.swift; sourceTree = "<group>"; };
 		41A4C26D18636B4380C8058A /* MaCursor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MaCursor-Info.plist"; sourceTree = "<group>"; };
 		44B36FDC21A51D11AA8B8598 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4B35E1828BA082BA61A49C5B /* MaCursor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MaCursor-Prefix.pch"; sourceTree = "<group>"; };
+		4CE928E43730D5BEECFA6DEF /* CursorSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CursorSettingsView.swift; path = SwiftUI/Views/CursorSettingsView.swift; sourceTree = "<group>"; };
 		504BFF22761DC61FCD6C0448 /* SlotImageImporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SlotImageImporter.swift; path = SwiftUI/Services/SlotImageImporter.swift; sourceTree = "<group>"; };
 		578387732EEC904403B4CCA9 /* CursorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Models/CursorThemeModel.swift; sourceTree = "<group>"; };
 		57C7AC8F1D706B5AEC650A79 /* HotspotEditorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HotspotEditorView.swift; path = SwiftUI/Views/HotspotEditorView.swift; sourceTree = "<group>"; };
@@ -121,6 +130,7 @@
 		949BBEC71127967367FD74F9 /* MaCursor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MaCursor.entitlements; sourceTree = "<group>"; };
 		95C58E3ED8C43E3788815E42 /* CursorGeometry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CursorGeometry.swift; path = SwiftUI/Models/CursorGeometry.swift; sourceTree = "<group>"; };
 		9711A9CFEAD605223DF8E7B0 /* AboutViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AboutViews.swift; path = SwiftUI/Views/AboutViews.swift; sourceTree = "<group>"; };
+		996F4FA31E239F790EB495A2 /* MACCursorShadow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MACCursorShadow.h; sourceTree = "<group>"; };
 		A2113D6137D086F1485EC2FB /* SharedExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SharedExtensions.swift; path = SwiftUI/Utils/SharedExtensions.swift; sourceTree = "<group>"; };
 		A4C4170DFB08565B4F4C9D13 /* Slots.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Slots.swift; path = SwiftUI/Models/Slots.swift; sourceTree = "<group>"; };
 		A53325E3A2A500BC05E5FDE8 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
@@ -132,6 +142,7 @@
 		B1BDFEED205B0D8A7B5E5EE6 /* MaCursor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaCursor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21C6CCC11C45C8C4992D080 /* ThemeConversionReviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeConversionReviewView.swift; path = SwiftUI/Views/ThemeConversionReviewView.swift; sourceTree = "<group>"; };
 		BB43430C8E46157D3E2AB0EB /* HelperToolManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI/Services/HelperToolManager.swift; sourceTree = "<group>"; };
+		BBE157F2EE479227A36F2C60 /* MACAutoSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MACAutoSwitch.m; sourceTree = "<group>"; };
 		BEE90051E8E0556B6119A86A /* CGSPrivateAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivateAccessibility.h; sourceTree = "<group>"; };
 		C456CE28DACB8867A7DDBA89 /* MACConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MACConstants.swift; path = SwiftUI/Models/MACConstants.swift; sourceTree = "<group>"; };
 		C4D60249E6F374B02871AB67 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
@@ -151,6 +162,7 @@
 		D20E996ED042D7B7C3E0BBC3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D70BB2ABDF9BC5E047402C07 /* RoleMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RoleMapper.swift; path = SwiftUI/Services/RoleMapper.swift; sourceTree = "<group>"; };
 		DA31B7A258EBBADE32F0F7AF /* SettingsViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SettingsViews.swift; path = SwiftUI/Views/SettingsViews.swift; sourceTree = "<group>"; };
+		DB81795AA1B42ED1782ABBE4 /* AutoSwitchRules.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSwitchRules.swift; path = SwiftUI/Models/AutoSwitchRules.swift; sourceTree = "<group>"; };
 		DD3F9AF6BB008150E7278111 /* CursorLibrary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CursorLibrary.swift; path = SwiftUI/Models/CursorLibrary.swift; sourceTree = "<group>"; };
 		DEF9028122AAB91843F3DD3E /* CursorModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CursorModels.swift; path = SwiftUI/Models/CursorModels.swift; sourceTree = "<group>"; };
 		DEFD0E7970BDD1AA8D73DFB7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -166,6 +178,7 @@
 		EE11009900110011 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Resources/l10n/tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EE1100AA00110011 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Resources/l10n/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EE1100BB00110011 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = Resources/l10n/ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE1100CC00110011 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = Resources/l10n/pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F0D49742409994E5C09D2DAC /* EditThemeSidebar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EditThemeSidebar.swift; path = SwiftUI/Views/EditThemeSidebar.swift; sourceTree = "<group>"; };
 		F3A4722D0B1F38D0AE79C045 /* INFParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = INFParser.swift; path = SwiftUI/Services/INFParser.swift; sourceTree = "<group>"; };
 		F5466634D03C89F32474E964 /* ValidatedTextFields.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValidatedTextFields.swift; path = SwiftUI/Views/ValidatedTextFields.swift; sourceTree = "<group>"; };
@@ -258,6 +271,10 @@
 				CE00000200000002 /* MACCursorActions.m */,
 				CE00000300000001 /* MACCursorDaemon.h */,
 				CE00000300000002 /* MACCursorDaemon.m */,
+				996F4FA31E239F790EB495A2 /* MACCursorShadow.h */,
+				2DCFD4FD52B04FE57659C59D /* MACCursorShadow.m */,
+				40A8234CE8A4D5AF9EB96BAA /* MACAutoSwitch.h */,
+				BBE157F2EE479227A36F2C60 /* MACAutoSwitch.m */,
 			);
 			path = CursorEngine;
 			sourceTree = "<group>";
@@ -279,6 +296,15 @@
 				737F4FBA16098E416EFC7004 /* CGSPrivateCursor.h */,
 			);
 			path = CGSPrivateAPI;
+			sourceTree = "<group>";
+		};
+		9086BCA288FF1B25DAA8D19C /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				FF7BB69F8A9833C31C841FED /* Models */,
+				AFC03575B345BA6A83B153EE /* Views */,
+			);
+			name = SwiftUI;
 			sourceTree = "<group>";
 		};
 		9A92BFF79FC93FD7F3646E06 /* MaCursor */ = {
@@ -335,8 +361,17 @@
 				63C7FA07B1D33BB6C21FD739 /* AppManagers.swift */,
 				006B454DC8542472D6F23062 /* AppExtensions.swift */,
 				F5466634D03C89F32474E964 /* ValidatedTextFields.swift */,
+				9086BCA288FF1B25DAA8D19C /* SwiftUI */,
 			);
 			path = MaCursor;
+			sourceTree = "<group>";
+		};
+		AFC03575B345BA6A83B153EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4CE928E43730D5BEECFA6DEF /* CursorSettingsView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		B6E939283071E97E80D0F6E6 /* Products */ = {
@@ -356,6 +391,14 @@
 			);
 			name = models;
 			path = LegacyEngine/models;
+			sourceTree = "<group>";
+		};
+		FF7BB69F8A9833C31C841FED /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DB81795AA1B42ED1782ABBE4 /* AutoSwitchRules.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +480,7 @@
 				tr,
 				ja,
 				ar,
+				pl,
 			);
 			mainGroup = 1212E12479199A20CEF0D892;
 			packageReferences = (
@@ -470,6 +514,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		75AD4E82995E6758C2F86B9E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -479,6 +524,8 @@
 				CE20000200000001 /* MACCursorActions.m in Sources */,
 				CE20000300000001 /* MACCursorDaemon.m in Sources */,
 				CE30000100000001 /* main.m in Sources */,
+				806720F335249EDCD5A5CC81 /* MACCursorShadow.m in Sources */,
+				B305920040B3BDA0F71DD593 /* MACAutoSwitch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +580,10 @@
 				97C36AEF1F7E28243AD36525 /* AppManagers.swift in Sources */,
 				8704707093E063FC4D016093 /* AppExtensions.swift in Sources */,
 				BF23AAFBF178876FCA646CD1 /* ValidatedTextFields.swift in Sources */,
+				31EEF90C933696E589A080DD /* MACCursorShadow.m in Sources */,
+				99B7A8789A1EB7A9A418CCBC /* MACAutoSwitch.m in Sources */,
+				D51177E3C48810FF822EE174 /* AutoSwitchRules.swift in Sources */,
+				B32EB581CEB55EA339C3A722 /* CursorSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +603,7 @@
 				EE11009900110011 /* tr */,
 				EE1100AA00110011 /* ja */,
 				EE1100BB00110011 /* ar */,
+				EE1100CC00110011 /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -572,7 +624,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -590,7 +642,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursorhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -607,7 +659,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
@@ -620,7 +672,7 @@
 					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -642,7 +694,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
@@ -655,7 +707,7 @@
 					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -681,7 +733,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = SP495GG2KZ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -703,7 +755,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.4.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.writronic.macursorhelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
