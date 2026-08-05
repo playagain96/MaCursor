@@ -361,6 +361,10 @@
 
 ---
 
+### [MD3E Cursors](https://github.com/writronic/MaCursor/blob/main/themes/MD3ECursors.cursor)
+
+<img src="screenshots/MD3ECursors.png" alt="MD3E Cursors">
+
 ### [Memori](https://github.com/writronic/MaCursor/blob/main/themes/Memori.cursor)
 
 <img src="screenshots/Memori.png" alt="Memori">
